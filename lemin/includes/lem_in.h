@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 14:01:58 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:19:08 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct	s_master
 {
 	int				ants_nb;
 	int				nodes_nb;
-	char			**adjacency;
+	int				**adjacency_mtx;
 	t_storage		*storage;
 	int				piping;
 	int				start;
@@ -123,5 +123,6 @@ void				ft_parser_fill_entry_node(t_master *mstr, char *line,
 
 void				ft_storage_grow(t_master *mstr);
 t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
+int					ft_dico_add(t_hash_dico *dico,t_line_info *entry);
 
 #endif
