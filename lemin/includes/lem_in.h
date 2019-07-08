@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 11:35:09 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 13:32:30 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** STORAGE BATCH SIZES
 */
 # define BATCH_MALLOC_SIZE 1000
-# define BATCH_PRINT_SIZE 10
+# define BATCH_PRINT_SIZE 1000
 /*
 ** DICTIONARY
 */
@@ -31,9 +31,8 @@
 ** LINE DEFINES
 */
 # define POS_LINE 0
-# define POS_START 1
-# define POS_X 2
-# define POS_Y 3
+# define POS_X 1
+# define POS_Y 2
 /*
 ** LINE DEFINES
 */
@@ -47,7 +46,7 @@
 
 typedef enum	e_ln_type
 {
-	ERROR, START, END, CELL, PIPE, COMMENT, END_OF_READ, ANTS_NB
+	END_OF_READ, ERROR, START, END, NODE, PIPE, COMMENT, ANTS_NB
 }				t_ln_type;
 
 typedef struct	s_bucket
@@ -98,6 +97,7 @@ typedef struct	s_solution
 typedef struct	s_master
 {
 	int				ants_nb;
+	int				nodes_nb;
 	char			**adjacency;
 	t_storage		*storage;
 	int				piping;
@@ -114,8 +114,10 @@ void				ft_exit(t_errors error);
 int					ft_dico_hasher_djb2(char *str, char *end, int amplitude);
 //int					ft_dico_add(t_hash_dico *dico, char *pos[4]);
 void				ft_storage_grow(t_master *mstr);
-
+void				ft_parser_fill_entry_node(t_master *mstr, char *line,
+						t_line_info *entry, t_hash_dico *dico);
 t_ln_type			ft_parser_check_node(char *line, t_ln_type type);
+t_ln_type			ft_parser_check_pipe(char *line, t_ln_type type);
 t_ln_type			ft_parser_line_type(char *line, int piping);
 
 #endif
