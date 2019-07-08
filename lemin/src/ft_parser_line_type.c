@@ -17,7 +17,7 @@
 static t_ln_type	ft_is_hashtag(char *line)
 {
 	if (*line != '#')
-		return(ERROR);
+		return(END_OF_READ);
 	if (!ft_strcmp(line, START_MK))
 		return(START);
 	else if (!ft_strcmp(line, END_MK))
@@ -30,10 +30,13 @@ t_ln_type	ft_parser_line_type(char *line, int piping)
 {
 	t_ln_type type;
 
-	if (*line == 0)
-		return (ERROR);
+	type = END_OF_READ;
+	if (*line == 0 || ft_is_whitespace(*line))
+		return (END_OF_READ);
 	type = ft_is_hashtag(line);
-	if (piping == NOPE)
+	if (piping == NOPE && !ft_strchr(line, '-'))
 		type = ft_parser_check_cell(line, type);
-	return(type);
+	//else
+	//	type = ft_parser_check_pipe(line, type);
+	return (type);
 }
