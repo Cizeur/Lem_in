@@ -6,33 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 13:39:05 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 14:08:27 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/get_next_line.h"
 #include "lem_in.h"
-
-t_ln_type 	ft_storage_add_line(char *line, t_master *mstr)
-{
-	int 			reduc_ind;
-	t_line_info		*entry;
-	int				index;
-
-
-	index = mstr->lines_nb;
-	reduc_ind = index % BATCH_MALLOC_SIZE;
-	if (!reduc_ind && index)
-		ft_storage_grow(mstr);
-	entry = &(mstr->storage->entry[reduc_ind]);
-	entry->type = ft_parser_line_type(line, mstr->piping);
-	if (entry->type == END_OF_READ)
-		return (END_OF_READ);
-	ft_parser_fill_entry_node(mstr, line, entry, mstr->dico);
-	entry->line = line;
-	mstr->lines_nb++;
-	return (entry->type);
-}
 
 void 		ft_storage_print(t_storage *storage, int ind_max)
 {
@@ -51,8 +30,15 @@ void 		ft_storage_print(t_storage *storage, int ind_max)
 			storage = storage->next;
 		entry = &(storage->entry[reduc_ind]);
 		length = ft_strlen(entry->line);
-		ft_putstr(entry->line);
-		ft_putchar('\n');
+		//ft_putstr(entry->line);
+		//ft_putchar('\n');
+		printf("||%s||- type %d - index %d ",
+		entry->line, entry->type, entry->line_index);
+		if (entry->type == NODE)
+			printf("node_nb %d - name [[%.*s]] -hash %d",
+				entry->node_number ,entry->name_len
+				,entry->line, entry->hash_key);
+		printf("\n");
 	}
 }
 
@@ -66,8 +52,7 @@ void		parser(t_master *mstr)
 
 	line = ft_parser_ants_get(mstr);
 	start = mstr->storage;
-	line_type = ANTS_NB;
-	ft_storage_add_line(line, mstr);
+	line_type = ft_storage_add_line(line, mstr);
 	line = NULL;
 	while ((r = get_next_line(0, &line)) > 0
 			&& line_type != END_OF_READ)

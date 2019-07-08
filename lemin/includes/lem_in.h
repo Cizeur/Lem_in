@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 13:32:30 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 14:01:58 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct 	s_line_info
 	int					hash_key;
 	int					line_index;
 	int					node_number;
-	char				*name;
 	int					name_len;
 	int					pipe[2];
 }				t_line_info;
@@ -108,16 +107,21 @@ typedef struct	s_master
 }				t_master;
 
 void 				ft_init_mstr(t_master *mstr);
+void				ft_exit(t_errors error);
+
+int					ft_dico_hasher_djb2(char *str, char *end, int amplitude);
+
+//int					ft_dico_add(t_hash_dico *dico, char *pos[4]);
+
 void				parser(t_master *mstr);
 char				*ft_parser_ants_get(t_master *mstr);
-void				ft_exit(t_errors error);
-int					ft_dico_hasher_djb2(char *str, char *end, int amplitude);
-//int					ft_dico_add(t_hash_dico *dico, char *pos[4]);
-void				ft_storage_grow(t_master *mstr);
-void				ft_parser_fill_entry_node(t_master *mstr, char *line,
-						t_line_info *entry, t_hash_dico *dico);
 t_ln_type			ft_parser_check_node(char *line, t_ln_type type);
 t_ln_type			ft_parser_check_pipe(char *line, t_ln_type type);
 t_ln_type			ft_parser_line_type(char *line, int piping);
+void				ft_parser_fill_entry_node(t_master *mstr, char *line,
+						t_line_info *entry, t_hash_dico *dico);
+
+void				ft_storage_grow(t_master *mstr);
+t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
 
 #endif
