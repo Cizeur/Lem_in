@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/08 10:24:52 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/08 10:33:39 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,11 @@ INC_LEMIN					:= lem_in.h\
 DEPENDANCIES_LEMIN_O		:= Makefile ./dependancies_$(L_LEMIN_DIR).mk\
 								 ./dependancies_$(L_LEMIN_DIR)_object.mk\
 								 ../shared_val.mk
+
+
+DEPENDANCIES_LEMIN_O		+= ./includes/*.h
+
+
 DEPENDANCIES_LEMIN			:= $(DEPENDANCIES_LEMIN_O) \
  								$(addprefix ../,$(DEPENDANCIES_LIBFT_EXPORT))
 
