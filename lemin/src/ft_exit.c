@@ -22,7 +22,7 @@ char g_error_message[13][40] = {
 	{"Repeat cell names"},
 	{"Failed dico entry malloc"},
 	{"GIVE ME ANTS"},
-	{"nope8"},
+	{"DIGITS ONLY"},
 	{"nope9"},
 	{"nope10"},
 	{"nope11"},
