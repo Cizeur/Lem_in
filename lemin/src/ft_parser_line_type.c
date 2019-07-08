@@ -14,11 +14,8 @@
 #include "lem_in.h"
 #include "utils.h"
 
-static t_ln_type	ft_is_hashtag(t_master *mstr, char *line)
+static t_ln_type	ft_is_hashtag(char *line)
 {
-
-		mstr = 0;
-
 	if (*line != '#')
 		return(ERROR);
 	if (!ft_strcmp(line, START_MK))
@@ -29,14 +26,14 @@ static t_ln_type	ft_is_hashtag(t_master *mstr, char *line)
 		return(COMMENT);
 }
 
-t_ln_type	ft_parser_line_type(t_master *mstr, char *line, int piping)
+t_ln_type	ft_parser_line_type(char *line, int piping)
 {
 	t_ln_type type;
 
 	if (*line == 0)
 		return (ERROR);
-	type = ft_is_hashtag(mstr, line);
+	type = ft_is_hashtag(line);
 	if (piping == NOPE)
-		type = ft_parser_check_cell(mstr, line, type);
+		type = ft_parser_check_cell(line, type);
 	return(type);
 }

@@ -40,26 +40,21 @@ char	*ft_check_numbers(char *line, int *i_adr)
 	return (pos);
 }
 
-t_ln_type		ft_parser_check_cell(t_master *mstr, char *line, t_ln_type type)
+t_ln_type		ft_parser_check_cell(char *line, t_ln_type type)
 {
 	int i;
 	char *pos[4];
 
 	ft_bzero(pos, sizeof(pos));
-	mstr->dico->current_key = mstr->index;
 	i = ft_strlen(line) - 1;
 	pos[POS_LINE] = line;
 	pos[POS_START] = ft_find_name_start(pos[POS_LINE]);
 	if ((pos[POS_Y] = ft_check_numbers(line, &i)))
 	{
 		if ((pos[POS_X] = ft_check_numbers(line, &i)))
-		{
 			type = CELL;
-			if (!ft_dico_add(mstr->dico, pos))
-				ft_exit(FAIL_REPEAT_ENTRY);
-			mstr->index = mstr->dico->current_key;
-		}
 	}
 	return(type);
 }
+
 
