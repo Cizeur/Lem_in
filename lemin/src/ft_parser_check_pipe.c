@@ -6,12 +6,11 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 11:59:16 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/08 13:37:41 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 13:41:10 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include "libft/libft.h"
 #include "utils.h"
 
 t_ln_type		ft_parser_check_pipe(char *line, t_ln_type type)
