@@ -6,11 +6,9 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 09:48:09 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 12:17:32 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 13:42:29 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "utils.h"
 
 char		*ft_find_name_start(char *name)
 {
