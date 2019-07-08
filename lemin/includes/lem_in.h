@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 15:19:08 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:22:54 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct	s_master
 	int				nodes_nb;
 	int				**adjacency_mtx;
 	t_storage		*storage;
+	t_storage		*storage_start;
 	int				piping;
 	int				start;
 	int				end;
