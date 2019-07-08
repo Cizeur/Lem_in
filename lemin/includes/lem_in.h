@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 15:22:54 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:26:49 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,10 @@ t_ln_type			ft_parser_check_node(char *line, t_ln_type type);
 t_ln_type			ft_parser_check_pipe(char *line, t_ln_type type);
 t_ln_type			ft_parser_line_type(char *line, int piping);
 void				ft_parser_fill_entry_node(t_master *mstr, char *line,
-						t_line_info *entry, t_hash_dico *dico);
+						t_line_info *entry);
 
 void				ft_storage_grow(t_master *mstr);
 t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
-int					ft_dico_add(t_hash_dico *dico,t_line_info *entry);
+int					ft_dico_add(t_master *mstr, t_hash_dico *dico,t_line_info *entry);
 
 #endif
