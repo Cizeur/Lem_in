@@ -13,7 +13,7 @@
 #include "libft/get_next_line.h"
 #include "lem_in.h"
 
-void 		ft_storage_add_line(char *line, t_master *mstr)
+t_ln_type 	ft_storage_add_line(char *line, t_master *mstr)
 {
 	int 			reduc_ind;
 	t_line_info		*entry;
@@ -25,7 +25,12 @@ void 		ft_storage_add_line(char *line, t_master *mstr)
 		ft_storage_grow(mstr);
 	entry = &(mstr->storage->entry[reduc_ind]);
 	entry->line = line;
+	if (mstr->lines_nb)
+		entry->type = ft_parser_line_type(line, mstr->piping);
+	else
+		entry->type = ANTS_NB;
 	mstr->lines_nb++;
+	return (entry->type);
 }
 
 
@@ -34,12 +39,10 @@ void 		ft_storage_print(t_storage *storage, int ind_max)
 	int 			ind;
 	int 			reduc_ind;
 	t_line_info		*entry;
-	char			bufferprint[BATCH_PRINT_SIZE + 1];
 	int				pos;
 	int				length;
 
 	ind = -1;
-	ft_bzero(bufferprint, sizeof(bufferprint));
 	pos = 0;
 	while(++ind < ind_max)
 	{
@@ -58,15 +61,17 @@ void		parser(t_master *mstr)
 {
 	char		*line;
 	int			r;
+	t_ln_type	line_type;
 	t_storage	*start;
 
 	line = ft_parser_ants_get(mstr);
 	start = mstr->storage;
-	ft_storage_add_line(line, mstr);
+	line_type = ft_storage_add_line(line, mstr);
 	line = NULL;
-	while ((r = get_next_line(0, &line)) > 0)
+	while ((r = get_next_line(0, &line)) > 0
+			&& line_type != END_OF_READ)
 	{
-		ft_storage_add_line(line, mstr);
+		line_type = ft_storage_add_line(line, mstr);
 		line = NULL;
 	}
 	if (r == -1)

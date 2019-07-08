@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 09:18:05 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/03 09:18:07 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 11:34:20 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_check_numbers(char *line, int *i_adr)
 	return (pos);
 }
 
-t_ln_type		ft_parser_check_cell(char *line, t_ln_type type)
+t_ln_type		ft_parser_check_node(char *line, t_ln_type type)
 {
 	int i;
 	char *pos[4];

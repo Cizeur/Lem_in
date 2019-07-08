@@ -16,7 +16,7 @@
 
 void		ft_storage_grow(t_master *mstr)
 {
-	printf("buffer %p \n" ,mstr->storage );
+//	printf("buffer %p \n" ,mstr->storage );
 	if (!mstr)
 		return;
 	mstr->storage->next = (t_storage *)ft_memalloc(sizeof(t_storage));

@@ -33,9 +33,10 @@ t_ln_type	ft_parser_line_type(char *line, int piping)
 	type = END_OF_READ;
 	if (*line == 0 || ft_is_whitespace(*line))
 		return (END_OF_READ);
-	type = ft_is_hashtag(line);
+	if ((type = ft_is_hashtag(line))!= END_OF_READ)
+		return (type);
 	if (piping == NOPE && !ft_strchr(line, '-'))
-		type = ft_parser_check_cell(line, type);
+		type = ft_parser_check_node(line, type);
 	//else
 	//	type = ft_parser_check_pipe(line, type);
 	return (type);
