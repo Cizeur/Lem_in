@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 17:03:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/02 17:03:38 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 13:37:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_ln_type	ft_parser_line_type(char *line, int piping)
 		return (type);
 	if (piping == NOPE && !ft_strchr(line, '-'))
 		type = ft_parser_check_node(line, type);
-	//else
-	//	type = ft_parser_check_pipe(line, type);
+	else
+		type = ft_parser_check_pipe(line, type);
 	return (type);
 }

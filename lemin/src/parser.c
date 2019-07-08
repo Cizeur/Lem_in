@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 12:41:17 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 13:39:05 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_ln_type 	ft_storage_add_line(char *line, t_master *mstr)
 	mstr->lines_nb++;
 	return (entry->type);
 }
-
 
 void 		ft_storage_print(t_storage *storage, int ind_max)
 {
