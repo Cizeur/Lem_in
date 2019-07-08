@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/08 15:38:56 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/08 16:38:46 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRC_LEMIN =  \
 	ft_init_mstr.c\
 	ft_exit.c\
 	main.c\
-	not_working_dico_add.c\
+	ft_dico_add.c\
 	ft_dico_hasher_djb2.c
 	##ft_dico_add.c\
 
