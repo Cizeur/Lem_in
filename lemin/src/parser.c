@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/02 14:55:53 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 12:41:17 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@ t_ln_type 	ft_storage_add_line(char *line, t_master *mstr)
 	t_line_info		*entry;
 	int				index;
 
+
 	index = mstr->lines_nb;
 	reduc_ind = index % BATCH_MALLOC_SIZE;
 	if (!reduc_ind && index)
 		ft_storage_grow(mstr);
 	entry = &(mstr->storage->entry[reduc_ind]);
+	entry->type = ft_parser_line_type(line, mstr->piping);
+	if (entry->type == END_OF_READ)
+		return (END_OF_READ);
+	ft_parser_fill_entry_node(mstr, line, entry, mstr->dico);
 	entry->line = line;
-	if (mstr->lines_nb)
-		entry->type = ft_parser_line_type(line, mstr->piping);
-	else
-		entry->type = ANTS_NB;
 	mstr->lines_nb++;
 	return (entry->type);
 }
@@ -66,7 +67,8 @@ void		parser(t_master *mstr)
 
 	line = ft_parser_ants_get(mstr);
 	start = mstr->storage;
-	line_type = ft_storage_add_line(line, mstr);
+	line_type = ANTS_NB;
+	ft_storage_add_line(line, mstr);
 	line = NULL;
 	while ((r = get_next_line(0, &line)) > 0
 			&& line_type != END_OF_READ)
