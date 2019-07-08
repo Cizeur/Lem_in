@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/08 16:57:49 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:43:27 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,8 @@ void    ft_calculate_start_end_adjancency_matrix(t_master *mstr)
 
 void    ft_put_pipe_in_adjancency_matrix(t_master *mstr, int node1, int node2)
 {
-    // if (mstr->adjacency[node1][node2] = 0)
         mstr->adjacency_mtx[node1][node2] = 1;
-    // else
-        // ft_exit(ADJACENCY_MTX);
-    // if (mstr->adjacency[node2][node1] = 0)
         mstr->adjacency_mtx[node2][node1] = 1;
-    // else
-        // ft_exit(ADJACENCY_MTX);   
 }
 
 void    ft_adjacency_matrix(t_master *mstr)
