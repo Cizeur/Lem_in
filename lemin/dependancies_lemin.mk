@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/08 16:54:05 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/08 18:19:46 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_LEMIN =  \
 	ft_parser_check_node.c\
 	ft_parser_check_pipe.c\
 	ft_parser_fill_entry_node.c\
+	ft_parser_fill_entry_pipe.c\
 	ft_storage_grow.c\
 	ft_storage_add_line.c\
 	ft_storage_get_line.c\

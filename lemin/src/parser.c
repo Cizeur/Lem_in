@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 17:15:29 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 18:48:01 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void 		ft_storage_print(t_storage *storage, int ind_max)
 			printf("node_nb %d - name [[%.*s]] -hash %d",
 				entry->node_number ,entry->name_len
 				,entry->line, entry->hash_key);
+		if (entry->type == PIPE)
+			printf("  pipe[%d-%d]",
+				entry->pipe[0], entry->pipe[1]);
 		printf("\n");
 	}
 }
@@ -61,8 +64,8 @@ void		parser(t_master *mstr)
 	}
 	if (r == -1)
 		ft_exit(FAIL_ON_READ);
-	ft_storage_print(mstr->storage_start, mstr->lines_nb);
+	//ft_storage_print(mstr->storage_start, mstr->lines_nb);
 	printf("collisions : %d\n", mstr->dico->collisions);
-	#define TEST "15"
+	#define TEST "Mvo6"
 	printf("get %s - %d\n", TEST , ft_dico_get(mstr->storage_start, mstr->dico, TEST , ft_strlen(TEST)));
 }

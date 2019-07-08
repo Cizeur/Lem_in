@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:46:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 15:25:20 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 18:19:27 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ t_ln_type 	ft_storage_add_line(char *line, t_master *mstr)
 		ft_parser_line_type(line, mstr->piping);
 	if (entry->type == END_OF_READ)
 		return (END_OF_READ);
+	mstr->piping = entry->type == PIPE ? CERTAINLY : mstr->piping;
 	entry->line = line;
 	entry->line_index = mstr->lines_nb;
 	ft_parser_fill_entry_node(mstr, line, entry);
+	ft_parser_fill_entry_pipe(mstr, line, entry);
 	//ft_parser_fill_entry_pipe(mstr, line, entry, mstr->dico);
 	mstr->lines_nb++;
 	return (entry->type);

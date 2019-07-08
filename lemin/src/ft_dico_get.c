@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:28:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 17:03:07 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 18:48:40 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int			ft_dico_get(t_storage *storage_start, t_hash_dico *dico, char *needle, int
 	t_line_info *cmp_line;
 	int			hash;
 
-	printf("%s\n", needle);
 	hash = ft_dico_hasher_djb2(needle, needle + len, HASH_SIZE);
 	dico_entry = &(dico->dico_list[hash]);
 	if (!(dico_entry->line_index))
