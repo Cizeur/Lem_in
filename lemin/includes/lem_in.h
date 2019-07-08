@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/02 15:43:40 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 11:35:09 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 typedef enum	e_ln_type
 {
-	ERROR, START, END, CELL, PIPE, COMMENT, END_OF_READ
+	ERROR, START, END, CELL, PIPE, COMMENT, END_OF_READ, ANTS_NB
 }				t_ln_type;
 
 typedef struct	s_bucket
@@ -115,7 +115,7 @@ int					ft_dico_hasher_djb2(char *str, char *end, int amplitude);
 //int					ft_dico_add(t_hash_dico *dico, char *pos[4]);
 void				ft_storage_grow(t_master *mstr);
 
-t_ln_type			ft_parser_check_cell(char *line, t_ln_type type);
+t_ln_type			ft_parser_check_node(char *line, t_ln_type type);
 t_ln_type			ft_parser_line_type(char *line, int piping);
 
 #endif
