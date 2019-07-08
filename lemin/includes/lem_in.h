@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 15:26:49 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 16:30:50 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 /*
 ** DICTIONARY
 */
-# define HASH_SIZE 23197
+# define HASH_SIZE 100153
 /*
 ** LINE DEFINES
 */
@@ -124,6 +124,7 @@ void				ft_parser_fill_entry_node(t_master *mstr, char *line,
 
 void				ft_storage_grow(t_master *mstr);
 t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
+t_line_info			*ft_storage_get_line(t_storage *storage_start, int line_nb);
 int					ft_dico_add(t_master *mstr, t_hash_dico *dico,t_line_info *entry);
 
 #endif
