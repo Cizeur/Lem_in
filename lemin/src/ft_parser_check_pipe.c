@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 11:59:16 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/08 13:42:41 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 14:15:07 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_ln_type		ft_parser_check_pipe(char *line, t_ln_type type)
 	pipe = 0;
 	check_first_name = 0;
 	check_second_name = 0;
-	while (line[i] && (!ft_is_whitespace(line[i]) || line[i] == '-') && pipe < 2)
+	while (line[i] && !ft_is_whitespace(line[i]) && pipe < 2)
 	{
 		if (!ft_is_whitespace(line[i]) && pipe == 0)
 			check_first_name++;
