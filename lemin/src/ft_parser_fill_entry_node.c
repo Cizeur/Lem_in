@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 12:08:15 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 16:32:09 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 16:51:58 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void		ft_parser_fill_entry_node(t_master *mstr, char *line,
 	entry->hash_key = ft_dico_hasher_djb2(line, name_end, HASH_SIZE);
 	entry->node_number = mstr->nodes_nb;
 	mstr->nodes_nb++;
-	ft_dico_add(mstr, mstr->dico, entry);
+	ft_dico_add(mstr->storage_start, mstr->dico, entry);
 }

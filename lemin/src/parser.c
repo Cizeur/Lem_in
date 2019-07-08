@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 16:26:45 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 17:06:08 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ void		parser(t_master *mstr)
 		ft_exit(FAIL_ON_READ);
 	ft_storage_print(mstr->storage_start, mstr->lines_nb);
 	printf("collisions : %d\n", mstr->dico->collisions);
+	#define TEST "15"
+	printf("get %s - %d\n", TEST , ft_dico_get(mstr->storage_start, mstr->dico, TEST , ft_strlen(TEST)));
 }
