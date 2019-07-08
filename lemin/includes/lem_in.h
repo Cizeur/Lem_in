@@ -47,7 +47,7 @@
 
 typedef enum	e_ln_type
 {
-	ERROR, START, END, CELL, PIPE, COMMENT
+	ERROR, START, END, CELL, PIPE, COMMENT, END_OF_READ
 }				t_ln_type;
 
 typedef struct	s_bucket
@@ -101,11 +101,11 @@ typedef struct	s_master
 	char			**adjacency;
 	t_storage		*storage;
 	int				piping;
+	int				start;
+	int				end;
 	int				lines_nb;
 	t_hash_dico		*dico;
 }				t_master;
-
-
 
 void 				ft_init_mstr(t_master *mstr);
 void				parser(t_master *mstr);
