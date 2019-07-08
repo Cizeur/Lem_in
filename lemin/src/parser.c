@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 17:06:08 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 17:15:29 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void 		ft_storage_print(t_storage *storage, int ind_max)
 		length = ft_strlen(entry->line);
 		//ft_putstr(entry->line);
 		//ft_putchar('\n');
-	//	printf("||%s||- type %d - index %d ",
-	//	entry->line, entry->type, entry->line_index);
-	//	if (entry->type == NODE)
-	//		printf("node_nb %d - name [[%.*s]] -hash %d",
-	//			entry->node_number ,entry->name_len
-	//			,entry->line, entry->hash_key);
-	//	printf("\n");
+		printf("||%s||- type %d - index %d ",
+		entry->line, entry->type, entry->line_index);
+		if (entry->type == NODE)
+			printf("node_nb %d - name [[%.*s]] -hash %d",
+				entry->node_number ,entry->name_len
+				,entry->line, entry->hash_key);
+		printf("\n");
 	}
 }
 
