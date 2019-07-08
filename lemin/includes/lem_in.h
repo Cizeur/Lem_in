@@ -47,7 +47,7 @@
 
 typedef enum	e_ln_type
 {
-	ERROR, START, END, CELL, PIPE, COMMENT, AMBIGUITY
+	ERROR, START, END, CELL, PIPE, COMMENT
 }				t_ln_type;
 
 typedef struct	s_bucket
@@ -67,10 +67,9 @@ typedef struct 	s_line_info
 	char 				*line;
 	t_ln_type			type;
 	int					hash_key;
-	int					node_index;
+	int					line_index;
 	int					node_number;
 	char				*name;
-	char				*name_start;
 	int					name_len;
 	int					pipe[2];
 }				t_line_info;
@@ -81,9 +80,11 @@ typedef struct	s_storage
 	t_line_info			output[BATCH_PRINT_SIZE];
 	struct s_storage	*next;
 }				t_storage;
+
 /*
 ** The flow of a path can be expressed in fixed turn (initialisation) than (one//var ant per turn)
 */
+
 typedef struct	s_solution
 {
 	int					*path;
@@ -98,7 +99,6 @@ typedef struct	s_master
 {
 	int				ants_nb;
 	char			**adjacency;
-
 	t_storage		*storage;
 	int				piping;
 	int				lines_nb;
@@ -112,13 +112,10 @@ void				parser(t_master *mstr);
 char				*ft_parser_ants_get(t_master *mstr);
 void				ft_exit(t_errors error);
 int					ft_dico_hasher_djb2(char *str, char *end, int amplitude);
-int					ft_dico_add(t_hash_dico *dico, char *pos[4]);
+//int					ft_dico_add(t_hash_dico *dico, char *pos[4]);
 void				ft_storage_grow(t_master *mstr);
 
-
-t_ln_type			ft_parser_check_cell(t_master *mstr, char *line,
-					t_ln_type type);
-t_ln_type			ft_parser_line_type(t_master *mstr,
-					char *line, int piping);
+t_ln_type			ft_parser_check_cell(char *line, t_ln_type type);
+t_ln_type			ft_parser_line_type(char *line, int piping);
 
 #endif

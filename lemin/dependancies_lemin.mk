@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/04 11:49:10 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/08 10:24:52 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,15 +30,14 @@ SRC_LEMIN =  \
 	ft_parser_ants_get.c\
 	ft_parser_line_type.c\
 	ft_parser_check_cell.c\
-	ft_dico_hasher_djb2.c\
-	ft_dico_add.c\
 	ft_storage_grow.c\
-	ft_storage_comment_addend.c\
 	ft_is_whitespace.c\
 	ft_find_start.c\
 	ft_init_mstr.c\
 	ft_exit.c\
-	main.c
+	main.c\
+	ft_dico_hasher_djb2.c
+	##ft_dico_add.c\
 
 INC_LEMIN					:= lem_in.h\
 							error.h\

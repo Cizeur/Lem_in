@@ -17,7 +17,6 @@
 void 	ft_init_mstr(t_master *mstr)
 {
 	mstr->piping = NOPE;
-	mstr->index = 0;
 	if(!(mstr->dico = (t_hash_dico *)ft_memalloc(sizeof(t_hash_dico))))
 		ft_exit(FAIL_MALLOC_DIC);
 	if(!(mstr->storage = (t_storage *)ft_memalloc(sizeof(t_storage))))
