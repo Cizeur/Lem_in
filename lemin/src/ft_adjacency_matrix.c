@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/08 17:43:27 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:58:19 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ void    ft_calculate_start_end_adjancency_matrix(t_master *mstr)
     int     i;
     int     j;
 
-    while (i < mstr->nodes_nb)
+    i = -1;
+    while (++i < mstr->nodes_nb)
     {
         j = 0;
-        while (j < mstr->nodes_nb && mstr->adjacency_mtx[i][j] == 0)
+        while (++j < mstr->nodes_nb && mstr->adjacency_mtx[i][j] == 0)
             j++;
         if (!(j == mstr->nodes_nb))
         {
             mstr->adjacency_mtx[i][mstr->nodes_nb + 1] = j;
             j = mstr->nodes_nb - 1;
             while (j >= 0 && mstr->adjacency_mtx[i][j] == 0)
-                j++;
+                j--;
             mstr->adjacency_mtx[i][mstr->nodes_nb + 2] = j;
         }
-        i++;
     }
 }
 
