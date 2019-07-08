@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 14:08:27 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:24:25 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ void		parser(t_master *mstr)
 	char		*line;
 	int			r;
 	t_ln_type	line_type;
-	t_storage	*start;
 
 	line = ft_parser_ants_get(mstr);
-	start = mstr->storage;
+	mstr->storage_start = mstr->storage;
 	line_type = ft_storage_add_line(line, mstr);
 	line = NULL;
 	while ((r = get_next_line(0, &line)) > 0
@@ -62,5 +61,5 @@ void		parser(t_master *mstr)
 	}
 	if (r == -1)
 		ft_exit(FAIL_ON_READ);
-	ft_storage_print(start, mstr->lines_nb);
+	ft_storage_print(mstr->storage_start, mstr->lines_nb);
 }
