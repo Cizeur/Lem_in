@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/09 12:50:44 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/09 19:10:58 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
         ft_exit(ADJACENCY_MTX);
     while (i < mstr->nodes_nb)
     {
-        if (!(mstr->adjacency_mtx[i] = (int*)ft_memalloc(sizeof(int) * (2 * mstr->nodes_nb + 4))))
+        if (!(mstr->adjacency_mtx[i] = (int*)ft_memalloc(sizeof(int) * (3 * mstr->nodes_nb + 4))))
             ft_exit(ADJACENCY_MTX);
         mstr->adjacency_mtx[i][mstr->nodes_nb + 1] = DISCONNECTED;
         mstr->adjacency_mtx[i][mstr->nodes_nb + 2] = DISCONNECTED;
         i++;
     }
+    if (!(mstr->node_lvl_stack = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
+        ft_exit(NODE_STACK_MTX);
+    if (!(mstr->node_queue = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
+        ft_exit(NODE_STACK_MTX);
 }
 
 static void    ft_put_line_index_to_adjancency_matrix(t_master *mstr, int line_index, int node_number)
@@ -75,10 +79,10 @@ static void    ft_put_pipe_in_adjancency_matrix(t_master *mstr, int node1, int n
 
         nodes = mstr->adjacency_mtx[node1][mstr->nodes_nb + 3];
         mstr->adjacency_mtx[node1][mstr->nodes_nb + 3]++;
-        mstr->adjacency_mtx[node1][mstr->nodes_nb + 4 + nodes] = node2;
+        mstr->adjacency_mtx[node1][2 * mstr->nodes_nb + 4 + nodes] = node2;
         nodes = mstr->adjacency_mtx[node2][mstr->nodes_nb + 3];
         mstr->adjacency_mtx[node2][mstr->nodes_nb + 3]++;
-        mstr->adjacency_mtx[node2][mstr->nodes_nb + 4 + nodes] = node1;
+        mstr->adjacency_mtx[node2][2 * mstr->nodes_nb + 4 + nodes] = node1;
         mstr->adjacency_mtx[node1][node2] = 1;
         mstr->adjacency_mtx[node2][node1] = 1;
         min = mstr->adjacency_mtx[node1][mstr->nodes_nb + 1];

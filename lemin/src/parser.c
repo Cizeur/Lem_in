@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/09 13:00:18 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/09 18:48:53 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static void    ft_print_matrix(t_master *mstr)
     while ((j = -1) && ++i < mstr->nodes_nb)
     {
         printf ("node : %4d |", i);
-		while (++j < 2 * mstr->nodes_nb + 4)
+		while (++j < 3 * mstr->nodes_nb + 4)
    		{
 
-			if (j > mstr->nodes_nb + 3 + mstr->adjacency_mtx[i][mstr->nodes_nb + 3])
+			if (j > 2 * mstr->nodes_nb + 3 + mstr->adjacency_mtx[i][mstr->nodes_nb + 3])
 				break;
 			else if (j > mstr->nodes_nb + 3)
 				printf ("\033[0;33m%3d\033[0m", mstr->adjacency_mtx[i][j]);
@@ -100,4 +100,8 @@ void		parser(t_master *mstr)
 	printf("get %s - %d\n", TEST , ft_dico_get(mstr->storage_start, mstr->dico, TEST , ft_strlen(TEST)));
 	printf("start: %s and end %s\n", mstr->start->line, mstr->end->line);
 	ft_print_matrix(mstr);
+	solver(mstr);
+	ft_print_matrix(mstr);
+	printf("\n\n\n\n");
+
 }
