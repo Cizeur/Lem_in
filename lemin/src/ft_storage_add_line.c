@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:46:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 18:19:27 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/09 08:30:32 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_ln_type 	ft_storage_add_line(char *line, t_master *mstr)
 	entry->line_index = mstr->lines_nb;
 	ft_parser_fill_entry_node(mstr, line, entry);
 	ft_parser_fill_entry_pipe(mstr, line, entry);
-	//ft_parser_fill_entry_pipe(mstr, line, entry, mstr->dico);
+	ft_parser_apply_command(mstr, entry);
 	mstr->lines_nb++;
 	return (entry->type);
 }
