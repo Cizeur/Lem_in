@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/09 13:17:30 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/09 19:10:51 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 /*
 ** DICTIONARY
 */
-# define HASH_SIZE 10015300
+# define HASH_SIZE 100153
 /*
 ** LINE DEFINES
 */
@@ -38,6 +38,12 @@
 */
 # define NOPE 0
 # define CERTAINLY 1
+/*
+** DFS DEFINE
+*/
+# define DEAD_END 0
+# define SUCCESS 1
+
 /*
 ** COMMAND DEFINES
 */
@@ -60,6 +66,7 @@ typedef enum	e_ln_type
 {
 	END_OF_READ, ERROR, START, END, NODE, PIPE, COMMENT, ANTS_NB
 }				t_ln_type;
+
 
 typedef struct	s_bucket
 {
@@ -110,8 +117,11 @@ typedef struct	s_master
 	int				ants_nb;
 	int				nodes_nb;
 	int				graph_explored;
+	int				magic_number;
 	int				command_line;
 	int				**adjacency_mtx;
+	int				*node_lvl_stack;
+	int				*node_queue;
 	t_storage		*storage;
 	t_storage		*storage_start;
 	int				piping;
@@ -144,6 +154,8 @@ t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
 t_line_info			*ft_storage_get_line(t_storage *storage_start, int line_nb);
 int					ft_dico_add(t_storage *storage_start, t_hash_dico *dico,t_line_info *entry);
 int					ft_dico_get(t_storage *storage_start, t_hash_dico *dico, char *needle, int len);
+
+void				solver(t_master *mstr);
 
 
 void				ft_adjacency_matrix_generate(t_master *mstr, t_storage *storage);

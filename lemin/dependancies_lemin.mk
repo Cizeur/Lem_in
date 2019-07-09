@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/09 09:16:06 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/09 17:47:17 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC_LEMIN =  \
 	ft_find_end.c\
 	ft_init_mstr.c\
 	ft_exit.c\
+	solver.c\
 	main.c\
 	ft_dico_add.c\
 	ft_dico_get.c\
