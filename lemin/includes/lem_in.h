@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/09 10:33:17 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/09 13:17:30 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct	s_master
 {
 	int				ants_nb;
 	int				nodes_nb;
+	int				graph_explored;
 	int				command_line;
 	int				**adjacency_mtx;
 	t_storage		*storage;
