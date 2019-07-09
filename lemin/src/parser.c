@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/09 08:48:19 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/09 13:00:18 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,35 @@ void 		ft_storage_print(t_storage *storage, int ind_max)
 }
 
 
+static void    ft_print_matrix(t_master *mstr)
+{
+    int     i;
+	int		j;
+
+  	i = -1;
+    while ((j = -1) && ++i < mstr->nodes_nb)
+    {
+        printf ("node : %4d |", i);
+		while (++j < 2 * mstr->nodes_nb + 4)
+   		{
+
+			if (j > mstr->nodes_nb + 3 + mstr->adjacency_mtx[i][mstr->nodes_nb + 3])
+				break;
+			else if (j > mstr->nodes_nb + 3)
+				printf ("\033[0;33m%3d\033[0m", mstr->adjacency_mtx[i][j]);
+			else if (mstr->adjacency_mtx[i][j] && j < mstr->nodes_nb)
+				printf ("\033[0;31m%3d\033[0m", mstr->adjacency_mtx[i][j]);
+			else if (mstr->adjacency_mtx[i][j])
+				printf ("\033[0;32m%3d\033[0m", mstr->adjacency_mtx[i][j]);
+			else
+				printf ("%3d", mstr->adjacency_mtx[i][j]);
+		}
+		printf ("\n");
+    }
+}
+
+
+
 void		parser(t_master *mstr)
 {
 	char		*line;
@@ -64,9 +93,11 @@ void		parser(t_master *mstr)
 	}
 	if (r == -1)
 		ft_exit(FAIL_ON_READ);
+	ft_adjacency_matrix_generate(mstr, mstr->storage_start);
 	ft_storage_print(mstr->storage_start, mstr->lines_nb);
 	printf("collisions : %d\n", mstr->dico->collisions);
 	#define TEST "Mvo6"
 	printf("get %s - %d\n", TEST , ft_dico_get(mstr->storage_start, mstr->dico, TEST , ft_strlen(TEST)));
-	printf("start: %s and end %s\n", ft_storage_get_line(mstr->storage_start, mstr->start)->line, ft_storage_get_line(mstr->storage_start, mstr->end)->line);
+	printf("start: %s and end %s\n", mstr->start->line, mstr->end->line);
+	ft_print_matrix(mstr);
 }

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/09 08:43:37 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/09 10:33:17 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,17 @@
 # define COM_DEFAULT 0
 # define COM_START 1
 # define COM_END 2
+
 /*
 ** COMMAND LINES
 */
 # define START_MK "##start"
 # define END_MK "##end"
+
+/*
+** ADJACENCY
+*/
+#define DISCONNECTED -1
 
 typedef enum	e_ln_type
 {
@@ -94,7 +100,7 @@ typedef struct	s_solution
 	int					*path;
 	int					fixed;
 /*
-	int					var;
+**	int					var;
 */
 	struct s_solution	*next;
 }				t_solution;
@@ -108,8 +114,8 @@ typedef struct	s_master
 	t_storage		*storage;
 	t_storage		*storage_start;
 	int				piping;
-	int				start;
-	int				end;
+	t_line_info		*start;
+	t_line_info		*end;
 	int				lines_nb;
 	t_hash_dico		*dico;
 }				t_master;
@@ -137,5 +143,8 @@ t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
 t_line_info			*ft_storage_get_line(t_storage *storage_start, int line_nb);
 int					ft_dico_add(t_storage *storage_start, t_hash_dico *dico,t_line_info *entry);
 int					ft_dico_get(t_storage *storage_start, t_hash_dico *dico, char *needle, int len);
+
+
+void				ft_adjacency_matrix_generate(t_master *mstr, t_storage *storage);
 
 #endif

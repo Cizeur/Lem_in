@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/09 08:42:41 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/09 09:16:06 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC_LEMIN =  \
 	ft_storage_grow.c\
 	ft_storage_add_line.c\
 	ft_storage_get_line.c\
+	ft_adjacency_matrix.c\
 	ft_is_whitespace.c\
 	ft_find_end.c\
 	ft_init_mstr.c\

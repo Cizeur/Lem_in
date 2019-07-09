@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 08:34:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/09 08:52:46 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/09 09:03:38 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void			ft_parser_apply_command(t_master *mstr, t_line_info *entry)
 	else if (entry->type == END)
 		mstr->command_line = COM_END;
 	else if (mstr->command_line == COM_START && entry->type == NODE)
-		mstr->start = entry->line_index;
+		mstr->start = entry;
 	else if (mstr->command_line == COM_END && entry->type == NODE)
-		mstr->end = entry->line_index;
+		mstr->end = entry;
 	if (entry->type != START && entry->type != END)
 		mstr->command_line = COM_DEFAULT;
 }
