@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/10 09:48:20 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 10:07:39 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct	s_master
 	int				command_line;
 	int				**adjacency_mtx;
 	int				*node_lvl_stack;
-	int				*node_queue;
+	int				*node_queue[2];
 	int				*node_path;
 	t_storage		*storage;
 	t_storage		*storage_start;
