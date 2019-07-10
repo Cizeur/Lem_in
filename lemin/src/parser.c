@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/09 18:48:53 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 09:02:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void 		ft_storage_print(t_storage *storage, int ind_max)
 
 static void    ft_print_matrix(t_master *mstr)
 {
+   return;
     int     i;
 	int		j;
 
@@ -98,8 +99,8 @@ void		parser(t_master *mstr)
 	printf("collisions : %d\n", mstr->dico->collisions);
 	#define TEST "Mvo6"
 	printf("get %s - %d\n", TEST , ft_dico_get(mstr->storage_start, mstr->dico, TEST , ft_strlen(TEST)));
-	printf("start: %s and end %s\n", mstr->start->line, mstr->end->line);
-	ft_print_matrix(mstr);
+	printf("start: %d and end %d\n", mstr->start->node_number, mstr->end->node_number);
+	//ft_print_matrix(mstr);
 	solver(mstr);
 	ft_print_matrix(mstr);
 	printf("\n\n\n\n");

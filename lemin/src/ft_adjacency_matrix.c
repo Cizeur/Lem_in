@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/09 19:10:58 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 07:30:06 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
     if (!(mstr->node_lvl_stack = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
         ft_exit(NODE_STACK_MTX);
     if (!(mstr->node_queue = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
+        ft_exit(NODE_STACK_MTX);
+    if (!(mstr->node_path = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
         ft_exit(NODE_STACK_MTX);
 }
 

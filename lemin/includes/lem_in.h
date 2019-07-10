@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/09 19:10:51 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 09:48:20 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,6 @@ typedef struct	s_solution
 {
 	int					*path;
 	int					fixed;
-/*
-**	int					var;
-*/
-	struct s_solution	*next;
 }				t_solution;
 
 typedef struct	s_master
@@ -122,6 +118,7 @@ typedef struct	s_master
 	int				**adjacency_mtx;
 	int				*node_lvl_stack;
 	int				*node_queue;
+	int				*node_path;
 	t_storage		*storage;
 	t_storage		*storage_start;
 	int				piping;
@@ -129,6 +126,7 @@ typedef struct	s_master
 	t_line_info		*end;
 	int				lines_nb;
 	t_hash_dico		*dico;
+	t_solution		*solutions;
 }				t_master;
 
 void 				ft_init_mstr(t_master *mstr);
