@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/10 13:20:23 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 17:29:07 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct	s_master
 	int				*node_lvl_stack;
 	int				*node_queue[2];
 	int				*node_path;
+	int				*node_capacity;
 	t_storage		*storage;
 	t_storage		*storage_start;
 	int				piping;

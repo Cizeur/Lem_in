@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/10 10:18:38 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 17:46:14 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
     {
         if (!(mstr->adjacency_mtx[i] = (int*)ft_memalloc(sizeof(int) * (3 * mstr->nodes_nb + 4))))
             ft_exit(ADJACENCY_MTX);
-        mstr->adjacency_mtx[i][mstr->nodes_nb + 1] = DISCONNECTED;
-        mstr->adjacency_mtx[i][mstr->nodes_nb + 2] = DISCONNECTED;
         ft_intset(&mstr->adjacency_mtx[i][mstr->nodes_nb + 4], mstr->nodes_nb, -1);
         i++;
     }
@@ -37,6 +35,8 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
     if (!(mstr->node_queue[1] = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
         ft_exit(NODE_STACK_MTX);
     if (!(mstr->node_path = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
+        ft_exit(NODE_STACK_MTX);
+    if (!(mstr->node_capacity = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
         ft_exit(NODE_STACK_MTX);
 }
 
@@ -76,13 +76,10 @@ static void    ft_calculate_start_end_adjancency_matrix(t_master *mstr)
 
 static void    ft_put_pipe_in_adjancency_matrix(t_master *mstr, int node1, int node2)
 {
-        int min;
-        int max;
         int nodes;
 
         if (mstr->adjacency_mtx[node1][node2])
             return;
-
         nodes = mstr->adjacency_mtx[node1][mstr->nodes_nb + 3];
         mstr->adjacency_mtx[node1][mstr->nodes_nb + 3]++;
         mstr->adjacency_mtx[node1][2 * mstr->nodes_nb + 4 + nodes] = node2;
@@ -91,14 +88,8 @@ static void    ft_put_pipe_in_adjancency_matrix(t_master *mstr, int node1, int n
         mstr->adjacency_mtx[node2][2 * mstr->nodes_nb + 4 + nodes] = node1;
         mstr->adjacency_mtx[node1][node2] = 1;
         mstr->adjacency_mtx[node2][node1] = 1;
-        min = mstr->adjacency_mtx[node1][mstr->nodes_nb + 1];
-        max = mstr->adjacency_mtx[node1][mstr->nodes_nb + 2];
-        mstr->adjacency_mtx[node1][mstr->nodes_nb + 1] = min == DISCONNECTED || min > node2 ? node2 : min;
-        mstr->adjacency_mtx[node1][mstr->nodes_nb + 2] = max == DISCONNECTED || max < node2 ? node2 : max;
-        min = mstr->adjacency_mtx[node2][mstr->nodes_nb + 1];
-        max = mstr->adjacency_mtx[node2][mstr->nodes_nb + 2];
-        mstr->adjacency_mtx[node2][mstr->nodes_nb + 1] = min == DISCONNECTED || min > node1 ? node1 : min;
-        mstr->adjacency_mtx[node2][mstr->nodes_nb + 2] = max == DISCONNECTED || max < node1 ? node1 : max;
+
+      //  mstr->adjacency_mtx[node2][mstr->nodes_nb + 2] = max == DISCONNECTED || max < node1 ? node1 : max;
 }
 
 void		ft_adjacency_matrix_generate(t_master *mstr, t_storage *storage)

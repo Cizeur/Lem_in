@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/10 12:32:39 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 13:46:21 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static void    ft_print_matrix(t_master *mstr)
 		if (check > 1)
 					printf("\033[0;31m	error\033[0m");
 		if (check)
-				printf ("\n");
+					printf("  --  %.*s\n",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][mstr->nodes_nb])->name_len,
+						ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][mstr->nodes_nb])->line);
     }
 }
 
