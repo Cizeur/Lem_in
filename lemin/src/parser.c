@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/10 09:02:03 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 12:32:39 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void 		ft_storage_print(t_storage *storage, int ind_max)
 {
+	return;
 	int 			ind;
 	int 			reduc_ind;
 	t_line_info		*entry;
@@ -48,29 +49,30 @@ void 		ft_storage_print(t_storage *storage, int ind_max)
 
 static void    ft_print_matrix(t_master *mstr)
 {
-   return;
     int     i;
 	int		j;
+	int		check;
 
   	i = -1;
     while ((j = -1) && ++i < mstr->nodes_nb)
     {
-        printf ("node : %4d |", i);
-		while (++j < 3 * mstr->nodes_nb + 4)
-   		{
 
-			if (j > 2 * mstr->nodes_nb + 3 + mstr->adjacency_mtx[i][mstr->nodes_nb + 3])
-				break;
-			else if (j > mstr->nodes_nb + 3)
-				printf ("\033[0;33m%3d\033[0m", mstr->adjacency_mtx[i][j]);
-			else if (mstr->adjacency_mtx[i][j] && j < mstr->nodes_nb)
-				printf ("\033[0;31m%3d\033[0m", mstr->adjacency_mtx[i][j]);
-			else if (mstr->adjacency_mtx[i][j])
-				printf ("\033[0;32m%3d\033[0m", mstr->adjacency_mtx[i][j]);
-			else
-				printf ("%3d", mstr->adjacency_mtx[i][j]);
+		check = 0;
+		while (++j < mstr->nodes_nb)
+   		{
+			if (mstr->adjacency_mtx[i][j + mstr->nodes_nb + 4] != -1)
+			{
+				if (!check)
+					printf ("node : %4d |", i);
+				check++;
+				printf ("\033[0;33m%6d\033[0m", mstr->adjacency_mtx[i][j + mstr->nodes_nb + 4]);
+
+			}
 		}
-		printf ("\n");
+		if (check > 1)
+					printf("\033[0;31m	error\033[0m");
+		if (check)
+				printf ("\n");
     }
 }
 

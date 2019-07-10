@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/10 07:30:06 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 10:18:38 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "error.h"
+#include "utils.h"
 
 static void    ft_alloc_adjancency_matrix(t_master *mstr)
 {
@@ -26,11 +27,14 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
             ft_exit(ADJACENCY_MTX);
         mstr->adjacency_mtx[i][mstr->nodes_nb + 1] = DISCONNECTED;
         mstr->adjacency_mtx[i][mstr->nodes_nb + 2] = DISCONNECTED;
+        ft_intset(&mstr->adjacency_mtx[i][mstr->nodes_nb + 4], mstr->nodes_nb, -1);
         i++;
     }
     if (!(mstr->node_lvl_stack = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
         ft_exit(NODE_STACK_MTX);
-    if (!(mstr->node_queue = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
+    if (!(mstr->node_queue[0] = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
+        ft_exit(NODE_STACK_MTX);
+    if (!(mstr->node_queue[1] = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
         ft_exit(NODE_STACK_MTX);
     if (!(mstr->node_path = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb)))
         ft_exit(NODE_STACK_MTX);

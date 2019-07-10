@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/10 09:39:50 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 12:52:44 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,19 @@ int 			ft_solver_bfs(t_master *mstr, int cur_node, int end_node)
 	mtx = mstr->adjacency_mtx;
 	ft_intset(mstr->node_lvl_stack, mstr->nodes_nb, -1);
 	ft_intset(mstr->node_path, mstr->nodes_nb, -1);
-	ft_intset(mstr->node_queue, mstr->nodes_nb, -1);
-	mstr->node_queue[0] = cur_node;
+	ft_intset(mstr->node_queue[0], mstr->nodes_nb, -1);
+	ft_intset(mstr->node_queue[1], mstr->nodes_nb, -1);
+	mstr->node_queue[0][0] = cur_node;
 	mstr->node_lvl_stack[cur_node] = 0;
 	queue_len = 1;
 	queue_start = 0;
 	mstr->node_path[0] = cur_node;
 	while(queue_len)
 	{
-		cur_node = mstr->node_queue[queue_start];
+		cur_node = mstr->node_queue[0][queue_start];
 		mstr->node_path[mstr->node_lvl_stack[cur_node]] = cur_node;
+		if (mstr->node_lvl_stack[cur_node])
+		mstr->node_path[mstr->node_lvl_stack[cur_node] - 1] = mstr->node_queue[1][queue_start];
 		queue_start++;
 		queue_len--;
 		i = -1;
@@ -47,44 +50,57 @@ int 			ft_solver_bfs(t_master *mstr, int cur_node, int end_node)
 			mstr->node_path[mstr->node_lvl_stack[cur_node] + 1] = next_node;
 			if (next_node == end_node)
 				return(SUCCESS);
-			if (next_node >= 0 && mstr->node_lvl_stack[next_node] == -1)
+			if (next_node != -1 && mstr->node_lvl_stack[next_node] == -1)
 			{
-				mstr->node_queue[queue_start + queue_len++] = next_node;
+				mstr->node_queue[1][queue_start + queue_len] = cur_node;
+				mstr->node_queue[0][queue_start + queue_len++] = next_node;
 				mstr->node_lvl_stack[next_node] = mstr->node_lvl_stack[cur_node] + 1;
 			}
 		}
-		printf("\n");
 	}
 	return(DEAD_END);
 }
 
-void			ft_pop_matrix(int max_nodes, int **mtx, int *node_path)
+static int		ft_find_next_node(int max_nodes, int *mtx_node, int start, int needle_node)
 {
-	int i;
 	int j;
 	int next_node;
 
-	i = 0;
-	while((j = -1) && node_path[i + 1] != -1 && (i + 1) < max_nodes)
-	{
-		while( ++j < mtx[node_path[i]][max_nodes + 3])
+	j = - 1;
+	while( ++j < mtx_node[max_nodes + 3])
 		{
-			next_node = mtx[node_path[i]][ 2 * max_nodes + 4 + j];
-			if (next_node == node_path[i + 1])
-			{
-				mtx[node_path[i]][max_nodes + 4 + j] = node_path[i + 1];
-				mtx[node_path[i]][ 2 * max_nodes + 4 + j] = -1;
-				break;
-			}
+			next_node = mtx_node[j + start];
+			if (next_node == needle_node)
+				return(j);
 		}
-		j = -1;
-		while( ++j < mtx[node_path[i + 1]][max_nodes + 3])
+	return (-1);
+}
+void			ft_pop_matrix(int max_nodes, int **mtx, int *node_path)
+{
+	int i;
+	int next_node;
+	int rec_node;
+	int cur_node;
+	int dec[2];
+
+	dec[1] = 2 * max_nodes + 4;
+	dec[0] = max_nodes + 4;
+	i = 0;
+	while(node_path[i + 1] != -1 && (i + 1) < max_nodes)
+	{
+		cur_node = node_path[i];
+		next_node = ft_find_next_node(max_nodes, mtx[cur_node], dec[1] ,node_path[i + 1]);
+		if (next_node != -1)
 		{
-			next_node = mtx[node_path[i + 1]][max_nodes + 4 + j];
-			if (next_node == node_path[i])
+			mtx[cur_node][next_node + dec[0]] = mtx[cur_node][next_node + dec[1]];
+			//if (node_path[i + 1] != end_node)
+				mtx[cur_node][next_node + dec[1]] = -1;
+			if ((rec_node = ft_find_next_node(max_nodes, mtx[node_path[i + 1]], dec[0] ,node_path[i])) != -1)
 			{
-				mtx[node_path[i + 1]][max_nodes + 4 + j] = 0;
-				break;
+				mtx[node_path[i + 1]][rec_node + dec[1]] =	mtx[node_path[i + 1]][rec_node + dec[0]];
+				mtx[node_path[i + 1]][rec_node + dec[0]] = -1;
+			//	if (node_path[i + 1] != end_node)
+					mtx[cur_node][next_node + dec[0]] = -1;
 			}
 		}
 		i++;
@@ -95,7 +111,7 @@ static void    ft_print_matrix(t_master *mstr)
 {
     int     i;
 	int		j;
-
+	return;
   	i = -1;
 
     while ((j = -1) && ++i < mstr->nodes_nb)
@@ -126,14 +142,21 @@ static void    ft_print_matrix(t_master *mstr)
 	{
 		if (mstr->node_path[i] == -1)
 		break;
+		printf("%5.*s",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][mstr->nodes_nb])->name_len,
+		ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][mstr->nodes_nb])->line);
+	}
+	i = -1;
+	printf("\n");
+	while (++i < mstr->nodes_nb)
+	{
+		if (mstr->node_path[i] == -1)
+		break;
 		printf("%3d", mstr->node_path[i]);
-		 //printf("%5.*s",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][mstr->nodes_nb])->name_len,
-		//ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][mstr->nodes_nb])->line);
 	}
 	printf("\n");
 	i = -1;
 	while (++i < mstr->nodes_nb)
-		printf("%3d", mstr->node_queue[i]);
+		printf("||%3d - %3d||", mstr->node_queue[0][i], mstr->node_queue[1][i]);
 		printf("\n");
 	i = -1;
 	while (++i < mstr->nodes_nb)
@@ -144,18 +167,27 @@ static void    ft_print_matrix(t_master *mstr)
 void			solver(t_master *mstr)
 {
 	int magic[3];
+	int flow = 0;
+	int i;
 
 	magic[0] = mstr->ants_nb;
 	magic[1] = mstr->adjacency_mtx[mstr->start->node_number][mstr->nodes_nb + 3];
 	magic[2] = mstr->adjacency_mtx[mstr->end->node_number][mstr->nodes_nb + 3];
+
+	printf("max flow options -%d -%d -%d\n", magic[0],magic[1],magic[2]);
 	mstr->magic_number= ft_min(ft_min(magic[0], magic[1]), magic[2]);
 
-	ft_print_matrix(mstr);
-	if(!(ft_solver_bfs(mstr, mstr->start->node_number, mstr->end->node_number)))
+	while (flow < mstr->magic_number)
+	{
+		if(!(ft_solver_bfs(mstr, mstr->start->node_number, mstr->end->node_number)))
+			break;
+		ft_pop_matrix(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
+		ft_print_matrix(mstr);
+		flow++;
+		i = -1;
+	}
+	printf("max flow -%d\n", mstr->magic_number);
+	printf("final flow -%d\n", flow);
+	if(!flow)
 		ft_exit(NOT_CONNECTED);
-	ft_pop_matrix(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
-	ft_print_matrix(mstr);
-	ft_solver_bfs(mstr, mstr->start->node_number, mstr->end->node_number);
-	ft_pop_matrix(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
-	ft_print_matrix(mstr);
 }
