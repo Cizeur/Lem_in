@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:44:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/10 09:48:20 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/10 10:30:29 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ typedef struct	s_master
 	t_line_info		*end;
 	int				lines_nb;
 	t_hash_dico		*dico;
-	t_solution		*solutions;
+	t_solution		**solutions;
+	int				nb_solutions;
 }				t_master;
 
 void 				ft_init_mstr(t_master *mstr);
