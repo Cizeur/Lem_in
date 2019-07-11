@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/10 13:46:21 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/11 18:54:15 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,33 +52,96 @@ static void    ft_print_matrix(t_master *mstr)
     int     i;
 	int		j;
 	int		check;
+	int		end[2];
+	int 	start[2];
 
-  	i = -1;
+  	//return;
+	i = -1;
+	end[0] = 0;
+	start[0] = 0;
     while ((j = -1) && ++i < mstr->nodes_nb)
     {
-
+		end[1] = 0;
+		start[1] = 0;
 		check = 0;
 		while (++j < mstr->nodes_nb)
    		{
-			if (mstr->adjacency_mtx[i][j + mstr->nodes_nb + 4] != -1)
+			if (mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb] != -1)
 			{
 				if (!check)
 					printf ("node : %4d |", i);
 				check++;
-				printf ("\033[0;33m%6d\033[0m", mstr->adjacency_mtx[i][j + mstr->nodes_nb + 4]);
-
+				printf ("\033[0;33m%6d\033[0m", mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb]);
+				if (mstr->adjacency_mtx[i][j+ A_OPTIONS + 2 * mstr->nodes_nb] == 0)
+				{
+					start[0]++;
+					start[1] = 1;
+				}
+				if (mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb] == 1)
+				{
+					end[0]++;
+					end[1] = 1;
+				}
 			}
 		}
+		if (check)
+					printf("  --  %.*s",ft_storage_get_line(mstr->storage_start, mstr->adjacency_mtx[i][A_LINE_INDEX])->name_len,
+						ft_storage_get_line(mstr->storage_start, mstr->adjacency_mtx[i][A_LINE_INDEX])->line);
 		if (check > 1)
 					printf("\033[0;31m	error\033[0m");
+		if (start[1])
+					printf("\033[0;31m	start ?\033[0m");
+		if (end[1])
+					printf("\033[0;31m	end ?\033[0m");
 		if (check)
-					printf("  --  %.*s\n",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][mstr->nodes_nb])->name_len,
-						ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][mstr->nodes_nb])->line);
+			printf("\n");
     }
+	printf("NB of link to start %d\n NB of link to end %d\n", start[0], end[0]);
 }
+/*
+static void    ft_print_matrix(t_master *mstr)
+{
+    int     i;
+	int		j;
+//	return;
+  	i = -1;
+	printf("\n");
+    while ((j = -1) && ++i < mstr->nodes_nb)
+    {
+        printf ("node : %4d |", i);
+		while (++j < 2 * mstr->nodes_nb + A_OPTIONS)
+   		{
 
+			if (j > 2 * mstr->nodes_nb + 3 + mstr->adjacency_mtx[i][mstr->nodes_nb + 3])
+				break;
+			else if (j == mstr->nodes_nb)
+				printf("\033[0;34m%5.*s\33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][mstr->nodes_nb])->name_len,
+				ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][mstr->nodes_nb])->line);
+			else if (mstr->adjacency_mtx[i][j] == -1 && j <= 2 * mstr->nodes_nb + 3 )
+				printf ("%3s", " ");
+			else if (j > 2 * mstr->nodes_nb + 3)
+				printf ("\033[0;36m%3d\033[0m", mstr->adjacency_mtx[i][j]);
+			else if (j > mstr->nodes_nb + 3)
+				printf ("\033[0;33m%3d\033[0m", mstr->adjacency_mtx[i][j]);
+			else if (j == mstr->nodes_nb + 2)
+				printf ("\033[0;35m%3d\033[0m", mstr->adjacency_mtx[i][j]);
+			else if (mstr->adjacency_mtx[i][j] && j < mstr->nodes_nb)
+				printf ("\033[0;31m%3d\033[0m", mstr->adjacency_mtx[i][j]);
+			else if (mstr->adjacency_mtx[i][j])
+				printf ("\033[0;32m%3d\033[0m", mstr->adjacency_mtx[i][j]);
+			else
+				printf ("%3d", mstr->adjacency_mtx[i][j]);
 
+			if (mstr->adjacency_mtx[i][j] != DISCONNECTED)
+				printf("%3d", mstr->adjacency_mtx[i][j]);
+			else
+				printf("%3s", "");
+		}
 
+		printf ("\n");
+	}
+}
+*/
 void		parser(t_master *mstr)
 {
 	char		*line;
@@ -107,5 +170,6 @@ void		parser(t_master *mstr)
 	solver(mstr);
 	ft_print_matrix(mstr);
 	printf("\n\n\n\n");
-
+	return;
+	ft_print_matrix(mstr);
 }

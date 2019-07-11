@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/10 17:29:07 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/11 16:50:58 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@
 ** ADJACENCY
 */
 #define DISCONNECTED -1
+#define DEACTIVATED -2
+#define ACTIVATED 2
+#define A_LINKS_NB 0
+#define A_LOADED 1
+#define A_LINE_INDEX 2
+#define A_OPTIONS 3
 
 typedef enum	e_ln_type
 {
@@ -117,7 +123,8 @@ typedef struct	s_master
 	int				command_line;
 	int				**adjacency_mtx;
 	int				*node_lvl_stack;
-	int				*node_queue[2];
+	int				*node_queue;
+	int				*node_parent;
 	int				*node_path;
 	int				*node_capacity;
 	t_storage		*storage;
