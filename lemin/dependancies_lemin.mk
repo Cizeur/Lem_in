@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/12 14:03:28 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/12 16:45:05 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,15 @@ SRC_LEMIN =  \
 	ft_storage_grow.c\
 	ft_storage_add_line.c\
 	ft_storage_get_line.c\
-	ft_adjacency_matrix.c\
 	ft_is_whitespace.c\
 	ft_find_end.c\
 	ft_intset.c\
 	ft_init_mstr.c\
 	ft_exit.c\
 	solver.c\
+	ft_matrix_generate.c\
+	ft_matrix_popping.c\
+	ft_matrix_find_node.c\
 	main.c\
 	ft_dico_add.c\
 	ft_dico_get.c\

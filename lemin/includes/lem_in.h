@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/12 14:47:03 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/12 16:44:26 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ int					ft_dico_hasher_djb2(char *str, char *end, int amplitude);
 #include "debug.h"
 //
 
-
 void				parser(t_master *mstr);
 char				*ft_parser_ants_get(t_master *mstr);
 t_ln_type			ft_parser_check_node(char *line, t_ln_type type);
@@ -168,9 +167,10 @@ int					ft_dico_add(t_storage *storage_start, t_hash_dico *dico,t_line_info *ent
 int					ft_dico_get(t_storage *storage_start, t_hash_dico *dico, char *needle, int len);
 
 void				solver(t_master *mstr);
+void				ft_matrix_popping(int max_nodes, int **mtx, int *node_path);
 
-
-void				ft_adjacency_matrix_generate(t_master *mstr, t_storage *storage);
+void				ft_matrix_generate(t_master *mstr, t_storage *storage);
 void				ft_solution_print(t_master *mstr);
+int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/12 15:02:32 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/12 16:39:30 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void    ft_put_pipe_in_adjancency_matrix(t_master *mstr, int node1, int n
 
 }
 
-void		ft_adjacency_matrix_generate(t_master *mstr, t_storage *storage)
+void		ft_matrix_generate(t_master *mstr, t_storage *storage)
 {
 	int 			ind;
 	int 			reduc_ind;
