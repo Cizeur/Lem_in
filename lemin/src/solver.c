@@ -6,79 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/11 18:57:38 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/12 14:58:55 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
-
-static void    ft_print_matrix(t_master *mstr)
-{
-    int     i;
-	int		j;
-	return;
-  	i = -1;
-    while ((j = -1) && ++i < mstr->nodes_nb)
-    {
-        printf("\033[0;34m%5.*s : \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->name_len,
-			ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->line);
-		printf ("node : %4d |", i);
-		while (++j < 3 * mstr->nodes_nb + A_OPTIONS)
-   		{
-
-			if (j == mstr->nodes_nb + A_OPTIONS || j == 2 * mstr->nodes_nb + A_OPTIONS)
-				printf("%3s", "|");
-			if (mstr->adjacency_mtx[i][j] == DISCONNECTED)
-				printf("%3s", " . ");
-			else if (mstr->adjacency_mtx[i][j] == DEACTIVATED)
-				printf("\033[0;31m%3s\033[0m", " X ");
-			else if (j < A_OPTIONS)
-				printf("\033[0;32m%3d\033[0m", mstr->adjacency_mtx[i][j]);
-			else
-				printf("%3d", mstr->adjacency_mtx[i][j]);
-
-		}
-		printf ("\n");
-	}
-	i = -1;
-
-	printf("\n");
-	while (++i < mstr->nodes_nb)
-	{
-		if (mstr->node_path[i] == -1)
-		break;
-
-	        printf("\033[0;34m%5.*s\33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->name_len,
-			ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->line);
-	}
-		while (++i < mstr->nodes_nb)
-	{
-		if (mstr->node_path[i] == -1)
-		break;
-
-	        printf("\033[0;34m%5.*s : \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->name_len,
-			ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->line);
-	}
-	i = -1;
-	printf("\n");
-	while (++i < mstr->nodes_nb)
-	{
-		if (mstr->node_path[i] == -1)
-		break;
-		printf("%5d", mstr->node_path[i]);
-	}
-	printf("\n");
-	i = -1;
-	while (++i < mstr->nodes_nb)
-		printf("||%3d - %3d||", mstr->node_parent[i], mstr->node_queue[i]);
-		printf("\n");
-	i = -1;
-	while (++i < mstr->nodes_nb)
-		printf("%3d", mstr->node_lvl_stack[i]);
-		printf("\n");
-		i = -1;
-}
 
 static int		ft_find_next_node(int *mtx_node, int start, int needle_node)
 {
@@ -94,21 +27,23 @@ static int		ft_find_next_node(int *mtx_node, int start, int needle_node)
 		}
 	return (-1);
 }
-/*
-int				ft_good_path(int *load_path, int length)
+
+int				ft_no_more_links(int *mtx_node, int start)
 {
-	int i;
+	int j;
+	int next_node;
 
-	i = -1;
-
-	while (++i < length)
-	{
-		if (load_path[i] > 1)
-			return (0);
-	}
-	return(1);
+	j = - 1;
+	while( ++j < mtx_node[A_LINKS_NB])
+		{
+			next_node = mtx_node[j + start];
+			if (next_node != DISCONNECTED)
+				return(0);
+		}
+	return (1);
 }
-*/
+
+
 
 void			ft_clean_path(t_master *mstr)
 {
@@ -122,55 +57,6 @@ void			ft_clean_path(t_master *mstr)
 		mstr->node_path[i - 1] = mstr->node_parent[mstr->node_path[i]];
 	}
 }
-/*
-void			ft_printf_node_path(t_master *mstr)
-{
-		int i;
-	i = -1;
-
-	printf("\n");
-	while (++i < mstr->nodes_nb)
-	{
-		if (mstr->node_parent[i] == -1)
-			printf(" nope ");
-		else
-	        printf("\033[0;34m%5.*s \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_parent[i]][A_LINE_INDEX])->name_len,
-			ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_parent[i]][A_LINE_INDEX])->line);
-	}
-	printf("\n");
-	i = -1;
-	printf("\n");
-	while (++i < mstr->nodes_nb)
-	{
-		if (mstr->node_path[i] == -1)
-			printf(" nope ");
-		else
-	        printf("\033[0;35m%5.*s \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->name_len,
-			ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->line);
-	}
-	printf("\n");
-	i = -1;
-	printf("\n");
-	while (++i < mstr->nodes_nb)
-	{
-		if (mstr->node_parent[i] == -1)
-			printf(" nope ");
-		else
-	        printf("\033[0;34m%3d \33[0m", mstr->node_parent[i]);
-	}
-	printf("\n");
-	i = -1;
-	printf("\n");
-	while (++i < mstr->nodes_nb)
-	{
-		if (mstr->node_path[i] == -1)
-			printf(" nope ");
-		else
-	        printf("\033[0;35m%3d \33[0m",mstr->node_path[i]);
-	}
-	printf("\n");
-}
-*/
 
 int				ft_overloaded_path(t_master *mstr)
 {
@@ -193,10 +79,9 @@ int				ft_overloaded_path(t_master *mstr)
 		load += mtx[cur][A_LOADED] ? 2 : 0;
 		if (cur != mstr->end->node_number)
 			load += mtx[nex][A_LOADED] ? -1 : 0;
-		//printf("[[prec : %d - cur : %d - nex : %d ]] load : %d", prev, cur , nex, load);
 		if (load >= 2)
 		{
-		//	printf("[[prec : %d - cur : %d - nex : %d ]] load : %d", prev, cur , nex, load);
+			mstr->killed++;
 			if ((i = ft_find_next_node(mtx[cur], A_OPTIONS, nex)) != -1)
 				mtx[cur][A_OPTIONS + i] = DEACTIVATED;
 			else
@@ -249,9 +134,12 @@ int 			ft_solver_bfs(t_master *mstr, int cur_node, int end_node)
 				ft_clean_path(mstr);
 				if(ft_overloaded_path(mstr))
 				{
-					ft_print_matrix(mstr);
+					if (DEBUG_PRINT_MATRIX)
+					{
 					printf("\n\n##########OVEEEERLOAD###############\n");
+					ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 					printf("##########OVEEEERLOAD###############\n\n\n");
+					}
 					return (ft_solver_bfs(mstr, mstr->start->node_number, mstr->end->node_number));
 				}
 				return (SUCCESS);
@@ -279,13 +167,13 @@ void			ft_pop_matrix(int max_nodes, int **mtx, int *node_path)
 	int pos;
 
 	i = 0;
-	while(node_path[i + 1] != -1  && (i + 1) < max_nodes)
+	while((i + 1) < max_nodes && node_path[i + 1] != -1)
 	{
 		next_node = node_path[i + 1];
 		cur_node = node_path[i];
-		if (mtx[cur_node][max_nodes + A_OPTIONS + next_node] != 2)
+		if (mtx[cur_node][max_nodes + A_OPTIONS + next_node] != ACTIVATED)
 		{
-			if((pos = ft_find_next_node(mtx[cur_node], A_OPTIONS, next_node)) != -1)
+			if((pos = ft_find_next_node(mtx[cur_node], A_OPTIONS, next_node)) != DISCONNECTED)
 				ft_swap(&mtx[cur_node][A_OPTIONS + pos], &mtx[cur_node][A_OPTIONS + pos + 2 * max_nodes]);
 			mtx[cur_node][max_nodes + A_OPTIONS + next_node] = ACTIVATED;
 			mtx[next_node][max_nodes + A_OPTIONS + cur_node] = ACTIVATED;
@@ -293,13 +181,36 @@ void			ft_pop_matrix(int max_nodes, int **mtx, int *node_path)
 		}
 		else
 		{
-			if((pos = ft_find_next_node(mtx[next_node], A_OPTIONS + max_nodes * 2, cur_node)) != -1)
+			if((pos = ft_find_next_node(mtx[next_node], A_OPTIONS + max_nodes * 2, cur_node)) != DISCONNECTED)
 				mtx[next_node][A_OPTIONS + pos + 2 * max_nodes] = -1;
-			mtx[cur_node][max_nodes + A_OPTIONS + next_node] = 1;
-			mtx[next_node][max_nodes + A_OPTIONS + cur_node] = 1;
-			mtx[next_node][A_LOADED] = 0;
+			mtx[cur_node][max_nodes + A_OPTIONS + next_node] = USED;
+			mtx[next_node][max_nodes + A_OPTIONS + cur_node] = USED;
+			if (ft_no_more_links(mtx[cur_node], 2 * max_nodes + A_OPTIONS))
+				mtx[cur_node][A_LOADED] = 0;
 		}
 		i++;
+	}
+}
+
+void			ft_adjacency_matrix_solution_store(t_master *mstr)
+{
+	int i;
+	int j;
+	int **mtx;
+	int possible_unused;
+
+	i = -1;
+	mtx = mstr->adjacency_mtx;
+	while (++i < mstr->nodes_nb)
+	{
+		j = -1;
+		while (++j < mtx[i][A_LINKS_NB])
+			{
+			mtx[i][j + A_OPTIONS + 3 * mstr->nodes_nb] = mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb];
+			if ((possible_unused = mtx[i][j + A_OPTIONS]) >= 0
+				&& mtx[i][mstr->nodes_nb + A_OPTIONS + possible_unused] == UNUSED)
+				mtx[i][j + A_OPTIONS + 3 * mstr->nodes_nb] = mtx[i][j + A_OPTIONS];
+			}
 	}
 }
 
@@ -314,28 +225,22 @@ void			solver(t_master *mstr)
 	magic[0] = mstr->ants_nb;
 	magic[1] = mstr->adjacency_mtx[mstr->start->node_number][A_LINKS_NB];
 	magic[2] = mstr->adjacency_mtx[mstr->end->node_number][A_LINKS_NB];
-	ft_intset(mstr->node_lvl_stack, mstr->nodes_nb, -1);
-	ft_intset(mstr->node_path, mstr->nodes_nb, -1);
-	ft_intset(mstr->node_queue, 2 * mstr->nodes_nb, -1);
-	printf("max flow options -%d -%d -%d\n", magic[0],magic[1],magic[2]);
+	ft_intset(mstr->node_lvl_stack, mstr->nodes_nb + 1, DISCONNECTED);
+	ft_intset(mstr->node_path, mstr->nodes_nb + 1, DISCONNECTED);
+	ft_intset(mstr->node_queue, mstr->nodes_nb + 1, DISCONNECTED);
 	mstr->magic_number= ft_min(ft_min(magic[0], magic[1]), magic[2]);
-	ft_print_matrix(mstr);
-	printf("WAAAAT\n");
-
+	ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	while (flow < mstr->magic_number)
 	{
 		if(!(ft_solver_bfs(mstr, mstr->start->node_number, mstr->end->node_number)))
 			break;
 		ft_pop_matrix(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
-		ft_print_matrix(mstr);
+		ft_adjacency_matrix_solution_store(mstr);
+		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 		flow++;
 		i = -1;
 	}
-	printf("\n\nmax flow -%d\n", mstr->magic_number);
-	printf("final flow -%d\n", flow);
 	if(!flow)
 		ft_exit(NOT_CONNECTED);
-	//ft_print_matrix(mstr);
-	return;
-		ft_print_matrix(mstr);
+	mstr->nb_solutions = flow;
 }

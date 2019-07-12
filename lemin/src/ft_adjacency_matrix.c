@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/11 18:37:08 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/12 15:02:32 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
         ft_exit(ADJACENCY_MTX);
     while (i < mstr->nodes_nb)
     {
-        if (!(mstr->adjacency_mtx[i] = (int*)ft_memalloc(sizeof(int) * (3 * (mstr->nodes_nb) + A_OPTIONS))))
+        if (!(mstr->adjacency_mtx[i] = (int*)ft_memalloc(sizeof(int) * (4 * (mstr->nodes_nb) + A_OPTIONS))))
             ft_exit(ADJACENCY_MTX);
-        ft_intset(mstr->adjacency_mtx[i], 3 * mstr->nodes_nb + A_OPTIONS , DISCONNECTED);
+        ft_intset(mstr->adjacency_mtx[i], 4 * mstr->nodes_nb + A_OPTIONS , DISCONNECTED);
         mstr->adjacency_mtx[i][A_LINKS_NB] = 0;
         i++;
     }
-    if (!(mstr->node_lvl_stack = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb + 1)))
+    if (!(mstr->node_lvl_stack = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
         ft_exit(NODE_STACK_MTX);
-    if (!(mstr->node_queue = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb + 1)))
+    if (!(mstr->node_queue = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
         ft_exit(NODE_STACK_MTX);
-    if (!(mstr->node_path = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb + 1)))
+    if (!(mstr->node_path = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
         ft_exit(NODE_STACK_MTX);
-    if (!(mstr->node_parent = (int*)ft_memalloc(sizeof(int) * mstr->nodes_nb + 1)))
+    if (!(mstr->node_parent = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
         ft_exit(NODE_STACK_MTX);
  }
 
