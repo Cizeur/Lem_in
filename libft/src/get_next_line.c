@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_single_fd.c                          :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 17:40:14 by cgiron            #+#    #+#             */
-/*   Updated: 2019/06/19 12:40:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/12 15:04:56 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int				get_next_line(const int fd, char **line)
 	int			r;
 	char		*temp;
 
+	r = 0;
 	if (fd < 0 || fd >= MAX_FD || !line || BUFF_SIZE <= 0)
 		return (-1);
 	if (!(gnl[fd] = !gnl[fd] ? ft_strnew(0) : gnl[fd]))
