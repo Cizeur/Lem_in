@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/10 07:50:43 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/12 14:03:28 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,11 @@ SRC_LEMIN =  \
 	main.c\
 	ft_dico_add.c\
 	ft_dico_get.c\
-	ft_dico_hasher_djb2.c
+	ft_dico_hasher_djb2.c\
+	ft_solution_print.c
+
+SRC_LEMIN += \
+			 debug_print.c
 
 INC_LEMIN					:= lem_in.h\
 							error.h\
