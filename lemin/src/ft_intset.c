@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 07:46:20 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/12 15:03:03 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/12 15:21:51 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void				ft_intset(int *tab, int size, int nb)
 {
 	if (!tab)
 		return;
-	while (--size)
+	while (size--)
 	{
 		*tab = nb;
 		tab++;
