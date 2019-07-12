@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:26:31 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/11 18:29:08 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/12 12:29:57 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void     inizialization(t_master *mstr)
     i = 0;
     mstr->start_index = -1;
     mstr->end_index = -1;
-    mstr->nb_nodes = 0;
-    mstr->nb_pipes = 0;
+    mstr->current_node = 0;
+    mstr->current_pipe = 0;
     if (!(mstr->nodes_array = (t_nodes**)ft_memalloc(sizeof(t_nodes*) * mstr->nb_nodes)))
         ft_exit(ERROR_MALLOC);
     if (!(mstr->pipes_array = (t_pipes**)ft_memalloc(sizeof(t_pipes*) * mstr->nb_pipes)))
@@ -31,6 +31,8 @@ void     inizialization(t_master *mstr)
             ft_exit(ERROR_MALLOC);
         if (!(mstr->nodes_array[i]->pipes = (int*)ft_memalloc(sizeof(int) * mstr->nb_nodes)))
             ft_exit(ERROR_MALLOC);
+        mstr->nodes_array[i]->nb_pipes = 0;
+        mstr->nodes_array[i]->flag = NOTHING;
         i++;
     }
     i = 0;
@@ -38,7 +40,6 @@ void     inizialization(t_master *mstr)
     {
         if (!(mstr->pipes_array[i] = (t_pipes*)ft_memalloc(sizeof(t_nodes*))))
             ft_exit(ERROR_MALLOC);
-        
         i++;
     }
     /*

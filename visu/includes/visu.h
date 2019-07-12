@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/11 18:30:48 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/12 12:26:01 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include "error.h"
 # include "libft/libft.h"
 
+# define NOTHING 0
+# define START 1
+# define END 2
+
 typedef struct		s_nodes
 {
 	int				node_index;
@@ -27,6 +31,7 @@ typedef struct		s_nodes
 	int				y;
 	int				*pipes;
 	int				nb_pipes;
+	int				flag;
 }					t_nodes;
 
 typedef struct		s_pipes
@@ -48,6 +53,9 @@ typedef struct		s_master
 	t_pipes			**pipes_array;
 	int				start_index;
 	int				end_index;
+	int				current_node;
+	int				current_pipe;
+	int				current_movement;
 }					t_master;
 
 /*
