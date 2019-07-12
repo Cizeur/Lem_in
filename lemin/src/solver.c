@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/12 14:58:55 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/12 15:25:37 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int				ft_no_more_links(int *mtx_node, int start)
 		}
 	return (1);
 }
-
-
 
 void			ft_clean_path(t_master *mstr)
 {
@@ -213,8 +211,6 @@ void			ft_adjacency_matrix_solution_store(t_master *mstr)
 			}
 	}
 }
-
-
 
 void			solver(t_master *mstr)
 {
