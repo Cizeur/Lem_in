@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/11 16:50:58 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/12 14:47:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 /*
 ** STORAGE BATCH SIZES
 */
-# define BATCH_MALLOC_SIZE 1000
-# define BATCH_PRINT_SIZE 1000
+# define BATCH_MALLOC_SIZE 100
+# define BATCH_PRINT_SIZE 10000
 /*
 ** DICTIONARY
 */
@@ -62,7 +62,9 @@
 */
 #define DISCONNECTED -1
 #define DEACTIVATED -2
-#define ACTIVATED 2
+#define UNUSED 1
+#define USED 2
+#define ACTIVATED 3
 #define A_LINKS_NB 0
 #define A_LOADED 1
 #define A_LINE_INDEX 2
@@ -119,6 +121,7 @@ typedef struct	s_master
 	int				ants_nb;
 	int				nodes_nb;
 	int				graph_explored;
+	int				killed;
 	int				magic_number;
 	int				command_line;
 	int				**adjacency_mtx;
@@ -143,7 +146,10 @@ void				ft_exit(t_errors error);
 
 int					ft_dico_hasher_djb2(char *str, char *end, int amplitude);
 
-//int					ft_dico_add(t_hash_dico *dico, char *pos[4]);
+//
+#include "debug.h"
+//
+
 
 void				parser(t_master *mstr);
 char				*ft_parser_ants_get(t_master *mstr);
@@ -155,7 +161,6 @@ void				ft_parser_fill_entry_node(t_master *mstr, char *line,
 void				ft_parser_fill_entry_pipe(t_master *mstr, char *line,
 						t_line_info *entry);
 void				ft_parser_apply_command(t_master *mstr, t_line_info *entry);
-
 void				ft_storage_grow(t_master *mstr);
 t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
 t_line_info			*ft_storage_get_line(t_storage *storage_start, int line_nb);
@@ -166,5 +171,6 @@ void				solver(t_master *mstr);
 
 
 void				ft_adjacency_matrix_generate(t_master *mstr, t_storage *storage);
+void				ft_solution_print(t_master *mstr);
 
 #endif
