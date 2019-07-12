@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:26:31 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/12 12:29:57 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:25:50 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,15 @@ void     inizialization(t_master *mstr)
         if (!(mstr->nodes_array[i]->pipes = (int*)ft_memalloc(sizeof(int) * mstr->nb_nodes)))
             ft_exit(ERROR_MALLOC);
         mstr->nodes_array[i]->nb_pipes = 0;
-        mstr->nodes_array[i]->flag = NOTHING;
+        mstr->nodes_array[i]->flag = NODE_NOTHING;
         i++;
     }
     i = 0;
     while (i < mstr->nb_pipes)
     {
-        if (!(mstr->pipes_array[i] = (t_pipes*)ft_memalloc(sizeof(t_nodes*))))
+        if (!(mstr->pipes_array[i] = (t_pipes*)ft_memalloc(sizeof(t_pipes))))
             ft_exit(ERROR_MALLOC);
+        mstr->pipes_array[i]->active = PIPE_ACTIVE;
         i++;
     }
     /*

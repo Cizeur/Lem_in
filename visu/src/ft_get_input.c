@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:34:01 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/12 12:01:05 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:25:51 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_get_parameters(t_master *mstr, char *line, int nb_line)
 		mstr->nb_movements = ft_atoi(line + 31);
 }
 
-void	ft_get_input(t_master *mstr, char *line, int nb_line)
+void	ft_get_input(t_master *mstr, char *line)
 {
 	if (mstr->current_node < mstr->nb_nodes)
 		ft_get_nodes(mstr, line);
@@ -34,5 +34,4 @@ void	ft_get_input(t_master *mstr, char *line, int nb_line)
 		ft_get_pipes(mstr, line);
 	else if (mstr->current_movement < mstr->nb_movements)
 		ft_get_movements(mstr, line);
-	(void)nb_line;
 }

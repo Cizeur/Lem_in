@@ -11,11 +11,11 @@
 2 4 2
 3 4 4
 0-1
-# inactive
+#inactive
 0-2
-# inactive
+#inactive
 2-3
-# inactive
+#inactive
 3-4
 4-1
 

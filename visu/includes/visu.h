@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/12 12:26:01 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:25:48 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
 # include "error.h"
 # include "libft/libft.h"
 
-# define NOTHING 0
-# define START 1
-# define END 2
+# define NODE_NOTHING	0
+# define NODE_START		1
+# define NODE_END		2
+
+# define PIPE_ACTIVE	1
+# define PIPE_INACTIVE	-1
 
 typedef struct		s_nodes
 {
@@ -37,7 +40,9 @@ typedef struct		s_nodes
 typedef struct		s_pipes
 {
 	int				pipe_index;
+	char			*node1_name;
 	int				node1_index;
+	char			*node2_name;
 	int				node2_index;
 	int				active;
 }					t_pipes;
@@ -75,7 +80,7 @@ void  				inizialization(t_master *mstr);
 */
 
 void				ft_get_parameters(t_master *mstr, char *line, int nb_line);
-void				ft_get_input(t_master *mstr, char *line, int nb_line);
+void				ft_get_input(t_master *mstr, char *line);
 void				ft_get_nodes(t_master *mstr, char *line);
 void				ft_get_pipes(t_master *mstr, char *line);
 void				ft_get_movements(t_master *mstr, char *line);
@@ -85,6 +90,9 @@ void				ft_get_movements(t_master *mstr, char *line);
 */
 
 void			    ft_print_parameters(t_master *mstr);
+void  				ft_print_nodes(t_master *mstr);
+void  				ft_print_pipes(t_master *mstr);
+
 
 /*
 ***		VISUAL
