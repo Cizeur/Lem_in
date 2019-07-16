@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/16 17:01:40 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:50:00 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct		s_master
 	SDL_Window      *gWindow;
 	SDL_Surface     *gScreenSurface;
 	SDL_Surface     *gHelloWorld;
-	// int				current_movement;
+	SDL_Event		event_Quit;
 }					t_master;
 
 /*

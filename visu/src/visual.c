@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:11:18 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/16 17:19:19 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:50:21 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,27 @@ int     load_visual(t_master *mstr)
     return (TRUE);
 }
 
+void    run_visual(t_master *mstr)
+{
+    int     flag_quit;
+
+    flag_quit = FALSE;
+    while (flag_quit == FALSE)
+    {
+        while (SDL_PollEvent(&mstr->event_Quit) != 0)
+        {
+            if (mstr->event_Quit.type == SDL_QUIT)
+                flag_quit = TRUE;
+            else
+            {
+                SDL_BlitSurface(mstr->gHelloWorld, NULL, mstr->gScreenSurface, NULL);
+                SDL_UpdateWindowSurface(mstr->gWindow);
+            }
+            
+        }
+    }
+}
+
 void    close_visual(t_master *mstr)
 {
     SDL_FreeSurface(mstr->gHelloWorld);
@@ -48,38 +69,14 @@ void    close_visual(t_master *mstr)
 
 void    visual(t_master *mstr)
 {
-    mstr->gWindow = NULL;
-    mstr->gScreenSurface = NULL;
-    mstr->gHelloWorld = NULL;
+    // mstr->gWindow = NULL;
+    // mstr->gScreenSurface = NULL;
+    // mstr->gHelloWorld = NULL;
 
     if (init_visual(mstr) == TRUE)
     {
         if (load_visual(mstr) == TRUE)
-        {
-            ft_putendl("meow");
-            SDL_BlitSurface(mstr->gHelloWorld, NULL, mstr->gScreenSurface, NULL);
-            SDL_UpdateWindowSurface(mstr->gWindow);
-            SDL_Delay(20000);
-        }
+            run_visual(mstr);
         close_visual(mstr);
     }
-    // if (SDL_Init(SDL_INIT_VIDEO) == -1)
-    //     ft_exit(INIT_SDL);
-    // gWindow = SDL_CreateWindow(
-    //     "An SDL2 window",
-    //     SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-    //     SCREEN_WIDTH, SCREEN_HEIGHT,
-    //     SDL_WINDOW_SHOWN
-    // );
-    // if (!window)
-    //     write(1, "toto", 4);
-    // else
-    // {
-    //     screenSurface = SDL_GetWindowSurface(window);
-    //     SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF ));
-    //     SDL_UpdateWindowSurface( window );
-    //     SDL_Delay(3000);
-    //     SDL_DestroyWindow(window);
-    //     SDL_Quit();
-    // }
 }
