@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:14:30 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/12 16:37:06 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:11:01 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,19 @@ void	ft_get_nodes(t_master *mstr, char *line)
 		mstr->nodes_array[mstr->current_node]->name = ft_strdup(tmp[0]);
 		mstr->nodes_array[mstr->current_node]->len_name = ft_strlen(tmp[0]);
 		mstr->nodes_array[mstr->current_node]->x = ft_atoi(tmp[1]);
+		if (ft_atoi(tmp[1]) < mstr->min_x)
+			mstr->min_x = ft_atoi(tmp[1]);
+		if (ft_atoi(tmp[1]) > mstr->max_x)
+			mstr->max_x = ft_atoi(tmp[1]);
 		mstr->nodes_array[mstr->current_node]->y = ft_atoi(tmp[2]);
+		if (ft_atoi(tmp[2]) < mstr->min_y)
+			mstr->min_y = ft_atoi(tmp[2]);
+		if (ft_atoi(tmp[2]) > mstr->max_y)
+			mstr->max_y = ft_atoi(tmp[2]);
+		if (mstr->nodes_array[mstr->current_node]->flag == NODE_START)
+			mstr->start_name = ft_strdup(tmp[0]);
+		if (mstr->nodes_array[mstr->current_node]->flag == NODE_END)
+			mstr->end_name = ft_strdup(tmp[0]);
 		ft_free_tmp(tmp);
 		mstr->current_node++;
 	}

@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:07:46 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/12 16:41:42 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/16 14:58:19 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ void    ft_print_parameters(t_master *mstr)
     printf("NB INACTIVE PIPES = %d\n", mstr->nb_inactive);
     printf("NB MOVEMENTS      = %d\n", mstr->nb_movements);
     printf("START INDEX       = %d\n", mstr->start_index);
-    printf("END INDEX         = %d\n\n\n", mstr->end_index);
+    printf("START NAME        = %s\n", mstr->start_name);
+    printf("END INDEX         = %d\n", mstr->end_index);
+    printf("END NAME          = %s\n", mstr->end_name);
+    printf("POS MAX X         = %d\n", mstr->max_x);
+    printf("POS MIN X         = %d\n", mstr->min_x);
+    printf("POS MAX Y         = %d\n", mstr->max_y);
+    printf("POS MIN Y         = %d\n\n\n", mstr->min_y);
+    
 }
 
 void    ft_print_nodes(t_master *mstr)

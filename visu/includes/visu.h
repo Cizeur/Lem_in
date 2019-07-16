@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/12 16:25:48 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:01:40 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <stdlib.h>
 # include "error.h"
 # include "libft/libft.h"
+# include "SDL.h"
+# include "SDL_ttf.h"
+
+# define TRUE			1
+# define FALSE			-1
 
 # define NODE_NOTHING	0
 # define NODE_START		1
@@ -24,6 +29,9 @@
 
 # define PIPE_ACTIVE	1
 # define PIPE_INACTIVE	-1
+
+# define SCREEN_WIDTH	640
+# define SCREEN_HEIGHT	480
 
 typedef struct		s_nodes
 {
@@ -47,6 +55,13 @@ typedef struct		s_pipes
 	int				active;
 }					t_pipes;
 
+// typedef struct		s_moves
+// {
+// 	int				move_index;
+
+// }					t_moves;
+
+
 typedef struct		s_master
 {
 	int				nb_ants;
@@ -56,18 +71,28 @@ typedef struct		s_master
 	int				nb_movements;
 	t_nodes			**nodes_array;
 	t_pipes			**pipes_array;
+	// t_moves			**moves_array;
 	int				start_index;
+	char			*start_name;
 	int				end_index;
+	char			*end_name;
 	int				current_node;
 	int				current_pipe;
-	int				current_movement;
+	int				max_x;
+	int				min_x;
+	int				max_y;
+	int				min_y;
+	SDL_Window      *gWindow;
+	SDL_Surface     *gScreenSurface;
+	SDL_Surface     *gHelloWorld;
+	// int				current_movement;
 }					t_master;
 
 /*
 ***		PARSER
 */
 
-void				parser(t_master *mstr);
+int					parser(t_master *mstr);
 
 /*
 ***		INITIALIZATION
@@ -98,10 +123,12 @@ void  				ft_print_pipes(t_master *mstr);
 ***		VISUAL
 */
 
+void 			   	visual(t_master *mstr);
+
 /*
 ***		FT_EXIT
 */
 
-void			    ft_exit(t_errors error);
+int				    ft_exit(t_errors error);
 
 #endif

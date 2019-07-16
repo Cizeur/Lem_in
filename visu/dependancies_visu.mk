@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:40:40 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/11 16:06:14 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/16 12:58:56 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,10 @@ SRC_VISU =  \
 INC_VISU					:= visu.h\
 							error.h\
 							libft/get_next_line.h\
-							libft/libft.h
+							libft/libft.h\
+							/Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/include/SDL2/SDL.h\
+							/Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2/SDL_ttf.h
+
 
 DEPENDANCIES_VISU_O		:= Makefile ./dependancies_$(L_VISU_DIR).mk\
 								 ./dependancies_$(L_VISU_DIR)_object.mk\
@@ -47,7 +50,8 @@ DEPENDANCIES_VISU_O		:= Makefile ./dependancies_$(L_VISU_DIR).mk\
 
 DEPENDANCIES_VISU_O		+= ./includes/*.h
 
-DEPENDANCIES_VISU			:= $(DEPENDANCIES_LEMIN_O) \
+
+DEPENDANCIES_VISU			:= $(DEPENDANCIES_VISU_O) \
  								$(addprefix ../,$(DEPENDANCIES_LIBFT_EXPORT))
 
 INC_VISU_EXPORT			:= $(addprefix $(SHARE_INC_DIR)/,$(INC_VISU))
