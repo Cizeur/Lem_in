@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:11:18 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/16 17:50:21 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:57:48 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ void    close_visual(t_master *mstr)
 
 void    visual(t_master *mstr)
 {
-    // mstr->gWindow = NULL;
-    // mstr->gScreenSurface = NULL;
-    // mstr->gHelloWorld = NULL;
-
     if (init_visual(mstr) == TRUE)
     {
         if (load_visual(mstr) == TRUE)
