@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser_fill_entry_pipe.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 12:08:15 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 18:51:47 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/18 14:05:09 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void		ft_parser_fill_entry_pipe(t_master *mstr, char *line,
 		{
 			entry->pipe[0] = ft_storage_get_line(mstr->storage_start, entry->pipe[0])->node_number;
 			entry->pipe[1] = ft_storage_get_line(mstr->storage_start, entry->pipe[1])->node_number;
+			mstr->pipes_nb++;
 			return ;
 		}
 	}
-	printf("hello you wrong\n");
 	entry->type = END_OF_READ;
 }

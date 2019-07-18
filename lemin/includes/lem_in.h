@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/12 16:44:26 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/18 15:28:58 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 /*
 ** STORAGE BATCH SIZES
 */
-# define BATCH_MALLOC_SIZE 100
-# define BATCH_PRINT_SIZE 10000
+# define BATCH_MALLOC_SIZE 10000
+# define BATCH_PRINT_SIZE 100000
 /*
 ** DICTIONARY
 */
@@ -97,12 +97,13 @@ typedef struct 	s_line_info
 	int					node_number;
 	int					name_len;
 	int					pipe[2];
+	int					active_pipe;
 }				t_line_info;
 
 typedef struct	s_storage
 {
 	t_line_info			entry[BATCH_MALLOC_SIZE];
-	t_line_info			output[BATCH_PRINT_SIZE];
+
 	struct s_storage	*next;
 }				t_storage;
 
@@ -120,6 +121,7 @@ typedef struct	s_master
 {
 	int				ants_nb;
 	int				nodes_nb;
+	int				pipes_nb;
 	int				graph_explored;
 	int				killed;
 	int				magic_number;
@@ -139,6 +141,7 @@ typedef struct	s_master
 	t_hash_dico		*dico;
 	t_solution		**solutions;
 	int				nb_solutions;
+	char			output[BATCH_PRINT_SIZE + 1];
 }				t_master;
 
 void 				ft_init_mstr(t_master *mstr);
@@ -172,5 +175,7 @@ void				ft_matrix_popping(int max_nodes, int **mtx, int *node_path);
 void				ft_matrix_generate(t_master *mstr, t_storage *storage);
 void				ft_solution_print(t_master *mstr);
 int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
+
+void				output(t_master *mstr);
 
 #endif

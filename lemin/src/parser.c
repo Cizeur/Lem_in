@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/17 11:19:30 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/18 14:14:23 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void		parser(t_master *mstr)
 	ft_matrix_generate(mstr, mstr->storage_start);
 //_
 	ft_debug_storage_print(mstr->storage_start, mstr->lines_nb, DEBUG_PRINT_STORAGE);
-	printf("collisions : %d\n", mstr->dico->collisions);
-	printf("start: %d and end %d\n", mstr->start->node_number, mstr->end->node_number);
+//	printf("collisions : %d\n", mstr->dico->collisions);
+//	printf("start: %d and end %d\n", mstr->start->node_number, mstr->end->node_number);
 }

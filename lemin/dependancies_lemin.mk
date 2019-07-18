@@ -27,6 +27,7 @@ NAME_LEMIN	:= lem-in
 
 SRC_LEMIN =  \
 	parser.c\
+	output.c\
 	ft_parser_ants_get.c\
 	ft_parser_line_type.c\
 	ft_parser_check_node.c\
