@@ -26,7 +26,7 @@ endif
 
 DEPENDANCY_OBJ_INC_FILE := ./dependancies_$(L_LEMIN_DIR)_object.mk
 L_FT    := ../libft
-EXFLAGS := -L $(L_FT) -lft
+EXFLAGS := -L $(L_FT) -lft $(SHARE_FLAGS)
 SIMULINK := $(SHARE_INC_DIR)/$(NAME_LIBFT)
 
 NAME 	:= $(NAME_LEMIN)
