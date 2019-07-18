@@ -19,6 +19,6 @@ vpath %.c $(SHARE_SRC_DIR)
 vpath %.h $(SHARE_INC_DIR)
 vpath %.o $(SHARE_OBJ_DIR)
 
-SHARE_FLAGS				:= -Wall -Wextra -Werror -O3 -ffreestanding -fno-builtin
+SHARE_FLAGS				:= -Wall -Wextra -Werror -O3 -ffreestanding -fno-builtin -flto
 SHARE_FLAGS				+= -I $(SHARE_INC_DIR)
 SHARE_DEBUG				:= -O0 -g
