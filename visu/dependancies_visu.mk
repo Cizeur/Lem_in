@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:40:40 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/16 12:58:56 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/22 15:49:37 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,14 +34,22 @@ SRC_VISU =  \
 	ft_print.c \
 	initialization.c \
 	main.c \
-	visual.c
+	visual.c \
+	T_init.c \
+	T_load_media.c \
+	T_load_texture.c \
+	T_close_visual.c
 
-INC_VISU					:= visu.h\
-							error.h\
-							libft/get_next_line.h\
-							libft/libft.h\
-							/Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/include/SDL2/SDL.h\
-							/Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2/SDL_ttf.h
+INC_VISU	:= visu.h\
+			error.h\
+			key_press.h \
+			libft/get_next_line.h\
+			libft/libft.h\
+			/Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/include/SDL2/SDL.h\
+			/Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2/SDL_ttf.h \
+			/Users/crfernan/.brew/Cellar/sdl2_gfx/1.0.4/include/SDL2/SDL2_gfxPrimitives.h \
+			/Users/crfernan/.brew/Cellar/sdl2_image/2.0.5/include/SDL2/SDL_image.h
+
 
 
 DEPENDANCIES_VISU_O		:= Makefile ./dependancies_$(L_VISU_DIR).mk\

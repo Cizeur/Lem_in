@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 11:56:45 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/16 12:58:26 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/22 14:25:13 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,24 @@ $(error LIBFT_DEPENDANCIES not included)
 endif
 
 DEPENDANCY_OBJ_INC_FILE := ./dependancies_$(L_VISU_DIR)_object.mk
+
 L_FT    := ../libft
-L_SDL    := /Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/lib
-L_SDL_TTF    := /Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/lib
-L_SDL_DIR := /Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/include/SDL2/
-L_SDL_TTF_DIR := /Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2/
+
+L_SDL			:= /Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/lib
+L_SDL_DIR		:= /Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/include/SDL2/
+
+L_SDL_TTF		:= /Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/lib
+L_SDL_TTF_DIR	:= /Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2/
+
+L_SDL_GLX		:= /Users/crfernan/.brew/Cellar/sdl2_gfx/1.0.4/lib
+L_SDL_GLX_DIR	:= /Users/crfernan/.brew/Cellar/sdl2_gfx/1.0.4/include/SDL2/
+
+L_SDL_IMAGE		:= /Users/crfernan/.brew/Cellar/sdl2_image/2.0.5/lib
+L_SDL_IMAGE_DIR	:= /Users/crfernan/.brew/Cellar/sdl2_image/2.0.5/include/SDL2/
+
 EXFLAGS := -L $(L_FT) -lft -L $(L_SDL) -lSDL2 -L $(L_SDL_TTF) -lSDL2_ttf
+EXFLAGS += -L $(L_SDL_GLX) -lSDL2_gfx -L $(L_SDL_IMAGE) -lSDL2_image
+
 SIMULINK := $(SHARE_INC_DIR)/$(NAME_LIBFT)
 
 NAME 	:= $(NAME_VISU)
@@ -42,6 +54,7 @@ OBJ		:= $(patsubst %.c,%.o,$(SRC))
 
 CC      := gcc
 CFLAGS  := $(SHARE_FLAGS) -I $(L_SDL_DIR) -I $(L_SDL_TTF_DIR)
+CFLAGS	+= -I $(L_SDL_GLX_DIR) -I $(L_SDL_IMAGE_DIR)
 
 .PHONY: all clean fclean re debug simulink
 

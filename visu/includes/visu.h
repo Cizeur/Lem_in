@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/16 17:50:00 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/22 15:28:56 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "error.h"
+# include "key_press.h"
 # include "libft/libft.h"
 # include "SDL.h"
+# include "SDL_image.h"
 # include "SDL_ttf.h"
+# include "SDL2_gfxPrimitives.h"
 
 # define TRUE			1
 # define FALSE			-1
@@ -55,12 +58,10 @@ typedef struct		s_pipes
 	int				active;
 }					t_pipes;
 
-// typedef struct		s_moves
-// {
-// 	int				move_index;
-
-// }					t_moves;
-
+typedef struct		s_moves
+{
+	int				move_index;
+}					t_moves;
 
 typedef struct		s_master
 {
@@ -71,21 +72,28 @@ typedef struct		s_master
 	int				nb_movements;
 	t_nodes			**nodes_array;
 	t_pipes			**pipes_array;
-	// t_moves			**moves_array;
+	t_moves			**moves_array;
 	int				start_index;
 	char			*start_name;
 	int				end_index;
 	char			*end_name;
 	int				current_node;
 	int				current_pipe;
+	int				current_movement;
 	int				max_x;
 	int				min_x;
 	int				max_y;
 	int				min_y;
-	SDL_Window      *gWindow;
-	SDL_Surface     *gScreenSurface;
-	SDL_Surface     *gHelloWorld;
-	SDL_Event		event_Quit;
+
+/*
+***		VARIABLES FOR THE VISUAL
+*/
+
+	SDL_Window		*gWindow;
+	int				img_init_png;
+	SDL_Renderer	*gRenderer;
+	SDL_Texture		*gTexture;
+	SDL_Event		event;
 }					t_master;
 
 /*
@@ -98,7 +106,7 @@ int					parser(t_master *mstr);
 ***		INITIALIZATION
 */
 
-void  				inizialization(t_master *mstr);
+int	  				inizialization(t_master *mstr);
 
 /*
 ***		PARSER : FT_GET
@@ -118,6 +126,11 @@ void			    ft_print_parameters(t_master *mstr);
 void  				ft_print_nodes(t_master *mstr);
 void  				ft_print_pipes(t_master *mstr);
 
+/*
+***		FT_EXIT
+*/
+
+int				    ft_exit(t_errors error);
 
 /*
 ***		VISUAL
@@ -125,10 +138,11 @@ void  				ft_print_pipes(t_master *mstr);
 
 void 			   	visual(t_master *mstr);
 
-/*
-***		FT_EXIT
-*/
-
-int				    ft_exit(t_errors error);
+int   				init_visual(t_master *mstr);
+void    			close_visual(t_master *mstr);
+int					load_media_visual(t_master *mstr);
+// SDL_Surface			*load_surface_visual(t_master *mstr, char *path);
+SDL_Texture			*load_texture_visual(t_master *mstr, char *path);
+// void 				run_visual(t_master *mstr);
 
 #endif

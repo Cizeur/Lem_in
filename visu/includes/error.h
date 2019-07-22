@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:07:41 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/16 17:11:13 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:28:20 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 typedef enum	e_errors
 {
-		ERROR_MALLOC, FAIL_ON_READ, INVALID_NAME, INIT_SDL, CREATE_SDL, LOAD_BMP
+	ERROR_MALLOC, FAIL_ON_READ, INVALID_NAME, OVERLAPING_ROOMS,
+	INIT_SDL, CREATE_SDL, LOAD_BMP
 }				t_errors;
 
 #endif
