@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/22 15:28:56 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/22 16:05:40 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct		s_master
 	int				img_init_png;
 	SDL_Renderer	*gRenderer;
 	SDL_Texture		*gTexture;
-	SDL_Event		event;
+	SDL_Event		event_Quit;
 }					t_master;
 
 /*
@@ -141,8 +141,7 @@ void 			   	visual(t_master *mstr);
 int   				init_visual(t_master *mstr);
 void    			close_visual(t_master *mstr);
 int					load_media_visual(t_master *mstr);
-// SDL_Surface			*load_surface_visual(t_master *mstr, char *path);
 SDL_Texture			*load_texture_visual(t_master *mstr, char *path);
-// void 				run_visual(t_master *mstr);
+void 				run_visual(t_master *mstr);
 
 #endif
