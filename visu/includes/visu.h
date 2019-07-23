@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/22 16:05:40 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/23 12:38:55 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ typedef struct		s_moves
 	int				move_index;
 }					t_moves;
 
+typedef struct		s_texture
+{
+	char			*path;
+	int				width;
+	int				height;
+	SDL_Texture		*texture;
+}					t_texture;
+
 typedef struct		s_master
 {
 	int				nb_ants;
@@ -92,7 +100,9 @@ typedef struct		s_master
 	SDL_Window		*gWindow;
 	int				img_init_png;
 	SDL_Renderer	*gRenderer;
-	SDL_Texture		*gTexture;
+	// SDL_Texture		*gTexture;
+	t_texture		*background_texture;
+	t_texture		*foo_texture;
 	SDL_Event		event_Quit;
 }					t_master;
 
@@ -143,5 +153,16 @@ void    			close_visual(t_master *mstr);
 int					load_media_visual(t_master *mstr);
 SDL_Texture			*load_texture_visual(t_master *mstr, char *path);
 void 				run_visual(t_master *mstr);
+
+/*
+***		TEXTURE
+*/
+
+int					init_texture(t_texture *texture);
+int					clear_texture(t_texture *texture);
+int					free_texture(t_texture *texture);
+int					load_texture_from_file(t_master *mstr, t_texture *texture, char *path);
+int					render_texture(t_master *mstr, t_texture *texture, int x, int y);
+
 
 #endif

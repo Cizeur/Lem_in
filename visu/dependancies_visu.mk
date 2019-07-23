@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:40:40 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/22 16:08:53 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/23 13:00:13 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC_VISU =  \
 	T_load_media.c \
 	T_load_texture.c \
 	T_run.c \
-	T_close.c
+	T_close.c \
+	T_texture.c
 
 INC_VISU	:= visu.h\
 			error.h\
