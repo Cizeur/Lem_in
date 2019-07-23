@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/23 12:38:55 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/23 20:11:16 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define PIPE_ACTIVE	1
 # define PIPE_INACTIVE	-1
 
-# define SCREEN_WIDTH	640
-# define SCREEN_HEIGHT	480
+# define S_WIDTH	1500
+# define S_HEIGHT	1000
 
 typedef struct		s_nodes
 {
@@ -92,18 +92,24 @@ typedef struct		s_master
 	int				min_x;
 	int				max_y;
 	int				min_y;
+	SDL_Window		*window;
+	SDL_Renderer	*render;
+	SDL_Event		event_Quit;
+	t_texture		*background;
+	SDL_Rect		**rect_array;
+	int				img_init_png;
 
 /*
-***		VARIABLES FOR THE VISUAL
+***		VARIABLES FOR THE VISUAL TUTORIAL
 */
 
-	SDL_Window		*gWindow;
-	int				img_init_png;
-	SDL_Renderer	*gRenderer;
-	// SDL_Texture		*gTexture;
-	t_texture		*background_texture;
-	t_texture		*foo_texture;
-	SDL_Event		event_Quit;
+	// SDL_Window		*gWindow;
+	// int				img_init_png;
+	// SDL_Renderer	*gRenderer;
+	// // SDL_Texture		*gTexture;
+	// t_texture		*background_texture;
+	// t_texture		*foo_texture;
+	// // SDL_Event		event_Quit;
 }					t_master;
 
 /*
@@ -163,6 +169,13 @@ int					clear_texture(t_texture *texture);
 int					free_texture(t_texture *texture);
 int					load_texture_from_file(t_master *mstr, t_texture *texture, char *path);
 int					render_texture(t_master *mstr, t_texture *texture, int x, int y);
+
+
+int					vs_init(t_master *mstr);
+int					vs_load(t_master *mstr);
+int					vs_run(t_master *mstr);
+void				vs_close(t_master *mstr);
+
 
 
 #endif

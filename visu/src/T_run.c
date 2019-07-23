@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 15:55:56 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/23 13:06:34 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:01:20 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,36 @@
 
 void    run_visual(t_master *mstr)
 {
-    int         i;
-    int         flag_quit;
+    (void)mstr;
 
+    // int         i;
+    // int         flag_quit;
+
+    // flag_quit = FALSE;
+    // while (flag_quit == FALSE)
+    // {
+    //     while (SDL_PollEvent(&mstr->event_Quit) != 0)
+    //     {
+    //         if (mstr->event_Quit.type == SDL_QUIT)
+    //             flag_quit = TRUE;
+    //         while (i < SCREEN_WIDTH)
+    //         {
+    //             //Clear screen
+    //             SDL_SetRenderDrawColor(mstr->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    //             SDL_RenderClear(mstr->gRenderer);
+    //             //Render background texture to screen
+    //             render_texture(mstr, mstr->background_texture, 0, 0);
+    //             //Render foo texture to screen
+    //             render_texture(mstr, mstr->foo_texture, i, 190);
+    //             //Update screen
+    //             SDL_RenderPresent(mstr->gRenderer);
+    //             //Delay
+    //             SDL_Delay(10);
+    //             i = i + 10;
+    //         }
+    //     }
+    // }
+}
 
     // SDL_Rect    fillRect = {
     //     SCREEN_WIDTH / 4,
@@ -31,33 +58,6 @@ void    run_visual(t_master *mstr)
     //     SCREEN_WIDTH * 2 / 3,
     //     SCREEN_HEIGHT * 2 / 3
     // };
-    flag_quit = FALSE;
-    while (flag_quit == FALSE)
-    {
-        while (SDL_PollEvent(&mstr->event_Quit) != 0)
-        {
-            if (mstr->event_Quit.type == SDL_QUIT)
-                flag_quit = TRUE;
-            
-            while (i < SCREEN_WIDTH)
-            {
-                //Clear screen
-                SDL_SetRenderDrawColor(mstr->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-                SDL_RenderClear(mstr->gRenderer);
-                //Render background texture to screen
-                render_texture(mstr, mstr->background_texture, 0, 0);
-                //Render foo texture to screen
-                render_texture(mstr, mstr->foo_texture, i, 190);
-                //Update screen
-                SDL_RenderPresent(mstr->gRenderer);
-                //Delay
-                SDL_Delay(100);
-                i = i + 10;
-            }
-        }
-    }
-}
-
 
     // if (mstr->event_Quit.type == SDL_QUIT)
     //     flag_quit = TRUE;
