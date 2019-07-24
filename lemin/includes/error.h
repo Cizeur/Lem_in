@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:24:01 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/12 14:41:19 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/23 17:13:14 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ typedef enum	e_errors
 		FAILED_ALLOC_SOLUTIONS,
 		MAX_NUMBER_OF_SOLUTIONS_REACHED,
 		START_OR_END_MISSING,
-		WRONG_POSITION_FOR_START_END,
+		WRONG_POSITION_FOR_START_END,\
+		DEAD_END_ON_SOLUTION
 }				t_errors;
 
 #endif

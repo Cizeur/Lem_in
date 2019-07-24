@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/18 15:28:40 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/23 14:03:47 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static void		ft_output_batch_print(t_storage *storage, char *buffer)
 }
 void			output(t_master *mstr)
 {
+	if (!OUTPUT_ACTIVATED)
+		return;
 	ft_output_first_lines(mstr);
 	ft_output_batch_print(mstr->storage_start, mstr->output);
 }

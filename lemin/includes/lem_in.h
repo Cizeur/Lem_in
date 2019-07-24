@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/18 15:28:58 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/24 12:22:49 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@
 #define A_LINKS_NB 0
 #define A_LOADED 1
 #define A_LINE_INDEX 2
-#define A_OPTIONS 3
+#define A_GOT_ANT 3
+#define A_STORED_SOLUTION 4
+#define A_PATH_LEN 5
+#define A_OPTIONS 6
 
 typedef enum	e_ln_type
 {
@@ -140,6 +143,7 @@ typedef struct	s_master
 	int				lines_nb;
 	t_hash_dico		*dico;
 	t_solution		**solutions;
+	int				max_path_len;
 	int				nb_solutions;
 	char			output[BATCH_PRINT_SIZE + 1];
 }				t_master;
@@ -175,6 +179,8 @@ void				ft_matrix_popping(int max_nodes, int **mtx, int *node_path);
 void				ft_matrix_generate(t_master *mstr, t_storage *storage);
 void				ft_solution_print(t_master *mstr);
 int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
+
+void				ft_solver_extract_path_len(t_master *mstr, int max_nodes);
 
 void				output(t_master *mstr);
 

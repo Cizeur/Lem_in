@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/12 16:44:05 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/24 12:07:52 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,9 @@ void			ft_adjacency_matrix_solution_store(t_master *mstr)
 			if ((possible_unused = mtx[i][j + A_OPTIONS]) >= 0
 				&& mtx[i][mstr->nodes_nb + A_OPTIONS + possible_unused] == UNUSED)
 				mtx[i][j + A_OPTIONS + 3 * mstr->nodes_nb] = mtx[i][j + A_OPTIONS];
+			if (mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb] >= 0
+				&& i != mstr->start->node_number)
+				mtx[i][A_STORED_SOLUTION] = mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb];
 			}
 	}
 }
@@ -175,6 +178,7 @@ void			solver(t_master *mstr)
 			break;
 		ft_matrix_popping(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
 		ft_adjacency_matrix_solution_store(mstr);
+		ft_solver_extract_path_len(mstr, mstr->nodes_nb);
 		//
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 		//
