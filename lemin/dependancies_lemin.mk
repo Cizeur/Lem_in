@@ -52,7 +52,10 @@ SRC_LEMIN =  \
 	ft_dico_get.c\
 	ft_dico_hasher_djb2.c\
 	ft_solution_print.c\
-	ft_solver_max_path_len.c
+	ft_solver_extract_path_len.c\
+	ft_solver_sort_paths.c\
+	ft_solver_turn_counter.c
+	
 
 SRC_LEMIN += \
 			 debug_print.c

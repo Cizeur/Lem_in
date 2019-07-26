@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 10:58:52 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/23 14:03:56 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/26 15:44:24 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** NODES NUMBERS DEFINE
  */
 
-# define OUTPUT_ACTIVATED 0
+# define OUTPUT_ACTIVATED 1
 # define SO_NODE_NB "# number of nodes            = "
 # define SO_PIPE_NB "# number of pipes            = "
 # define SO_INACT_PIPE_NB "# number of inactive pipes   = "

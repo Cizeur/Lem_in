@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/24 12:22:49 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/26 15:46:28 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ typedef struct	s_master
 	int				lines_nb;
 	t_hash_dico		*dico;
 	t_solution		**solutions;
-	int				max_path_len;
+	int				turn_counter;
+	int				end_of_search;
 	int				nb_solutions;
 	char			output[BATCH_PRINT_SIZE + 1];
 }				t_master;
@@ -181,6 +182,8 @@ void				ft_solution_print(t_master *mstr);
 int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
 
 void				ft_solver_extract_path_len(t_master *mstr, int max_nodes);
+void 				ft_solver_sort_paths(t_master *mstr, int max_nodes, int flow);
+void				ft_solver_turn_counter(t_master *mstr, int flow);
 
 void				output(t_master *mstr);
 

@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:55:55 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/24 12:19:35 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/26 12:26:00 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 #define DEBUG_PRINT_PATH_LEN 0
-#define DEBUG_PRINT_MATRIX 1
+#define DEBUG_PRINT_MATRIX 0
 #define DEBUG_PRINT_TEST_RESULT 0
 #define DEBUG_PRINT_STORAGE 0
 
