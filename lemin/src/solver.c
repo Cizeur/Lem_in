@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/24 12:07:52 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/26 15:47:15 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,17 +172,18 @@ void			solver(t_master *mstr)
 	//
 	ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	//
-	while (flow < mstr->magic_number)
+	while (flow < mstr->magic_number && !mstr->end_of_search)
 	{
 		if(!(ft_solver_bfs(mstr, mstr->start->node_number, mstr->end->node_number)))
 			break;
 		ft_matrix_popping(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
 		ft_adjacency_matrix_solution_store(mstr);
 		ft_solver_extract_path_len(mstr, mstr->nodes_nb);
+		ft_solver_sort_paths(mstr, mstr->nodes_nb, ++flow);
+		ft_solver_turn_counter(mstr, flow);
 		//
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 		//
-		flow++;
 	}
 	if(!flow)
 		ft_exit(NOT_CONNECTED);

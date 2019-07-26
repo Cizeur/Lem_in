@@ -6,7 +6,7 @@
 /*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/23 14:03:47 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/26 15:45:02 by cesar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static void		ft_output_first_lines(t_master *mstr)
 	ft_putchar('\n');
 	ft_putstr(SO_PIPE_NB);
 	ft_putnbr(mstr->pipes_nb);
+	ft_putchar('\n');
+	ft_putstr(SO_MVMT_NB);
+	ft_putnbr(mstr->turn_counter);
 	ft_putchar('\n');
 }
 
