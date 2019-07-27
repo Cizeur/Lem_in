@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:07:46 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/16 14:58:19 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/27 21:12:18 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,13 @@ void    ft_print_pipes(t_master *mstr)
 		printf("NODE NAME  2     = %s\n\n", mstr->pipes_array[i]->node2_name);
         i++;
     }
+}
+
+
+void    ft_print_moves(t_master *mstr)
+{
+    int     i;
+
+    i = 0;
+    (void)mstr;
 }

@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:12:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/16 17:03:32 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/27 18:47:04 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,7 @@ int		ft_is_not_comment_2(t_master *mstr, char *line)
     return (1);
 }
 
-int     ft_str_cmp(char *s1, char *s2)
-{
-    int     i;
-
-    i = 0;
-    while (s1[i] && s2[i] && s1[i] == s2[i])
-        i++;
-    if (s1[i] == '\0' && s2[i] == '\0')
-        return (1);
-    return (0);
-}
-
-int     ft_get_index_node(t_master *mstr, char *name)
-{
-    int     i;
-
-    i = 0;
-    while (i < mstr->nb_nodes)
-    {
-        if (ft_str_cmp(mstr->nodes_array[i]->name, name))
-            return (i);
-        i++;
-    }
-    return (ft_exit(INVALID_NAME));
-}
-
-void    ft_free_tmp_2(char **tmp)
+void    free_get_pipes(char **tmp)
 {
     free(tmp[0]);
     free(tmp[1]);
@@ -76,6 +50,6 @@ void	ft_get_pipes(t_master *mstr, char *line)
         mstr->nodes_array[index2]->pipes[mstr->nodes_array[index2]->nb_pipes] = index1;
         mstr->nodes_array[index2]->nb_pipes++;
         mstr->current_pipe++;
-        ft_free_tmp_2(tmp);
+        free_get_pipes(tmp);
     }
 }

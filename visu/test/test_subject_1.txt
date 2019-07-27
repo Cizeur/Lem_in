@@ -4,7 +4,7 @@
 # number of inactive pipes   = 0
 # number of movements        = 5
 ##start
-0 1 0
+0 -1 0
 ##end
 1 5 0
 2 9 0

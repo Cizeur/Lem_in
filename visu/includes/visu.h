@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/23 20:11:16 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/27 21:11:43 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,23 @@
 # define S_WIDTH	1500
 # define S_HEIGHT	1000
 
+typedef struct		s_ants
+{
+	int				ant_index;
+	int				current_move;
+	int				current_node;
+	// int				*path;
+}					t_ants;
+
 typedef struct		s_nodes
 {
 	int				node_index;
 	char			*name;
 	int				len_name;
 	int				x;
+	int				x_px;
 	int				y;
+	int				y_px;
 	int				*pipes;
 	int				nb_pipes;
 	int				flag;
@@ -61,6 +71,11 @@ typedef struct		s_pipes
 typedef struct		s_moves
 {
 	int				move_index;
+	int				current_index;
+	int				ant_index;
+	int				node1_index;
+	int				node2_index;
+	struct s_moves	*next;
 }					t_moves;
 
 typedef struct		s_texture
@@ -78,6 +93,7 @@ typedef struct		s_master
 	int				nb_pipes;
 	int				nb_inactive;
 	int				nb_movements;
+	t_ants			**ants_array;
 	t_nodes			**nodes_array;
 	t_pipes			**pipes_array;
 	t_moves			**moves_array;
@@ -87,7 +103,7 @@ typedef struct		s_master
 	char			*end_name;
 	int				current_node;
 	int				current_pipe;
-	int				current_movement;
+	int				current_move;
 	int				max_x;
 	int				min_x;
 	int				max_y;
@@ -96,20 +112,8 @@ typedef struct		s_master
 	SDL_Renderer	*render;
 	SDL_Event		event_Quit;
 	t_texture		*background;
-	SDL_Rect		**rect_array;
+	int				flag_exit;
 	int				img_init_png;
-
-/*
-***		VARIABLES FOR THE VISUAL TUTORIAL
-*/
-
-	// SDL_Window		*gWindow;
-	// int				img_init_png;
-	// SDL_Renderer	*gRenderer;
-	// // SDL_Texture		*gTexture;
-	// t_texture		*background_texture;
-	// t_texture		*foo_texture;
-	// // SDL_Event		event_Quit;
 }					t_master;
 
 /*
@@ -141,6 +145,7 @@ void				ft_get_movements(t_master *mstr, char *line);
 void			    ft_print_parameters(t_master *mstr);
 void  				ft_print_nodes(t_master *mstr);
 void  				ft_print_pipes(t_master *mstr);
+void  				ft_print_moves(t_master *mstr);
 
 /*
 ***		FT_EXIT
@@ -149,7 +154,7 @@ void  				ft_print_pipes(t_master *mstr);
 int				    ft_exit(t_errors error);
 
 /*
-***		VISUAL
+***		VISUAL THIS IS A MESS
 */
 
 void 			   	visual(t_master *mstr);
@@ -161,7 +166,7 @@ SDL_Texture			*load_texture_visual(t_master *mstr, char *path);
 void 				run_visual(t_master *mstr);
 
 /*
-***		TEXTURE
+***		TEXTURE THIS IS A MESS
 */
 
 int					init_texture(t_texture *texture);
@@ -176,6 +181,11 @@ int					vs_load(t_master *mstr);
 int					vs_run(t_master *mstr);
 void				vs_close(t_master *mstr);
 
+/*
+***		UTILS
+*/
+
+int					ft_get_index_node(t_master *mstr, char *name);
 
 
 #endif

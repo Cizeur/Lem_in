@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:34:01 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/16 14:28:02 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/27 18:04:04 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	ft_get_input(t_master *mstr, char *line)
 		ft_get_nodes(mstr, line);
 	else if (mstr->current_pipe < mstr->nb_pipes)
 		ft_get_pipes(mstr, line);
-	// else if (mstr->current_movement < mstr->nb_movements)
-	// 	ft_get_movements(mstr, line);
+	else if (mstr->current_move <= mstr->nb_movements)
+		ft_get_movements(mstr, line);
 }

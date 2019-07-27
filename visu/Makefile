@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 11:56:45 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/22 14:25:13 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/24 16:17:51 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ $(OBJ_DIR):
 
 %.o:%.c $(DEPENDANCIES_VISU_O)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) -g -c $< -o $(OBJ_DIR)/$@
 
 -include $(DEPENDANCY_OBJ_INC_FILE)
 

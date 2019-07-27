@@ -6,182 +6,116 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:50:19 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/23 20:11:15 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/27 21:56:35 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
 
-int     vs_run(t_master *mstr)
+void    draw_nodes(t_master *mstr, SDL_Rect node, int flag_node)
+{
+    SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
+    if (flag_node == NODE_START || flag_node == NODE_END)
+        SDL_SetRenderDrawColor(mstr->render, 0x00, 0x00, 0x00, 0xFF);
+    SDL_RenderFillRect(mstr->render, &node);
+    SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderDrawRect(mstr->render, &node);
+    node.x -= 1;
+    node.y -= 1;
+    node.w += 2;
+    node.h += 2;
+    SDL_RenderDrawRect(mstr->render, &node);
+    node.x -= 1;
+    node.y -= 1;
+    node.w += 2;
+    node.h += 2;
+    SDL_RenderDrawRect(mstr->render, &node);
+}
+
+float   ratio(t_master *mstr, char exe, int i)
+{
+    float       ratio;
+
+    if (exe == 'x')
+    {
+        if (mstr->max_x == mstr->min_x)
+            ratio = 0.5;
+        else
+            ratio = (float)((double)(mstr->nodes_array[i]->x - mstr->min_x)
+            / (double)(mstr->max_x - mstr->min_x));
+        return (ratio);
+    }
+    if (exe == 'y')
+    {
+        if (mstr->max_y == mstr->min_y)
+            ratio = 0.5;
+        else
+            ratio = (float)((double)(mstr->nodes_array[i]->y - mstr->min_y)
+            / (double)(mstr->max_y - mstr->min_y));
+        return (ratio);
+    }
+    return ((float)FALSE);
+}
+
+int     render_nodes(t_master *mstr)
 {
     int         i;
-    int         flag_quit;
-    int         x;
-    int         y;
-    // SDL_Rect    *node;
+    SDL_Rect    node;
 
     i = 0;
-    flag_quit = FALSE;
-    while (flag_quit == FALSE)
+    node.w = 20;
+    node.h = 20;
+    while (i < mstr->nb_nodes)
     {
-        while (SDL_PollEvent(&mstr->event_Quit) != 0)
-        {
-            if (mstr->event_Quit.type == SDL_QUIT)
-                flag_quit = TRUE;
-            SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
-            SDL_RenderClear(mstr->render);
-            render_texture(mstr, mstr->background, 0, 0);
-            while (i < mstr->nb_nodes)
-            {
-                SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0x00, 0xFF);
-                // if (!(node = (SDL_Rect*)ft_memalloc(sizeof(SDL_Rect))))
-                //     return (ft_exit(INIT_SDL));
-                x = (S_WIDTH / 10) * mstr->nodes_array[i]->x;
-                y = (S_HEIGHT / 10) * mstr->nodes_array[i]->y;
-                // node->x = (S_WIDTH / 10) + x;
-                // node->y = (S_HEIGHT / 10) + y;
-                // node->w = S_WIDTH / 50;
-                // node->h = S_HEIGHT / 50;
-                SDL_Rect node = {
-                    (S_WIDTH / 10) + x,
-                    (S_HEIGHT / 10) + y,
-                    S_WIDTH / 50,
-                    S_HEIGHT / 50
-                };
-                SDL_RenderFillRect(mstr->render, &node);
-                // free(node);
-                i++;
-            }
-            SDL_RenderPresent(mstr->render);
-        }
+        node.x = (S_WIDTH * 0.05) + (ratio(mstr, 'x', i) * S_WIDTH * 0.9);
+        node.y = (S_HEIGHT * 0.05) + (ratio(mstr, 'y', i) * S_HEIGHT * 0.9);
+        mstr->nodes_array[i]->x_px = node.x;
+        mstr->nodes_array[i]->y_px = node.y;
+        draw_nodes(mstr, node, mstr->nodes_array[i]->flag);
+        i++;
     }
     return (TRUE);
 }
 
-/*
-***     OPTION 1
-*/
+int    render_pipes(t_master *mstr)
+{
+    int         i;
 
-// while (i < mstr->nb_nodes)
-// {
-//     SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0x00, 0xFF);
-//     x = (S_WIDTH / 10) * mstr->nodes_array[i]->x;
-//     y = (S_HEIGHT / 10) * mstr->nodes_array[i]->y;
-//     SDL_Rect    node = {
-//         (S_WIDTH / 10) + x,
-//         (S_HEIGHT / 10) + y,
-//         S_WIDTH / 50,
-//         S_HEIGHT / 50
-//     };
-//     SDL_RenderFillRect(mstr->render, &node);
-//     SDL_RenderPresent(mstr->render);
-//     printf("NAME = %s || x = %d -> %d || y = %d -> %d\n", mstr->nodes_array[i]->name,
-//         mstr->nodes_array[i]->x, (S_WIDTH / 10) + x, mstr->nodes_array[i]->y, (S_HEIGHT / 10) + y);
-//     i++;
-// }
-// SDL_RenderPresent(mstr->render);
+    i = 0;
+    while (i < mstr->nb_pipes)
+    {
+        SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
+        thickLineRGBA(mstr->render,
+            mstr->nodes_array[mstr->pipes_array[i]->node1_index]->x_px + 10,
+            mstr->nodes_array[mstr->pipes_array[i]->node1_index]->y_px + 10,
+            mstr->nodes_array[mstr->pipes_array[i]->node2_index]->x_px + 10,
+            mstr->nodes_array[mstr->pipes_array[i]->node2_index]->y_px + 10,
+            2, 0xFF, 0xFF, 0xFF, 0xFF);
+        i++;
+    }
+    return (TRUE);
+}
 
+void   control(t_master *mstr)
+{
+    if (mstr->event_Quit.type == SDL_QUIT)
+        mstr->flag_exit = TRUE;
+}
 
-/*
-***     OPTION 2
-*/
-
-// SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0x00, 0xFF);
-// x = (S_WIDTH / 10) * mstr->nodes_array[0]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[0]->y;
-// SDL_Rect    node1 = {
-//     (S_WIDTH / 10) + x,
-//     (S_HEIGHT / 10) + y,
-//     S_WIDTH / 50,
-//     S_HEIGHT / 50
-// };
-// SDL_RenderFillRect(mstr->render, &node1);
-
-// x = (S_WIDTH / 10) * mstr->nodes_array[1]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[1]->y;
-// SDL_Rect    node2 = {
-//     (S_WIDTH / 10) + x,
-//     (S_HEIGHT / 10) + y,
-//     S_WIDTH / 50,
-//     S_HEIGHT / 50
-// };
-// SDL_RenderFillRect(mstr->render, &node2);
-
-// x = (S_WIDTH / 10) * mstr->nodes_array[2]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[2]->y;
-// SDL_Rect    node3 = {
-//     (S_WIDTH / 10) + x,
-//     (S_HEIGHT / 10) + y,
-//     S_WIDTH / 50,
-//     S_HEIGHT / 50
-// };
-// SDL_RenderFillRect(mstr->render, &node3);
-
-// x = (S_WIDTH / 10) * mstr->nodes_array[3]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[3]->y;
-// SDL_Rect    node4 = {
-//     (S_WIDTH / 10) + x,
-//     (S_HEIGHT / 10) + y,
-//     S_WIDTH / 50,
-//     S_HEIGHT / 50
-// };
-// SDL_RenderFillRect(mstr->render, &node4);
-
-// x = (S_WIDTH / 10) * mstr->nodes_array[4]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[4]->y;
-// SDL_Rect    node5 = {
-//     (S_WIDTH / 10) + x,
-//     (S_HEIGHT / 10) + y,
-//     S_WIDTH / 50,
-//     S_HEIGHT / 50
-// };
-// SDL_RenderFillRect(mstr->render, &node5);
-
-// SDL_RenderPresent(mstr->render);
-
-/*
-***     OPTION 3
-*/
-
-// SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0x00, 0xFF);
-// x = (S_WIDTH / 10) * mstr->nodes_array[0]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[0]->y;
-// node->x = (S_WIDTH / 10) + x;
-// node->y = (S_HEIGHT / 10) + y;
-// node->w = S_WIDTH / 50;
-// node->h = S_HEIGHT / 50;
-// SDL_RenderFillRect(mstr->render, node);
-
-// x = (S_WIDTH / 10) * mstr->nodes_array[1]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[1]->y;
-// node->x = (S_WIDTH / 10) + x;
-// node->y = (S_HEIGHT / 10) + y;
-// node->w = S_WIDTH / 50;
-// node->h = S_HEIGHT / 50;
-// SDL_RenderFillRect(mstr->render, node);
-
-// x = (S_WIDTH / 10) * mstr->nodes_array[2]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[2]->y;
-// node->x = (S_WIDTH / 10) + x;
-// node->y = (S_HEIGHT / 10) + y;
-// node->w = S_WIDTH / 50;
-// node->h = S_HEIGHT / 50;
-// SDL_RenderFillRect(mstr->render, node);
-
-// x = (S_WIDTH / 10) * mstr->nodes_array[3]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[3]->y;
-// node->x = (S_WIDTH / 10) + x;
-// node->y = (S_HEIGHT / 10) + y;
-// node->w = S_WIDTH / 50;
-// node->h = S_HEIGHT / 50;
-// SDL_RenderFillRect(mstr->render, node);
-
-// x = (S_WIDTH / 10) * mstr->nodes_array[4]->x;
-// y = (S_HEIGHT / 10) * mstr->nodes_array[4]->y;
-// node->x = (S_WIDTH / 10) + x;
-// node->y = (S_HEIGHT / 10) + y;
-// node->w = S_WIDTH / 50;
-// node->h = S_HEIGHT / 50;
-// SDL_RenderFillRect(mstr->render, node);
-
-// SDL_RenderPresent(mstr->render);
+int     vs_run(t_master *mstr)
+{
+    while (mstr->flag_exit == FALSE)
+    {
+        while (SDL_PollEvent(&mstr->event_Quit) != 0)
+        {
+            SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
+            SDL_RenderClear(mstr->render);
+            render_texture(mstr, mstr->background, 0, 0);
+            render_pipes(mstr);
+            render_nodes(mstr);
+            SDL_RenderPresent(mstr->render);
+        }
+        control(mstr);
+    }
+    return (TRUE);
+}
