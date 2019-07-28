@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 11:45:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/23 17:09:03 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 11:55:45 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int     load_texture_from_file(t_master *mstr, t_texture *texture, char *path)
     loadedSurface = IMG_Load(path);
     if(!loadedSurface)
         return (ft_exit(LOAD_IMG));
-    SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
+    SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0xFF, 0xFF));
     newTexture = SDL_CreateTextureFromSurface(mstr->render, loadedSurface);
     if (!newTexture)
         return (ft_exit(CREATE_TEXTURE));
@@ -74,7 +74,7 @@ int     load_texture_from_file(t_master *mstr, t_texture *texture, char *path)
 
 int     render_texture(t_master *mstr, t_texture *texture, int x, int y)
 {
-    SDL_Rect    renderQuad = {x, y, S_WIDTH, S_HEIGHT};
+    SDL_Rect    renderQuad = {x, y, texture->width, texture->height};
     SDL_RenderCopy(mstr->render, texture->texture, NULL, &renderQuad);
     return (TRUE);
 }

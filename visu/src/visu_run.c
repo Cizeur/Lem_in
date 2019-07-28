@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:50:19 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/27 21:56:35 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 11:34:18 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,24 @@
 void    draw_nodes(t_master *mstr, SDL_Rect node, int flag_node)
 {
     SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
-    if (flag_node == NODE_START || flag_node == NODE_END)
-        SDL_SetRenderDrawColor(mstr->render, 0x00, 0x00, 0x00, 0xFF);
-    SDL_RenderFillRect(mstr->render, &node);
-    SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderDrawRect(mstr->render, &node);
-    node.x -= 1;
-    node.y -= 1;
-    node.w += 2;
-    node.h += 2;
-    SDL_RenderDrawRect(mstr->render, &node);
-    node.x -= 1;
-    node.y -= 1;
-    node.w += 2;
-    node.h += 2;
-    SDL_RenderDrawRect(mstr->render, &node);
+    if (flag_node == NODE_NOTHING)
+        SDL_RenderFillRect(mstr->render, &node);
+    // SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
+    // if (flag_node == NODE_START || flag_node == NODE_END)
+    //     SDL_SetRenderDrawColor(mstr->render, 0x00, 0x00, 0x00, 0xFF);
+    // SDL_RenderFillRect(mstr->render, &node);
+    // SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
+    // SDL_RenderDrawRect(mstr->render, &node);
+    // node.x -= 1;
+    // node.y -= 1;
+    // node.w += 2;
+    // node.h += 2;
+    // SDL_RenderDrawRect(mstr->render, &node);
+    // node.x -= 1;
+    // node.y -= 1;
+    // node.w += 2;
+    // node.h += 2;
+    // SDL_RenderDrawRect(mstr->render, &node);
 }
 
 float   ratio(t_master *mstr, char exe, int i)
@@ -111,6 +114,8 @@ int     vs_run(t_master *mstr)
             SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderClear(mstr->render);
             render_texture(mstr, mstr->background, 0, 0);
+            render_texture(mstr, mstr->start, mstr->nodes_array[mstr->start_index]->x_px - 15, mstr->nodes_array[mstr->start_index]->y_px - 40);
+            render_texture(mstr, mstr->finish, mstr->nodes_array[mstr->end_index]->x_px - 15, mstr->nodes_array[mstr->end_index]->y_px - 40);
             render_pipes(mstr);
             render_nodes(mstr);
             SDL_RenderPresent(mstr->render);

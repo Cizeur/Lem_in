@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/27 21:11:43 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 11:19:10 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ typedef struct		s_master
 	SDL_Renderer	*render;
 	SDL_Event		event_Quit;
 	t_texture		*background;
+	t_texture		*start;
+	t_texture		*finish;
 	int				flag_exit;
 	int				img_init_png;
 }					t_master;
