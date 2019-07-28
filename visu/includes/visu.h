@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 15:12:01 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 17:01:41 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct		s_ants
 	int				ant_index;
 	int				current_move;
 	int				current_node;
-	// int				*path;
 }					t_ants;
 
 typedef struct		s_nodes

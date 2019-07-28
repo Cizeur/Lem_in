@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:50:19 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 15:24:24 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 16:37:09 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int    render_total_background(t_master *mstr)
     SDL_RenderClear(mstr->render);
     render_texture(mstr, mstr->background, 0, 0);
     render_texture(mstr, mstr->start,
-    mstr->nodes_array[mstr->start_index]->x_px - 15,
-    mstr->nodes_array[mstr->start_index]->y_px - 40);
+    mstr->nodes_array[mstr->start_index]->x_px - 10,
+    mstr->nodes_array[mstr->start_index]->y_px - 45);
     render_texture(mstr, mstr->finish,
-    mstr->nodes_array[mstr->end_index]->x_px - 15,
-    mstr->nodes_array[mstr->end_index]->y_px - 40);
+    mstr->nodes_array[mstr->end_index]->x_px - 10,
+    mstr->nodes_array[mstr->end_index]->y_px - 45);
     render_pipes(mstr);
     render_nodes(mstr);
     return (TRUE);

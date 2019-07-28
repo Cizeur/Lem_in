@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:13:58 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 12:14:15 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 16:44:12 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ float   ratio(t_master *mstr, char exe, int i)
         else
             ratio = (float)((double)(mstr->nodes_array[i]->x - mstr->min_x)
             / (double)(mstr->max_x - mstr->min_x));
-        return (ratio);
     }
     if (exe == 'y')
     {
@@ -32,9 +31,8 @@ float   ratio(t_master *mstr, char exe, int i)
         else
             ratio = (float)((double)(mstr->nodes_array[i]->y - mstr->min_y)
             / (double)(mstr->max_y - mstr->min_y));
-        return (ratio);
     }
-    return ((float)FALSE);
+    return (ratio);
 }
 
 int     render_nodes(t_master *mstr)
@@ -47,10 +45,18 @@ int     render_nodes(t_master *mstr)
     node.h = 20;
     while (i < mstr->nb_nodes)
     {
-        node.x = (S_WIDTH * 0.05) + (ratio(mstr, 'x', i) * S_WIDTH * 0.9);
-        node.y = (S_HEIGHT * 0.05) + (ratio(mstr, 'y', i) * S_HEIGHT * 0.9);
-        mstr->nodes_array[i]->x_px = node.x;
-        mstr->nodes_array[i]->y_px = node.y;
+        if (mstr->nodes_array[i]->x_px == FALSE)
+        {
+            node.x = (S_WIDTH * 0.05) + (ratio(mstr, 'x', i) * S_WIDTH * 0.9);
+            mstr->nodes_array[i]->x_px = node.x + 10;
+        }
+        if (mstr->nodes_array[i]->y_px == FALSE)
+        {
+            node.y = (S_HEIGHT * 0.05) + (ratio(mstr, 'y', i) * S_HEIGHT * 0.9);
+            mstr->nodes_array[i]->y_px = node.y + 10;
+        }
+        node.x = mstr->nodes_array[i]->x_px;
+        node.y = mstr->nodes_array[i]->y_px;
         SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
         if (mstr->nodes_array[i]->flag == NODE_NOTHING)
             SDL_RenderFillRect(mstr->render, &node);

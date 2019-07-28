@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:26:31 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 12:10:01 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 17:01:29 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ int		ft_alloc_ants(t_master *mstr)
 		mstr->ants_array[i]->ant_index = i;
 		mstr->ants_array[i]->current_move = 0;
 		mstr->ants_array[i]->current_node = FALSE;
-		// if (!(mstr->ants_array[i]->path = (int *)
-		// 	ft_memalloc(sizeof(int))))
-		// 	return (ft_exit(ERROR_MALLOC));
 		i++;
 	}
 	return (TRUE);
@@ -53,6 +50,8 @@ int		ft_alloc_nodes(t_master *mstr)
 			ft_memalloc(sizeof(int) * mstr->nb_nodes)))
 			return (ft_exit(ERROR_MALLOC));
 		mstr->nodes_array[i]->nb_pipes = 0;
+		mstr->nodes_array[i]->x_px = FALSE;
+		mstr->nodes_array[i]->y_px = FALSE;
 		mstr->nodes_array[i]->flag = NODE_NOTHING;
 		i++;
 	}
