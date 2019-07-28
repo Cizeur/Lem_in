@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_movements.c                                 :+:      :+:    :+:   */
+/*   ft_get_moves.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:13:50 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/27 21:11:00 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 13:36:45 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*trim(char *move)
 	return (trim);
 }
 
-void	free_get_movements(char *tmp, char **strsplit)
+void	free_get_moves(char *tmp, char **strsplit)
 {
 	free(tmp);
 	free(strsplit[0]);
@@ -52,7 +52,7 @@ void	ft_fill_movements(t_master *mstr, char *move, int index)
 	mstr->moves_array[mstr->current_move]->node2_index = node_index;
 	mstr->ants_array[ant_index]->current_move = mstr->current_move;
 	mstr->ants_array[ant_index]->current_node = node_index;
-	free_get_movements(tmp, strsplit);
+	free_get_moves(tmp, strsplit);
 }
 
 int		ft_new_movement(t_master *mstr)
@@ -66,13 +66,13 @@ int		ft_new_movement(t_master *mstr)
 	if (!mstr->moves_array[move_index])
 		current->next = NULL;
 	else
-		current->next = mstr->moves_array[move_index]->next;
+		current->next = mstr->moves_array[move_index];
 	current->move_index = mstr->current_move;
 	mstr->moves_array[move_index] = current;
 	return (TRUE);
 }
 
-void	ft_get_movements(t_master *mstr, char *line)
+void	ft_get_moves(t_master *mstr, char *line)
 {
 	int		i;
 	char	**moves_ants;

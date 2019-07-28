@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:40:40 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/27 18:37:14 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/28 12:30:08 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ SRC_VISU =  \
 	parser.c \
 	ft_exit.c \
 	ft_get_input.c \
-	ft_get_movements.c \
 	ft_get_nodes.c \
 	ft_get_pipes.c \
+	ft_get_moves.c \
 	ft_print.c \
 	initialization.c \
 	main.c \
@@ -38,6 +38,9 @@ SRC_VISU =  \
 	visu_init.c \
 	visu_load.c \
 	visu_run.c \
+	visu_render_nodes.c \
+	visu_render_pipes.c \
+	visu_render_moves.c \
 	visu_close.c \
 	visu_texture.c \
 	utils.c

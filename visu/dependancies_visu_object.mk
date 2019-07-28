@@ -6,12 +6,12 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:48:07 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/23 13:01:05 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/28 12:33:55 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ft_exit.o: visu.h error.h
-ft_get_movements.o: visu.h 
+ft_get_moves.o: visu.h 
 ft_get_nodes.o: visu.h
 ft_get_pipes.o: visu.h 
 ft_get_input.o: visu.h 

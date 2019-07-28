@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:26:31 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 11:27:06 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 12:10:01 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,10 @@ int		ft_alloc_moves(t_master *mstr)
 
 	i = 0;
 	if (!(mstr->moves_array = (t_moves **)
-		ft_memalloc(sizeof(t_moves *) * mstr->nb_movements)))
+		ft_memalloc(sizeof(t_moves *) * mstr->nb_movements + 1)))
 		return (ft_exit(ERROR_MALLOC));
 	return (TRUE);
+	mstr->moves_array[mstr->nb_movements] = NULL;
 }
 
 int		inizialization(t_master *mstr)

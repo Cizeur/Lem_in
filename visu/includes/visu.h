@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 11:19:10 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/28 15:12:01 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void				ft_get_parameters(t_master *mstr, char *line, int nb_line);
 void				ft_get_input(t_master *mstr, char *line);
 void				ft_get_nodes(t_master *mstr, char *line);
 void				ft_get_pipes(t_master *mstr, char *line);
-void				ft_get_movements(t_master *mstr, char *line);
+void				ft_get_moves(t_master *mstr, char *line);
 
 /*
 ***		PRINT
@@ -167,6 +167,18 @@ int					load_media_visual(t_master *mstr);
 SDL_Texture			*load_texture_visual(t_master *mstr, char *path);
 void 				run_visual(t_master *mstr);
 
+int					control(t_master *mstr);
+
+
+/*
+***		RENDER THIS IS A MESS
+*/
+
+int					render_nodes(t_master *mstr);
+int					render_pipes(t_master *mstr);
+int					render_moves(t_master *mstr);
+int					render_total_background(t_master *mstr);
+
 /*
 ***		TEXTURE THIS IS A MESS
 */
@@ -181,7 +193,7 @@ int					render_texture(t_master *mstr, t_texture *texture, int x, int y);
 int					vs_init(t_master *mstr);
 int					vs_load(t_master *mstr);
 int					vs_run(t_master *mstr);
-void				vs_close(t_master *mstr);
+int					vs_close(t_master *mstr);
 
 /*
 ***		UTILS
