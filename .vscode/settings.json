@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "lem_in.h": "c",
-        "visu.h": "c",
-        "get_next_line.h": "c",
-        "error.h": "c"
-    }
-}
