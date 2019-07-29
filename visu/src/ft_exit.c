@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:20:26 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 13:33:30 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:16:56 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,32 @@
 #include "visu.h"
 #include "error.h"
 
-int    ft_exit(t_errors error)
+char g_error_message[13][40] = {
+	{"ERROR_MALLOC"},
+	{"FAIL_ON_READ"},
+	{"INVALID_INPUT"},
+	{"INVALID_NAME"},
+	{"OVERLAPING_ROOMS"},
+	{"INIT_SDL"},
+	{"LOAD_VISU"},
+	{"RENDER_VISU"},
+
+	{"LOAD_IMG"},
+	{"RENDER_VISU"},
+	{"WRONG_ARGUENT"},
+	{"nope12"},
+	{"nope13"}
+};
+
+int    ft_exit(t_master *mstr, t_errors error)
 {
-    (void)error;
-    printf("ERROR");
+	printf("\e[36m");
+	printf("\n\n####################################################\n");
+	printf("####################################################\n");
+	printf("# ERROR %3d%39s #\n", error, g_error_message[error]);
+	printf("####################################################\n");
+	printf("####################################################\n\n");
+	printf("\e[0m");
+    close_program(mstr);
     return(FALSE);
 }

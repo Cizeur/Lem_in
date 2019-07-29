@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:40:40 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/29 13:01:16 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/29 19:06:40 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,16 +34,17 @@ SRC_VISU =  \
 	initialization.c \
 	main.c \
 	visual.c \
+	visu_parameters.c \
 	visu_init.c \
 	visu_load.c \
 	visu_run.c \
 	visu_render_nodes.c \
 	visu_render_pipes.c \
 	visu_render_moves.c \
-	visu_close.c \
 	visu_texture.c \
 	print.c \
-	utils.c
+	utils.c \
+	close.c
 	# T_init.c
 	# T_load_media.c
 	# T_load_texture.c

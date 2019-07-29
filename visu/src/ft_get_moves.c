@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:13:50 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 13:33:29 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:12:36 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*trim(char *move)
 	char	*trim;
 
 	strsplit = ft_strsplit(move, ' ');
-	trim = strsplit[0];
+	trim = ft_strdup(strsplit[0]);
+	free(strsplit[0]);
 	free(strsplit[1]);
 	free(strsplit);
 	return (trim);
@@ -26,13 +27,17 @@ char	*trim(char *move)
 
 void	free_get_moves(char *tmp, char **strsplit)
 {
-	free(tmp);
-	free(strsplit[0]);
-	free(strsplit[1]);
-	free(strsplit);
+	if (tmp)
+		free(tmp);
+	if (strsplit[0])
+		free(strsplit[0]);
+	if (strsplit[1])
+		free(strsplit[1]);
+	if (strsplit)
+		free(strsplit);
 }
 
-void	ft_fill_movements(t_master *mstr, char *move, int index)
+int		ft_fill_movements(t_master *mstr, char *move, int index)
 {
 	char	*tmp;
 	char	**strsplit;
@@ -42,7 +47,11 @@ void	ft_fill_movements(t_master *mstr, char *move, int index)
 	tmp = trim(move);
 	strsplit = ft_strsplit(tmp, '-');
 	ant_index = ft_atoi(strsplit[0]) - 1;
-	node_index = ft_get_index_node(mstr, strsplit[1]);
+	if ((node_index = ft_get_index_node(mstr, strsplit[1])) == FALSE)
+	{
+		free_get_moves(tmp, strsplit);
+		return (ft_exit(mstr, INVALID_NAME));
+	}
 	mstr->moves_array[mstr->current_move]->current_index = index;
 	mstr->moves_array[mstr->current_move]->ant_index = ant_index;
 	if (mstr->ants_array[ant_index]->current_node == FALSE)
@@ -53,6 +62,7 @@ void	ft_fill_movements(t_master *mstr, char *move, int index)
 	mstr->ants_array[ant_index]->current_move = mstr->current_move;
 	mstr->ants_array[ant_index]->current_node = node_index;
 	free_get_moves(tmp, strsplit);
+	return (TRUE);
 }
 
 int		ft_new_movement(t_master *mstr)
@@ -62,7 +72,7 @@ int		ft_new_movement(t_master *mstr)
 
 	move_index = mstr->current_move;
 	if (!(current = (t_moves*)ft_memalloc(sizeof(t_moves))))
-		return (ERROR_MALLOC);
+		return (ft_exit(mstr, ERROR_MALLOC));
 	if (!mstr->moves_array[move_index])
 		current->next = NULL;
 	else
@@ -76,15 +86,18 @@ int		ft_get_moves(t_master *mstr, char *line)
 {
 	int		i;
 	char	**moves_ants;
+	int		problem;
 
 	i = 0;
 	moves_ants = ft_strsplit(line, 'L');
-	if (moves_ants[i])
+	problem = FALSE;
+	if (moves_ants && moves_ants[i])
 	{
-		while (moves_ants[i])
+		while (problem == FALSE && moves_ants[i])
 		{
-			ft_new_movement(mstr);
-			ft_fill_movements(mstr, moves_ants[i], i);
+			if (ft_new_movement(mstr) == FALSE
+			|| ft_fill_movements(mstr, moves_ants[i], i) == FALSE)
+				problem = TRUE;
 			free(moves_ants[i]);
 			i++;
 		}

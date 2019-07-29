@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:13:58 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 16:44:12 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:15:21 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int     render_nodes(t_master *mstr)
         node.y = mstr->nodes_array[i]->y_px;
         SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
         if (mstr->nodes_array[i]->flag == NODE_NOTHING)
-            SDL_RenderFillRect(mstr->render, &node);
+            if (SDL_RenderFillRect(mstr->render, &node) == FALSE)
+                return (ft_exit(mstr, RENDER_VISU));
         i++;
     }
     return (TRUE);

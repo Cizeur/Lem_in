@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:07:46 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 13:00:34 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:14:11 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void    ft_print_parameters(t_master *mstr)
     printf("POS MAX X         = %d\n", mstr->max_x);
     printf("POS MIN X         = %d\n", mstr->min_x);
     printf("POS MAX Y         = %d\n", mstr->max_y);
-    printf("POS MIN Y         = %d\n\n\n", mstr->min_y);
-    
+    printf("POS MIN Y         = %d\n", mstr->min_y);
+    printf("PATH BACKGROUND   = %s\n\n\n", mstr->background_path);    
 }
 
 void    ft_print_nodes(t_master *mstr)
@@ -111,7 +111,8 @@ int    print(t_master *mstr, int ac, char **av)
             ft_print_moves(mstr);
         }
         else
-            return (ft_exit(WRONG_ARGUENT));
+            return (ft_exit(mstr, WRONG_ARGUENT));
         return (TRUE);
     }
+    return (FALSE);
 }

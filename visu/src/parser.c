@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 12:30:41 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:13:54 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,29 @@ int		parser(t_master *mstr)
 
 	nb_line = 0;
 	problem = FALSE;
-	while (problem == FALSE && (ret = get_next_line(0, &line)) > 0 && nb_line < 5) 
+	while (problem == FALSE && nb_line < 5 && (ret = get_next_line(0, &line)) > 0)
 	{
 		if (ret == FALSE)
-			return(ft_exit(FAIL_ON_READ));
+			return(ft_exit(mstr, FAIL_ON_READ));
 		if (ft_get_parameters(mstr, line, nb_line) == FALSE)
 			problem = TRUE;
 		nb_line++;
 		line = NULL;
 	}
-	if (problem == TRUE || inizialization(mstr) == FALSE || ft_get_input(mstr, line))
+	if (problem == TRUE || inizialization(mstr) == FALSE)
 		return (FALSE);
-	nb_line++;
+	if (ret != TRUE)
+		return(ft_exit(mstr, FAIL_ON_READ));
 	while (problem == FALSE && (ret = get_next_line(0, &line)) > 0)
 	{
 		if (ret == -1)
-			return (ft_exit(FAIL_ON_READ));
-		if (ft_get_input(mstr, line) == FALSE);
+			return (ft_exit(mstr, FAIL_ON_READ));
+		if (ft_get_input(mstr, line) == FALSE)
 			problem = TRUE;
-		nb_line++;
 		line = NULL;
+		nb_line++;
 	}
-	if (problem = TRUE)
+	if (problem == TRUE)
 		return (FALSE);
 	return (TRUE);
 }

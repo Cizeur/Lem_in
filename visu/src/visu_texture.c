@@ -6,22 +6,21 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 11:45:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 16:15:44 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:16:08 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
 
-int     init_texture(t_texture *texture)
+void     init_texture(t_texture *texture)
 {
     texture->height = 0;
     texture->width = 0;
     texture->path = NULL;
     texture->texture = NULL;
-    return (TRUE);
 }
 
-int     clear_texture(t_texture *texture)
+void     clear_texture(t_texture *texture)
 {
     texture->height = 0;
     texture->width = 0;
@@ -31,7 +30,6 @@ int     clear_texture(t_texture *texture)
     if (texture->texture)
         SDL_DestroyTexture(texture->texture);
     texture->texture = NULL;
-    return (TRUE);
 }
 
 int     free_texture(t_texture *texture)
@@ -59,11 +57,11 @@ int     load_texture_from_file(t_master *mstr, t_texture *texture, char *path)
     clear_texture(texture);
     loadedSurface = IMG_Load(path);
     if(!loadedSurface)
-        return (ft_exit(LOAD_IMG));
+        return (ft_exit(mstr, LOAD_VISU));
     SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0xFF, 0xFF));
     newTexture = SDL_CreateTextureFromSurface(mstr->render, loadedSurface);
     if (!newTexture)
-        return (ft_exit(CREATE_TEXTURE));
+        return (ft_exit(mstr, LOAD_VISU));
     texture->width = loadedSurface->w;
     texture->height = loadedSurface->h;
     texture->path = ft_strdup(path);
@@ -72,9 +70,10 @@ int     load_texture_from_file(t_master *mstr, t_texture *texture, char *path)
     return (TRUE);
 }
 
-int     render_texture(t_master *mstr, t_texture *texture, int x, int y)
+int      render_texture(t_master *mstr, t_texture *texture, int x, int y)
 {
     SDL_Rect    renderQuad = {x, y, texture->width, texture->height};
-    SDL_RenderCopy(mstr->render, texture->texture, NULL, &renderQuad);
+    if (SDL_RenderCopy(mstr->render, texture->texture, NULL, &renderQuad) == FALSE)
+        return (ft_exit(mstr, RENDER_VISU));
     return (TRUE);
 }

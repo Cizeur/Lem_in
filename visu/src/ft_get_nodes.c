@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:14:30 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 12:59:24 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:12:53 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,31 @@ void	free_get_nodes(char **tmp)
 	free(tmp);
 }
 
+int		ft_check_overlap(t_master *mstr, t_nodes *node)
+{
+	int		i;
+
+	i = 0;
+	while (i < mstr->current_node)
+	{
+		if (node->x == mstr->nodes_array[i]->x
+		&& node->y == mstr->nodes_array[i]->y)
+			return (ft_exit(mstr, OVERLAPING_ROOMS));
+		i++;
+	}
+	return (TRUE);
+}
+
 int		ft_check_nodes(t_master *mstr, char **tmp)
 {
 	if (mstr->nodes_array[mstr->current_node]->name == NULL
 	|| mstr->nodes_array[mstr->current_node]->len_name == 0
 	|| (mstr->nodes_array[mstr->current_node]->x == 0 && tmp[1][0] != '0')
 	|| (mstr->nodes_array[mstr->current_node]->y == 0 && tmp[2][0] != '0'))
-		return (ft_exit(INVALID_INPUT));
+		return (ft_exit(mstr, INVALID_INPUT));
+	if (ft_check_overlap(mstr, mstr->nodes_array[mstr->current_node]) == FALSE)
+		return (FALSE);
 	return (TRUE);
-
 }
 
 int		ft_get_nodes(t_master *mstr, char *line)
@@ -53,6 +69,7 @@ int		ft_get_nodes(t_master *mstr, char *line)
 	char		**tmp;
 	int			out;
 
+	out = TRUE;
 	if (ft_is_not_comment(mstr, line) == TRUE)
 	{
 		mstr->nodes_array[mstr->current_node]->node_index = mstr->current_node;

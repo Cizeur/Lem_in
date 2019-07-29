@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visu_close.c                                       :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:55:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 17:10:13 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:09:58 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,10 @@ void    free_moves(t_master *mstr)
     }
 }
 
-int    vs_close(t_master *mstr)
+int    close_program(t_master *mstr)
 {
+    if (mstr->background_path)
+        free(mstr->background_path);
     free_ants(mstr);
     free_nodes(mstr);
     free_pipes(mstr);
@@ -104,5 +106,7 @@ int    vs_close(t_master *mstr)
     mstr->window = NULL;
     IMG_Quit();
     SDL_Quit();
+    free(mstr);
+    mstr = NULL;
     return (FALSE);
 }

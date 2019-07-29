@@ -6,11 +6,25 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/27 18:30:00 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 12:30:40 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:14:26 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
+
+int     ft_str_isdigit(char *line)
+{
+    int     i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (ft_isdigit(line[i]) == 0)
+            return (FALSE);
+        i++;
+    }
+    return (TRUE);
+}
 
 int     ft_str_cmp(char *s1, char *s2)
 {
@@ -35,5 +49,5 @@ int     ft_get_index_node(t_master *mstr, char *name)
             return (i);
         i++;
     }
-    return (ft_exit(INVALID_NAME));
+    return (ft_exit(mstr, INVALID_NAME));
 }

@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 13:01:43 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 19:16:31 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct		s_master
 	SDL_Renderer	*render;
 	SDL_Event		event_Quit;
 	t_texture		*background;
+	char			*background_path;
 	t_texture		*start;
 	t_texture		*finish;
 	int				flag_exit;
@@ -150,6 +151,7 @@ void  				ft_print_moves(t_master *mstr);
 
 int 			   	visual(t_master *mstr);
 
+int					parameters_visual(t_master *mstr);
 int   				init_visual(t_master *mstr);
 void    			close_visual(t_master *mstr);
 int					load_media_visual(t_master *mstr);
@@ -172,8 +174,8 @@ int					render_total_background(t_master *mstr);
 ***		TEXTURE THIS IS A MESS
 */
 
-int					init_texture(t_texture *texture);
-int					clear_texture(t_texture *texture);
+void				init_texture(t_texture *texture);
+void				clear_texture(t_texture *texture);
 int					free_texture(t_texture *texture);
 int					load_texture_from_file(t_master *mstr, t_texture *texture, char *path);
 int					render_texture(t_master *mstr, t_texture *texture, int x, int y);
@@ -182,18 +184,20 @@ int					render_texture(t_master *mstr, t_texture *texture, int x, int y);
 int					vs_init(t_master *mstr);
 int					vs_load(t_master *mstr);
 int					vs_run(t_master *mstr);
-int					vs_close(t_master *mstr);
+int					close_program(t_master *mstr);
 
 /*
 ***		UTILS
 */
 
 int					ft_get_index_node(t_master *mstr, char *name);
+int					ft_str_cmp(char *s1, char *s2);
+int					ft_str_isdigit(char *line);
 
 /*
 ***		FT_EXIT
 */
 
-int				    ft_exit(t_errors error);
+int				    ft_exit(t_master *mstr, t_errors error);
 
 #endif
