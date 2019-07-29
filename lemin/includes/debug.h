@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:55:55 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/26 12:26:00 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/29 13:39:19 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #define DEBUG_PRINT_PATH_LEN 0
 #define DEBUG_PRINT_MATRIX 0
+#define DEBUG_TRUNC_MATRIX 0
 #define DEBUG_PRINT_TEST_RESULT 0
 #define DEBUG_PRINT_STORAGE 0
 

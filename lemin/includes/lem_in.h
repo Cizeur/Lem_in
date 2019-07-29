@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/26 15:46:28 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/29 17:07:41 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 /*
 ** STORAGE BATCH SIZES
 */
-# define BATCH_MALLOC_SIZE 10000
-# define BATCH_PRINT_SIZE 100000
+# define BATCH_MALLOC_SIZE 100000
+# define BATCH_PRINT_SIZE 1000000
 /*
 ** DICTIONARY
 */
@@ -68,10 +68,13 @@
 #define A_LINKS_NB 0
 #define A_LOADED 1
 #define A_LINE_INDEX 2
-#define A_GOT_ANT 3
-#define A_STORED_SOLUTION 4
-#define A_PATH_LEN 5
-#define A_OPTIONS 6
+#define A_ANT 3
+#define A_ANT_HIST 4
+#define A_STORED_SOLUTION 5
+#define A_CURRENT_SOLUTION 6
+#define A_STORED_PATH_LEN 7
+#define A_CURRENT_PATH_LEN 8
+#define A_OPTIONS 9
 
 typedef enum	e_ln_type
 {
@@ -143,6 +146,7 @@ typedef struct	s_master
 	int				lines_nb;
 	t_hash_dico		*dico;
 	t_solution		**solutions;
+	int				buffer_pos;
 	int				turn_counter;
 	int				end_of_search;
 	int				nb_solutions;
@@ -184,7 +188,13 @@ int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
 void				ft_solver_extract_path_len(t_master *mstr, int max_nodes);
 void 				ft_solver_sort_paths(t_master *mstr, int max_nodes, int flow);
 void				ft_solver_turn_counter(t_master *mstr, int flow);
+void				ft_solver_solution_store(int **mtx, int max_nodes);
 
+void				ft_output_solution(t_master *mstr);
+void				ft_output_putstr(char *str, t_master *mstr);
+void				ft_output_putnstr(char *str, int n ,t_master *mstr);
+void    			ft_output_putnbr(int n, t_master *mstr);
+void				ft_output_buffer_flush(t_master *mstr);
 void				output(t_master *mstr);
 
 #endif

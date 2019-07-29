@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/12 16:45:05 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/29 14:48:37 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,10 @@ SRC_LEMIN =  \
 	ft_solution_print.c\
 	ft_solver_extract_path_len.c\
 	ft_solver_sort_paths.c\
-	ft_solver_turn_counter.c
+	ft_solver_turn_counter.c\
+	ft_solver_solution_store.c\
+	ft_output_solution.c\
+	ft_output_buffer.c
 	
 
 SRC_LEMIN += \
