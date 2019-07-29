@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_solver_sort_paths.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 15:34:34 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/26 15:44:15 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/29 17:21:42 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			ft_path_sorter(int **mtx, int *path_starts, int flow)
 	i = -1;
 	while (++i < flow - 1)
 	{
-		if (mtx[path_starts[i]][A_PATH_LEN] > mtx[path_starts[i + 1]][A_PATH_LEN])
+		if (mtx[path_starts[i]][A_CURRENT_PATH_LEN] > mtx[path_starts[i + 1]][A_CURRENT_PATH_LEN])
 		{
 			ft_swap(&path_starts[i], &path_starts[i + 1]);
 			i = -1;
@@ -48,10 +48,4 @@ void 			ft_solver_sort_paths(t_master *mstr, int max_nodes, int flow)
 			*sorted++ = path_start;
 	}
 	ft_path_sorter(mtx, mstr->node_path, flow);
-	i = -1;
-//	printf("\n\nstart : ants %d\n", mstr->ants_nb);
-//	while (++i < flow)
-//	{
-//		printf("||Path %d of len %d ||\n", mstr->node_path[i], mtx[mstr->node_path[i]][A_PATH_LEN]);
-//	}
 }

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:53:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/12 14:13:03 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/29 09:20:33 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void    ft_print_matrix(t_master *mstr, int activation)
 		while (++j < 4 * mstr->nodes_nb + A_OPTIONS)
 		{
 
+			if (DEBUG_TRUNC_MATRIX && j >= A_OPTIONS)
+				break;
 			if (j % mstr->nodes_nb == A_OPTIONS)
 				printf("%3s", "|");
 			if (mstr->adjacency_mtx[i][j] == DISCONNECTED)
@@ -44,6 +46,8 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	}
 	i = -1;
 
+	if (DEBUG_TRUNC_MATRIX)
+		return;
 	printf("\n");
 	while (++i < mstr->nodes_nb)
 	{

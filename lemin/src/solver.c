@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/26 15:47:15 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/29 13:57:30 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static void		ft_init_stacks(t_master *mstr, int start_node)
 	mstr->node_queue[0] = start_node;
 	mstr->node_path[0] = start_node;
 	mstr->node_lvl_stack[start_node] = 0;
-
 }
 
 int 			ft_solver_bfs(t_master *mstr, int cur_node, int end_node)
@@ -155,7 +154,7 @@ void			ft_adjacency_matrix_solution_store(t_master *mstr)
 				mtx[i][j + A_OPTIONS + 3 * mstr->nodes_nb] = mtx[i][j + A_OPTIONS];
 			if (mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb] >= 0
 				&& i != mstr->start->node_number)
-				mtx[i][A_STORED_SOLUTION] = mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb];
+				mtx[i][A_CURRENT_SOLUTION] = mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb];
 			}
 	}
 }
@@ -181,11 +180,16 @@ void			solver(t_master *mstr)
 		ft_solver_extract_path_len(mstr, mstr->nodes_nb);
 		ft_solver_sort_paths(mstr, mstr->nodes_nb, ++flow);
 		ft_solver_turn_counter(mstr, flow);
+		if (!mstr->end_of_search)
+			ft_solver_solution_store(mstr->adjacency_mtx, mstr->nodes_nb);
+		else
+			flow--;
 		//
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 		//
 	}
 	if(!flow)
 		ft_exit(NOT_CONNECTED);
+	ft_solver_sort_paths(mstr, mstr->nodes_nb, flow);
 	mstr->nb_solutions = flow;
 }
