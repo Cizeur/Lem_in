@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:14:30 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/27 18:47:28 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 12:59:24 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,21 @@ void	free_get_nodes(char **tmp)
 	free(tmp);
 }
 
-void	ft_get_nodes(t_master *mstr, char *line)
+int		ft_check_nodes(t_master *mstr, char **tmp)
+{
+	if (mstr->nodes_array[mstr->current_node]->name == NULL
+	|| mstr->nodes_array[mstr->current_node]->len_name == 0
+	|| (mstr->nodes_array[mstr->current_node]->x == 0 && tmp[1][0] != '0')
+	|| (mstr->nodes_array[mstr->current_node]->y == 0 && tmp[2][0] != '0'))
+		return (ft_exit(INVALID_INPUT));
+	return (TRUE);
+
+}
+
+int		ft_get_nodes(t_master *mstr, char *line)
 {
 	char		**tmp;
+	int			out;
 
 	if (ft_is_not_comment(mstr, line) == TRUE)
 	{
@@ -61,7 +73,9 @@ void	ft_get_nodes(t_master *mstr, char *line)
 			mstr->start_name = ft_strdup(tmp[0]);
 		if (mstr->nodes_array[mstr->current_node]->flag == NODE_END)
 			mstr->end_name = ft_strdup(tmp[0]);
+		out = ft_check_nodes(mstr, tmp);
 		free_get_nodes(tmp);
 		mstr->current_node++;
 	}
+	return (out);
 }

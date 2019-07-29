@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:07:46 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/27 21:12:18 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 13:00:34 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,37 @@ void    ft_print_moves(t_master *mstr)
 
     i = 0;
     (void)mstr;
+    // printf("mstr->current_move = %d\n", mstr->current_move);
+    // printf("mstr->moves_array[]->current_index = %d\n", mstr->moves_array[mstr->current_move]->current_index);
+    // printf("mstr->moves_array[]->ant_index = %d\n", mstr->moves_array[mstr->current_move]->ant_index);
+    // printf("mstr->moves_array[]->node1_index = %d\n", mstr->moves_array[mstr->current_move]->node1_index);
+    // printf("mstr->moves_array[]->node2_index = %d\n", mstr->moves_array[mstr->current_move]->node2_index);
+}
+
+int    print(t_master *mstr, int ac, char **av)
+{
+    int     i;
+
+    i = 1;
+    while (i < ac)
+    {
+        if (ft_str_cmp(av[i], "-dParameters") == TRUE)
+            ft_print_parameters(mstr);
+        if (ft_str_cmp(av[i], "-dNodes") == TRUE)
+            ft_print_nodes(mstr);
+        if (ft_str_cmp(av[i], "-dPipes") == TRUE)
+            ft_print_pipes(mstr);
+        if (ft_str_cmp(av[i], "-dMoves") == TRUE)
+            ft_print_moves(mstr);
+        if (ft_str_cmp(av[i], "-dAll") == TRUE)
+        {
+            ft_print_parameters(mstr);
+            ft_print_nodes(mstr);
+            ft_print_pipes(mstr);
+            ft_print_moves(mstr);
+        }
+        else
+            return (ft_exit(WRONG_ARGUENT));
+        return (TRUE);
+    }
 }

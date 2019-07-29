@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 17:01:41 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 13:01:43 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,11 @@ typedef struct		s_master
 */
 
 int					parser(t_master *mstr);
+int					ft_get_parameters(t_master *mstr, char *line, int nb_line);
+int					ft_get_input(t_master *mstr, char *line);
+int					ft_get_nodes(t_master *mstr, char *line);
+int					ft_get_pipes(t_master *mstr, char *line);
+int					ft_get_moves(t_master *mstr, char *line);
 
 /*
 ***		INITIALIZATION
@@ -130,35 +135,20 @@ int					parser(t_master *mstr);
 int	  				inizialization(t_master *mstr);
 
 /*
-***		PARSER : FT_GET
-*/
-
-void				ft_get_parameters(t_master *mstr, char *line, int nb_line);
-void				ft_get_input(t_master *mstr, char *line);
-void				ft_get_nodes(t_master *mstr, char *line);
-void				ft_get_pipes(t_master *mstr, char *line);
-void				ft_get_moves(t_master *mstr, char *line);
-
-/*
 ***		PRINT
 */
 
+int				    print(t_master *mstr, int ac, char **av);
 void			    ft_print_parameters(t_master *mstr);
 void  				ft_print_nodes(t_master *mstr);
 void  				ft_print_pipes(t_master *mstr);
 void  				ft_print_moves(t_master *mstr);
 
 /*
-***		FT_EXIT
-*/
-
-int				    ft_exit(t_errors error);
-
-/*
 ***		VISUAL THIS IS A MESS
 */
 
-void 			   	visual(t_master *mstr);
+int 			   	visual(t_master *mstr);
 
 int   				init_visual(t_master *mstr);
 void    			close_visual(t_master *mstr);
@@ -200,5 +190,10 @@ int					vs_close(t_master *mstr);
 
 int					ft_get_index_node(t_master *mstr, char *name);
 
+/*
+***		FT_EXIT
+*/
+
+int				    ft_exit(t_errors error);
 
 #endif

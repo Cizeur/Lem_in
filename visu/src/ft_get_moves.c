@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:13:50 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/28 13:36:45 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/29 13:33:29 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		ft_new_movement(t_master *mstr)
 	return (TRUE);
 }
 
-void	ft_get_moves(t_master *mstr, char *line)
+int		ft_get_moves(t_master *mstr, char *line)
 {
 	int		i;
 	char	**moves_ants;
@@ -86,14 +86,10 @@ void	ft_get_moves(t_master *mstr, char *line)
 			ft_new_movement(mstr);
 			ft_fill_movements(mstr, moves_ants[i], i);
 			free(moves_ants[i]);
-			// printf("mstr->current_move = %d\n", mstr->current_move);
-			// printf("mstr->moves_array[]->current_index = %d\n", mstr->moves_array[mstr->current_move]->current_index);
-			// printf("mstr->moves_array[]->ant_index = %d\n", mstr->moves_array[mstr->current_move]->ant_index);
-			// printf("mstr->moves_array[]->node1_index = %d\n", mstr->moves_array[mstr->current_move]->node1_index);
-			// printf("mstr->moves_array[]->node2_index = %d\n", mstr->moves_array[mstr->current_move]->node2_index);
 			i++;
 		}
 		free(moves_ants);
 		mstr->current_move++;
 	}
+	return (TRUE);
 }
