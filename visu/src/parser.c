@@ -6,12 +6,26 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 19:13:54 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/30 22:40:45 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
 #include "libft/get_next_line.h"
+
+int		ft_comment_or_empty(char *line)
+{
+	if (line[0] != '#' && line[0] != '\n')
+		return (TRUE);
+	if (ft_str_cmp(line, "##start") == TRUE)
+		return (TRUE);
+	if (ft_str_cmp(line, "##end") == TRUE)
+		return (TRUE);
+	if (ft_str_cmp(line, "#inactive") == TRUE)
+		return (TRUE);
+
+	return (FALSE);
+}
 
 int		parser(t_master *mstr)
 {
@@ -39,12 +53,16 @@ int		parser(t_master *mstr)
 	{
 		if (ret == -1)
 			return (ft_exit(mstr, FAIL_ON_READ));
-		if (ft_get_input(mstr, line) == FALSE)
-			problem = TRUE;
+		if (ft_comment_or_empty(line) == TRUE)
+		{
+			if (ft_get_input(mstr, line) == FALSE)
+				problem = TRUE;
+		}
 		line = NULL;
 		nb_line++;
 	}
 	if (problem == TRUE)
 		return (FALSE);
+	check_inactive_nodes(mstr);
 	return (TRUE);
 }

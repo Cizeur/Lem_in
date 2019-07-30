@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:26:31 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 19:13:40 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/30 23:13:09 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		ft_alloc_nodes(t_master *mstr)
 		mstr->nodes_array[i]->nb_pipes = 0;
 		mstr->nodes_array[i]->x_px = FALSE;
 		mstr->nodes_array[i]->y_px = FALSE;
-		mstr->nodes_array[i]->flag = NODE_NOTHING;
+		mstr->nodes_array[i]->flag = NODE_USED;
 		i++;
 	}
 	return (TRUE);

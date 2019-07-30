@@ -1,8 +1,8 @@
 1
 # number of nodes            = 17
 # number of pipes            = 37
-# number of inactive pipes   = 0
 # number of movements        = 1
+# number of inactive pipes   = 0
 ##start
 start 0 1
 ##end

@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 15:11:18 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 19:08:14 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/30 19:11:34 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,18 @@
 
 int    visual(t_master *mstr)
 {
-    if (vs_init(mstr) == TRUE
-    && vs_load(mstr) == TRUE
-    && vs_run(mstr) == TRUE)
-        return (TRUE);
+    if (vs_init(mstr) == TRUE)
+    {
+        if (vs_load(mstr) == TRUE)
+        {
+            if (vs_run(mstr) == TRUE)
+                return (TRUE);
+            else
+                return (FALSE);
+        }
+        else
+            return (FALSE);
+        return(TRUE);
+    }
     return (FALSE);
 }

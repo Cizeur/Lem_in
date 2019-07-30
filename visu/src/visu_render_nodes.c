@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:13:58 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 19:15:21 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/30 23:22:06 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,23 @@ float   ratio(t_master *mstr, char exe, int i)
 int     render_nodes(t_master *mstr)
 {
     int         i;
-    SDL_Rect    node;
 
     i = 0;
-    node.w = 20;
-    node.h = 20;
     while (i < mstr->nb_nodes)
     {
         if (mstr->nodes_array[i]->x_px == FALSE)
-        {
-            node.x = (S_WIDTH * 0.05) + (ratio(mstr, 'x', i) * S_WIDTH * 0.9);
-            mstr->nodes_array[i]->x_px = node.x + 10;
-        }
+            mstr->nodes_array[i]->x_px =
+            (S_WIDTH * 0.05) + (ratio(mstr, 'x', i) * S_WIDTH * 0.85);
         if (mstr->nodes_array[i]->y_px == FALSE)
+            mstr->nodes_array[i]->y_px =
+            (S_HEIGHT * 0.05) + (ratio(mstr, 'y', i) * S_HEIGHT * 0.85);
+        if (mstr->nodes_array[i]->flag == NODE_USED)
         {
-            node.y = (S_HEIGHT * 0.05) + (ratio(mstr, 'y', i) * S_HEIGHT * 0.9);
-            mstr->nodes_array[i]->y_px = node.y + 10;
-        }
-        node.x = mstr->nodes_array[i]->x_px;
-        node.y = mstr->nodes_array[i]->y_px;
-        SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF);
-        if (mstr->nodes_array[i]->flag == NODE_NOTHING)
-            if (SDL_RenderFillRect(mstr->render, &node) == FALSE)
+            if (render_texture(mstr, mstr->node,
+            mstr->nodes_array[i]->x_px - 20,
+            mstr->nodes_array[i]->y_px - 50) == FALSE)
                 return (ft_exit(mstr, RENDER_VISU));
+        }
         i++;
     }
     return (TRUE);

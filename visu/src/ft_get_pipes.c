@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:12:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 12:59:24 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/30 19:38:11 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,13 @@ int 	ft_get_pipes(t_master *mstr, char *line)
             return (FALSE);
         mstr->pipes_array[mstr->current_pipe]->node1_index = index1;
         mstr->pipes_array[mstr->current_pipe]->node2_index = index2;
-        mstr->nodes_array[index1]->pipes[mstr->nodes_array[index1]->nb_pipes] = index2;
-        mstr->nodes_array[index1]->nb_pipes++;
-        mstr->nodes_array[index2]->pipes[mstr->nodes_array[index2]->nb_pipes] = index1;
-        mstr->nodes_array[index2]->nb_pipes++;
+        if (mstr->pipes_array[mstr->current_pipe]->active == PIPE_ACTIVE)
+        {
+            mstr->nodes_array[index1]->pipes[mstr->nodes_array[index1]->nb_pipes] = index2;
+            mstr->nodes_array[index1]->nb_pipes++;
+            mstr->nodes_array[index2]->pipes[mstr->nodes_array[index2]->nb_pipes] = index1;
+            mstr->nodes_array[index2]->nb_pipes++;
+        }
         mstr->current_pipe++;
         free_get_pipes(tmp);
     }

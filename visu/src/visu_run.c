@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:50:19 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 19:16:49 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/30 23:13:44 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ int    render_total_background(t_master *mstr)
     if (SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF) == FALSE
     || SDL_RenderClear(mstr->render) == FALSE
     || render_texture(mstr, mstr->background, 0, 0) == FALSE
-    || render_texture(mstr, mstr->start,
-    mstr->nodes_array[mstr->start_index]->x_px - 10,
-    mstr->nodes_array[mstr->start_index]->y_px - 45) == FALSE
-    || render_texture(mstr, mstr->finish,
-    mstr->nodes_array[mstr->end_index]->x_px - 10,
-    mstr->nodes_array[mstr->end_index]->y_px - 45) == FALSE
+    || render_nodes(mstr) == FALSE
     || render_pipes(mstr) == FALSE
-    || render_nodes(mstr) == FALSE)
+    || render_nodes(mstr) == FALSE
+    || render_texture(mstr, mstr->start,
+    mstr->nodes_array[mstr->start_index]->x_px - 15,
+    mstr->nodes_array[mstr->start_index]->y_px - 50) == FALSE
+    || render_texture(mstr, mstr->finish,
+    mstr->nodes_array[mstr->end_index]->x_px - 15,
+    mstr->nodes_array[mstr->end_index]->y_px - 50) == FALSE)
         return (FALSE);
     return (TRUE);
 }

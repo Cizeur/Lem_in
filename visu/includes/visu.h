@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 19:16:31 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/30 23:27:55 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@
 # define TRUE			1
 # define FALSE			-1
 
-# define NODE_NOTHING	0
+# define NODE_UNUSED	-1
+# define NODE_USED	0
 # define NODE_START		1
 # define NODE_END		2
 
 # define PIPE_ACTIVE	1
 # define PIPE_INACTIVE	-1
 
-# define S_WIDTH	1500
-# define S_HEIGHT	1000
+# define S_WIDTH	1700
+# define S_HEIGHT	1200
 
 typedef struct		s_ants
 {
@@ -110,10 +111,11 @@ typedef struct		s_master
 	SDL_Window		*window;
 	SDL_Renderer	*render;
 	SDL_Event		event_Quit;
+	t_texture		**textures;
 	t_texture		*background;
-	char			*background_path;
 	t_texture		*start;
 	t_texture		*finish;
+	t_texture		*node;
 	int				flag_exit;
 	int				img_init_png;
 }					t_master;
@@ -128,6 +130,7 @@ int					ft_get_input(t_master *mstr, char *line);
 int					ft_get_nodes(t_master *mstr, char *line);
 int					ft_get_pipes(t_master *mstr, char *line);
 int					ft_get_moves(t_master *mstr, char *line);
+void				check_inactive_nodes(t_master *mstr);
 
 /*
 ***		INITIALIZATION
@@ -150,8 +153,6 @@ void  				ft_print_moves(t_master *mstr);
 */
 
 int 			   	visual(t_master *mstr);
-
-int					parameters_visual(t_master *mstr);
 int   				init_visual(t_master *mstr);
 void    			close_visual(t_master *mstr);
 int					load_media_visual(t_master *mstr);

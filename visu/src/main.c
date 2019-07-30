@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:46:26 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 19:11:45 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/30 22:04:01 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int     main(int ac, char **av)
     if (!(mstr = (t_master*)ft_memalloc(sizeof(t_master))))
         ft_exit(mstr, ERROR_MALLOC);
     if (parser(mstr) == FALSE)
-        return (FALSE);
-    if (parameters_visual(mstr) == FALSE)
         return (FALSE);
     if (visual(mstr) == FALSE)
         return (FALSE);
