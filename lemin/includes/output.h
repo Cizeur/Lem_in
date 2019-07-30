@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 10:58:52 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/29 15:12:56 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/30 12:15:36 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@
 # define SO_INACT_PIPE_NB "# number of inactive pipes   = "
 # define SO_MVMT_NB "# number of movements        = "
 # define SO_INACT_PIPE_MK "#inactive\n"
+# define SO_ACT_PIPE_MK "#active\n"
 
 #endif

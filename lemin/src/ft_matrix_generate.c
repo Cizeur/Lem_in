@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_adjacency_matrix.c                              :+:      :+:    :+:   */
+/*   ft_matrix_generate.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/12 16:39:30 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/30 09:38:01 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
         ft_exit(NODE_STACK_MTX);
     if (!(mstr->node_parent = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
         ft_exit(NODE_STACK_MTX);
- }
+    if (!(mstr->stored_solution = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
+        ft_exit(NODE_STACK_MTX);
+}
 
 static void    ft_put_line_index_to_adjancency_matrix(t_master *mstr, int line_index, int node_number)
 {

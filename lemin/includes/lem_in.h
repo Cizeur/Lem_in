@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/29 17:07:41 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/30 12:07:07 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** STORAGE BATCH SIZES
 */
 # define BATCH_MALLOC_SIZE 100000
-# define BATCH_PRINT_SIZE 1000000
+# define BATCH_PRINT_SIZE 100000
 /*
 ** DICTIONARY
 */
@@ -128,6 +128,7 @@ typedef struct	s_master
 	int				ants_nb;
 	int				nodes_nb;
 	int				pipes_nb;
+	int				inactives_pipes_nb;
 	int				graph_explored;
 	int				killed;
 	int				magic_number;
@@ -138,6 +139,7 @@ typedef struct	s_master
 	int				*node_parent;
 	int				*node_path;
 	int				*node_capacity;
+	int				*stored_solution;
 	t_storage		*storage;
 	t_storage		*storage_start;
 	int				piping;
@@ -185,10 +187,11 @@ void				ft_matrix_generate(t_master *mstr, t_storage *storage);
 void				ft_solution_print(t_master *mstr);
 int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
 
-void				ft_solver_extract_path_len(t_master *mstr, int max_nodes);
-void 				ft_solver_sort_paths(t_master *mstr, int max_nodes, int flow);
+void				ft_solver_paths_get_starts(t_master *mstr, int max_nodes, int *extracted);
+void				ft_solver_paths_get_len(t_master *mstr, int flow, int *extracted);
+void				ft_solver_paths_sort(t_master *mstr, int flow, int *extracted);
 void				ft_solver_turn_counter(t_master *mstr, int flow);
-void				ft_solver_solution_store(int **mtx, int max_nodes);
+void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow);
 
 void				ft_output_solution(t_master *mstr);
 void				ft_output_putstr(char *str, t_master *mstr);

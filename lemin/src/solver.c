@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/29 13:57:30 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/30 12:21:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,19 +177,17 @@ void			solver(t_master *mstr)
 			break;
 		ft_matrix_popping(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
 		ft_adjacency_matrix_solution_store(mstr);
-		ft_solver_extract_path_len(mstr, mstr->nodes_nb);
-		ft_solver_sort_paths(mstr, mstr->nodes_nb, ++flow);
+		ft_solver_paths_get_starts(mstr, mstr->nodes_nb, mstr->node_path);
+		ft_solver_paths_get_len(mstr, ++flow, mstr->node_path);
+		ft_solver_paths_sort(mstr, flow, mstr->node_path);
 		ft_solver_turn_counter(mstr, flow);
 		if (!mstr->end_of_search)
-			ft_solver_solution_store(mstr->adjacency_mtx, mstr->nodes_nb);
+			ft_solver_solution_store(mstr, mstr->nodes_nb, flow);
 		else
 			flow--;
-		//
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
-		//
 	}
 	if(!flow)
 		ft_exit(NOT_CONNECTED);
-	ft_solver_sort_paths(mstr, mstr->nodes_nb, flow);
 	mstr->nb_solutions = flow;
 }
