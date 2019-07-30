@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:24:48 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/30 12:22:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/30 18:13:33 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void			ft_solver_turn_counter(t_master *mstr, int flow)
 		turns++;
 		ants -= flow;
 	}
-	mstr->turn_counter = turns + 1;
+	mstr->turn_counter = mstr->ants_nb == 1 ? turns : turns + 1;
 }
