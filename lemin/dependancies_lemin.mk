@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/29 14:48:37 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/30 17:41:28 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,7 @@ SRC_LEMIN =  \
 	ft_dico_get.c\
 	ft_dico_hasher_djb2.c\
 	ft_solution_print.c\
-	ft_solver_extract_path_len.c\
-	ft_solver_sort_paths.c\
+	ft_solver_paths.c\
 	ft_solver_turn_counter.c\
 	ft_solver_solution_store.c\
 	ft_output_solution.c\

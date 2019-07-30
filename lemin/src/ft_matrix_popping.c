@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_matrix_popping.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cesar <cesar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:20:38 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/23 14:00:47 by cesar            ###   ########.fr       */
+/*   Updated: 2019/07/30 15:59:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			ft_matrix_popping(int max_nodes, int **mtx, int *node_path)
 		else
 		{
 			if((pos = ft_matrix_find_node(mtx[next_node], A_OPTIONS + max_nodes * 2, cur_node)) != DISCONNECTED)
+				//mtx[next_node][A_OPTIONS + pos + 2 * max_nodes] = DISCONNECTED;
 				ft_swap(&mtx[next_node][A_OPTIONS + pos], &mtx[next_node][A_OPTIONS + pos + 2 * max_nodes]);
 			if (ft_no_more_links(mtx[cur_node], 2 * max_nodes + A_OPTIONS))
 			{

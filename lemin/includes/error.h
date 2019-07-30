@@ -6,12 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:24:01 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/29 09:00:31 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/30 15:12:48 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
+
+# define S_ERROR_OUTPUT "ERROR\n"
 
 typedef enum	e_errors
 {
@@ -34,7 +36,8 @@ typedef enum	e_errors
 		MAX_NUMBER_OF_SOLUTIONS_REACHED,
 		START_OR_END_MISSING,
 		WRONG_POSITION_FOR_START_END,
-		DEAD_END_ON_SOLUTION
+		DEAD_END_ON_SOLUTION,
+		FAIL_MALLOC_MSTR
 }				t_errors;
 
 #endif
