@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 11:56:45 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/31 12:08:01 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/31 12:46:44 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ SDL_IFLAGS	:=	-I../frameworks/SDL2.framework/Versions/A/Headers \
 				-I../frameworks/SDL2_image.framework/Versions/A/Headers \
 				-F../frameworks
 SDL_EXFLAGS	+=	-F../frameworks \
-				-rpath ../frameworks\
-				-rpath ./frameworks\
+				-rpath ../frameworks \
+				-rpath ./frameworks \
 				-framework OpenGL -framework AppKit -framework OpenCl \
 				-framework SDL2 -framework SDL2_ttf -framework SDL2_image \
 
