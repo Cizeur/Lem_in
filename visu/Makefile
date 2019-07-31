@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 11:56:45 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/24 16:17:51 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/31 11:46:13 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,33 +15,31 @@ include ../libft/dependancies_libft.mk
 include ../shared_val.mk
 
 ifeq ($(CHECK_VISU_DEP),)
-$(error_VISU_DEPENDANCIES not included)
+	$(error_VISU_DEPENDANCIES not included)
 endif
 ifeq ($(CHECK_SHARED_VAL),)
-$(error SHARE_VAL not included)
+	$(error SHARE_VAL not included)
 endif
 ifeq ($(CHECK_LIBFT_DEP),)
-$(error LIBFT_DEPENDANCIES not included)
+	$(error LIBFT_DEPENDANCIES not included)
 endif
 
 DEPENDANCY_OBJ_INC_FILE := ./dependancies_$(L_VISU_DIR)_object.mk
 
 L_FT    := ../libft
 
-L_SDL			:= /Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/lib
-L_SDL_DIR		:= /Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/include/SDL2/
+SDL_IFLAGS	:=	-I../frameworks/SDL2.framework/Versions/A/Headers \
+				-I../frameworks/SDL2_ttf.framework/Versions/A/Headers \
+				-I../frameworks/SDL2_image.framework/Versions/A/Headers \
+				-I../frameworks/SDL2_mixer.framework/Headers \
+				-I../frameworks/SDL2_net.framework/Headers \
+				-F../frameworks
+SDL_EXFLAGS	+=	-F../frameworks \
+				-rpath ../frameworks \
+				-framework OpenGL -framework AppKit -framework OpenCl \
+				-framework SDL2 -framework SDL2_ttf -framework SDL2_image \
 
-L_SDL_TTF		:= /Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/lib
-L_SDL_TTF_DIR	:= /Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2/
-
-L_SDL_GLX		:= /Users/crfernan/.brew/Cellar/sdl2_gfx/1.0.4/lib
-L_SDL_GLX_DIR	:= /Users/crfernan/.brew/Cellar/sdl2_gfx/1.0.4/include/SDL2/
-
-L_SDL_IMAGE		:= /Users/crfernan/.brew/Cellar/sdl2_image/2.0.5/lib
-L_SDL_IMAGE_DIR	:= /Users/crfernan/.brew/Cellar/sdl2_image/2.0.5/include/SDL2/
-
-EXFLAGS := -L $(L_FT) -lft -L $(L_SDL) -lSDL2 -L $(L_SDL_TTF) -lSDL2_ttf
-EXFLAGS += -L $(L_SDL_GLX) -lSDL2_gfx -L $(L_SDL_IMAGE) -lSDL2_image
+EXFLAGS := -L $(L_FT) -lft
 
 SIMULINK := $(SHARE_INC_DIR)/$(NAME_LIBFT)
 
@@ -53,8 +51,9 @@ SRC 	:= $(SRC_VISU)
 OBJ		:= $(patsubst %.c,%.o,$(SRC))
 
 CC      := gcc
-CFLAGS  := $(SHARE_FLAGS) -I $(L_SDL_DIR) -I $(L_SDL_TTF_DIR)
-CFLAGS	+= -I $(L_SDL_GLX_DIR) -I $(L_SDL_IMAGE_DIR)
+CFLAGS  := $(SHARE_FLAGS) 
+CFLAGS	+= $(SDL_IFLAGS)
+EXFLAGS	+= $(SDL_EXFLAGS)
 
 .PHONY: all clean fclean re debug simulink
 
