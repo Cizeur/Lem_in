@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:13:50 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/29 19:12:36 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:22:55 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int		ft_fill_movements(t_master *mstr, char *move, int index)
 	if (mstr->ants_array[ant_index]->current_node == FALSE)
 		mstr->moves_array[mstr->current_move]->node1_index = mstr->start_index;
 	else
-		mstr->moves_array[mstr->current_move]->node1_index = mstr->ants_array[ant_index]->current_node;
+		mstr->moves_array[mstr->current_move]->node1_index =
+		mstr->ants_array[ant_index]->current_node;
 	mstr->moves_array[mstr->current_move]->node2_index = node_index;
 	mstr->ants_array[ant_index]->current_move = mstr->current_move;
 	mstr->ants_array[ant_index]->current_node = node_index;

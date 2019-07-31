@@ -6,11 +6,26 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:34:01 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 19:04:58 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:22:16 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
+
+int		ft_check_parameters(t_master *mstr, int nb_line)
+{
+	if (nb_line == 0)
+		return (mstr->nb_ants != 0 ? TRUE : ft_exit(mstr, INVALID_INPUT));
+	else if (nb_line == 1)
+		return (mstr->nb_nodes != 0 ? TRUE : ft_exit(mstr, INVALID_INPUT));
+	else if (nb_line == 2)
+		return (mstr->nb_pipes != 0 ? TRUE : ft_exit(mstr, INVALID_INPUT));
+	else if (nb_line == 3)
+		return (mstr->nb_movements != 0 ? TRUE : ft_exit(mstr, INVALID_INPUT));
+	else if (nb_line == 4)
+		return (TRUE);
+	return (FALSE);
+}
 
 int		ft_get_parameters(t_master *mstr, char *line, int nb_line)
 {
@@ -19,29 +34,16 @@ int		ft_get_parameters(t_master *mstr, char *line, int nb_line)
 		if (ft_str_isdigit(line) == FALSE)
 			return (ft_exit(mstr, INVALID_INPUT));
 		mstr->nb_ants = ft_atoi(line);
-		return (mstr->nb_ants != 0 ? TRUE : ft_exit(mstr, INVALID_INPUT));
 	}
 	else if (nb_line == 1)
-	{
 		mstr->nb_nodes = ft_atoi(line + 31);
-		return (mstr->nb_nodes != 0 ? TRUE : ft_exit(mstr, INVALID_INPUT));
-	}
 	else if (nb_line == 2)
-	{
 		mstr->nb_pipes = ft_atoi(line + 31);
-		return (mstr->nb_pipes != 0 ? TRUE : ft_exit(mstr, INVALID_INPUT));
-	}
 	else if (nb_line == 3)
-	{
 		mstr->nb_movements = ft_atoi(line + 31);
-		return (mstr->nb_movements != 0 ? TRUE : ft_exit(mstr, INVALID_INPUT));
-	}
 	else if (nb_line == 4)
-	{
 		mstr->nb_inactive = ft_atoi(line + 31);
-		return (TRUE);
-	}
-	return (ft_exit(mstr, INVALID_INPUT));
+	return (ft_check_parameters(mstr, nb_line));
 }
 
 int		ft_get_input(t_master *mstr, char *line)

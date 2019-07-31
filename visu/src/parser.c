@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 22:40:45 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:35:19 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ int		ft_comment_or_empty(char *line)
 		return (TRUE);
 	if (ft_str_cmp(line, "#inactive") == TRUE)
 		return (TRUE);
-
 	return (FALSE);
 }
 
-int		parser(t_master *mstr)
+int		read_parameters(t_master *mstr)
 {
 	int			ret;
 	char		*line;
@@ -36,10 +35,11 @@ int		parser(t_master *mstr)
 
 	nb_line = 0;
 	problem = FALSE;
-	while (problem == FALSE && nb_line < 5 && (ret = get_next_line(0, &line)) > 0)
+	while (problem == FALSE && nb_line < 5
+	&& (ret = get_next_line(0, &line)) > 0)
 	{
 		if (ret == FALSE)
-			return(ft_exit(mstr, FAIL_ON_READ));
+			return (ft_exit(mstr, FAIL_ON_READ));
 		if (ft_get_parameters(mstr, line, nb_line) == FALSE)
 			problem = TRUE;
 		nb_line++;
@@ -48,7 +48,17 @@ int		parser(t_master *mstr)
 	if (problem == TRUE || inizialization(mstr) == FALSE)
 		return (FALSE);
 	if (ret != TRUE)
-		return(ft_exit(mstr, FAIL_ON_READ));
+		return (ft_exit(mstr, FAIL_ON_READ));
+	return (nb_line);
+}
+
+int		read_nodes_pipes_moves(t_master *mstr, int nb_line)
+{
+	int			ret;
+	char		*line;
+	int			problem;
+
+	problem = FALSE;
 	while (problem == FALSE && (ret = get_next_line(0, &line)) > 0)
 	{
 		if (ret == -1)
@@ -63,6 +73,16 @@ int		parser(t_master *mstr)
 	}
 	if (problem == TRUE)
 		return (FALSE);
-	check_inactive_nodes(mstr);
+	return (check_inactive_nodes(mstr));
+}
+
+int		parser(t_master *mstr)
+{
+	int			nb_line;
+
+	if ((nb_line = read_parameters(mstr)) == FALSE)
+		return (FALSE);
+	if (read_nodes_pipes_moves(mstr, nb_line) == FALSE)
+		return (FALSE);
 	return (TRUE);
 }

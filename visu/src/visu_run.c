@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:50:19 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 23:13:44 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 11:58:23 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int    render_total_background(t_master *mstr)
     mstr->nodes_array[mstr->start_index]->x_px - 15,
     mstr->nodes_array[mstr->start_index]->y_px - 50) == FALSE
     || render_texture(mstr, mstr->finish,
-    mstr->nodes_array[mstr->end_index]->x_px - 15,
-    mstr->nodes_array[mstr->end_index]->y_px - 50) == FALSE)
+    mstr->nodes_array[mstr->end_index]->x_px - 50,
+    mstr->nodes_array[mstr->end_index]->y_px - 80) == FALSE)
         return (FALSE);
     return (TRUE);
 }
