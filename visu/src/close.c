@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:55:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 15:17:03 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 17:20:09 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	free_moves(t_master *mstr)
 		{
 			current = mstr->moves_array[i];
 			next = mstr->moves_array[i]->next;
-			while (next != NULL)
+			while (current != NULL)
 			{
 				free(current);
 				current = next;
@@ -85,28 +85,40 @@ void	free_moves(t_master *mstr)
 			}
 			i++;
 		}
+		free(mstr->moves_array[i]);
 		free(mstr->moves_array);
+	}
+}
+
+void	free_textures(t_master *mstr)
+{
+	int		i;
+
+	i = 0;
+	free_texture(mstr->background);
+	free_texture(mstr->start);
+	free_texture(mstr->finish);
+	free_texture(mstr->node);
+	if (mstr->textures)
+	{
+		while (i < 8)
+		{
+			free_texture(mstr->textures[i]);
+			i++;
+		}
+		free(mstr->textures);
 	}
 }
 
 int		close_program(t_master *mstr)
 {
-	int		i;
-
-	i = 0;
+	free(mstr->start_name);
+	free(mstr->end_name);
 	free_ants(mstr);
 	free_nodes(mstr);
 	free_pipes(mstr);
 	free_moves(mstr);
-	free_texture(mstr->background);
-	free_texture(mstr->start);
-	free_texture(mstr->finish);
-	free_texture(mstr->node);
-	while (i < 8)
-	{
-		free_texture(mstr->textures[i]);
-		i++;
-	}
+	free_textures(mstr);
 	SDL_DestroyRenderer(mstr->render);
 	mstr->render = NULL;
 	SDL_DestroyWindow(mstr->window);
@@ -115,6 +127,5 @@ int		close_program(t_master *mstr)
 	SDL_Quit();
 	free(mstr);
 	mstr = NULL;
-	while(1);
 	return (TRUE);
 }

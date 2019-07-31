@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:12:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 13:22:01 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 16:43:16 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,20 @@ int		ft_is_not_comment_2(t_master *mstr, char *line)
 	return (TRUE);
 }
 
-int		free_get_pipes(char **tmp)
+void	free_get_pipes(char **tmp)
 {
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp);
-	return (TRUE);
+	int		i;
+
+	i = 0;
+	if (tmp)
+	{
+		while (tmp[i])
+		{
+			free(tmp[i]);
+			i++;
+		}
+		free(tmp);
+	}
 }
 
 int		ft_get_pipes(t_master *mstr, char *line)

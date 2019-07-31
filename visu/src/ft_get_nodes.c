@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:14:30 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 12:23:14 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 16:43:18 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,18 @@ int		ft_is_not_comment(t_master *mstr, char *line)
 
 void	free_get_nodes(char **tmp)
 {
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp[2]);
-	free(tmp);
+	int		i;
+
+	i = 0;
+	if (tmp)
+	{
+		while (tmp[i])
+		{
+			free(tmp[i]);
+			i++;
+		}
+		free(tmp);
+	}
 }
 
 int		ft_check_overlap(t_master *mstr, t_nodes *node)

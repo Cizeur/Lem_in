@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:13:50 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 12:22:55 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 17:20:10 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,20 @@ char	*trim(char *move)
 
 void	free_get_moves(char *tmp, char **strsplit)
 {
+	int		i;
+
+	i = 0;
+	if (strsplit)
+	{
+		while (strsplit[i])
+		{
+			free(strsplit[i]);
+			i++;
+		}
+		free(strsplit);
+	}
 	if (tmp)
 		free(tmp);
-	if (strsplit[0])
-		free(strsplit[0]);
-	if (strsplit[1])
-		free(strsplit[1]);
-	if (strsplit)
-		free(strsplit);
 }
 
 int		ft_fill_movements(t_master *mstr, char *move, int index)
@@ -83,6 +89,22 @@ int		ft_new_movement(t_master *mstr)
 	return (TRUE);
 }
 
+void	free_moves_ants(char **moves_ants)
+{
+	int		i;
+
+	i = 0;
+	if (moves_ants)
+	{
+		while (moves_ants[i])
+		{
+			free(moves_ants[i]);
+			i++;
+		}
+		free(moves_ants);
+	}
+}
+
 int		ft_get_moves(t_master *mstr, char *line)
 {
 	int		i;
@@ -99,11 +121,10 @@ int		ft_get_moves(t_master *mstr, char *line)
 			if (ft_new_movement(mstr) == FALSE
 			|| ft_fill_movements(mstr, moves_ants[i], i) == FALSE)
 				problem = TRUE;
-			free(moves_ants[i]);
 			i++;
 		}
-		free(moves_ants);
 		mstr->current_move++;
 	}
+	free_moves_ants(moves_ants);
 	return (TRUE);
 }
