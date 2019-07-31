@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 11:45:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 18:39:23 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 18:46:18 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		load_texture_from_file(t_master *mstr, t_texture *texture, char *path)
 	SDL_Texture		*new_texture;
 	SDL_Surface		*loaded_surface;
 
-	clear_texture(texture);
+	// clear_texture(texture);
 	loaded_surface = IMG_Load(path);
 	if (!loaded_surface)
 		return (FALSE);
