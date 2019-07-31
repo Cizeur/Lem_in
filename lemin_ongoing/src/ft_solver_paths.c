@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:19:22 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/30 17:42:02 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/31 18:24:39 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void			ft_solver_paths_get_starts(t_master *mstr, int max_nodes, int *extracted)
 		path_start = mtx[mstr->start->node_number][A_OPTIONS + max_nodes * 2 + i];
 		if(path_start == DISCONNECTED)
 			continue;
+//		printf("p:%d - ", path_start);
 		*extracted++ = path_start;
 	}
 }
@@ -38,11 +39,13 @@ static int		ft_get_path_len(int **mtx, int cur_node, int end_node)
 	path_len = 1;
 	while (cur_node != end_node)
 	{
+//		printf("{%d}", cur_node);
 		if (cur_node == DISCONNECTED)
 			return(DEACTIVATED);
 		cur_node = mtx[cur_node][A_CURRENT_SOLUTION];
 		path_len++;
 	}
+//	printf("{%d}", cur_node);
 	return (--path_len);
 }
 
@@ -54,8 +57,16 @@ void 			ft_solver_paths_get_len(t_master *mstr, int flow, int *extracted)
 
 	mtx = mstr->adjacency_mtx;
 	i = -1;
+//	printf("\nflow : %d", flow);
 	while (++i < flow && !mstr->end_of_search)
 	{
+			if (extracted[i] == DISCONNECTED)
+			{
+				printf("oh oh \n");
+				mstr->end_of_search = 1;
+				return;
+			}
+	//		printf("\nstart [%d]", extracted[i]);
 			mtx[extracted[i]][A_CURRENT_PATH_LEN]
 			= ft_get_path_len(mtx, extracted[i], mstr->end->node_number);
 			if (mtx[extracted[i]][A_CURRENT_PATH_LEN] == DEACTIVATED)

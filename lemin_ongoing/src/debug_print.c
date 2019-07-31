@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:53:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/29 09:20:33 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/31 15:55:36 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	if (!activation)
 		return;
 	i = -1;
+	printf("\n");
 	while ((j = -1) && ++i < mstr->nodes_nb)
 	{
-		printf("\033[0;34m%5.*s : \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->name_len,
+		printf("\033[0;34m%10.*s : \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->name_len,
 				ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->line);
 		printf ("node : %4d |", i);
 		while (++j < 4 * mstr->nodes_nb + A_OPTIONS)
@@ -66,6 +67,7 @@ void    ft_print_matrix(t_master *mstr, int activation)
 				ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->line);
 	}
 	i = -1;
+	printf("\nNode Path\n");
 	printf("\n");
 	while (++i < mstr->nodes_nb)
 	{
@@ -73,16 +75,12 @@ void    ft_print_matrix(t_master *mstr, int activation)
 			break;
 		printf("%5d", mstr->node_path[i]);
 	}
+	printf("\nNode Parent\n");
 	printf("\n");
 	i = -1;
 	while (++i < mstr->nodes_nb)
 		printf("||%3d - %3d||", mstr->node_parent[i], mstr->node_queue[i]);
 	printf("\n");
-	i = -1;
-	while (++i < mstr->nodes_nb)
-		printf("%3d", mstr->node_lvl_stack[i]);
-	printf("\n");
-	i = -1;
 }
 
 void    		ft_print_test(t_master *mstr, int activation)

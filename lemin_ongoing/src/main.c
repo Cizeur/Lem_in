@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 09:32:24 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/31 18:23:35 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int			main(int  argc, char **argv)
 	ft_init_mstr(mstr);
 	parser(mstr);
 	solver(mstr);
-	//output(mstr);
+	output(mstr);
 	return(0);
 }

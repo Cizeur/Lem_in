@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 09:38:01 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/31 14:57:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
             ft_exit(ADJACENCY_MTX);
         ft_intset(mstr->adjacency_mtx[i], 4 * mstr->nodes_nb + A_OPTIONS , DISCONNECTED);
         mstr->adjacency_mtx[i][A_LINKS_NB] = 0;
+        mstr->adjacency_mtx[i][A_LOADED] = 0;
         i++;
     }
     if (!(mstr->node_lvl_stack = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
         ft_exit(NODE_STACK_MTX);
-    if (!(mstr->node_queue = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
+    if (!(mstr->node_queue = (int*)ft_memalloc(sizeof(int) * 2 * (mstr->nodes_nb + 1))))
         ft_exit(NODE_STACK_MTX);
     if (!(mstr->node_path = (int*)ft_memalloc(sizeof(int) * (mstr->nodes_nb + 1))))
         ft_exit(NODE_STACK_MTX);
@@ -45,10 +46,7 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
 static void    ft_put_line_index_to_adjancency_matrix(t_master *mstr, int line_index, int node_number)
 {
     if (mstr->adjacency_mtx[node_number][A_LINE_INDEX] == DISCONNECTED)
-    {
         mstr->adjacency_mtx[node_number][A_LINE_INDEX] = line_index;
-        mstr->adjacency_mtx[node_number][A_LOADED] = 0;
-    }
     else if (mstr->adjacency_mtx[node_number][A_LINE_INDEX] != line_index)
         ft_exit(ADJACENCY_MTX);
 }
