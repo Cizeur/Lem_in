@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 10:38:40 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/31 14:27:16 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,11 +202,13 @@ void				ft_matrix_generate(t_master *mstr, t_storage *storage);
 void				ft_solution_print(t_master *mstr);
 int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
 
+int 				ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node);
 void				ft_solver_paths_get_starts(t_master *mstr, int max_nodes, int *extracted);
 void				ft_solver_paths_get_len(t_master *mstr, int flow, int *extracted);
 void				ft_solver_paths_sort(t_master *mstr, int flow, int *extracted);
 void				ft_solver_turn_counter(t_master *mstr, int flow);
 void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow);
+
 
 void				ft_output_solution(t_master *mstr);
 void				ft_output_putstr(char *str, t_master *mstr);
