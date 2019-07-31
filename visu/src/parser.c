@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 12:35:19 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 13:21:23 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int		read_nodes_pipes_moves(t_master *mstr, int nb_line)
 	}
 	if (problem == TRUE)
 		return (FALSE);
-	return (check_inactive_nodes(mstr));
+	check_inactive_nodes(mstr);
+	return (TRUE);
 }
 
 int		parser(t_master *mstr)

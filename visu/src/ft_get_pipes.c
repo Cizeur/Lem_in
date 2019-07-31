@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:12:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 12:28:22 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 13:22:01 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int		ft_get_pipes(t_master *mstr, char *line)
 	int		i1;
 	int		i2;
 
-	if (ft_is_not_comment_2(mstr, line) == TRUE && free_get_pipes(tmp))
+
+	if (ft_is_not_comment_2(mstr, line) == TRUE)
 	{
 		mstr->pipes_array[mstr->current_pipe]->pipe_index = mstr->current_pipe;
 		tmp = ft_strsplit(line, '-');
@@ -54,6 +55,7 @@ int		ft_get_pipes(t_master *mstr, char *line)
 			mstr->nodes_array[i2]->pipes[mstr->nodes_array[i2]->nb_pipes] = i1;
 			mstr->nodes_array[i2]->nb_pipes++;
 		}
+		free_get_pipes(tmp);
 		mstr->current_pipe++;
 	}
 	return (TRUE);
