@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:55:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 12:09:26 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 15:17:03 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void	free_moves(t_master *mstr)
 
 int		close_program(t_master *mstr)
 {
+	int		i;
+
+	i = 0;
 	free_ants(mstr);
 	free_nodes(mstr);
 	free_pipes(mstr);
@@ -98,6 +101,12 @@ int		close_program(t_master *mstr)
 	free_texture(mstr->background);
 	free_texture(mstr->start);
 	free_texture(mstr->finish);
+	free_texture(mstr->node);
+	while (i < 8)
+	{
+		free_texture(mstr->textures[i]);
+		i++;
+	}
 	SDL_DestroyRenderer(mstr->render);
 	mstr->render = NULL;
 	SDL_DestroyWindow(mstr->window);
@@ -106,5 +115,6 @@ int		close_program(t_master *mstr)
 	SDL_Quit();
 	free(mstr);
 	mstr = NULL;
-	return (FALSE);
+	while(1);
+	return (TRUE);
 }

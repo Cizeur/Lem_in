@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 13:21:23 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 15:11:31 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		read_parameters(t_master *mstr)
 		if (ft_get_parameters(mstr, line, nb_line) == FALSE)
 			problem = TRUE;
 		nb_line++;
+		free(line);
 		line = NULL;
 	}
 	if (problem == TRUE || inizialization(mstr) == FALSE)
@@ -68,6 +69,7 @@ int		read_nodes_pipes_moves(t_master *mstr, int nb_line)
 			if (ft_get_input(mstr, line) == FALSE)
 				problem = TRUE;
 		}
+		free(line);
 		line = NULL;
 		nb_line++;
 	}

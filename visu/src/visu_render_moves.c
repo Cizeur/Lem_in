@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:15:41 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 11:57:15 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 15:08:12 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int    render_moves(t_master *mstr)
             x = mstr->nodes_array[current->node1_index]->x_px + (i * x_step);
             y = mstr->nodes_array[current->node1_index]->y_px + (i * y_step);
             SDL_SetRenderDrawColor(mstr->render, 0x00, 0xFF, 0x00, 0xFF);
-            if (render_texture(mstr, mstr->textures[current->ant_index % 8], x - 40, y - 40)  == FALSE)
+            if (render_texture(mstr, mstr->textures[(current->ant_index % 8)], x - 40, y - 40)  == FALSE)
                 return (FALSE);
             if (control(mstr) == FALSE)
                 return (FALSE);

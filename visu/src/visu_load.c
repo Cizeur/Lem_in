@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:38:14 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 13:40:05 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 15:07:38 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int     load_image(t_master *mstr, t_texture *texture, char *path, int width, in
 	clear_texture(texture);
 	loadedSurface = IMG_Load(path);
 	if (!loadedSurface)
-		return (ft_exit(mstr, LOAD_VISU));
+		return (FALSE);
 	SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0xFF, 0xFF));
 	newTexture = SDL_CreateTextureFromSurface(mstr->render, loadedSurface);
 	if (!newTexture)
-		return (ft_exit(mstr, LOAD_VISU));
+		return (FALSE);
 	texture->path = ft_strdup(path);
 	texture->width = width;
 	texture->height = height;
@@ -70,25 +70,25 @@ int load_nodes_textures(t_master *mstr)
 	init_texture(mstr->background);
 	if (load_image(mstr, mstr->background, g_path_from_visu_textures[0], S_WIDTH, S_HEIGHT) == FALSE)
 		if (load_image(mstr, mstr->background, g_path_from_git_textures[0], S_WIDTH, S_HEIGHT) == FALSE)
-			return (FALSE);
+			return (ft_exit(mstr, LOAD_VISU));
 	if (!(mstr->start = (t_texture*)ft_memalloc(sizeof(t_texture))))
 		return (ft_exit(mstr, ERROR_MALLOC));
 	init_texture(mstr->start);
 	if (load_image(mstr, mstr->start, g_path_from_visu_textures[1], 100, 100) == FALSE)
 		if (load_image(mstr, mstr->start, g_path_from_git_textures[1], 100, 100) == FALSE)
-			return (FALSE);
+			return (ft_exit(mstr, LOAD_VISU));
 	if (!(mstr->finish = (t_texture*)ft_memalloc(sizeof(t_texture))))
 		return (ft_exit(mstr, ERROR_MALLOC));
 	init_texture(mstr->finish);
 	if (load_image(mstr, mstr->finish, g_path_from_visu_textures[2], 100, 100) == FALSE)
 		if (load_image(mstr, mstr->finish, g_path_from_git_textures[2], 100, 100) == FALSE)
-			return (FALSE);
+			return (ft_exit(mstr, LOAD_VISU));
 	if (!(mstr->node = (t_texture*)ft_memalloc(sizeof(t_texture))))
 		return (ft_exit(mstr, ERROR_MALLOC));
 	init_texture(mstr->node);
 	if (load_image(mstr, mstr->node, g_path_from_visu_textures[3], 70, 70) == FALSE)
 		if (load_image(mstr, mstr->node, g_path_from_git_textures[3], 70, 70) == FALSE)
-			return (FALSE);
+			return (ft_exit(mstr, LOAD_VISU));
 	return (TRUE);
 }
 
@@ -101,12 +101,12 @@ int     vs_load(t_master *mstr)
 	 	return (ft_exit(mstr, ERROR_MALLOC));
 	while (i < 12)
 	{
-		if (!(mstr->textures[i] = (t_texture*)ft_memalloc(sizeof(t_texture))))
+		if (!(mstr->textures[i - 4] = (t_texture*)ft_memalloc(sizeof(t_texture))))
 			return (ft_exit(mstr, ERROR_MALLOC));
-		init_texture(mstr->textures[i]);
-		if (load_image(mstr, mstr->textures[i], g_path_from_visu_textures[i], 100, 100) == FALSE)
-			if (load_image(mstr, mstr->textures[i], g_path_from_git_textures[i], 100, 100) == FALSE)
-				return (FALSE);
+		init_texture(mstr->textures[i - 4]);
+		if (load_image(mstr, mstr->textures[i - 4], g_path_from_visu_textures[i], 100, 100) == FALSE)
+			if (load_image(mstr, mstr->textures[i - 4], g_path_from_git_textures[i], 100, 100) == FALSE)
+				return (ft_exit(mstr, LOAD_VISU));
 		i++;
 	}
 	load_nodes_textures(mstr);
