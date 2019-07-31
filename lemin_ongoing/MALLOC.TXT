@@ -1,0 +1,5 @@
+MALLOC A CHECK
+mstr
+dico
+dico_index
+misc_line
