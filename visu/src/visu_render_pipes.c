@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:14:23 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 23:15:15 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 11:41:27 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,22 @@ int    render_pipes(t_master *mstr)
         if (mstr->pipes_array[i]->active == PIPE_ACTIVE)
         {
             if (SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF) == FALSE
-            || thickLineRGBA(mstr->render,
+            || SDL_RenderDrawLine(mstr->render,
             mstr->nodes_array[mstr->pipes_array[i]->node1_index]->x_px,
             mstr->nodes_array[mstr->pipes_array[i]->node1_index]->y_px,
             mstr->nodes_array[mstr->pipes_array[i]->node2_index]->x_px,
-            mstr->nodes_array[mstr->pipes_array[i]->node2_index]->y_px,
-            5, 0xFF, 0xFF, 0xFF, 0xFF) == FALSE)
+            mstr->nodes_array[mstr->pipes_array[i]->node2_index]->y_px) == FALSE)
                 return (ft_exit(mstr, RENDER_VISU));
         }
         i++;
     }
     return (TRUE);
 }
+
+// if (SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF) == FALSE
+// || thickLineRGBA(mstr->render,
+// mstr->nodes_array[mstr->pipes_array[i]->node1_index]->x_px,
+// mstr->nodes_array[mstr->pipes_array[i]->node1_index]->y_px,
+// mstr->nodes_array[mstr->pipes_array[i]->node2_index]->x_px,
+// mstr->nodes_array[mstr->pipes_array[i]->node2_index]->y_px,
+// 5, 0xFF, 0xFF, 0xFF, 0xFF) == FALSE)

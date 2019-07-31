@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 23:27:55 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 11:38:31 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "SDL.h"
 # include "SDL_image.h"
 # include "SDL_ttf.h"
-# include "SDL2_gfxPrimitives.h"
+// # include "SDL2_gfxPrimitives.h"
 
 # define TRUE			1
 # define FALSE			-1

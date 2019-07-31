@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:40:40 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/30 22:05:50 by crfernan         ###   ########.fr        #
+#    Updated: 2019/07/31 11:38:19 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,9 +53,8 @@ INC_VISU	:= visu.h\
 			libft/libft.h\
 			/Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/include/SDL2/SDL.h\
 			/Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2/SDL_ttf.h \
-			/Users/crfernan/.brew/Cellar/sdl2_gfx/1.0.4/include/SDL2/SDL2_gfxPrimitives.h \
 			/Users/crfernan/.brew/Cellar/sdl2_image/2.0.5/include/SDL2/SDL_image.h
-
+			# /Users/crfernan/.brew/Cellar/sdl2_gfx/1.0.4/include/SDL2/SDL2_gfxPrimitives.h \
 
 
 DEPENDANCIES_VISU_O		:= Makefile ./dependancies_$(L_VISU_DIR).mk\

@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:13:58 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 23:22:06 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 11:29:51 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int     render_nodes(t_master *mstr)
         if (mstr->nodes_array[i]->flag == NODE_USED)
         {
             if (render_texture(mstr, mstr->node,
-            mstr->nodes_array[i]->x_px - 20,
+            mstr->nodes_array[i]->x_px - 30,
             mstr->nodes_array[i]->y_px - 50) == FALSE)
                 return (ft_exit(mstr, RENDER_VISU));
         }

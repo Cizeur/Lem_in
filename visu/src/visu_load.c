@@ -6,12 +6,11 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:38:14 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 23:26:18 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 11:27:28 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
-#include "textures.h"
 
 char g_path_textures[8][150] = {
 	{"resources_visual/ballon.png"},
@@ -64,7 +63,7 @@ int     vs_load(t_master *mstr)
 	if (!(mstr->background = (t_texture*)ft_memalloc(sizeof(t_texture))))
 		return (ft_exit(mstr, ERROR_MALLOC));
 	init_texture(mstr->background);
-	if (load_image(mstr, mstr->background, "resources_visual/background3.png", S_WIDTH, S_HEIGHT) == FALSE)
+	if (load_image(mstr, mstr->background, "resources_visual/background.jpg", S_WIDTH, S_HEIGHT) == FALSE)
 		return (FALSE);
 	if (!(mstr->start = (t_texture*)ft_memalloc(sizeof(t_texture))))
 		return (ft_exit(mstr, ERROR_MALLOC));
@@ -79,7 +78,7 @@ int     vs_load(t_master *mstr)
 	if (!(mstr->node = (t_texture*)ft_memalloc(sizeof(t_texture))))
 		return (ft_exit(mstr, ERROR_MALLOC));
 	init_texture(mstr->node);
-	if (load_image(mstr, mstr->node, "resources_visual/tend.png", 70, 70) == FALSE)
+	if (load_image(mstr, mstr->node, "resources_visual/tend4.png", 70, 70) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
