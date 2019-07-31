@@ -1,3 +1,6 @@
 */*.o
 */*.a
 */obj
+*/*dSYM
+*/visu_lemin
+*/lem-in
