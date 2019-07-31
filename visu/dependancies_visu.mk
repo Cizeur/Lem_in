@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:40:40 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/31 12:55:09 by cgiron           ###   ########.fr        #
+#    Updated: 2019/07/31 17:43:38 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_VISU =  \
 	visu_render_nodes.c \
 	visu_render_pipes.c \
 	visu_render_moves.c \
+	visu_render_total_background.c \
 	visu_texture.c \
 	print.c \
 	utils.c \

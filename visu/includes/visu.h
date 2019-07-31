@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 17:05:34 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/07/31 18:34:56 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct		s_master
 	int				min_y;
 	SDL_Window		*window;
 	SDL_Renderer	*render;
-	SDL_Event		event_Quit;
+	SDL_Event		event_quit;
 	t_texture		**textures;
 	t_texture		*background;
 	t_texture		*start;
@@ -120,7 +120,7 @@ typedef struct		s_master
 }					t_master;
 
 /*
-***		PARSER
+***		PARSER and INITIALIZATION
 */
 
 int					parser(t_master *mstr);
@@ -129,40 +129,22 @@ int					ft_get_input(t_master *mstr, char *line);
 int					ft_get_nodes(t_master *mstr, char *line);
 int					ft_get_pipes(t_master *mstr, char *line);
 int					ft_get_moves(t_master *mstr, char *line);
+
 void				check_inactive_nodes(t_master *mstr);
+int					inizialization(t_master *mstr);
 
 /*
-***		INITIALIZATION
+***		VISUAL
 */
 
-int	  				inizialization(t_master *mstr);
-
-/*
-***		PRINT
-*/
-
-int				    print(t_master *mstr, int ac, char **av);
-void			    ft_print_parameters(t_master *mstr);
-void  				ft_print_nodes(t_master *mstr);
-void  				ft_print_pipes(t_master *mstr);
-void  				ft_print_moves(t_master *mstr);
-
-/*
-***		VISUAL THIS IS A MESS
-*/
-
-int 			   	visual(t_master *mstr);
-int   				init_visual(t_master *mstr);
-void    			close_visual(t_master *mstr);
-int					load_media_visual(t_master *mstr);
-SDL_Texture			*load_texture_visual(t_master *mstr, char *path);
-void 				run_visual(t_master *mstr);
-
+int					vs_init(t_master *mstr);
+int					vs_load(t_master *mstr);
+int					vs_run(t_master *mstr);
+int					visual(t_master *mstr);
 int					control(t_master *mstr);
 
-
 /*
-***		RENDER THIS IS A MESS
+***		RENDER
 */
 
 int					render_nodes(t_master *mstr);
@@ -171,20 +153,26 @@ int					render_moves(t_master *mstr);
 int					render_total_background(t_master *mstr);
 
 /*
-***		TEXTURE THIS IS A MESS
+***		TEXTURE
 */
 
 void				init_texture(t_texture *texture);
 void				clear_texture(t_texture *texture);
 int					free_texture(t_texture *texture);
-int					load_texture_from_file(t_master *mstr, t_texture *texture, char *path);
-int					render_texture(t_master *mstr, t_texture *texture, int x, int y);
+int					load_texture_from_file(t_master *mstr,
+					t_texture *texture, char *path);
+int					render_texture(t_master *mstr,
+					t_texture *texture, int x, int y);
 
+/*
+***		PRINT -> ALL OF THEM USE PRINTF AND ARE NOT WORKING
+*/
 
-int					vs_init(t_master *mstr);
-int					vs_load(t_master *mstr);
-int					vs_run(t_master *mstr);
-int					close_program(t_master *mstr);
+int					print(t_master *mstr, int ac, char **av);
+void				ft_print_parameters(t_master *mstr);
+void				ft_print_nodes(t_master *mstr);
+void				ft_print_pipes(t_master *mstr);
+void				ft_print_moves(t_master *mstr);
 
 /*
 ***		UTILS
@@ -195,9 +183,10 @@ int					ft_str_cmp(char *s1, char *s2);
 int					ft_str_isdigit(char *line);
 
 /*
-***		FT_EXIT
+***		ERROR EXIT AND CLOSE PROGRAM
 */
 
-int				    ft_exit(t_master *mstr, t_errors error);
+int					ft_exit(t_master *mstr, t_errors error);
+int					close_program(t_master *mstr);
 
 #endif
