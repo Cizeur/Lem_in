@@ -70,7 +70,7 @@
 ** AJACENCY OPTIONS
 */
 
-#define A_OPTIONS 11
+#define A_OPTIONS 13
 
 #define A_LINKS_NB 0
 #define A_LOADED 1
@@ -83,6 +83,8 @@
 #define A_CURRENT_PATH_LEN 8
 #define A_VISITED_FLOW 9
 #define A_VISITED_BACKFLOW 10
+#define A_PARENT_FLOW 11
+#define A_PARENT_BACKFLOW 112
 
 /*
 ** FLOW TYPE
