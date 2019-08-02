@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 10:34:54 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 18:28:27 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/02 09:29:50 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void			ft_output_solution(t_master *mstr)
 	ft_output_putstr("\n", mstr);
 	turns= mstr->turn_counter;
 	i = -1;
-	while (turns-- - 1)
+	while (turns--)
 	{
 		ft_push_ants_forward(mstr, max_node);
 		ants = ft_load_new_ants(mstr, ants, turns);

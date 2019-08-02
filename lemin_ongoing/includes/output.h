@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 10:58:52 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/30 17:59:01 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/02 16:05:13 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** NODES NUMBERS DEFINE
  */
 
-# define OUTPUT_ACTIVATED 1
+# define OUTPUT_ACTIVATED 0
 # define SO_NODE_NB "# number of nodes            = "
 # define SO_PIPE_NB "# number of pipes            = "
 # define SO_INACT_PIPE_NB "# number of inactive pipes   = "

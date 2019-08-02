@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 14:27:16 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/02 16:04:54 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 ** AJACENCY OPTIONS
 */
 
-#define A_OPTIONS 13
+#define A_OPTIONS 16
 
 #define A_LINKS_NB 0
 #define A_LOADED 1
@@ -84,7 +84,10 @@
 #define A_VISITED_FLOW 9
 #define A_VISITED_BACKFLOW 10
 #define A_PARENT_FLOW 11
-#define A_PARENT_BACKFLOW 112
+#define A_PARENT_BACKFLOW 12
+#define A_LOADED_FINDER 13
+#define A_PATH_NUMBER 14
+#define A_SOLUTION_START 15
 
 /*
 ** FLOW TYPE
@@ -205,6 +208,7 @@ void				ft_solution_print(t_master *mstr);
 int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
 
 int 				ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node);
+int					ft_solver_paths_finder(t_master *mstr, int flow);
 void				ft_solver_paths_get_starts(t_master *mstr, int max_nodes, int *extracted);
 void				ft_solver_paths_get_len(t_master *mstr, int flow, int *extracted);
 void				ft_solver_paths_sort(t_master *mstr, int flow, int *extracted);

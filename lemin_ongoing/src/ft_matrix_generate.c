@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 14:57:03 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/02 14:15:38 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void    ft_alloc_adjancency_matrix(t_master *mstr)
         ft_exit(ADJACENCY_MTX);
     while (i < mstr->nodes_nb)
     {
-        if (!(mstr->adjacency_mtx[i] = (int*)ft_memalloc(sizeof(int) * (4 * (mstr->nodes_nb) + A_OPTIONS))))
+        if (!(mstr->adjacency_mtx[i] = (int*)ft_memalloc(sizeof(int) * (3 * (mstr->nodes_nb) + A_OPTIONS))))
             ft_exit(ADJACENCY_MTX);
-        ft_intset(mstr->adjacency_mtx[i], 4 * mstr->nodes_nb + A_OPTIONS , DISCONNECTED);
+        ft_intset(mstr->adjacency_mtx[i], 3 * mstr->nodes_nb + A_OPTIONS , DISCONNECTED);
         mstr->adjacency_mtx[i][A_LINKS_NB] = 0;
         mstr->adjacency_mtx[i][A_LOADED] = 0;
         i++;
@@ -58,11 +58,13 @@ static void    ft_put_pipe_in_adjancency_matrix(t_master *mstr, int node1, int n
         if (mstr->adjacency_mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] != DISCONNECTED)
             return;
         mstr->adjacency_mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] = 1;
+        mstr->adjacency_mtx[node2][2 * mstr->nodes_nb + node1 + A_OPTIONS] = 1;
         nodes = mstr->adjacency_mtx[node1][A_LINKS_NB];
         mstr->adjacency_mtx[node1][A_LINKS_NB]+=1;
         mstr->adjacency_mtx[node1][A_OPTIONS + nodes] = node2;
 
         mstr->adjacency_mtx[node2][mstr->nodes_nb + node1 + A_OPTIONS] = 1;
+        mstr->adjacency_mtx[node1][2 * mstr->nodes_nb + node2 + A_OPTIONS] = 1;
         nodes = mstr->adjacency_mtx[node2][A_LINKS_NB];
         mstr->adjacency_mtx[node2][A_LINKS_NB]+=1;
         mstr->adjacency_mtx[node2][A_OPTIONS + nodes] = node1;

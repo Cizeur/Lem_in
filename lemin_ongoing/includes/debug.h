@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:55:55 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 17:45:38 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/02 16:18:02 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 #define DEBUG_PRINT_PATH_LEN 0
-#define DEBUG_PRINT_MATRIX 0
+#define DEBUG_PRINT_MATRIX 1
 #define DEBUG_TRUNC_MATRIX 0
 #define DEBUG_PRINT_TEST_RESULT 0
 #define DEBUG_PRINT_STORAGE 0
