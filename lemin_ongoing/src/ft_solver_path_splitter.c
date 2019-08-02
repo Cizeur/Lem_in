@@ -16,18 +16,22 @@
 static void		ft_path_cleaning(t_master *mstr)
 {
 	int i;
+	int *node_path;
+	int **mtx;
 
+	mtx = mstr->adjacency_mtx;
+	node_path = mstr->node_path;
 	i = mstr->nodes_nb;
-//	printf("\nnew flow \n");
 	while (--i)
 	{
-		if (mstr->node_path[i] == DISCONNECTED)
+		if (node_path[i] == DISCONNECTED)
 			continue;
-		mstr->node_path[i - 1] = mstr->node_parent[mstr->node_path[i]];
+		printf("%d\n", mtx[node_path[i]][A_PARENT_FLOW]);
+		if (mtx[mtx[node_path[i]][A_PARENT_FLOW]][A_VISITED_FLOW] == i)
+			node_path[i - 1] = mtx[node_path[i]][A_PARENT_FLOW];
+		else
+			node_path[i - 1] = mtx[node_path[i]][A_PARENT_BACKFLOW];
 	}
-//	while (i < mstr->nodes_nb && mstr->node_path[i] != DISCONNECTED)
-//		printf("%d-", mstr->node_path[i++]);
-//	printf("\n");
 }
 
 static int		 ft_check_node(t_master *mstr, int cur_node, int next_node, int queue_pos)
@@ -35,13 +39,18 @@ static int		 ft_check_node(t_master *mstr, int cur_node, int next_node, int queu
 	int **mtx;
 	int flow;
 	int visited_lvl;
-
+	int parent;
 
 	mtx =  mstr->adjacency_mtx;
+	printf("hello\n");
+	parent = mtx[cur_node][A_VISITED_BACKFLOW] != DISCONNECTED ?
+		A_PARENT_BACKFLOW : A_PARENT_FLOW;
+		printf("goodbye %d - %d\n",cur_node ,mtx[cur_node][parent]);
 	flow = cur_node == mstr->start->node_number
-		|| !(mtx[mstr->node_parent[cur_node]][A_LOADED]
+		|| !(mtx[mtx[cur_node][parent]][A_LOADED]
 		&& mtx[cur_node][A_LOADED])
 		? F_FLOW : F_BACKFLOW;
+		printf("goodbye\n");
 	if (mtx[cur_node][A_LOADED] && flow == F_FLOW && !mtx[next_node][A_LOADED])
 		return(NOPE);
 	if (mtx[next_node][A_VISITED_BACKFLOW] != DISCONNECTED)
@@ -49,10 +58,17 @@ static int		 ft_check_node(t_master *mstr, int cur_node, int next_node, int queu
 	visited_lvl = flow == F_FLOW ? A_VISITED_FLOW : A_VISITED_BACKFLOW;
 	if (mtx[next_node][visited_lvl] == DISCONNECTED)
 	{
-		mstr->node_parent[next_node] = cur_node;
+		printf("goodbye\n");
+		mtx[next_node][parent] = cur_node;
 		mstr->node_queue[queue_pos] = next_node;
-		mtx[next_node][visited_lvl] = mtx[cur_node][A_VISITED_FLOW] + 1;
-		mtx[next_node][A_VISITED_FLOW] = mtx[next_node][visited_lvl];
+		mtx[next_node][visited_lvl] = mtx[cur_node][visited_lvl] + 1;
+		if (mtx[next_node][A_VISITED_FLOW] == DISCONNECTED)
+		{
+			mtx[next_node][A_VISITED_FLOW] =
+			mtx[next_node][visited_lvl] + 1;
+			mtx[next_node][A_PARENT_FLOW] =
+			cur_node;
+		}
 		return(SUCCESS);
 	}
 	return(NOPE);
@@ -67,6 +83,8 @@ static void		ft_init_stacks(t_master *mstr, int start_node)
 	{
 		mstr->adjacency_mtx[i][A_VISITED_FLOW] = DISCONNECTED;
 		mstr->adjacency_mtx[i][A_VISITED_BACKFLOW] = DISCONNECTED;
+		mstr->adjacency_mtx[i][A_PARENT_BACKFLOW] = DISCONNECTED;
+		mstr->adjacency_mtx[i][A_PARENT_FLOW] = DISCONNECTED;
 	}
 	ft_intset(mstr->node_path, mstr->nodes_nb, DISCONNECTED);
 	ft_intset(mstr->node_queue, mstr->nodes_nb, DISCONNECTED);
@@ -75,6 +93,8 @@ static void		ft_init_stacks(t_master *mstr, int start_node)
 	mstr->node_path[0] = start_node;
 	mstr->adjacency_mtx[start_node][A_VISITED_FLOW] = 0;
 	mstr->adjacency_mtx[start_node][A_VISITED_BACKFLOW] = 0;
+	mstr->adjacency_mtx[start_node][A_PARENT_FLOW] = start_node;
+	mstr->adjacency_mtx[start_node][A_PARENT_FLOW] = start_node;
 }
 
 int ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node)
@@ -99,13 +119,13 @@ int ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node)
 		while (++i < mtx[cur_node][A_LINKS_NB])
 		{
 			next_node = mtx[cur_node][A_OPTIONS + i];
-			if (next_node == mstr->node_parent[cur_node] || next_node == DISCONNECTED
+			if (next_node == mtx[cur_node][A_PARENT_FLOW] || next_node == DISCONNECTED
 				||next_node == mstr->start->node_number)
 				continue;
 			if (next_node == end_node)
 			{
 				//printf("|| %d - %d ||", cur_node, next_node);
-				mstr->node_parent[next_node] = cur_node;
+				mtx[end_node][A_PARENT_FLOW] = cur_node;
 				mstr->node_path[mtx[cur_node][A_VISITED_FLOW] + 1] = end_node;
 				ft_path_cleaning(mstr);
 				return (SUCCESS);
