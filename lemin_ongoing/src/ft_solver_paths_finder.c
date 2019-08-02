@@ -89,9 +89,9 @@ int		ft_solver_one_path_finder(t_master *mstr, int cur_node, int end_node, int p
 			if ( next_node == DISCONNECTED
 				||next_node == mstr->start->node_number
 				||next_node == mtx[cur_node][A_PARENT_FLOW]
-				||mtx[next_node][A_LOADED_FINDER] == CERTAINLY
-				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == DEACTIVATED
-				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED)
+				||mtx[next_node][A_LOADED_FINDER]
+				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED
+				||mtx[next_node][mstr->nodes_nb + A_OPTIONS + cur_node] == DEACTIVATED)
 				continue;
 			if(mtx[next_node][A_VISITED_FLOW] == DISCONNECTED)
 			{
@@ -111,6 +111,7 @@ void			ft_unload_nodes(t_master *mstr)
 	int **mtx;
 	int linked_node;
 
+	return;
 	mtx = mstr->adjacency_mtx;
 	i = -1;
 	while ((j = -1) && ++i < mstr->nodes_nb)
@@ -143,7 +144,10 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 	while (++i < flow + 1)
 	{
 		if (ft_solver_one_path_finder(mstr, mstr->start->node_number, mstr->end->node_number, i) == DEAD_END)
-		return (DEAD_END);
+		{
+			printf("NOPE");
+			return (DEAD_END);
+		}
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	}
 	ft_unload_nodes(mstr);
