@@ -127,22 +127,12 @@ void			ft_unload_nodes(t_master *mstr)
 		while (++j < mtx[i][A_LINKS_NB])
 		{
 			linked_node = mtx[i][A_OPTIONS + j];
-			if (mtx[i][A_PATH_NUMBER] == DISCONNECTED)
-			{
+			if (!mtx[i][A_LOADED_FINDER])
 				mtx[i][A_LOADED] = NOPE;
-				if (mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] == ACTIVATED)
-					mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] = 1;
-				if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] == ACTIVATED)
-					mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;
-			}
-		/*	else
-			{
-				if (linked_node != mtx[i][A_CURRENT_SOLUTION])
-				{
-					if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] == ACTIVATED)
-						mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;
-				}
-			}*/
+			if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] != DISCONNECTED)
+				mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;
+			if (mtx[i][A_LOADED_FINDER] && linked_node == mtx[i][A_CURRENT_SOLUTION])
+				mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = ACTIVATED;
 		}
 	}
 }
@@ -159,6 +149,7 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 		mtx[i][A_LOADED_FINDER] = NOPE;
 		mtx[i][A_PATH_NUMBER] = DISCONNECTED;
 	}
+	mtx[mstr->end->node_number][A_LOADED] = 0;
 	i = -1;
 	while (++i < flow)
 	{
@@ -172,5 +163,6 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 	}
 	printf("#YES %d\n", flow);
 	ft_unload_nodes(mstr);
+	ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	return (SUCCESS);
 }

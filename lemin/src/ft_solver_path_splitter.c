@@ -33,30 +33,6 @@ static void		ft_path_cleaning(t_master *mstr)
 	}
 }
 
-static void			ft_edge_cutting(t_master *mstr, int max_nodes)
-{
-	int i;
-	int *node_path;
-	int **mtx;
-	int cur_node;
-	int next_node;
-
-	mtx = mstr->adjacency_mtx;
-	node_path = mstr->node_path;
-	i = -1;
-	while (node_path[++i + 1] != DISCONNECTED)
-	{
-		cur_node = node_path[i];
-		next_node = node_path[i + 1];
-		if(!(mtx[cur_node][A_LOADED] && mtx[next_node][A_LOADED]))
-			continue;
-		if (mtx[next_node][A_OPTIONS + max_nodes + cur_node] == ACTIVATED)
-			mtx[next_node][A_OPTIONS + max_nodes + cur_node] = DEACTIVATED;
-		if (mtx[next_node][A_OPTIONS + max_nodes + cur_node] == DEACTIVATED)
-			mtx[next_node][A_OPTIONS + max_nodes + cur_node] = USED;
-	}
-}
-
 static int			ft_check_node(t_master *mstr, int cur_node,
 								int next_node, int queue_pos)
 {
@@ -140,15 +116,13 @@ int ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node)
 			if ( next_node == DISCONNECTED
 				|| next_node == mstr->start->node_number
 				|| next_node == mtx[cur_node][A_PARENT_FLOW]
-				|| mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED
-				|| mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == DEACTIVATED)
+				|| mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED)
 				continue;
 			if (next_node == end_node)
 			{
 				mtx[end_node][A_PARENT_FLOW] = cur_node;
 				mstr->node_path[mtx[cur_node][A_VISITED_FLOW] + 1] = end_node;
 				ft_path_cleaning(mstr);
-				ft_edge_cutting(mstr, mstr->nodes_nb);
 				return (SUCCESS);
 			}
 			if(ft_check_node(mstr, cur_node, next_node, queue_len + queue_start))

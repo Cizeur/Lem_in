@@ -35,13 +35,13 @@ void			solver(t_master *mstr)
 					mstr->end->node_number)))
 			break ;
 		ft_matrix_popping(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
+		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 		if (!(ft_solver_paths_finder(mstr, ++flow)))
 			continue;
 		ft_solver_paths_get_starts(mstr, mstr->nodes_nb, mstr->node_path);
 		ft_solver_paths_get_len(mstr, flow, mstr->node_path);
 		ft_solver_paths_sort(mstr, flow, mstr->node_path);
 		ft_solver_turn_counter(mstr, flow);
-		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 		if (!mstr->end_of_search)
 			ft_solver_solution_store(mstr, mstr->nodes_nb, flow);
 	}

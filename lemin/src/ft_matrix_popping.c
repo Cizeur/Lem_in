@@ -11,22 +11,7 @@
 /* ************************************************************************** */
 
 #include "lem_in.h"
-/*
-static int		ft_no_more_links(int *mtx_node, int start)
-{
-	int j;
-	int next_node;
 
-	j = - 1;
-	while( ++j < mtx_node[A_LINKS_NB])
-		{
-			next_node = mtx_node[j + start];
-			if (next_node != DISCONNECTED)
-				return(0);
-		}
-	return (1);
-}
-*/
 void			ft_matrix_popping(int max_nodes, int **mtx, int *node_path)
 {
 	int i;
@@ -38,8 +23,12 @@ void			ft_matrix_popping(int max_nodes, int **mtx, int *node_path)
 	{
 		next_node = node_path[i + 1];
 		cur_node = node_path[i];
-		mtx[next_node][A_LOADED] = CERTAINLY;
-		mtx[cur_node][A_OPTIONS + max_nodes + next_node] = ACTIVATED;
+		if(!(mtx[cur_node][A_LOADED] && mtx[next_node][A_LOADED]))
+			mtx[cur_node][A_OPTIONS + max_nodes + next_node] = ACTIVATED;
+		if(mtx[cur_node][A_LOADED] && mtx[next_node][A_LOADED])
+			mtx[next_node][A_OPTIONS + max_nodes + cur_node] = 1;
+		mtx[cur_node][A_LOADED] = CERTAINLY;
 		i++;
 	}
+	mtx[node_path[0]][A_LOADED] = 0;
 }
