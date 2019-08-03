@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:24:01 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 14:11:22 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 14:10:22 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 
 typedef enum	e_errors
 {
-		STANDARD, NAME_EMPTY_OR_SPACE,
-		ALLREADY_IN_DIC,
+		STANDARD,
+		EMPTY_FILE,
 		FAIL_MALLOC_DIC,
+		NAME_EMPTY_OR_SPACE,
+		ALLREADY_IN_DIC,
+		DASH_IN_NAME,
 		FAIL_REPEAT_ENTRY,
 		FAILED_DICO_ENTRY_CREATION,
 		NO_ANTS,

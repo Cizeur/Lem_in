@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 12:58:03 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 16:00:35 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,11 +155,8 @@ typedef struct	s_master
 	int				max_flow;
 	int				command_line;
 	int				**adjacency_mtx;
-	int				*node_lvl_stack;
 	int				*node_queue;
-	int				*node_parent;
 	int				*node_path;
-	int				*node_capacity;
 	int				*stored_solution;
 	t_storage		*storage;
 	t_storage		*storage_start;
@@ -198,7 +195,7 @@ void				ft_parser_apply_command(t_master *mstr, t_line_info *entry);
 void				ft_storage_grow(t_master *mstr);
 t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
 t_line_info			*ft_storage_get_line(t_storage *storage_start, int line_nb);
-int					ft_dico_add(t_storage *storage_start, t_hash_dico *dico,t_line_info *entry);
+void				ft_dico_add(t_storage *storage_start, t_hash_dico *dico,t_line_info *entry);
 int					ft_dico_get(t_storage *storage_start, t_hash_dico *dico, char *needle, int len);
 
 void				solver(t_master *mstr);
@@ -218,6 +215,7 @@ void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow);
 
 
 void				ft_output_solution(t_master *mstr);
+void				ft_output_count_inactive_pipes(t_master *mstr);
 void				ft_output_putstr(char *str, t_master *mstr);
 void				ft_output_putnstr(char *str, int n ,t_master *mstr);
 void    			ft_output_putnbr(int n, t_master *mstr);
