@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 15:43:01 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 18:12:20 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,29 @@ void			ft_unload_nodes(t_master *mstr)
 	i = -1;
 	while ((j = -1) && ++i < mstr->nodes_nb)
 	{
-		if (!(mtx[i][A_LOADED] && mtx[i][A_PATH_NUMBER] == DISCONNECTED)
-			|| i == mstr->end->node_number)
+		if (!(mtx[i][A_LOADED])
+			|| i == mstr->end->node_number
+			|| i == mstr->start->node_number)
 			continue;
 		while (++j < mtx[i][A_LINKS_NB])
 		{
-			mtx[i][A_LOADED] = NOPE;
 			linked_node = mtx[i][A_OPTIONS + j];
-			if (mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] != ACTIVATED)
-				mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] = 1;
-			if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] == ACTIVATED)
-				mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;
+			if (mtx[i][A_PATH_NUMBER] == DISCONNECTED)
+			{
+				mtx[i][A_LOADED] = NOPE;
+				if (mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] == ACTIVATED)
+					mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] = 1;
+				if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] == ACTIVATED)
+					mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;
+			}
+		/*	else
+			{
+				if (linked_node != mtx[i][A_CURRENT_SOLUTION])
+				{
+					if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] == ACTIVATED)
+						mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;
+				}
+			}*/
 		}
 	}
 }
@@ -153,12 +165,12 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 		if (ft_solver_one_path_finder(mstr, mstr->start->node_number,
 					mstr->end->node_number, i) == DEAD_END)
 		{
-			printf("#NOPE\n");
+			printf("#NOPE %d\n", flow);
 			return (DEAD_END);
 		}
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	}
-	printf("#YES\n");
+	printf("#YES %d\n", flow);
 	ft_unload_nodes(mstr);
 	return (SUCCESS);
 }

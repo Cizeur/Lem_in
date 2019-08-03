@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:20:38 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/02 15:35:24 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 17:46:33 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void			ft_matrix_popping(int max_nodes, int **mtx, int *node_path)
 		next_node = node_path[i + 1];
 		cur_node = node_path[i];
 		mtx[next_node][A_LOADED] = CERTAINLY;
-		if (mtx[next_node][A_OPTIONS + max_nodes + cur_node] != DEACTIVATED)
 		mtx[cur_node][A_OPTIONS + max_nodes + next_node] = ACTIVATED;
 		i++;
 	}
