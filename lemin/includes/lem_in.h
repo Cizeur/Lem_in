@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 14:03:25 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 12:58:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 /*
 ** STORAGE BATCH SIZES
 */
-# define BATCH_MALLOC_SIZE 10000
-# define BATCH_PRINT_SIZE 10000
+# define BATCH_MALLOC_SIZE 100000
+# define BATCH_PRINT_SIZE 100000
 /*
 ** DICTIONARY
 */
@@ -65,6 +65,13 @@
 #define UNUSED 1
 #define USED 2
 #define ACTIVATED 3
+
+/*
+** AJACENCY OPTIONS
+*/
+
+#define A_OPTIONS 17
+
 #define A_LINKS_NB 0
 #define A_LOADED 1
 #define A_LINE_INDEX 2
@@ -74,7 +81,21 @@
 #define A_CURRENT_SOLUTION 6
 #define A_STORED_PATH_LEN 7
 #define A_CURRENT_PATH_LEN 8
-#define A_OPTIONS 9
+#define A_VISITED_FLOW 9
+#define A_VISITED_BACKFLOW 10
+#define A_PARENT_FLOW 11
+#define A_PARENT_BACKFLOW 12
+#define A_LOADED_FINDER 13
+#define A_PATH_NUMBER 14
+#define A_SOLUTION_START 15
+#define A_LOADED_SHORTENER 16
+
+/*
+** FLOW TYPE
+*/
+
+#define F_FLOW 1
+#define F_BACKFLOW -1
 
 typedef enum	e_ln_type
 {
@@ -131,7 +152,7 @@ typedef struct	s_master
 	int				inactives_pipes_nb;
 	int				graph_explored;
 	int				killed;
-	int				magic_number;
+	int				max_flow;
 	int				command_line;
 	int				**adjacency_mtx;
 	int				*node_lvl_stack;
@@ -151,7 +172,7 @@ typedef struct	s_master
 	int				buffer_pos;
 	int				turn_counter;
 	int				end_of_search;
-	int				nb_solutions;
+	int				final_flow;
 	char			output[BATCH_PRINT_SIZE + 1];
 }				t_master;
 
@@ -187,11 +208,14 @@ void				ft_matrix_generate(t_master *mstr, t_storage *storage);
 void				ft_solution_print(t_master *mstr);
 int					ft_matrix_find_node(int *mtx_node, int start, int needle_node);
 
+int 				ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node);
+int					ft_solver_paths_finder(t_master *mstr, int flow);
 void				ft_solver_paths_get_starts(t_master *mstr, int max_nodes, int *extracted);
 void				ft_solver_paths_get_len(t_master *mstr, int flow, int *extracted);
 void				ft_solver_paths_sort(t_master *mstr, int flow, int *extracted);
 void				ft_solver_turn_counter(t_master *mstr, int flow);
 void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow);
+
 
 void				ft_output_solution(t_master *mstr);
 void				ft_output_putstr(char *str, t_master *mstr);

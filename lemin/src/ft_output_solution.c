@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 10:34:54 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/30 10:57:36 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 12:59:52 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static int		ft_load_new_ants(t_master *mstr, int ants, int turns)
 
 	i = -1;
 	mtx = mstr->adjacency_mtx;
-	while(ants <= mstr->ants_nb && ++i < mstr->nb_solutions)
+	while(ants <= mstr->ants_nb && ++i < mstr->final_flow)
 	{
 		cur_cell = mstr->stored_solution[i];
-		if(mtx[cur_cell][A_STORED_PATH_LEN] > turns)
+		if(i && mtx[cur_cell][A_STORED_PATH_LEN] > turns)
 			break;
 		mtx[cur_cell][A_ANT] = ants;
 		ft_output_putstr("L", mstr);

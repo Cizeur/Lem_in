@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output.h                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 10:58:52 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/03 09:27:07 by cgiron           ###   ########.fr       */
+/*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
+/*   Updated: 2019/07/30 13:27:49 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OUTPUT_H
-# define OUTPUT_H
+#include "lem_in.h"
+#include "stdlib.h"
+#include "libft/libft.h"
 
-/*
-** NODES NUMBERS DEFINE
- */
+int			main(int  argc, char **argv)
+{
+	t_master *mstr;
 
-# define OUTPUT_ACTIVATED 1
-# define SO_NODE_NB "# number of nodes            = "
-# define SO_PIPE_NB "# number of pipes            = "
-# define SO_INACT_PIPE_NB "# number of inactive pipes   = "
-# define SO_MVMT_NB "# number of movements        = "
-# define SO_INACT_PIPE_MK "#inactive\n"
-# define SO_ACT_PIPE_MK "#active\n"
-
-#endif
+	argc--;
+	argv++;
+	if (!(mstr=(t_master *)ft_memalloc(sizeof(t_master))))
+		ft_exit(FAIL_MALLOC_MSTR);
+	ft_init_mstr(mstr);
+	parser(mstr);
+	solver(mstr);
+	output(mstr);
+	return(0);
+}

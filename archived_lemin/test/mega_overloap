@@ -1,4 +1,4 @@
-3
+15
 ##start
 start 0 1
 random 10 10
@@ -28,8 +28,9 @@ start-8
 start-random
 8-9
 9-10
-10-4
+10-3
 2-5
+2-10
 4-end
 12-end
 4-12

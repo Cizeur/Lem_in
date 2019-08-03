@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 08:31:11 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 13:00:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/30 09:39:12 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow)
 
 	i = -1;
 	mtx = mstr->adjacency_mtx;
-	mstr->final_flow = flow;
 	while (++i < max_nodes)
 	{
 		mtx[i][A_STORED_PATH_LEN] = mtx[i][A_CURRENT_PATH_LEN];

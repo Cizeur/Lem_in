@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:53:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/02 16:16:14 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/29 09:20:33 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,17 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	if (!activation)
 		return;
 	i = -1;
-	printf("\n");
 	while ((j = -1) && ++i < mstr->nodes_nb)
 	{
-		if (DEBUG_TRUNC_MATRIX && mstr->adjacency_mtx[i][A_PATH_NUMBER] == DISCONNECTED)
-				continue;
-		printf("\033[0;34m%10.*s : \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->name_len,
+		printf("\033[0;34m%5.*s : \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->name_len,
 				ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->line);
 		printf ("node : %4d |", i);
-		while (++j < 3 * mstr->nodes_nb + A_OPTIONS)
+		while (++j < 4 * mstr->nodes_nb + A_OPTIONS)
 		{
 
 			if (DEBUG_TRUNC_MATRIX && j >= A_OPTIONS)
 				break;
-			if ((j - A_OPTIONS) % mstr->nodes_nb == 0)
+			if (j % mstr->nodes_nb == A_OPTIONS)
 				printf("%3s", "|");
 			if (mstr->adjacency_mtx[i][j] == DISCONNECTED)
 				printf("%3s", " . ");
@@ -69,20 +66,23 @@ void    ft_print_matrix(t_master *mstr, int activation)
 				ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->line);
 	}
 	i = -1;
-	printf("\nNode Path\n");
 	printf("\n");
 	while (++i < mstr->nodes_nb)
 	{
-	//	if (mstr->node_path[i] == -1)
-	//		break;
+		if (mstr->node_path[i] == -1)
+			break;
 		printf("%5d", mstr->node_path[i]);
 	}
-	printf("\nNode Parent\n");
 	printf("\n");
 	i = -1;
 	while (++i < mstr->nodes_nb)
 		printf("||%3d - %3d||", mstr->node_parent[i], mstr->node_queue[i]);
 	printf("\n");
+	i = -1;
+	while (++i < mstr->nodes_nb)
+		printf("%3d", mstr->node_lvl_stack[i]);
+	printf("\n");
+	i = -1;
 }
 
 void    		ft_print_test(t_master *mstr, int activation)

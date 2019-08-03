@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:31:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 14:06:35 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/07/31 14:17:44 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lem_in.h"
 #include <stdlib.h>
 
-char g_error_message[13][40] = {
+char g_error_message[23][40] = {
 	{"Standard"},
 	{"Space before name"},
 	{"Entry already in dic"},
@@ -27,12 +27,21 @@ char g_error_message[13][40] = {
 	{"nope10"},
 	{"nope11"},
 	{"nope12"},
-	{"nope13"}
+	{"nope13"},
+	{"nope14"},
+	{"NO FLOW"},
+	{"nope16"},
+	{"nope17"},
+	{"nope18"},
+	{"nope19"},
+	{"nope20"},
+	{"nope21"},
+	{"nope22"},
+	{"nope23"}
 };
 
 void		ft_exit(t_errors error)
 {
-	/*
 	printf("\e[36m");
 	printf("\n\n####################################################\n");
 	printf("####################################################\n");
@@ -40,8 +49,6 @@ void		ft_exit(t_errors error)
 	printf("####################################################\n");
 	printf("####################################################\n\n");
 	printf("\e[0m");
-	*/
-	error = 0;
 	ft_putstr(S_ERROR_OUTPUT);
 	//pause();
 	exit(error != STANDARD ? 1 : 0);

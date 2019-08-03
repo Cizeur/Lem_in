@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/30 12:38:14 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 12:59:30 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		ft_get_inactive_pipes(t_master *mstr)
 	mtx = mstr->adjacency_mtx;
 	solution_start = mstr->stored_solution;
 	active_pipes = 0;
-	while(++i < mstr->nb_solutions)
+	while(++i < mstr->final_flow)
 		active_pipes += mtx[solution_start[i]][A_STORED_PATH_LEN] + 1;
 	mstr->inactives_pipes_nb = mstr->pipes_nb - active_pipes;
 }
@@ -57,7 +57,7 @@ static int		ft_is_path_start(int node, t_master *mstr)
 
 	i = -1;
 	solution_start = mstr->stored_solution;
-	flow = mstr->nb_solutions;
+	flow = mstr->final_flow;
 	while (++i < flow)
 	{
 		if (solution_start[i] == node)
@@ -119,7 +119,4 @@ void			output(t_master *mstr)
 	ft_putchar('\n');
 	ft_output_solution(mstr);
 	ft_output_buffer_flush(mstr);
-	ft_putstr(SO_MVMT_NB);
-	ft_putnbr(mstr->turn_counter);
-	ft_putchar('\n');
 }

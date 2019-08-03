@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:24:48 by cesar             #+#    #+#             */
-/*   Updated: 2019/07/30 18:13:33 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 11:18:08 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static int		ft_turn_counter_initialiser(t_master *mstr, int *node_path, int flow
 		current_path_len = mstr->adjacency_mtx[node_path[i]][A_CURRENT_PATH_LEN] ;
 		current_flow++;
 	}
-	if (ants > 0)
+	if (ants >= 0)
 		return(ants);
 	else
-		return(0);
+		return(-1);
 }
 
 void			ft_solver_turn_counter(t_master *mstr, int flow)
@@ -42,17 +42,21 @@ void			ft_solver_turn_counter(t_master *mstr, int flow)
 
 	ants = mstr->ants_nb;
 	ants = ft_turn_counter_initialiser(mstr, mstr->node_path, flow);
-	if (ants && !mstr->end_of_search)
+	if (ants != -1 && !mstr->end_of_search)
 		turns = mstr->adjacency_mtx[mstr->node_path[flow - 1]][A_CURRENT_PATH_LEN] - 1;
 	else
 	{
-		mstr->end_of_search = 1;
+		mstr->end_of_search = CERTAINLY;
 		return;
 	}
-	while (ants >= 0)
+	while (ants > 0)
 	{
 		turns++;
 		ants -= flow;
 	}
-	mstr->turn_counter = mstr->ants_nb == 1 ? turns : turns + 1;
+	printf("turns : %d\n", turns + 1);
+	if (turns + 1 < mstr->turn_counter || flow == 1)
+		mstr->turn_counter = turns + 1;
+	else
+		mstr->end_of_search = CERTAINLY;
 }
