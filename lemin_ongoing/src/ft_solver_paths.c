@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:19:22 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/02 15:29:46 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 09:17:00 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,14 @@ void 			ft_solver_paths_get_len(t_master *mstr, int flow, int *extracted)
 
 	mtx = mstr->adjacency_mtx;
 	i = -1;
-//	printf("\nflow : %d", flow);
 	while (++i < flow && !mstr->end_of_search)
 	{
 			if (extracted[i] == DISCONNECTED)
 			{
-				printf("oh oh \n");
+				printf("NOOOO\n");
 				mstr->end_of_search = 1;
 				return;
 			}
-	//		printf("\nstart [%d]", extracted[i]);
 			mtx[extracted[i]][A_CURRENT_PATH_LEN]
 			= ft_get_path_len(mtx, extracted[i], mstr->end->node_number);
 			if (mtx[extracted[i]][A_CURRENT_PATH_LEN] == DEACTIVATED)

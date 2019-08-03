@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 09:36:06 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/02 13:00:58 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 12:45:15 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,24 @@ static void		ft_path_cleaning(t_master *mstr)
 	}
 }
 
+static int		ft_check_if_active(t_master *mstr, int next_node ,int max_nodes)
+{
+	int i;
+	int **mtx;
+	int linked_node;
+
+	i = -1;
+	mtx = mstr->adjacency_mtx;
+	while(++i < mtx[next_node][A_LINKS_NB])
+	{
+		linked_node = mtx[next_node][A_OPTIONS + i];
+		if(mtx[linked_node][A_OPTIONS + max_nodes + next_node] == ACTIVATED)
+			return (NOPE);
+	}
+	return (CERTAINLY);
+}
+
+
 static void		ft_edge_cutting(t_master *mstr, int max_nodes)
 {
 	int i;
@@ -50,12 +68,15 @@ static void		ft_edge_cutting(t_master *mstr, int max_nodes)
 		next_node = node_path[i + 1];
 		if(!(mtx[cur_node][A_LOADED] && mtx[next_node][A_LOADED]))
 			continue;
-		if (mtx[next_node][A_OPTIONS + max_nodes + cur_node] == ACTIVATED)
+		if (mtx[next_node][A_OPTIONS + max_nodes + cur_node] == ACTIVATED
+			|| mtx[next_node][A_OPTIONS + max_nodes + cur_node] == USED)
 		{
 			mtx[next_node][A_OPTIONS + max_nodes + cur_node] = DEACTIVATED;
+			mtx[cur_node][A_OPTIONS + max_nodes + next_node] = USED;
+			if (ft_check_if_active(mstr, next_node, max_nodes))
+				mtx[cur_node][A_OPTIONS + max_nodes + next_node] = ACTIVATED;
 			continue;
 		}
-		mtx[cur_node][A_OPTIONS + max_nodes + next_node] = USED;
 	}
 }
 
@@ -139,11 +160,11 @@ int ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node)
 			if ( next_node == DISCONNECTED
 				||next_node == mstr->start->node_number
 				||next_node == mtx[cur_node][A_PARENT_FLOW]
-				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED)
+				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED
+				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == DEACTIVATED)
 				continue;
 			if (next_node == end_node)
 			{
-				//printf("|| %d - %d ||", cur_node, next_node);
 				mtx[end_node][A_PARENT_FLOW] = cur_node;
 				mstr->node_path[mtx[cur_node][A_VISITED_FLOW] + 1] = end_node;
 				ft_path_cleaning(mstr);

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/02 16:53:56 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 12:11:33 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ int		ft_solver_one_path_finder(t_master *mstr, int cur_node, int end_node, int p
 				||next_node == mstr->start->node_number
 				||next_node == mtx[cur_node][A_PARENT_FLOW]
 				||mtx[next_node][A_LOADED_FINDER]
-				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED
-				||mtx[next_node][mstr->nodes_nb + A_OPTIONS + cur_node] == DEACTIVATED)
+				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED)
 				continue;
 			if(mtx[next_node][A_VISITED_FLOW] == DISCONNECTED)
 			{
@@ -111,7 +110,6 @@ void			ft_unload_nodes(t_master *mstr)
 	int **mtx;
 	int linked_node;
 
-	return;
 	mtx = mstr->adjacency_mtx;
 	i = -1;
 	while ((j = -1) && ++i < mstr->nodes_nb)
@@ -119,11 +117,14 @@ void			ft_unload_nodes(t_master *mstr)
 		if (!(mtx[i][A_LOADED] && mtx[i][A_PATH_NUMBER] == DISCONNECTED)
 			|| i == mstr->end->node_number)
 			continue;
-		while(j < mtx[i][A_LINKS_NB])
+		while(++j < mtx[i][A_LINKS_NB])
 		{
+			mtx[i][A_LOADED] = NOPE;
 			linked_node = mtx[i][A_OPTIONS + j];
-			mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] = 1;
-			mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;
+			if (mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] == ACTIVATED)
+				mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] = 1;
+			if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] == ACTIVATED)
+				mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;;
 		}
 	}
 }
@@ -141,15 +142,16 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 		mtx[i][A_PATH_NUMBER] = DISCONNECTED;
 	}
 	i = -1;
-	while (++i < flow + 1)
+	while (++i < flow)
 	{
 		if (ft_solver_one_path_finder(mstr, mstr->start->node_number, mstr->end->node_number, i) == DEAD_END)
 		{
-			printf("NOPE");
+			printf("#NOPE\n");
 			return (DEAD_END);
 		}
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	}
+	printf("# flow %d ", flow);
 	ft_unload_nodes(mstr);
 	return (SUCCESS);
 }

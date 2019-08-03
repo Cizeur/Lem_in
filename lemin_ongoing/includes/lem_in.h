@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/02 16:04:54 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 12:58:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 ** AJACENCY OPTIONS
 */
 
-#define A_OPTIONS 16
+#define A_OPTIONS 17
 
 #define A_LINKS_NB 0
 #define A_LOADED 1
@@ -88,6 +88,7 @@
 #define A_LOADED_FINDER 13
 #define A_PATH_NUMBER 14
 #define A_SOLUTION_START 15
+#define A_LOADED_SHORTENER 16
 
 /*
 ** FLOW TYPE
@@ -151,7 +152,7 @@ typedef struct	s_master
 	int				inactives_pipes_nb;
 	int				graph_explored;
 	int				killed;
-	int				magic_number;
+	int				max_flow;
 	int				command_line;
 	int				**adjacency_mtx;
 	int				*node_lvl_stack;
@@ -171,7 +172,7 @@ typedef struct	s_master
 	int				buffer_pos;
 	int				turn_counter;
 	int				end_of_search;
-	int				nb_solutions;
+	int				final_flow;
 	char			output[BATCH_PRINT_SIZE + 1];
 }				t_master;
 

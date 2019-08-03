@@ -6,36 +6,38 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/02 15:59:39 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 12:58:36 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
 
+static int		ft_get_max_flow_limit(t_master *mstr)
+{
+	int limit[3];
+	limit[0] = mstr->ants_nb;
+	limit[1] = mstr->adjacency_mtx[mstr->start->node_number][A_LINKS_NB];
+	limit[2] = mstr->adjacency_mtx[mstr->end->node_number][A_LINKS_NB];
+	return (ft_min(ft_min(limit[0], limit[1]), limit[2]));
+}
+
 void			solver(t_master *mstr)
 {
-	int magic[3];
+
 	int flow;
 
-	magic[0] = mstr->ants_nb;
-	magic[1] = mstr->adjacency_mtx[mstr->start->node_number][A_LINKS_NB];
-	magic[2] = mstr->adjacency_mtx[mstr->end->node_number][A_LINKS_NB];
-	mstr->magic_number= ft_min(ft_min(magic[0], magic[1]), magic[2]);
-	//
-	ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
-	//
+
+	mstr->max_flow = ft_get_max_flow_limit(mstr);
+	mstr->final_flow = 0;
 	flow = 0;
-	while (flow < mstr->magic_number && !mstr->end_of_search)
+	while (flow < mstr->max_flow && !mstr->end_of_search)
 	{
 		if(!(ft_solver_paths_splitter(mstr, mstr->start->node_number, mstr->end->node_number)))
 			break;
 		ft_matrix_popping(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
-		if(!(ft_solver_paths_finder(mstr, flow)))
-		{
+		if(!(ft_solver_paths_finder(mstr, ++flow)))
 			break;
-		}
-		flow++;
 		ft_solver_paths_get_starts(mstr, mstr->nodes_nb, mstr->node_path);
 		ft_solver_paths_get_len(mstr, flow, mstr->node_path);
 		ft_solver_paths_sort(mstr, flow, mstr->node_path);
@@ -44,11 +46,8 @@ void			solver(t_master *mstr)
 		if (!mstr->end_of_search)
 			ft_solver_solution_store(mstr, mstr->nodes_nb, flow);
 		else
-		{
 			flow--;
-		}
 	}
-	if(!flow)
+	if(!mstr->final_flow)
 		ft_exit(NOT_CONNECTED);
-	mstr->nb_solutions = flow;
 }
