@@ -3,11 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/Users/crfernan/.brew/Cellar/sdl2/2.0.9_1/include/SDL2",
-                "/Users/crfernan/.brew/Cellar/sdl2_image/2.0.5/include/SDL2",
-                "/Users/crfernan/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2",
-                "/Users/crfernan/.brew/Cellar/sdl2_gfx/1.0.4/include/SDL2"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "macFrameworkPath": [
