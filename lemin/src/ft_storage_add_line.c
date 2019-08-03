@@ -6,15 +6,15 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:46:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 11:37:38 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 14:49:04 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_ln_type 	ft_storage_add_line(char *line, t_master *mstr)
+t_ln_type		ft_storage_add_line(char *line, t_master *mstr)
 {
-	int 			reduc_ind;
+	int				reduc_ind;
 	t_line_info		*entry;
 	int				index;
 

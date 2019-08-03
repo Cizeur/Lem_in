@@ -6,12 +6,29 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 12:11:33 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 15:43:01 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
+
+static void		ft_init_stacks(t_master *mstr, int start_node)
+{
+	int i;
+
+	i = -1;
+	while (++i < mstr->nodes_nb)
+	{
+		mstr->adjacency_mtx[i][A_VISITED_FLOW] = DISCONNECTED;
+		mstr->adjacency_mtx[i][A_PARENT_FLOW] = DISCONNECTED;
+	}
+	ft_intset(mstr->node_path, mstr->nodes_nb, DISCONNECTED);
+	ft_intset(mstr->node_queue, 2 * mstr->nodes_nb, DISCONNECTED);
+	mstr->node_queue[0] = start_node;
+	mstr->node_path[0] = start_node;
+	mstr->adjacency_mtx[start_node][A_VISITED_FLOW] = 0;
+}
 
 static void		ft_path_cleaning(t_master *mstr, int path_number)
 {
@@ -29,33 +46,26 @@ static void		ft_path_cleaning(t_master *mstr, int path_number)
 		node_path[i - 1] = mtx[node_path[i]][A_PARENT_FLOW];
 	}
 	mtx[node_path[1]][A_SOLUTION_START] = 1;
-	i = 0;
-//	printf("path || %d -", node_path[0]);
 	while (node_path[++i + 1] != DISCONNECTED)
 	{
 		mtx[node_path[i]][A_CURRENT_SOLUTION] = node_path[i + 1];
 		mtx[node_path[i]][A_LOADED_FINDER] = CERTAINLY;
 		mtx[node_path[i]][A_PATH_NUMBER] = path_number;
-//		printf("%d -", node_path[i]);
 	}
-//	printf("%d ||done", node_path[i]);
 }
 
-static void		ft_init_stacks(t_master *mstr, int start_node)
+static int		ft_is_possible_next(t_master *mstr, int cur_node, int next_node)
 {
-	int i;
+	int **mtx;
 
-	i = -1;
-	while (++i < mstr->nodes_nb)
-	{
-		mstr->adjacency_mtx[i][A_VISITED_FLOW] = DISCONNECTED;
-		mstr->adjacency_mtx[i][A_PARENT_FLOW] = DISCONNECTED;
-	}
-	ft_intset(mstr->node_path, mstr->nodes_nb, DISCONNECTED);
-	ft_intset(mstr->node_queue, 2 * mstr->nodes_nb, DISCONNECTED);
-	mstr->node_queue[0] = start_node;
-	mstr->node_path[0] = start_node;
-	mstr->adjacency_mtx[start_node][A_VISITED_FLOW] = 0;
+	mtx = mstr->adjacency_mtx;
+	if (next_node == DISCONNECTED
+		|| next_node == mstr->start->node_number
+		|| next_node == mtx[cur_node][A_PARENT_FLOW]
+		|| mtx[next_node][A_LOADED_FINDER]
+		|| mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED)
+		return (NOPE);
+	return (CERTAINLY);
 }
 
 int		ft_solver_one_path_finder(t_master *mstr, int cur_node, int end_node, int path_number)
@@ -86,13 +96,9 @@ int		ft_solver_one_path_finder(t_master *mstr, int cur_node, int end_node, int p
 				ft_path_cleaning(mstr, path_number);
 				return (SUCCESS);
 			}
-			if ( next_node == DISCONNECTED
-				||next_node == mstr->start->node_number
-				||next_node == mtx[cur_node][A_PARENT_FLOW]
-				||mtx[next_node][A_LOADED_FINDER]
-				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED)
+			if (!ft_is_possible_next(mstr, cur_node, next_node))
 				continue;
-			if(mtx[next_node][A_VISITED_FLOW] == DISCONNECTED)
+			if (mtx[next_node][A_VISITED_FLOW] == DISCONNECTED)
 			{
 				mtx[next_node][A_PARENT_FLOW] = cur_node;
 				mstr->node_queue[queue_len++ +queue_start] = next_node;
@@ -117,14 +123,14 @@ void			ft_unload_nodes(t_master *mstr)
 		if (!(mtx[i][A_LOADED] && mtx[i][A_PATH_NUMBER] == DISCONNECTED)
 			|| i == mstr->end->node_number)
 			continue;
-		while(++j < mtx[i][A_LINKS_NB])
+		while (++j < mtx[i][A_LINKS_NB])
 		{
 			mtx[i][A_LOADED] = NOPE;
 			linked_node = mtx[i][A_OPTIONS + j];
-			if (mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] == ACTIVATED)
+			if (mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] != ACTIVATED)
 				mtx[linked_node][A_OPTIONS + mstr->nodes_nb + i] = 1;
 			if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] == ACTIVATED)
-				mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;;
+				mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = 1;
 		}
 	}
 }
@@ -144,14 +150,15 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 	i = -1;
 	while (++i < flow)
 	{
-		if (ft_solver_one_path_finder(mstr, mstr->start->node_number, mstr->end->node_number, i) == DEAD_END)
+		if (ft_solver_one_path_finder(mstr, mstr->start->node_number,
+					mstr->end->node_number, i) == DEAD_END)
 		{
 			printf("#NOPE\n");
 			return (DEAD_END);
 		}
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	}
-	printf("# flow %d ", flow);
+	printf("#YES\n");
 	ft_unload_nodes(mstr);
 	return (SUCCESS);
 }

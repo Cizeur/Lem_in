@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 12:58:36 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 15:42:19 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,19 @@ static int		ft_get_max_flow_limit(t_master *mstr)
 
 void			solver(t_master *mstr)
 {
-
 	int flow;
-
 
 	mstr->max_flow = ft_get_max_flow_limit(mstr);
 	mstr->final_flow = 0;
 	flow = 0;
 	while (flow < mstr->max_flow && !mstr->end_of_search)
 	{
-		if(!(ft_solver_paths_splitter(mstr, mstr->start->node_number, mstr->end->node_number)))
-			break;
+		if (!(ft_solver_paths_splitter(mstr, mstr->start->node_number,
+					mstr->end->node_number)))
+			break ;
 		ft_matrix_popping(mstr->nodes_nb, mstr->adjacency_mtx, mstr->node_path);
-		if(!(ft_solver_paths_finder(mstr, ++flow)))
-			break;
+		if (!(ft_solver_paths_finder(mstr, ++flow)))
+			continue;
 		ft_solver_paths_get_starts(mstr, mstr->nodes_nb, mstr->node_path);
 		ft_solver_paths_get_len(mstr, flow, mstr->node_path);
 		ft_solver_paths_sort(mstr, flow, mstr->node_path);
@@ -45,8 +44,6 @@ void			solver(t_master *mstr)
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 		if (!mstr->end_of_search)
 			ft_solver_solution_store(mstr, mstr->nodes_nb, flow);
-		else
-			flow--;
 	}
 	if(!mstr->final_flow)
 		ft_exit(NOT_CONNECTED);

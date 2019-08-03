@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 12:08:15 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 18:06:41 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 14:11:35 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@
 void		ft_parser_fill_entry_node(t_master *mstr, char *line,
 						t_line_info *entry)
 {
-	char *name_end;
+	char	*name_end;
+	int		i;
 
 	if (entry->type != NODE)
-		return;
+		return ;
 	name_end = ft_find_name_end(line);
+	i = -1;
 	entry->name_len = (int)(name_end - line);
+	while (++i < entry->name_len)
+	{
+		if (line[i] == '-')
+			ft_exit(DASH_IN_NAME);
+	}
 	entry->hash_key = ft_dico_hasher_djb2(line, name_end, HASH_SIZE);
 	entry->node_number = mstr->nodes_nb;
 	mstr->nodes_nb++;

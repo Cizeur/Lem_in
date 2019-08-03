@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/31 18:23:35 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 14:48:47 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "stdlib.h"
 #include "libft/libft.h"
 
-int			main(int  argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_master *mstr;
 
@@ -26,5 +26,5 @@ int			main(int  argc, char **argv)
 	parser(mstr);
 	solver(mstr);
 	output(mstr);
-	return(0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 17:03:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/30 15:28:51 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 14:17:43 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,27 @@
 static t_ln_type	ft_is_hashtag(char *line)
 {
 	if (*line != '#')
-		return(END_OF_READ);
+		return (END_OF_READ);
 	if (!ft_strcmp(line, START_MK))
-		return(START);
+		return (START);
 	else if (!ft_strcmp(line, END_MK))
-		return(END);
+		return (END);
 	else
-		return(COMMENT);
+		return (COMMENT);
 }
 
-t_ln_type	ft_parser_line_type(char *line, int piping)
+t_ln_type			ft_parser_line_type(char *line, int piping)
 {
 	t_ln_type type;
 
 	type = END_OF_READ;
 	if (*line == 0 || *line == 'L' || ft_is_whitespace(*line))
 		return (END_OF_READ);
-	if ((type = ft_is_hashtag(line))!= END_OF_READ)
+	if ((type = ft_is_hashtag(line)) != END_OF_READ)
 		return (type);
-	else if (piping == NOPE && !ft_strchr(line, '-'))
+	else if (piping == NOPE)
 		type = ft_parser_check_node(line, type);
-	else
+	if (type == END_OF_READ)
 		type = ft_parser_check_pipe(line, type);
 	return (type);
 }

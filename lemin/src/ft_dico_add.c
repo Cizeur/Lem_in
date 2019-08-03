@@ -6,21 +6,19 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:28:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/07/08 16:51:33 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 14:02:21 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include "libft/libft.h"
-
 
 static t_bucket	ft_dico_check_double_inc(t_storage *storage_start,
-				t_hash_dico *dico,t_line_info *entry)
+				t_hash_dico *dico, t_line_info *entry)
 {
-	t_bucket *dico_entry;
-	t_bucket *bucket;
-	t_bucket *tmp;
-	t_line_info *cmp_line;
+	t_bucket	*dico_entry;
+	t_bucket	*bucket;
+	t_bucket	*tmp;
+	t_line_info	*cmp_line;
 
 	dico_entry = &(dico->dico_list[entry->hash_key]);
 	bucket = dico_entry;
@@ -40,7 +38,8 @@ static t_bucket	ft_dico_check_double_inc(t_storage *storage_start,
 	return (*dico_entry);
 }
 
-int			ft_dico_add(t_storage *storage_start, t_hash_dico *dico,t_line_info *entry)
+void			ft_dico_add(t_storage *storage_start, t_hash_dico *dico,
+					t_line_info *entry)
 {
 	t_bucket dico_entry;
 
@@ -52,6 +51,5 @@ int			ft_dico_add(t_storage *storage_start, t_hash_dico *dico,t_line_info *entry
 		dico_entry = ft_dico_check_double_inc(storage_start, dico, entry);
 		dico->collisions++;
 	}
-	dico->dico_list[entry->hash_key] =  dico_entry;
-	return(1);
+	dico->dico_list[entry->hash_key] = dico_entry;
 }

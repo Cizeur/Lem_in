@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 09:36:06 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 12:45:15 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 15:55:32 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static int		ft_check_if_active(t_master *mstr, int next_node ,int max_nodes)
 	return (CERTAINLY);
 }
 
-
-static void		ft_edge_cutting(t_master *mstr, int max_nodes)
+static void			ft_edge_cutting(t_master *mstr, int max_nodes)
 {
 	int i;
 	int *node_path;
@@ -80,14 +79,15 @@ static void		ft_edge_cutting(t_master *mstr, int max_nodes)
 	}
 }
 
-static int		 ft_check_node(t_master *mstr, int cur_node, int next_node, int queue_pos)
+static int			ft_check_node(t_master *mstr, int cur_node,
+								int next_node, int queue_pos)
 {
 	int **mtx;
 	int flow;
 	int visited_lvl;
 	int parent;
 
-	mtx =  mstr->adjacency_mtx;
+	mtx = mstr->adjacency_mtx;
 	parent = mtx[cur_node][A_VISITED_BACKFLOW] != DISCONNECTED ?
 		A_PARENT_BACKFLOW : A_PARENT_FLOW;
 	flow = cur_node == mstr->start->node_number
@@ -95,15 +95,17 @@ static int		 ft_check_node(t_master *mstr, int cur_node, int next_node, int queu
 		&& mtx[cur_node][A_LOADED])
 		? F_FLOW : F_BACKFLOW;
 	if (mtx[cur_node][A_LOADED] && flow == F_FLOW && !mtx[next_node][A_LOADED])
-		return(NOPE);
+		return (NOPE);
 	if (mtx[next_node][A_VISITED_BACKFLOW] != DISCONNECTED)
-		return(NOPE);
+		return (NOPE);
 	visited_lvl = flow == F_FLOW ? A_VISITED_FLOW : A_VISITED_BACKFLOW;
 	if (mtx[next_node][visited_lvl] == DISCONNECTED)
 	{
-		mtx[next_node][flow == F_FLOW ? A_PARENT_FLOW : A_PARENT_BACKFLOW] = cur_node;
+		mtx[next_node][flow == F_FLOW ?
+			A_PARENT_FLOW : A_PARENT_BACKFLOW] = cur_node;
 		mstr->node_queue[queue_pos] = next_node;
-		mtx[next_node][visited_lvl] = ft_max(mtx[cur_node][A_VISITED_FLOW], mtx[cur_node][A_VISITED_BACKFLOW]) + 1;
+		mtx[next_node][visited_lvl] = ft_max(mtx[cur_node][A_VISITED_FLOW],
+				mtx[cur_node][A_VISITED_BACKFLOW]) + 1;
 		if (mtx[next_node][A_VISITED_FLOW] == DISCONNECTED)
 		{
 			mtx[next_node][A_VISITED_FLOW] =
@@ -111,9 +113,9 @@ static int		 ft_check_node(t_master *mstr, int cur_node, int next_node, int queu
 			mtx[next_node][A_PARENT_FLOW] =
 			cur_node;
 		}
-		return(SUCCESS);
+		return (SUCCESS);
 	}
-	return(NOPE);
+	return (NOPE);
 }
 
 static void		ft_init_stacks(t_master *mstr, int start_node)
@@ -158,10 +160,10 @@ int ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node)
 		{
 			next_node = mtx[cur_node][A_OPTIONS + i];
 			if ( next_node == DISCONNECTED
-				||next_node == mstr->start->node_number
-				||next_node == mtx[cur_node][A_PARENT_FLOW]
-				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED
-				||mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == DEACTIVATED)
+				|| next_node == mstr->start->node_number
+				|| next_node == mtx[cur_node][A_PARENT_FLOW]
+				|| mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED
+				|| mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == DEACTIVATED)
 				continue;
 			if (next_node == end_node)
 			{

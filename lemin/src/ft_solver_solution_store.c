@@ -6,14 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 08:31:11 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 13:00:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 14:50:36 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
 
-void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow)
+void		ft_solver_solution_store(t_master *mstr, int max_nodes, int flow)
 {
 	int i;
 	int **mtx;
@@ -31,5 +31,5 @@ void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow)
 	ft_intset(mstr->stored_solution, max_nodes + 1, -1);
 	i = -1;
 	while (++i < flow)
-			mstr->stored_solution[i] = mstr->node_path[i];
+		mstr->stored_solution[i] = mstr->node_path[i];
 }

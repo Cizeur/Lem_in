@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:53:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/02 16:16:14 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/03 16:00:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,6 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	//		break;
 		printf("%5d", mstr->node_path[i]);
 	}
-	printf("\nNode Parent\n");
-	printf("\n");
-	i = -1;
-	while (++i < mstr->nodes_nb)
-		printf("||%3d - %3d||", mstr->node_parent[i], mstr->node_queue[i]);
-	printf("\n");
 }
 
 void    		ft_print_test(t_master *mstr, int activation)
