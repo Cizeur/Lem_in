@@ -13,59 +13,56 @@
 #include "lem_in.h"
 #include "utils.h"
 
-static void		ft_path_cleaning(t_master *mstr)
+static void		ft_path_cleaning(t_master *mstr, int queue_end)
 {
 	int i;
-	int *node_path;
-	int **mtx;
+	int j;
 
-	mtx = mstr->adjacency_mtx;
-	node_path = mstr->node_path;
-	i = mstr->nodes_nb;
-	while (--i)
+	i = queue_end + 1;
+	j= 0;
+	while(i--)
 	{
-		if (node_path[i] == DISCONNECTED)
-			continue;
-		if (mtx[mtx[node_path[i]][A_PARENT_FLOW]][A_VISITED_FLOW] == i - 1)
-			node_path[i - 1] = mtx[node_path[i]][A_PARENT_FLOW];
-		else
-			node_path[i - 1] = mtx[node_path[i]][A_PARENT_BACKFLOW];
+		if (i == queue_end)
+		{
+			mstr->node_path[j++] = mstr->node_queue[i];
+			queue_end = mstr->node_parents[i];
+		}
 	}
+	queue_end = j -1;
+	j = -1;
+	while(++j <= queue_end / 2)
+		ft_swap(&mstr->node_path[j], &mstr->node_path[queue_end - j]);
 }
 
 static int			ft_check_node(t_master *mstr, int cur_node,
-								int next_node, int queue_pos)
+								int next_node, int queue_pos, int queue_start)
 {
 	int **mtx;
 	int flow;
 	int visited_lvl;
-	int parent;
 
 	mtx = mstr->adjacency_mtx;
-	parent = mtx[cur_node][A_VISITED_BACKFLOW] != DISCONNECTED ?
-		A_PARENT_BACKFLOW : A_PARENT_FLOW;
 	flow = cur_node == mstr->start->node_number
-		|| !(mtx[mtx[cur_node][parent]][A_LOADED]
+		|| !(mtx[mstr->node_queue[mstr->node_parents[queue_start]]][A_LOADED]
 		&& mtx[cur_node][A_LOADED])
 		? F_FLOW : F_BACKFLOW;
 	if (mtx[cur_node][A_LOADED] && flow == F_FLOW && !mtx[next_node][A_LOADED])
+		return (NOPE);
+	if (mtx[cur_node][A_LOADED]
+		&& mtx[next_node][mstr->nodes_nb + A_OPTIONS + cur_node] != ACTIVATED
+		&& mtx[next_node][A_LOADED])
 		return (NOPE);
 	if (mtx[next_node][A_VISITED_BACKFLOW] != DISCONNECTED)
 		return (NOPE);
 	visited_lvl = flow == F_FLOW ? A_VISITED_FLOW : A_VISITED_BACKFLOW;
 	if (mtx[next_node][visited_lvl] == DISCONNECTED)
 	{
-		mtx[next_node][flow == F_FLOW ?
-			A_PARENT_FLOW : A_PARENT_BACKFLOW] = cur_node;
 		mstr->node_queue[queue_pos] = next_node;
-		mtx[next_node][visited_lvl] = ft_max(mtx[cur_node][A_VISITED_FLOW],
-				mtx[cur_node][A_VISITED_BACKFLOW]) + 1;
-		if (mtx[next_node][A_VISITED_FLOW] == DISCONNECTED)
+		mstr->node_parents[queue_pos] = queue_start;
+		mtx[next_node][A_VISITED_FLOW] = 1;
+		if (flow == F_BACKFLOW)
 		{
-			mtx[next_node][A_VISITED_FLOW] =
-			mtx[next_node][visited_lvl];
-			mtx[next_node][A_PARENT_FLOW] =
-			cur_node;
+			mtx[next_node][A_VISITED_BACKFLOW] = 1;
 		}
 		return (SUCCESS);
 	}
@@ -81,15 +78,14 @@ static void		ft_init_stacks(t_master *mstr, int start_node)
 	{
 		mstr->adjacency_mtx[i][A_VISITED_FLOW] = DISCONNECTED;
 		mstr->adjacency_mtx[i][A_VISITED_BACKFLOW] = DISCONNECTED;
-		mstr->adjacency_mtx[i][A_PARENT_BACKFLOW] = DISCONNECTED;
-		mstr->adjacency_mtx[i][A_PARENT_FLOW] = DISCONNECTED;
 	}
 	ft_intset(mstr->node_path, mstr->nodes_nb, DISCONNECTED);
-	ft_intset(mstr->node_queue, 2* mstr->nodes_nb, DISCONNECTED);
+	ft_intset(mstr->node_queue, 2 * mstr->nodes_nb, DISCONNECTED);
+	ft_intset(mstr->node_parents, 2 * mstr->nodes_nb, DISCONNECTED);
 	mstr->node_queue[0] = start_node;
+	mstr->node_parents[0] = start_node;
 	mstr->node_path[0] = start_node;
 	mstr->adjacency_mtx[start_node][A_VISITED_FLOW] = 0;
-	mstr->adjacency_mtx[start_node][A_PARENT_FLOW] = start_node;
 }
 
 int ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node)
@@ -115,17 +111,17 @@ int ft_solver_paths_splitter(t_master *mstr, int cur_node, int end_node)
 			next_node = mtx[cur_node][A_OPTIONS + i];
 			if ( next_node == DISCONNECTED
 				|| next_node == mstr->start->node_number
-				|| next_node == mtx[cur_node][A_PARENT_FLOW]
-				|| mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED)
+				|| mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED
+				|| next_node == mstr->node_queue[mstr->node_parents[queue_start - 1]])
 				continue;
 			if (next_node == end_node)
 			{
-				mtx[end_node][A_PARENT_FLOW] = cur_node;
-				mstr->node_path[mtx[cur_node][A_VISITED_FLOW] + 1] = end_node;
-				ft_path_cleaning(mstr);
+				mstr->node_queue[queue_start] = end_node;
+				mstr->node_parents[queue_start] = queue_start - 1;
+				ft_path_cleaning(mstr, queue_start);
 				return (SUCCESS);
 			}
-			if(ft_check_node(mstr, cur_node, next_node, queue_len + queue_start))
+			if(ft_check_node(mstr, cur_node, next_node, queue_len + queue_start, queue_start - 1))
 				queue_len++;
 		}
 	}

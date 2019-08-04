@@ -77,6 +77,24 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	//		break;
 		printf("%5d", mstr->node_path[i]);
 	}
+	i = -1;
+	printf("\nNode Queue\n");
+	printf("\n");
+	while (++i < 2 * mstr->nodes_nb)
+	{
+		if (mstr->node_path[i] == -1)
+			break;
+		printf("%5d", mstr->node_queue[i]);
+	}
+	i = -1;
+	printf("\nNode Parents\n");
+	printf("\n");
+	while (++i < 2 * mstr->nodes_nb)
+	{
+		if (mstr->node_path[i] == -1)
+			break;
+		printf("%5d", mstr->node_parents[i]);
+	}
 }
 
 void    		ft_print_test(t_master *mstr, int activation)

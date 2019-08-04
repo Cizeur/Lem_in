@@ -49,7 +49,6 @@ void		ft_solver_turn_counter(t_master *mstr, int flow)
 			[mstr->node_path[flow - 1]][A_CURRENT_PATH_LEN] - 1;
 	else
 	{
-		printf("#no turns \n");
 		mstr->end_of_search = CERTAINLY;
 		return ;
 	}
@@ -62,5 +61,4 @@ void		ft_solver_turn_counter(t_master *mstr, int flow)
 		mstr->turn_counter = turns + 1;
 	else
 		mstr->end_of_search = CERTAINLY;
-	printf("#turns %d\n", mstr->turn_counter);
 }

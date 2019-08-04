@@ -34,6 +34,9 @@ static void		ft_alloc_adjancency_matrix(t_master *mstr)
 	if (!(mstr->node_queue = (int *)ft_memalloc(
 			sizeof(int) * (2 * mstr->nodes_nb + 1))))
 		ft_exit(NODE_STACK_MTX);
+	if (!(mstr->node_parents = (int *)ft_memalloc(
+			sizeof(int) * (2 * mstr->nodes_nb + 1))))
+		ft_exit(NODE_STACK_MTX);
 	if (!(mstr->node_path = (int *)ft_memalloc(
 			sizeof(int) * (mstr->nodes_nb + 1))))
 		ft_exit(NODE_STACK_MTX);

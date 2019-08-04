@@ -137,6 +137,20 @@ void			ft_unload_nodes(t_master *mstr)
 	}
 }
 
+
+void			test(t_master *mstr)
+{
+	int i;
+	i = -1;
+	printf("\nNode Path\n");
+	printf("\n");
+	while (++i < mstr->nodes_nb)
+	{
+	if (mstr->node_path[i] == -1)
+			break;
+		printf("%5d", mstr->node_path[i]);
+	}
+}
 int				ft_solver_paths_finder(t_master *mstr, int flow)
 {
 	int i;
@@ -150,18 +164,16 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 		mtx[i][A_PATH_NUMBER] = DISCONNECTED;
 	}
 	mtx[mstr->end->node_number][A_LOADED] = 0;
+//	test(mstr);
+//	printf("\nPATHS\n");
 	i = -1;
 	while (++i < flow)
 	{
 		if (ft_solver_one_path_finder(mstr, mstr->start->node_number,
 					mstr->end->node_number, i) == DEAD_END)
-		{
-			printf("#NOPE %d\n", flow);
 			return (DEAD_END);
-		}
 		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	}
-	printf("#YES %d\n", flow);
 	ft_unload_nodes(mstr);
 	ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	return (SUCCESS);

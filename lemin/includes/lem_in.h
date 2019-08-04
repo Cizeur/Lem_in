@@ -157,6 +157,7 @@ typedef struct	s_master
 	int				**adjacency_mtx;
 	int				*node_queue;
 	int				*node_path;
+	int				*node_parents;
 	int				*stored_solution;
 	t_storage		*storage;
 	t_storage		*storage_start;
