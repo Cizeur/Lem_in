@@ -25,9 +25,9 @@ static void		ft_alloc_adjancency_matrix(t_master *mstr)
 	while (++i < mstr->nodes_nb)
 	{
 		if (!(mtx[i] = (int *)ft_memalloc(
-			sizeof(int) * (3 * (mstr->nodes_nb) + A_OPTIONS))))
+			sizeof(int) * (2 * (mstr->nodes_nb) + A_OPTIONS))))
 			ft_exit(ADJACENCY_MTX);
-		ft_intset(mtx[i], 3 * mstr->nodes_nb + A_OPTIONS, DISCONNECTED);
+		ft_intset(mtx[i], 2 * mstr->nodes_nb + A_OPTIONS, DISCONNECTED);
 		mtx[i][A_LINKS_NB] = 0;
 		mtx[i][A_LOADED] = 0;
 	}
@@ -68,12 +68,10 @@ static void		ft_put_pipe_in_adjancency_matrix(
 	if (mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] != DISCONNECTED)
 		return ;
 	mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] = 1;
-	mtx[node2][2 * mstr->nodes_nb + node1 + A_OPTIONS] = 1;
 	nodes = mtx[node1][A_LINKS_NB];
 	mtx[node1][A_LINKS_NB] += 1;
 	mtx[node1][A_OPTIONS + nodes] = node2;
 	mtx[node2][mstr->nodes_nb + node1 + A_OPTIONS] = 1;
-	mtx[node1][2 * mstr->nodes_nb + node2 + A_OPTIONS] = 1;
 	nodes = mtx[node2][A_LINKS_NB];
 	mtx[node2][A_LINKS_NB] += 1;
 	mtx[node2][A_OPTIONS + nodes] = node1;

@@ -28,7 +28,7 @@ void    ft_print_matrix(t_master *mstr, int activation)
 		printf("\033[0;34m%10.*s : \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->name_len,
 				ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->line);
 		printf ("node : %4d |", i);
-		while (++j < 3 * mstr->nodes_nb + A_OPTIONS)
+		while (++j < 2 * mstr->nodes_nb + A_OPTIONS)
 		{
 
 			if (DEBUG_TRUNC_MATRIX && j >= A_OPTIONS)
