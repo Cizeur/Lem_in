@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/03 14:41:08 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 18:36:49 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 #include "utils.h"
 #include "libft/libft.h"
 
-static void		ft_output_first_lines(t_master *mstr)
+static void		ft_output_first_lines(t_master *mstr, int activation)
 {
 	ft_putstr(mstr->storage_start->entry[0].line);
 	ft_putchar('\n');
+	if (!activation)
+		return;
 	ft_putstr(SO_NODE_NB);
 	ft_putnbr(mstr->nodes_nb);
 	ft_putchar('\n');
@@ -71,7 +73,7 @@ static void		ft_output_pipe(t_master *mstr, t_line_info entry)
 		ft_output_putstr(SO_ACT_PIPE_MK, mstr);
 }
 
-void			ft_output_batch_print(t_storage *storage, t_master *mstr)
+void			ft_output_batch_print(t_storage *storage, t_master *mstr, int activ_visu)
 {
 	int			i;
 	t_line_info entry;
@@ -82,7 +84,7 @@ void			ft_output_batch_print(t_storage *storage, t_master *mstr)
 	{
 		while (++i < BATCH_MALLOC_SIZE && (entry = storage->entry[i]).line)
 		{
-			if (entry.type == PIPE)
+			if (entry.type == PIPE && activ_visu)
 				ft_output_pipe(mstr, entry);
 			ft_output_putstr(storage->entry[i].line, mstr);
 			ft_output_putstr("\n", mstr);
@@ -99,12 +101,9 @@ void			output(t_master *mstr)
 	if (!OUTPUT_ACTIVATED)
 		return ;
 	ft_output_count_inactive_pipes(mstr);
-	ft_output_first_lines(mstr);
-	ft_output_batch_print(mstr->storage_start, mstr);
+	ft_output_first_lines(mstr, OUTPUT_VISU);
+	ft_output_batch_print(mstr->storage_start, mstr, OUTPUT_VISU);
 	ft_output_buffer_flush(mstr);
-	ft_putstr(SO_MVMT_NB);
-	ft_putnbr(mstr->turn_counter);
-	ft_putchar('\n');
 	ft_output_solution(mstr);
 	ft_output_buffer_flush(mstr);
 }

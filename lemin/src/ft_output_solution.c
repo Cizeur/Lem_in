@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 10:34:54 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 14:05:49 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 18:43:38 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ static void		ft_push_one_ant_forward(t_master *mstr, int *cur_cell)
 	if (mtx[cur_cell[A_STORED_SOLUTION]][A_ANT_HIST] != DISCONNECTED
 		&& cur_cell[A_STORED_SOLUTION] != mstr->end->node_number)
 		ft_push_one_ant_forward(mstr, mtx[cur_cell[A_STORED_SOLUTION]]);
+	if (mstr->line_started)
+		ft_output_putstr(" ", mstr);
+	mstr->line_started = CERTAINLY;
 	ft_output_putstr("L", mstr);
 	ft_output_putnbr(cur_cell[A_ANT_HIST], mstr);
 	ft_output_putstr("-", mstr);
 	entry = ft_storage_get_line(mstr->storage_start,
 			mtx[cur_cell[A_STORED_SOLUTION]][A_LINE_INDEX]);
 	ft_output_putnstr(entry->line, entry->name_len, mstr);
-	ft_output_putstr(" ", mstr);
 	mtx[cur_cell[A_STORED_SOLUTION]][A_ANT] = cur_cell[A_ANT_HIST];
 	cur_cell[A_ANT_HIST] = DISCONNECTED;
 }
@@ -79,13 +81,15 @@ static int		ft_load_new_ants(t_master *mstr, int ants, int turns)
 		if (i && mtx[cur_cell][A_STORED_PATH_LEN] > turns)
 			break ;
 		mtx[cur_cell][A_ANT] = ants;
+		if (mstr->line_started)
+			ft_output_putstr(" ", mstr);
+		mstr->line_started = CERTAINLY;
 		ft_output_putstr("L", mstr);
 		ft_output_putnbr(ants, mstr);
 		ft_output_putstr("-", mstr);
 		entry = ft_storage_get_line(mstr->storage_start,
 			mtx[cur_cell][A_LINE_INDEX]);
 		ft_output_putnstr(entry->line, entry->name_len, mstr);
-		ft_output_putstr(" ", mstr);
 		ants++;
 	}
 	return (ants);
@@ -105,6 +109,7 @@ void			ft_output_solution(t_master *mstr)
 	i = -1;
 	while (turns--)
 	{
+		mstr->line_started = NOPE;
 		ft_push_ants_forward(mstr, max_node);
 		ants = ft_load_new_ants(mstr, ants, turns);
 		ft_update_history(mstr, max_node);

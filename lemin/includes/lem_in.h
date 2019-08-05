@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 15:45:24 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 18:42:38 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct	s_master
 	int				end_of_search;
 	int				final_flow;
 	int 			skip;
+	int				line_started;
 	char			output[BATCH_PRINT_SIZE + 1];
 }				t_master;
 

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:24:48 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/05 14:34:10 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 18:50:05 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		ft_solver_turn_counter(t_master *mstr, int flow)
 	int turns;
 
 	ants = mstr->ants_nb;
+	mstr->skip = NOPE;
 	ants = ft_turn_counter_init(mstr, mstr->node_path, flow);
 	if (ants != -1 && !mstr->end_of_search)
 		turns = mstr->adjacency_mtx
@@ -60,5 +61,5 @@ void		ft_solver_turn_counter(t_master *mstr, int flow)
 	if (turns + 1 <= mstr->turn_counter || flow == 1)
 		mstr->turn_counter = turns + 1;
 	else
-		mstr->end_of_search = 1;
+		mstr->end_of_search = CERTAINLY;
 }
