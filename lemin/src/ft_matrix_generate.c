@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/03 16:14:26 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 12:22:00 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,31 @@
 #include "error.h"
 #include "utils.h"
 
-static void		ft_alloc_adjancency_matrix(t_master *mstr)
+static void		ft_alloc_adjancency_matrix(t_master *mstr, int nodes)
 {
 	int i;
 	int **mtx;
+	int malloc_size;
 
 	i = -1;
-	if (!(mtx = (int **)ft_memalloc(sizeof(int *) * mstr->nodes_nb)))
+	malloc_size = mstr->nodes_nb * sizeof(int);
+	if (!(mtx = (int **)ft_memalloc(sizeof(int *) * nodes)))
 		ft_exit(ADJACENCY_MTX);
-	while (++i < mstr->nodes_nb)
+	while (++i < nodes)
 	{
-		if (!(mtx[i] = (int *)ft_memalloc(
-			sizeof(int) * (2 * (mstr->nodes_nb) + A_OPTIONS))))
+		if (!(mtx[i] = (int *)ft_memalloc(sizeof(int)
+				* (2 * nodes + A_OPTIONS))))
 			ft_exit(ADJACENCY_MTX);
-		ft_intset(mtx[i], 2 * mstr->nodes_nb + A_OPTIONS, DISCONNECTED);
+		ft_intset(mtx[i], 2 * nodes + A_OPTIONS, DISCONNECTED);
 		mtx[i][A_LINKS_NB] = 0;
 		mtx[i][A_LOADED] = 0;
 	}
-	if (!(mstr->node_queue = (int *)ft_memalloc(
-			sizeof(int) * (2 * mstr->nodes_nb + 1))))
-		ft_exit(NODE_STACK_MTX);
-	if (!(mstr->node_parents = (int *)ft_memalloc(
-			sizeof(int) * (2 * mstr->nodes_nb + 1))))
-		ft_exit(NODE_STACK_MTX);
-	if (!(mstr->node_path = (int *)ft_memalloc(
-			sizeof(int) * (mstr->nodes_nb + 1))))
-		ft_exit(NODE_STACK_MTX);
-	if (!(mstr->stored_solution = (int *)ft_memalloc(
-			sizeof(int) * (mstr->nodes_nb + 1))))
+	mstr->node_queue = (int *)ft_memalloc(sizeof(int) * (2 * nodes + 1));
+	mstr->node_parents = (int *)ft_memalloc(sizeof(int) * (2 * nodes + 1));
+	mstr->node_path = (int *)ft_memalloc(sizeof(int) * (nodes + 1));
+	mstr->stored_solution = (int *)ft_memalloc(sizeof(int) * (nodes + 1));
+	if (!mstr->node_queue || !mstr->node_parents
+			|| !mstr->node_path || !mstr->stored_solution)
 		ft_exit(NODE_STACK_MTX);
 	mstr->adjacency_mtx = mtx;
 }
@@ -67,11 +64,11 @@ static void		ft_put_pipe_in_adjancency_matrix(
 	mtx = mstr->adjacency_mtx;
 	if (mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] != DISCONNECTED)
 		return ;
-	mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] = 1;
+	mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] = INACTIVE;
 	nodes = mtx[node1][A_LINKS_NB];
 	mtx[node1][A_LINKS_NB] += 1;
 	mtx[node1][A_OPTIONS + nodes] = node2;
-	mtx[node2][mstr->nodes_nb + node1 + A_OPTIONS] = 1;
+	mtx[node2][mstr->nodes_nb + node1 + A_OPTIONS] = INACTIVE;
 	nodes = mtx[node2][A_LINKS_NB];
 	mtx[node2][A_LINKS_NB] += 1;
 	mtx[node2][A_OPTIONS + nodes] = node1;
@@ -84,7 +81,7 @@ void			ft_matrix_generate(t_master *mstr, t_storage *storage)
 	t_line_info	*entry;
 
 	ind = -1;
-	ft_alloc_adjancency_matrix(mstr);
+	ft_alloc_adjancency_matrix(mstr, mstr->nodes_nb);
 	while (++ind < mstr->lines_nb)
 	{
 		reduc_ind = ind % BATCH_MALLOC_SIZE;

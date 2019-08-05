@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:19:22 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/03 14:54:13 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 12:06:27 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,11 @@ void		ft_solver_paths_sort(t_master *mstr, int flow, int *extracted)
 			i = -1;
 		}
 	}
+}
+
+void		ft_solver_paths(t_master *mstr, int flow)
+{
+	ft_solver_paths_get_starts(mstr, mstr->nodes_nb, mstr->node_path);
+	ft_solver_paths_get_len(mstr, flow, mstr->node_path);
+	ft_solver_paths_sort(mstr, flow, mstr->node_path);
 }
