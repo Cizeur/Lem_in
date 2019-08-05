@@ -42,7 +42,7 @@ void			solver(t_master *mstr)
 		ft_solver_paths_shortener(mstr, flow);
 		ft_solver_paths(mstr, flow);
 		ft_solver_turn_counter(mstr, flow);
-		if (!mstr->end_of_search | mstr->skip)
+		if (!mstr->end_of_search && !mstr->skip)
 			ft_solver_solution_store(mstr, mstr->nodes_nb, flow);
 	}
 	if (!mstr->final_flow)

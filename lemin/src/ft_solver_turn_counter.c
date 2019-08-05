@@ -61,5 +61,5 @@ void		ft_solver_turn_counter(t_master *mstr, int flow)
 	if (turns + 1 <= mstr->turn_counter || flow == 1)
 		mstr->turn_counter = turns + 1;
 	else
-		mstr->end_of_search = CERTAINLY;
+		mstr->skip = CERTAINLY;
 }
