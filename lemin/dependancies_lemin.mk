@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/03 14:34:49 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/05 12:14:35 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,11 @@ SRC_LEMIN =  \
 	solver.c\
 	ft_matrix_generate.c\
 	ft_matrix_popping.c\
-	ft_matrix_find_node.c\
+	ft_matrix_reset_state.c\
 	main.c\
 	ft_dico_add.c\
 	ft_dico_get.c\
 	ft_dico_hasher_djb2.c\
-	ft_solution_print.c\
 	ft_solver_paths.c\
 	ft_solver_turn_counter.c\
 	ft_solver_solution_store.c\
@@ -59,7 +58,7 @@ SRC_LEMIN =  \
 	ft_output_count_inactive_pipes.c\
 	ft_output_buffer.c\
 	ft_solver_path_splitter.c\
-	ft_solver_paths_finder.c
+	ft_solver_paths_finder.c\
 	
 
 SRC_LEMIN += \
