@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 08:31:11 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 14:50:36 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 14:08:11 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void		ft_solver_solution_store(t_master *mstr, int max_nodes, int flow)
 	i = -1;
 	while (++i < flow)
 		mstr->stored_solution[i] = mstr->node_path[i];
+	printf("#flow : %d and turns %d\n", flow, mstr->turn_counter);
 }

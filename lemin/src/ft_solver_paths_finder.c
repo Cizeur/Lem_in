@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 10:24:33 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 15:01:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ static int		ft_is_possible_next(t_master *mstr, int cur_node,
 	int **mtx;
 
 	mtx = mstr->adjacency_mtx;
-	if (mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED
-		|| next_node == mstr->start->node_number
+	if (mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED)
+		return (NOPE);
+	if (next_node == mstr->start->node_number
 		|| next_node == mtx[cur_node][A_PARENT_FLOW]
 		|| mtx[next_node][A_LOADED_FINDER]
 		|| next_node == DISCONNECTED)
@@ -80,7 +81,7 @@ static void		ft_init_stacks(t_master *mstr, int start_node, int *queue)
 	queue[0] = 0;
 }
 
-int				ft_solver_one_path_finder(t_master *mstr, int **mtx,
+static int			ft_solver_one_path_finder(t_master *mstr, int **mtx,
 			int cur_node, int path_number)
 {
 	int next_node;
@@ -117,6 +118,7 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 	{
 		mtx[i][A_LOADED_FINDER] = NOPE;
 		mtx[i][A_PATH_NUMBER] = DISCONNECTED;
+		mtx[i][A_CURRENT_SOLUTION] = DISCONNECTED;
 	}
 	mtx[mstr->end->node_number][A_LOADED] = 0;
 	i = -1;
@@ -124,7 +126,8 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 	{
 		if (ft_solver_one_path_finder(mstr, mtx,
 				mstr->start->node_number, i) == DEAD_END)
-			return (DEAD_END);
+			ft_exit(DEAD_END_ON_SOLUTION);
+		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	}
 	return (SUCCESS);
 }

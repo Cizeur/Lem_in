@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 12:14:11 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 13:48:26 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 */
 # define NOPE 0
 # define CERTAINLY 1
+# define CONFIRMED 2
 /*
 ** DFS DEFINE
 */
@@ -169,6 +170,7 @@ typedef struct	s_master
 	int				turn_counter;
 	int				end_of_search;
 	int				final_flow;
+	int 			skip;
 	char			output[BATCH_PRINT_SIZE + 1];
 }				t_master;
 
@@ -205,6 +207,7 @@ void				ft_solution_print(t_master *mstr);
 
 int 				ft_solver_paths_splitter(t_master *mstr, int **mtx, int cur_node, int end_node);
 int					ft_solver_paths_finder(t_master *mstr, int flow);
+int					ft_solver_paths_shortener(t_master *mstr, int flow);
 void				ft_solver_paths(t_master *mstr, int flow);
 void				ft_solver_turn_counter(t_master *mstr, int flow);
 void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow);
