@@ -18,7 +18,7 @@
  */
 
 # define OUTPUT_ACTIVATED 1
-# define OUTPUT_VISU 0
+# define OUTPUT_VISU 1
 # define SO_NODE_NB "# number of nodes            = "
 # define SO_PIPE_NB "# number of pipes            = "
 # define SO_INACT_PIPE_NB "# number of inactive pipes   = "
