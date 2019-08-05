@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 12:16:41 by cgiron            #+#    #+#              #
-#    Updated: 2019/07/31 13:49:04 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/05 08:49:48 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,11 @@ all : $(NAME)
 STD_DEPENDANCY := $(DEPENDANCIES_LIBFT_EXPORT)
 
 $(NAME_LEMIN) : $(DEPENDANCIES_LEMIN_EXPORT) $(STD_DEPENDANCY)
+	$(MAKE) -C $(L_LIBFT_DIR) --no-print-directory
 	$(MAKE) -C $(L_LEMIN_DIR) $(L_NAME) --no-print-directory
 
 $(NAME_VISU) : $(DEPENDANCIES_VISU_EXPORT) $(STD_DEPENDANCY)
+	$(MAKE) -C $(L_LIBFT_DIR) --no-print-directory
 	$(MAKE)  -C $(L_VISU_DIR) $(V_NAME) --no-print-directory
 
 clean:
