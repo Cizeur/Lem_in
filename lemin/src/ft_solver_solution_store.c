@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 08:31:11 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 14:08:11 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 15:50:19 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void		ft_solver_solution_store(t_master *mstr, int max_nodes, int flow)
 	mstr->final_flow = flow;
 	while (++i < max_nodes)
 	{
+		mtx[i][A_STORED_SOLUTION_START] = mtx[i][A_SOLUTION_START];
 		mtx[i][A_STORED_PATH_LEN] = mtx[i][A_CURRENT_PATH_LEN];
 		mtx[i][A_STORED_SOLUTION] = mtx[i][A_CURRENT_SOLUTION];
 		mtx[i][A_CURRENT_PATH_LEN] = DISCONNECTED;

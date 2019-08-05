@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 15:01:59 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/05 17:24:00 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 		mtx[i][A_LOADED_FINDER] = NOPE;
 		mtx[i][A_PATH_NUMBER] = DISCONNECTED;
 		mtx[i][A_CURRENT_SOLUTION] = DISCONNECTED;
+		mtx[i][A_CURRENT_PATH_LEN] = DISCONNECTED;
+		mtx[i][A_SOLUTION_START] = DISCONNECTED;
 	}
 	mtx[mstr->end->node_number][A_LOADED] = 0;
 	i = -1;
