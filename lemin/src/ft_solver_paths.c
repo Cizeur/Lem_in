@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:19:22 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/05 16:23:37 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 11:25:18 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static int	ft_get_path_len(int **mtx, int cur_node, int end_node)
 	path_len = 1;
 	while (cur_node != end_node)
 	{
-		if (cur_node == DISCONNECTED)
-			return (DEACTIVATED);
 		cur_node = mtx[cur_node][A_CURRENT_SOLUTION];
 		path_len++;
 	}
@@ -63,8 +61,6 @@ void		ft_solver_paths_get_len(t_master *mstr, int flow, int *extracted)
 		}
 		mtx[extracted[i]][A_CURRENT_PATH_LEN] =
 			ft_get_path_len(mtx, extracted[i], mstr->end->node_number);
-		if (mtx[extracted[i]][A_CURRENT_PATH_LEN] == DEACTIVATED)
-			mstr->end_of_search = 1;
 	}
 }
 

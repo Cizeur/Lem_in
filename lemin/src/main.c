@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:46:04 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 12:02:08 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 int			main(int argc, char **argv)
 {
 	t_master *mstr;
+	int start;
+	int end;
 
 	argc--;
 	argv++;
@@ -24,6 +26,10 @@ int			main(int argc, char **argv)
 		ft_exit(FAIL_MALLOC_MSTR, mstr);
 	ft_init_mstr(mstr);
 	parser(mstr);
+	start = mstr->start->node_number;
+	end = mstr->end->node_number;
+	if (mstr->adjacency_mtx[start][A_OPTIONS + mstr->nodes + end] != DISCONNECTED)
+		output_start_end(mstr);
 	solver(mstr);
 	output(mstr);
 	return (0);

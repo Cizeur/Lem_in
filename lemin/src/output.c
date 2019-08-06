@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/06 11:11:55 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 12:00:22 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void		ft_output_pipe(t_master *mstr, t_line_info entry)
 		ft_output_putstr(SO_ACT_PIPE_MK, mstr);
 }
 
-void			ft_output_batch_print(t_storage *storage, t_master *mstr,
+static void			ft_output_batch_print(t_storage *storage, t_master *mstr,
 							int activ_visu)
 {
 	int			i;
