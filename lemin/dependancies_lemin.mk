@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/06 11:59:15 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/06 16:18:48 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,8 @@ SRC_LEMIN =  \
 	ft_solver_path_splitter.c\
 	ft_solver_paths_finder.c\
 	ft_solver_paths_shortener.c\
-	
+	ft_free_everything.c
 
-#SRC_LEMIN += \
-			 debug_print.c
 
 INC_LEMIN					:= lem_in.h\
 							error.h\
@@ -75,10 +73,6 @@ INC_LEMIN					:= lem_in.h\
 DEPENDANCIES_LEMIN_O		:= Makefile ./dependancies_$(L_LEMIN_DIR).mk\
 								 ./dependancies_$(L_LEMIN_DIR)_object.mk\
 								 ../shared_val.mk
-
-
-DEPENDANCIES_LEMIN_O		+= ./includes/*.h
-
 
 DEPENDANCIES_LEMIN			:= $(DEPENDANCIES_LEMIN_O) \
  								$(addprefix ../,$(DEPENDANCIES_LIBFT_EXPORT))
