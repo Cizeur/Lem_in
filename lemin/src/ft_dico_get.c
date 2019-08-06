@@ -6,14 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:28:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:23:27 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:40:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
 
-int			ft_dico_get(t_storage *storage_start, t_hash_dico *dico,
+int			ft_dico_get(t_master *mstr, t_hash_dico *dico,
 					char *needle, int len)
 {
 	t_bucket	*dico_entry;
@@ -26,7 +26,7 @@ int			ft_dico_get(t_storage *storage_start, t_hash_dico *dico,
 		return (-1);
 	while (dico_entry)
 	{
-		cmp_line = ft_storage_get_line(storage_start, dico_entry->line_index);
+		cmp_line = ft_storage_get_line(mstr, dico_entry->line_index);
 		if (len == cmp_line->name_len &&
 			!ft_strncmp(needle, cmp_line->line, cmp_line->name_len))
 			return (cmp_line->line_index);

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 18:48:54 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:44:54 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void			solver(t_master *mstr)
 				mstr->start->node_number, mstr->end->node_number)))
 			break ;
 		ft_matrix_popping(mstr->nodes, mstr->adjacency_mtx, mstr->node_path);
-		if (!(ft_solver_paths_finder(mstr, ++flow)))
-			break ;
+		ft_solver_paths_finder(mstr, ++flow);
 		ft_matrix_reset_state(mstr);
 		ft_solver_paths_shortener(mstr, flow);
 		ft_solver_paths(mstr, flow);
@@ -46,5 +45,5 @@ void			solver(t_master *mstr)
 			ft_solver_solution_store(mstr, mstr->nodes, flow);
 	}
 	if (!mstr->final_flow)
-		ft_exit(NOT_CONNECTED);
+		ft_exit(NOT_CONNECTED, mstr);
 }

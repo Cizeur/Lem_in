@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 14:45:26 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:33:56 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void		parser(t_master *mstr)
 		line = NULL;
 	}
 	if (r == -1)
-		ft_exit(FAIL_ON_READ);
+		ft_exit(FAIL_ON_READ, mstr);
 	if (!mstr->start || !mstr->end)
-		ft_exit(START_OR_END_MISSING);
+		ft_exit(START_OR_END_MISSING, mstr);
 	ft_matrix_generate(mstr, mstr->storage_start);
 }

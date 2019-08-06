@@ -6,14 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:28:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 14:02:21 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:47:28 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_bucket	ft_dico_check_double_inc(t_storage *storage_start,
-				t_hash_dico *dico, t_line_info *entry)
+static t_bucket	ft_dico_check_double_inc(t_master *mstr,
+					t_hash_dico *dico, t_line_info *entry)
 {
 	t_bucket	*dico_entry;
 	t_bucket	*bucket;
@@ -24,31 +24,33 @@ static t_bucket	ft_dico_check_double_inc(t_storage *storage_start,
 	bucket = dico_entry;
 	while (bucket)
 	{
-		cmp_line = ft_storage_get_line(storage_start, bucket->line_index);
+		cmp_line = ft_storage_get_line(mstr, bucket->line_index);
 		if (entry->name_len == cmp_line->name_len &&
 			!ft_strncmp(entry->line, cmp_line->line, cmp_line->name_len))
-			ft_exit(FAIL_REPEAT_ENTRY);
+			ft_exit(FAIL_REPEAT_ENTRY, mstr);
 		tmp = bucket;
 		bucket = bucket->next;
 	}
 	if (!(bucket = (t_bucket *)ft_memalloc(sizeof(t_bucket))))
-		ft_exit(FAIL_MALLOC_DIC);
+		ft_exit(FAIL_MALLOC_DIC, mstr);
 	tmp->next = bucket;
 	bucket->line_index = entry->line_index;
 	return (*dico_entry);
 }
 
-void			ft_dico_add(t_storage *storage_start, t_hash_dico *dico,
+void			ft_dico_add(t_master *mstr, t_hash_dico *dico,
 					t_line_info *entry)
 {
-	t_bucket dico_entry;
+	t_bucket	dico_entry;
+	t_storage	*storage_start;
 
+	storage_start = mstr->storage_start;
 	dico_entry = dico->dico_list[entry->hash_key];
 	if (!dico_entry.line_index)
 		dico_entry.line_index = entry->line_index;
 	else
 	{
-		dico_entry = ft_dico_check_double_inc(storage_start, dico, entry);
+		dico_entry = ft_dico_check_double_inc(mstr, dico, entry);
 		dico->collisions++;
 	}
 	dico->dico_list[entry->hash_key] = dico_entry;

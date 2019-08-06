@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:13:16 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:53:20 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,19 +170,23 @@ typedef struct	s_master
 	int				turn_counter;
 	int				end_of_search;
 	int				final_flow;
-	int 			skip;
+	int				skip;
 	int				line_started;
 	char			output[BATCH_PRINT_SIZE + 1];
+	int				output_type;
 }				t_master;
 
-void 				ft_init_mstr(t_master *mstr);
-void				ft_exit(t_errors error);
 
-int					ft_dico_hasher_djb2(char *str, char *end, int amplitude);
+void				ft_init_mstr(t_master *mstr);
+void				ft_exit(t_errors error, t_master *mstr);
 
 //
 #include "debug.h"
 //
+
+/*
+** PARSER PROTOTYPES
+*/
 
 void				parser(t_master *mstr);
 char				*ft_parser_ants_get(t_master *mstr);
@@ -194,32 +198,53 @@ void				ft_parser_fill_entry_node(t_master *mstr, char *line,
 void				ft_parser_fill_entry_pipe(t_master *mstr, char *line,
 						t_line_info *entry);
 void				ft_parser_apply_command(t_master *mstr, t_line_info *entry);
-void				ft_storage_grow(t_master *mstr);
-t_ln_type 			ft_storage_add_line(char *line, t_master *mstr);
-t_line_info			*ft_storage_get_line(t_storage *storage_start, int line_nb);
-void				ft_dico_add(t_storage *storage_start, t_hash_dico *dico,t_line_info *entry);
-int					ft_dico_get(t_storage *storage_start, t_hash_dico *dico, char *needle, int len);
 
-void				solver(t_master *mstr);
+/*
+** STORAGE PROTOTYPES
+*/
+
+void				ft_storage_grow(t_master *mstr);
+t_ln_type			ft_storage_add_line(char *line, t_master *mstr);
+t_line_info			*ft_storage_get_line(t_master *mstr, int line_nb);
+void				ft_dico_add(t_master *mstr,
+									t_hash_dico *dico,t_line_info *entry);
+int					ft_dico_get(t_master *mstr,
+									t_hash_dico *dico, char *needle, int len);
+
+/*
+** MATRIX PROTOTYPES
+*/
+
 void				ft_matrix_popping(int max_nodes, int **mtx, int *node_path);
 void				ft_matrix_reset_state(t_master *mstr);
+void				ft_matrix_reset_one_path(t_master *mstr, int path);
 void				ft_matrix_generate(t_master *mstr, t_storage *storage);
 void				ft_solution_print(t_master *mstr);
 
-int 				ft_solver_paths_splitter(t_master *mstr, int **mtx, int cur_node, int end_node);
-int					ft_solver_paths_finder(t_master *mstr, int flow);
-int					ft_solver_paths_shortener(t_master *mstr, int flow);
+/*
+** SOLVER PROTOTYPES
+*/
+
+void				solver(t_master *mstr);
+int					ft_solver_paths_splitter(t_master *mstr,
+								int **mtx, int cur_node, int end_node);
+void				ft_solver_paths_finder(t_master *mstr, int flow);
+void				ft_solver_paths_shortener(t_master *mstr, int flow);
 void				ft_solver_paths(t_master *mstr, int flow);
 void				ft_solver_turn_counter(t_master *mstr, int flow);
-void				ft_solver_solution_store(t_master *mstr, int max_nodes, int flow);
+void				ft_solver_solution_store(t_master *mstr,
+								int max_nodes, int flow);
 
+/*
+** OUTPUT PROTOTYPES
+*/
 
+void				output(t_master *mstr);
 void				ft_output_solution(t_master *mstr);
 void				ft_output_count_inactive_pipes(t_master *mstr);
 void				ft_output_putstr(char *str, t_master *mstr);
-void				ft_output_putnstr(char *str, int n ,t_master *mstr);
-void    			ft_output_putnbr(int n, t_master *mstr);
+void				ft_output_putnstr(char *str, int n, t_master *mstr);
+void				ft_output_putnbr(int n, t_master *mstr);
 void				ft_output_buffer_flush(t_master *mstr);
-void				output(t_master *mstr);
 
 #endif

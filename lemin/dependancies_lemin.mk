@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/05 13:15:44 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/06 10:19:01 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_LEMIN =  \
 	solver.c\
 	ft_matrix_generate.c\
 	ft_matrix_popping.c\
+	ft_matrix_reset_one_path.c\
 	ft_matrix_reset_state.c\
 	main.c\
 	ft_dico_add.c\
@@ -62,7 +63,7 @@ SRC_LEMIN =  \
 	ft_solver_paths_shortener.c\
 	
 
-SRC_LEMIN += \
+#SRC_LEMIN += \
 			 debug_print.c
 
 INC_LEMIN					:= lem_in.h\

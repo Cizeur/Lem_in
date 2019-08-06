@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 10:34:54 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 18:43:38 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:48:01 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		ft_push_one_ant_forward(t_master *mstr, int *cur_cell)
 	ft_output_putstr("L", mstr);
 	ft_output_putnbr(cur_cell[A_ANT_HIST], mstr);
 	ft_output_putstr("-", mstr);
-	entry = ft_storage_get_line(mstr->storage_start,
+	entry = ft_storage_get_line(mstr,
 			mtx[cur_cell[A_STORED_SOLUTION]][A_LINE_INDEX]);
 	ft_output_putnstr(entry->line, entry->name_len, mstr);
 	mtx[cur_cell[A_STORED_SOLUTION]][A_ANT] = cur_cell[A_ANT_HIST];
@@ -87,7 +87,7 @@ static int		ft_load_new_ants(t_master *mstr, int ants, int turns)
 		ft_output_putstr("L", mstr);
 		ft_output_putnbr(ants, mstr);
 		ft_output_putstr("-", mstr);
-		entry = ft_storage_get_line(mstr->storage_start,
+		entry = ft_storage_get_line(mstr,
 			mtx[cur_cell][A_LINE_INDEX]);
 		ft_output_putnstr(entry->line, entry->name_len, mstr);
 		ants++;

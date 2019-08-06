@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 10:22:03 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:46:04 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			main(int argc, char **argv)
 	argc--;
 	argv++;
 	if (!(mstr = (t_master *)ft_memalloc(sizeof(t_master))))
-		ft_exit(FAIL_MALLOC_MSTR);
+		ft_exit(FAIL_MALLOC_MSTR, mstr);
 	ft_init_mstr(mstr);
 	parser(mstr);
 	solver(mstr);

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/05 12:22:00 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:45:52 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void		ft_alloc_adjancency_matrix(t_master *mstr, int nodes)
 	i = -1;
 	malloc_size = mstr->nodes * sizeof(int);
 	if (!(mtx = (int **)ft_memalloc(sizeof(int *) * nodes)))
-		ft_exit(ADJACENCY_MTX);
+		ft_exit(ADJACENCY_MTX, mstr);
 	while (++i < nodes)
 	{
 		if (!(mtx[i] = (int *)ft_memalloc(sizeof(int)
 				* (2 * nodes + A_OPTIONS))))
-			ft_exit(ADJACENCY_MTX);
+			ft_exit(ADJACENCY_MTX, mstr);
 		ft_intset(mtx[i], 2 * nodes + A_OPTIONS, DISCONNECTED);
 		mtx[i][A_LINKS_NB] = 0;
 		mtx[i][A_LOADED] = 0;
@@ -39,7 +39,7 @@ static void		ft_alloc_adjancency_matrix(t_master *mstr, int nodes)
 	mstr->stored_solution = (int *)ft_memalloc(sizeof(int) * (nodes + 1));
 	if (!mstr->node_queue || !mstr->node_parents
 			|| !mstr->node_path || !mstr->stored_solution)
-		ft_exit(NODE_STACK_MTX);
+		ft_exit(NODE_STACK_MTX, mstr);
 	mstr->adjacency_mtx = mtx;
 }
 
@@ -52,7 +52,7 @@ static void		ft_put_line_index_to_adjancency_matrix(
 	if (mtx[node_number][A_LINE_INDEX] == DISCONNECTED)
 		mtx[node_number][A_LINE_INDEX] = line_index;
 	else if (mtx[node_number][A_LINE_INDEX] != line_index)
-		ft_exit(ADJACENCY_MTX);
+		ft_exit(ADJACENCY_MTX, mstr);
 }
 
 static void		ft_put_pipe_in_adjancency_matrix(
@@ -88,7 +88,7 @@ void			ft_matrix_generate(t_master *mstr, t_storage *storage)
 		if (!reduc_ind && ind)
 			storage = storage->next;
 		if (!storage)
-			ft_exit(ERROR_STORAGE);
+			ft_exit(ERROR_STORAGE, mstr);
 		entry = &(storage->entry[reduc_ind]);
 		if (entry)
 		{

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/05 18:36:49 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:58:35 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void		ft_output_first_lines(t_master *mstr, int activation)
 {
 	ft_putstr(mstr->storage_start->entry[0].line);
 	ft_putchar('\n');
-	if (!activation)
-		return;
+	if (activation != OUTPUT_VISU)
+		return ;
 	ft_putstr(SO_NODE_NB);
 	ft_putnbr(mstr->nodes);
 	ft_putchar('\n');
@@ -73,7 +73,8 @@ static void		ft_output_pipe(t_master *mstr, t_line_info entry)
 		ft_output_putstr(SO_ACT_PIPE_MK, mstr);
 }
 
-void			ft_output_batch_print(t_storage *storage, t_master *mstr, int activ_visu)
+void			ft_output_batch_print(t_storage *storage, t_master *mstr,
+							int activ_visu)
 {
 	int			i;
 	t_line_info entry;
@@ -84,7 +85,7 @@ void			ft_output_batch_print(t_storage *storage, t_master *mstr, int activ_visu)
 	{
 		while (++i < BATCH_MALLOC_SIZE && (entry = storage->entry[i]).line)
 		{
-			if (entry.type == PIPE && activ_visu)
+			if (entry.type == PIPE && activ_visu == OUTPUT_VISU)
 				ft_output_pipe(mstr, entry);
 			ft_output_putstr(storage->entry[i].line, mstr);
 			ft_output_putstr("\n", mstr);
@@ -98,11 +99,11 @@ void			output(t_master *mstr)
 {
 	mstr->buffer_pos = 0;
 	ft_bzero(mstr->output, BATCH_PRINT_SIZE + 1);
-	if (!OUTPUT_ACTIVATED)
+	if (mstr->output_type == OUTPUT_DEACTIVATED)
 		return ;
 	ft_output_count_inactive_pipes(mstr);
-	ft_output_first_lines(mstr, OUTPUT_VISU);
-	ft_output_batch_print(mstr->storage_start, mstr, OUTPUT_VISU);
+	ft_output_first_lines(mstr, mstr->output_type);
+	ft_output_batch_print(mstr->storage_start, mstr, mstr->output_type);
 	ft_output_buffer_flush(mstr);
 	ft_output_solution(mstr);
 	ft_output_buffer_flush(mstr);

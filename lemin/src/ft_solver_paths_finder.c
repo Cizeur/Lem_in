@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:24:08 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:48:17 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static int		ft_solver_one_path_finder(t_master *mstr, int **mtx,
 	return (DEAD_END);
 }
 
-int				ft_solver_paths_finder(t_master *mstr, int flow)
+void			ft_solver_paths_finder(t_master *mstr, int flow)
 {
 	int i;
 	int **mtx;
@@ -128,7 +128,6 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 	{
 		if (ft_solver_one_path_finder(mstr, mtx,
 				mstr->start->node_number, i) == DEAD_END)
-			ft_exit(DEAD_END_ON_SOLUTION);
+			ft_exit(DEAD_END_ON_SOLUTION, mstr);
 	}
-	return (SUCCESS);
 }

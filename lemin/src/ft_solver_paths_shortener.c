@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:16:42 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:44:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 
 static void	ft_path_cleaning(t_master *mstr, int path_number,
-							 int cur_node, int end_node)
+							int cur_node, int end_node)
 {
 	int i;
 	int *node_path;
@@ -31,7 +31,6 @@ static void	ft_path_cleaning(t_master *mstr, int path_number,
 			continue;
 		node_path[i - 1] = mtx[node_path[i]][A_PARENT_FLOW];
 	}
-	i = 0;
 	mtx[node_path[1]][A_SOLUTION_START] = CERTAINLY;
 	while (node_path[++i + 1] != DISCONNECTED)
 	{
@@ -110,7 +109,7 @@ static int	ft_solver_one_path_shorten(t_master *mstr, int **mtx,
 	return (DEAD_END);
 }
 
-int ft_solver_paths_shortener(t_master *mstr, int flow)
+void		ft_solver_paths_shortener(t_master *mstr, int flow)
 {
 	int i;
 	int **mtx;
@@ -124,7 +123,6 @@ int ft_solver_paths_shortener(t_master *mstr, int flow)
 		ft_matrix_reset_one_path(mstr, i);
 		if (ft_solver_one_path_shorten(mstr, mtx,
 			mstr->start->node_number, i) == DEAD_END)
-			ft_exit(DEAD_END_ON_SOLUTION);
+			ft_exit(DEAD_END_ON_SOLUTION, mstr);
 	}
-	return(SUCCESS);
 }
