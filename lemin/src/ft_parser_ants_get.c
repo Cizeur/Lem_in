@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 15:43:23 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:34:38 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 12:40:39 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 #include "utils.h"
 #include "lem_in.h"
 
-char		*ft_parser_ants_get(t_master *mstr)
+void		ft_parser_ants_get(t_master *mstr, char *line)
 {
-	char	*line;
 	int		i;
 
-	if (get_next_line(0, &line) <= 0)
-		ft_exit(EMPTY_FILE, mstr);
 	i = 0;
 	while (line[i] && ft_isdigit(line[i]))
 		i++;
@@ -31,5 +28,4 @@ char		*ft_parser_ants_get(t_master *mstr)
 		ft_exit(ANT_NOT_NB_ONLY, mstr);
 	if ((mstr->ants = ft_atoi(line)) <= 0)
 		ft_exit(NO_ANTS, mstr);
-	return (line);
 }

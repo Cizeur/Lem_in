@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/06 12:05:12 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 13:48:51 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,14 @@ void			output_start_end(t_master *mstr)
 {
 	mstr->buffer_pos = 0;
 	ft_bzero(mstr->output, BATCH_PRINT_SIZE + 1);
-	if (mstr->output_type == OUTPUT_DEACTIVATED)
-		return ;
-	ft_output_count_inactive_pipes(mstr);
-	ft_output_first_lines(mstr, mstr->output_type);
-	ft_output_batch_print(mstr->storage_start, mstr, mstr->output_type);
-	ft_output_buffer_flush(mstr);
-	ft_output_solution_start_end(mstr);
-	ft_output_buffer_flush(mstr);
+	if (mstr->output_type != OUTPUT_DEACTIVATED)
+	{
+		ft_output_count_inactive_pipes(mstr);
+		ft_output_first_lines(mstr, mstr->output_type);
+		ft_output_batch_print(mstr->storage_start, mstr, mstr->output_type);
+		ft_output_buffer_flush(mstr);
+		ft_output_solution_start_end(mstr);
+		ft_output_buffer_flush(mstr);
+	}
 	ft_exit(STANDARD, mstr);
 }

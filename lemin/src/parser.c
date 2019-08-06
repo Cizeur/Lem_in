@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:33:56 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:10:37 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ void		parser(t_master *mstr)
 	int			r;
 	t_ln_type	line_type;
 
-	line = ft_parser_ants_get(mstr);
+	line_type = COMMENT;
 	mstr->storage_start = mstr->storage;
-	line_type = ft_storage_add_line(line, mstr);
-	line = NULL;
-	while ((r = get_next_line(0, &line)) > 0
-			&& line_type != END_OF_READ)
+	while ((r = get_next_line(0, &line)) > 0)
 	{
 		line_type = ft_storage_add_line(line, mstr);
 		line = NULL;
+		if (line_type == END_OF_READ)
+			ft_exit(INVALID_LINE, mstr);
 	}
 	if (r == -1)
 		ft_exit(FAIL_ON_READ, mstr);

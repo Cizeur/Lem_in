@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 11:59:39 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:01:19 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@
 
 typedef enum	e_ln_type
 {
-	END_OF_READ, ERROR, START, END, NODE, PIPE, COMMENT, ANTS_NB
+	END_OF_READ, ANTS, ERROR, START, END, NODE, PIPE, COMMENT, ANTS_NB
 }				t_ln_type;
 
 
@@ -185,7 +185,7 @@ void			ft_exit(t_errors error, t_master *mstr);
 */
 
 void			parser(t_master *mstr);
-char			*ft_parser_ants_get(t_master *mstr);
+void			ft_parser_ants_get(t_master *mstr, char *line);
 t_ln_type		ft_parser_check_node(char *line, t_ln_type type);
 t_ln_type		ft_parser_check_pipe(char *line, t_ln_type type);
 t_ln_type		ft_parser_line_type(char *line, int piping);
