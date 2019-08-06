@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:21:26 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:27:30 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void				render_texture(t_master *mstr,
 ***		PRINT -> ALL OF THEM USE PRINTF AND ARE NOT WORKING
 */
 
-int					print(t_master *mstr, int ac, char **av);
+void				print(t_master *mstr, int ac, char **av);
 void				ft_print_parameters(t_master *mstr);
 void				ft_print_nodes(t_master *mstr);
 void				ft_print_pipes(t_master *mstr);
@@ -189,7 +189,7 @@ int					ft_str_isdigit(char *line);
 ***		ERROR EXIT AND CLOSE PROGRAM
 */
 
-int					ft_exit(t_master *mstr, t_errors error);
+void				ft_exit(t_master *mstr, t_errors error);
 void				close_program(t_master *mstr, int program_state);
 
 #endif

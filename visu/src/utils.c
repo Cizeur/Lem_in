@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/27 18:30:00 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:02:44 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:28:35 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int		ft_get_index_node(t_master *mstr, char *name)
 			return (i);
 		i++;
 	}
-	return (ft_exit(mstr, INVALID_NAME));
+	ft_exit(mstr, INVALID_NAME);
+	return (FALSE);
 }
