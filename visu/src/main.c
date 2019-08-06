@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:46:26 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 17:04:52 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:10:37 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ int		main(int ac, char **av)
 	(void)av;
 	if (!(mstr = (t_master*)ft_memalloc(sizeof(t_master))))
 		ft_exit(mstr, ERROR_MALLOC);
-	if (parser(mstr) == FALSE)
-		return (FALSE);
-	if (visual(mstr) == FALSE)
-		return (FALSE);
+	parser(mstr);
+	vs_init(mstr);
+	vs_load(mstr);
+	vs_run(mstr);
+	close_program(mstr, VISU_FINISHED);
+}
+
 	// if (print(mstr, ac, av) == FALSE)
 	// 	return (FALSE);
-	if (close_program(mstr) == FALSE)
-		return (FALSE);
-	return (TRUE);
-}

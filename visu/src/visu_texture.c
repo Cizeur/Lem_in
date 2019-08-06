@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 11:45:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 18:49:27 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:19:18 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		load_texture_from_file(t_master *mstr, t_texture *texture, char *path)
 	return (TRUE);
 }
 
-int		render_texture(t_master *mstr, t_texture *texture, int x, int y)
+void	render_texture(t_master *mstr, t_texture *texture, int x, int y)
 {
 	SDL_Rect	render_quad;
 
@@ -79,6 +79,5 @@ int		render_texture(t_master *mstr, t_texture *texture, int x, int y)
 	render_quad.h = texture->height;
 	if (SDL_RenderCopy(mstr->render, texture->texture, NULL, &render_quad)
 	== FALSE)
-		return (ft_exit(mstr, RENDER_VISU));
-	return (TRUE);
+		ft_exit(mstr, RENDER_VISU);
 }

@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:55:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 17:20:09 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:24:32 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,13 @@ void	free_moves(t_master *mstr)
 			{
 				free(current);
 				current = next;
-				next = current->next;
+				if (current != NULL)
+					next = current->next;
 			}
 			i++;
 		}
-		free(mstr->moves_array[i]);
+		if (mstr->moves_array[i])
+			free(mstr->moves_array[i]);
 		free(mstr->moves_array);
 	}
 }
@@ -110,22 +112,33 @@ void	free_textures(t_master *mstr)
 	}
 }
 
-int		close_program(t_master *mstr)
+void	close_program(t_master *mstr, int program_state)
 {
-	free(mstr->start_name);
-	free(mstr->end_name);
+	if (mstr->start_name)
+		free(mstr->start_name);
+	if (mstr->end_name)
+		free(mstr->end_name);
 	free_ants(mstr);
 	free_nodes(mstr);
 	free_pipes(mstr);
 	free_moves(mstr);
 	free_textures(mstr);
-	SDL_DestroyRenderer(mstr->render);
-	mstr->render = NULL;
-	SDL_DestroyWindow(mstr->window);
-	mstr->window = NULL;
+	if (mstr->render)
+	{
+		SDL_DestroyRenderer(mstr->render);
+		mstr->render = NULL;
+	}
+	if (mstr->window)
+	{
+		SDL_DestroyWindow(mstr->window);
+		mstr->window = NULL;
+	}
 	IMG_Quit();
 	SDL_Quit();
 	free(mstr);
 	mstr = NULL;
-	return (TRUE);
+	if (program_state == VISU_FAILED)
+		exit(1);
+	if (program_state == VISU_FINISHED)
+		exit(0);
 }

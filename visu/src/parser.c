@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 16:54:01 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:11:02 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,73 +29,50 @@ int		ft_comment_or_empty(char *line)
 }
 
 /*
-***	line 47 : comment before or in between number of ants
+***	comments before or in between number of ants
 */
 
-int		read_parameters(t_master *mstr)
+void		read_parameters(t_master *mstr)
 {
 	int			ret;
 	char		*line;
 	int			nb_line;
-	int			problem;
 
 	nb_line = 0;
-	problem = FALSE;
-	while (problem == FALSE && nb_line < 5
-	&& (ret = get_next_line(0, &line)) > 0)
+	while (nb_line < 5 && (ret = get_next_line(0, &line)) > 0)
 	{
-		if (ret == FALSE)
-			return (ft_exit(mstr, FAIL_ON_READ));
-		// if (ft_comment_or_empty(line) == TRUE)
-		// {
-			if (ft_get_parameters(mstr, line, nb_line) == FALSE)
-				problem = TRUE;
-		// }
+		ft_get_parameters(mstr, line, nb_line);
 		nb_line++;
 		free(line);
 		line = NULL;
 	}
-	if (problem == TRUE || inizialization(mstr) == FALSE)
-		return (FALSE);
-	if (ret != TRUE)
-		return (ft_exit(mstr, FAIL_ON_READ));
-	return (nb_line);
+	if (ret == FALSE)
+		ft_exit(mstr, FAIL_ON_READ);
 }
 
-int		read_nodes_pipes_moves(t_master *mstr, int nb_line)
+void		read_nodes_pipes_moves(t_master *mstr)
 {
 	int			ret;
 	char		*line;
-	int			problem;
+	int			nb_line;
 
-	problem = FALSE;
-	while (problem == FALSE && (ret = get_next_line(0, &line)) > 0)
+	nb_line = 5;
+	while ((ret = get_next_line(0, &line)) > 0)
 	{
-		if (ret == -1)
-			return (ft_exit(mstr, FAIL_ON_READ));
 		if (ft_comment_or_empty(line) == TRUE)
-		{
-			if (ft_get_input(mstr, line) == FALSE)
-				problem = TRUE;
-		}
+			ft_get_input(mstr, line);
 		free(line);
 		line = NULL;
 		nb_line++;
 	}
-	if (problem == TRUE)
-		return (FALSE);
-	check_inactive_nodes(mstr);
-	return (TRUE);
+	if (ret == FALSE)
+		ft_exit(mstr, FAIL_ON_READ);
 }
 
-int		parser(t_master *mstr)
+void		parser(t_master *mstr)
 {
-	int			nb_line;
-
-	nb_line = FALSE;
-	if ((nb_line = read_parameters(mstr)) == FALSE)
-		return (FALSE);
-	if (read_nodes_pipes_moves(mstr, nb_line) == FALSE)
-		return (FALSE);
-	return (TRUE);
+	read_parameters(mstr);
+	inizialization(mstr);
+	read_nodes_pipes_moves(mstr);
+	check_inactive_nodes(mstr);
 }

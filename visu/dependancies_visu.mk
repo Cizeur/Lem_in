@@ -6,7 +6,7 @@
 #    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:40:40 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/31 17:43:38 by crfernan         ###   ########.fr        #
+#    Updated: 2019/08/06 20:10:50 by crfernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC_VISU =  \
 	initialization.c \
 	ft_check_inactive_nodes.c \
 	main.c \
-	visual.c \
 	visu_init.c \
 	visu_load.c \
 	visu_run.c \

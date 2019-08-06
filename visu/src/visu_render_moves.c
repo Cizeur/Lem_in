@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:15:41 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 16:29:12 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:21:27 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		pos_y(t_master *mstr, t_moves *current, int i)
 	return (y);
 }
 
-int		render_moves(t_master *mstr)
+void	render_moves(t_master *mstr)
 {
 	int			i;
 	t_moves		*current;
@@ -47,16 +47,13 @@ int		render_moves(t_master *mstr)
 		while (current != NULL)
 		{
 			SDL_SetRenderDrawColor(mstr->render, 0x00, 0xFF, 0x00, 0xFF);
-			if (render_texture(mstr, mstr->textures[(current->ant_index % 8)],
-			pos_x(mstr, current, i), pos_y(mstr, current, i)) == FALSE)
-				return (FALSE);
-			if (control(mstr) == FALSE)
-				return (FALSE);
+			render_texture(mstr, mstr->textures[(current->ant_index % 8)],
+			pos_x(mstr, current, i), pos_y(mstr, current, i));
+			control(mstr);
 			current = current->next;
 		}
 		SDL_RenderPresent(mstr->render);
 		SDL_Delay(20);
 		i++;
 	}
-	return (TRUE);
 }

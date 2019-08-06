@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 15:58:19 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:21:26 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,23 @@
 # include "SDL_image.h"
 # include "SDL_ttf.h"
 
-# define TRUE			1
-# define FALSE			-1
+# define TRUE				1
+# define FALSE				-1
 
-# define NODE_UNUSED	-1
-# define NODE_USED	0
-# define NODE_START		1
-# define NODE_END		2
+# define NODE_UNUSED		-1
+# define NODE_USED			0
+# define NODE_START			1
+# define NODE_END			2
 
-# define PIPE_UNDEFINED	0
-# define PIPE_ACTIVE	1
-# define PIPE_INACTIVE	-1
+# define PIPE_UNDEFINED		0
+# define PIPE_ACTIVE		1
+# define PIPE_INACTIVE		-1
 
-# define S_WIDTH	1700
-# define S_HEIGHT	1200
+# define S_WIDTH			1700
+# define S_HEIGHT			1200
+
+# define VISU_FAILED		-1
+# define VISU_FINISHED		1
 
 typedef struct		s_ants
 {
@@ -124,34 +127,33 @@ typedef struct		s_master
 ***		PARSER and INITIALIZATION
 */
 
-int					parser(t_master *mstr);
-int					ft_get_parameters(t_master *mstr, char *line, int nb_line);
-int					ft_get_input(t_master *mstr, char *line);
-int					ft_get_nodes(t_master *mstr, char *line);
-int					ft_get_pipes(t_master *mstr, char *line);
-int					ft_get_moves(t_master *mstr, char *line);
+void				parser(t_master *mstr);
+void				ft_get_parameters(t_master *mstr, char *line, int nb_line);
+void				ft_get_input(t_master *mstr, char *line);
+void				ft_get_nodes(t_master *mstr, char *line);
+void				ft_get_pipes(t_master *mstr, char *line);
+void				ft_get_moves(t_master *mstr, char *line);
 
 void				check_inactive_nodes(t_master *mstr);
-int					inizialization(t_master *mstr);
+void				inizialization(t_master *mstr);
 
 /*
 ***		VISUAL
 */
 
-int					vs_init(t_master *mstr);
-int					vs_load(t_master *mstr);
-int					vs_run(t_master *mstr);
-int					visual(t_master *mstr);
+void				vs_init(t_master *mstr);
+void				vs_load(t_master *mstr);
+void				vs_run(t_master *mstr);
 int					control(t_master *mstr);
 
 /*
 ***		RENDER
 */
 
-int					render_nodes(t_master *mstr);
-int					render_pipes(t_master *mstr);
-int					render_moves(t_master *mstr);
-int					render_total_background(t_master *mstr);
+void				render_nodes(t_master *mstr);
+void				render_pipes(t_master *mstr);
+void				render_moves(t_master *mstr);
+void				render_total_background(t_master *mstr);
 
 /*
 ***		TEXTURE
@@ -162,7 +164,7 @@ void				clear_texture(t_texture *texture);
 int					free_texture(t_texture *texture);
 int					load_texture_from_file(t_master *mstr,
 					t_texture *texture, char *path);
-int					render_texture(t_master *mstr,
+void				render_texture(t_master *mstr,
 					t_texture *texture, int x, int y);
 
 /*
@@ -188,6 +190,6 @@ int					ft_str_isdigit(char *line);
 */
 
 int					ft_exit(t_master *mstr, t_errors error);
-int					close_program(t_master *mstr);
+void				close_program(t_master *mstr, int program_state);
 
 #endif

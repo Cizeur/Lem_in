@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:20:26 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 14:46:32 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 19:13:34 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int    ft_exit(t_master *mstr, t_errors error)
 	printf("####################################################\n");
 	printf("####################################################\n\n");
 	printf("\e[0m");
-    close_program(mstr);
+    close_program(mstr, VISU_FAILED);
     return(FALSE);
 }

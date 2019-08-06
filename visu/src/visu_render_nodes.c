@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:13:58 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 18:28:02 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:19:31 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float   ratio(t_master *mstr, char exe, int i)
     return (ratio);
 }
 
-int     render_nodes(t_master *mstr)
+void    render_nodes(t_master *mstr)
 {
     int         i;
 
@@ -54,12 +54,10 @@ int     render_nodes(t_master *mstr)
         }
         if (mstr->nodes_array[i]->flag == NODE_USED)
         {
-            if (render_texture(mstr, mstr->node,
+            render_texture(mstr, mstr->node,
             mstr->nodes_array[i]->x_px - 30,
-            mstr->nodes_array[i]->y_px - 50) == FALSE)
-                return (ft_exit(mstr, RENDER_VISU));
+            mstr->nodes_array[i]->y_px - 50);
         }
         i++;
     }
-    return (TRUE);
 }
