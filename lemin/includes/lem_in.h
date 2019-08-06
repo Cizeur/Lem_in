@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:53:20 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 11:59:39 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,46 @@
 # include "error.h"
 # include "libft/libft.h"
 
-
 /*
 ** STORAGE BATCH SIZES
 */
+
 # define BATCH_MALLOC_SIZE 10000
 # define BATCH_PRINT_SIZE 1000000
+
 /*
 ** DICTIONARY
 */
+
 # define HASH_SIZE 100153
+
 /*
 ** LINE DEFINES
 */
+
 # define POS_LINE 0
 # define POS_X 1
 # define POS_Y 2
+
 /*
 ** PIPE DEFINES
 */
+
 # define NOPE 0
 # define CERTAINLY 1
 # define CONFIRMED 2
+
 /*
 ** DFS DEFINE
 */
+
 # define DEAD_END 0
 # define SUCCESS 1
 
 /*
 ** COMMAND DEFINES
 */
+
 # define COM_DEFAULT 0
 # define COM_START 1
 # define COM_END 2
@@ -55,46 +64,45 @@
 /*
 ** COMMAND LINES
 */
+
 # define START_MK "##start"
 # define END_MK "##end"
 
 /*
 ** ADJACENCY
 */
-#define DISCONNECTED -1
-#define DEACTIVATED -2
-#define INACTIVE 1
-#define ACTIVATED 3
+# define DISCONNECTED -1
+# define INACTIVE 1
+# define ACTIVATED 2
 
 /*
 ** AJACENCY OPTIONS
 */
 
-#define A_OPTIONS 16
+# define A_OPTIONS 15
 
-#define A_LINKS_NB 0
-#define A_LOADED 1
-#define A_LINE_INDEX 2
-#define A_ANT 3
-#define A_ANT_HIST 4
-#define A_STORED_SOLUTION 5
-#define A_CURRENT_SOLUTION 6
-#define A_STORED_PATH_LEN 7
-#define A_CURRENT_PATH_LEN 8
-#define A_VISIT_FLOW 9
-#define A_VISIT_BACKFLOW 10
-#define A_PARENT_FLOW 11
-#define A_LOADED_FINDER 12
-#define A_PATH_NUMBER 13
-#define A_SOLUTION_START 14
-#define A_STORED_SOLUTION_START 15
+# define A_LINKS_NB 0
+# define A_LOADED 1
+# define A_LINE_INDEX 2
+# define A_ANT 3
+# define A_ANT_HIST 4
+# define A_STORED_SOLUTION 5
+# define A_CURRENT_SOLUTION 6
+# define A_STORED_PATH_LEN 7
+# define A_CURRENT_PATH_LEN 8
+# define A_VISIT_FLOW 9
+# define A_VISIT_BACKFLOW 10
+# define A_PARENT_FLOW 11
+# define A_LOADED_FINDER 12
+# define A_PATH_NUMBER 13
+# define A_SOLUTION_START 14
 
 /*
 ** FLOW TYPE
 */
 
-#define F_FLOW 1
-#define F_BACKFLOW -1
+# define F_FLOW 1
+# define F_BACKFLOW -1
 
 typedef enum	e_ln_type
 {
@@ -133,24 +141,12 @@ typedef struct	s_storage
 	struct s_storage	*next;
 }				t_storage;
 
-/*
-** The flow of a path can be expressed in fixed turn (initialisation) than (one//var ant per turn)
-*/
-
-typedef struct	s_solution
-{
-	int					*path;
-	int					fixed;
-}				t_solution;
-
 typedef struct	s_master
 {
 	int				ants;
 	int				nodes;
 	int				pipes;
 	int				inactives_pipes_nb;
-	int				graph_explored;
-	int				killed;
 	int				max_flow;
 	int				command_line;
 	int				**adjacency_mtx;
@@ -160,12 +156,11 @@ typedef struct	s_master
 	int				*stored_solution;
 	t_storage		*storage;
 	t_storage		*storage_start;
+	t_hash_dico		*dico;
 	int				piping;
 	t_line_info		*start;
 	t_line_info		*end;
 	int				lines_nb;
-	t_hash_dico		*dico;
-	t_solution		**solutions;
 	int				buffer_pos;
 	int				turn_counter;
 	int				end_of_search;
@@ -174,11 +169,12 @@ typedef struct	s_master
 	int				line_started;
 	char			output[BATCH_PRINT_SIZE + 1];
 	int				output_type;
+	int				fringe_start_end;
 }				t_master;
 
 
-void				ft_init_mstr(t_master *mstr);
-void				ft_exit(t_errors error, t_master *mstr);
+void			ft_init_mstr(t_master *mstr);
+void			ft_exit(t_errors error, t_master *mstr);
 
 //
 #include "debug.h"
@@ -188,63 +184,64 @@ void				ft_exit(t_errors error, t_master *mstr);
 ** PARSER PROTOTYPES
 */
 
-void				parser(t_master *mstr);
-char				*ft_parser_ants_get(t_master *mstr);
-t_ln_type			ft_parser_check_node(char *line, t_ln_type type);
-t_ln_type			ft_parser_check_pipe(char *line, t_ln_type type);
-t_ln_type			ft_parser_line_type(char *line, int piping);
-void				ft_parser_fill_entry_node(t_master *mstr, char *line,
-						t_line_info *entry);
-void				ft_parser_fill_entry_pipe(t_master *mstr, char *line,
-						t_line_info *entry);
-void				ft_parser_apply_command(t_master *mstr, t_line_info *entry);
+void			parser(t_master *mstr);
+char			*ft_parser_ants_get(t_master *mstr);
+t_ln_type		ft_parser_check_node(char *line, t_ln_type type);
+t_ln_type		ft_parser_check_pipe(char *line, t_ln_type type);
+t_ln_type		ft_parser_line_type(char *line, int piping);
+void			ft_parser_fill_entry_node(t_master *mstr, char *line,
+					t_line_info *entry);
+void			ft_parser_fill_entry_pipe(t_master *mstr, char *line,
+					t_line_info *entry);
+void			ft_parser_apply_command(t_master *mstr, t_line_info *entry);
 
 /*
 ** STORAGE PROTOTYPES
 */
 
-void				ft_storage_grow(t_master *mstr);
-t_ln_type			ft_storage_add_line(char *line, t_master *mstr);
-t_line_info			*ft_storage_get_line(t_master *mstr, int line_nb);
-void				ft_dico_add(t_master *mstr,
-									t_hash_dico *dico,t_line_info *entry);
-int					ft_dico_get(t_master *mstr,
-									t_hash_dico *dico, char *needle, int len);
+void			ft_storage_grow(t_master *mstr);
+t_ln_type		ft_storage_add_line(char *line, t_master *mstr);
+t_line_info		*ft_storage_get_line(t_master *mstr, int line_nb);
+void			ft_dico_add(t_master *mstr,
+								t_hash_dico *dico,t_line_info *entry);
+int				ft_dico_get(t_master *mstr,
+								t_hash_dico *dico, char *needle, int len);
 
 /*
 ** MATRIX PROTOTYPES
 */
 
-void				ft_matrix_popping(int max_nodes, int **mtx, int *node_path);
-void				ft_matrix_reset_state(t_master *mstr);
-void				ft_matrix_reset_one_path(t_master *mstr, int path);
-void				ft_matrix_generate(t_master *mstr, t_storage *storage);
-void				ft_solution_print(t_master *mstr);
+void			ft_matrix_popping(int max_nodes, int **mtx, int *node_path);
+void			ft_matrix_reset_state(t_master *mstr);
+void			ft_matrix_reset_one_path(t_master *mstr, int path);
+void			ft_matrix_generate(t_master *mstr, t_storage *storage);
+void			ft_solution_print(t_master *mstr);
 
 /*
 ** SOLVER PROTOTYPES
 */
 
-void				solver(t_master *mstr);
-int					ft_solver_paths_splitter(t_master *mstr,
-								int **mtx, int cur_node, int end_node);
-void				ft_solver_paths_finder(t_master *mstr, int flow);
-void				ft_solver_paths_shortener(t_master *mstr, int flow);
-void				ft_solver_paths(t_master *mstr, int flow);
-void				ft_solver_turn_counter(t_master *mstr, int flow);
-void				ft_solver_solution_store(t_master *mstr,
-								int max_nodes, int flow);
+void			solver(t_master *mstr);
+int				ft_solver_paths_splitter(t_master *mstr,
+					int **mtx, int cur_node, int end_node);
+void			ft_solver_paths_finder(t_master *mstr, int flow);
+void			ft_solver_paths_shortener(t_master *mstr, int flow);
+void			ft_solver_paths(t_master *mstr, int flow);
+void			ft_solver_turn_counter(t_master *mstr, int flow);
+void			ft_solver_solution_store(t_master *mstr,
+					int max_nodes, int flow);
 
 /*
 ** OUTPUT PROTOTYPES
 */
 
-void				output(t_master *mstr);
-void				ft_output_solution(t_master *mstr);
-void				ft_output_count_inactive_pipes(t_master *mstr);
-void				ft_output_putstr(char *str, t_master *mstr);
-void				ft_output_putnstr(char *str, int n, t_master *mstr);
-void				ft_output_putnbr(int n, t_master *mstr);
-void				ft_output_buffer_flush(t_master *mstr);
+void			output(t_master *mstr);
+void			output_start_end(t_master *mstr);
+void			ft_output_solution(t_master *mstr);
+void			ft_output_count_inactive_pipes(t_master *mstr);
+void			ft_output_putstr(char *str, t_master *mstr);
+void			ft_output_putnstr(char *str, int n, t_master *mstr);
+void			ft_output_putnbr(int n, t_master *mstr);
+void			ft_output_buffer_flush(t_master *mstr);
 
 #endif
