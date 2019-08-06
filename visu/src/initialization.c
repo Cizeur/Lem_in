@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:26:31 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 17:09:28 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 17:04:14 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		ft_alloc_pipes(t_master *mstr)
 		if (!(mstr->pipes_array[i] = (t_pipes *)
 			ft_memalloc(sizeof(t_pipes))))
 			return (ft_exit(mstr, ERROR_MALLOC));
-		mstr->pipes_array[i]->active = PIPE_ACTIVE;
+		mstr->pipes_array[i]->active = PIPE_UNDEFINED;
 		i++;
 	}
 	return (TRUE);

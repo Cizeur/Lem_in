@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:12:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 16:43:16 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:16:45 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 int		ft_is_not_comment_2(t_master *mstr, char *line)
 {
-	if (line[0] == '#')
+
+	if (ft_strstr(line, "#active"))
+	{
+		mstr->pipes_array[mstr->current_pipe]->active = PIPE_ACTIVE;
+		return (FALSE);
+	}
+	if (ft_strstr(line, "#inactive"))
 	{
 		mstr->pipes_array[mstr->current_pipe]->active = PIPE_INACTIVE;
 		return (FALSE);
 	}
+	if (line[0] == '#')
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -44,7 +52,6 @@ int		ft_get_pipes(t_master *mstr, char *line)
 	int		i1;
 	int		i2;
 
-
 	if (ft_is_not_comment_2(mstr, line) == TRUE)
 	{
 		mstr->pipes_array[mstr->current_pipe]->pipe_index = mstr->current_pipe;
@@ -58,9 +65,9 @@ int		ft_get_pipes(t_master *mstr, char *line)
 		mstr->pipes_array[mstr->current_pipe]->node2_index = i2;
 		if (mstr->pipes_array[mstr->current_pipe]->active == PIPE_ACTIVE)
 		{
-			mstr->nodes_array[i1]->pipes[mstr->nodes_array[i1]->nb_pipes] = i2;
+			mstr->nodes_array[i1]->pipes[mstr->nodes_array[i1]->nb_pipes] = mstr->current_pipe;
 			mstr->nodes_array[i1]->nb_pipes++;
-			mstr->nodes_array[i2]->pipes[mstr->nodes_array[i2]->nb_pipes] = i1;
+			mstr->nodes_array[i2]->pipes[mstr->nodes_array[i2]->nb_pipes] = mstr->current_pipe;
 			mstr->nodes_array[i2]->nb_pipes++;
 		}
 		free_get_pipes(tmp);

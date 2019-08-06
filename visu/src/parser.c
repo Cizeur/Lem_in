@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 15:11:31 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:54:01 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,16 @@ int		ft_comment_or_empty(char *line)
 		return (TRUE);
 	if (ft_str_cmp(line, "##end") == TRUE)
 		return (TRUE);
+	if (ft_str_cmp(line, "#active") == TRUE)
+		return (TRUE);
 	if (ft_str_cmp(line, "#inactive") == TRUE)
 		return (TRUE);
 	return (FALSE);
 }
+
+/*
+***	line 47 : comment before or in between number of ants
+*/
 
 int		read_parameters(t_master *mstr)
 {
@@ -40,8 +46,11 @@ int		read_parameters(t_master *mstr)
 	{
 		if (ret == FALSE)
 			return (ft_exit(mstr, FAIL_ON_READ));
-		if (ft_get_parameters(mstr, line, nb_line) == FALSE)
-			problem = TRUE;
+		// if (ft_comment_or_empty(line) == TRUE)
+		// {
+			if (ft_get_parameters(mstr, line, nb_line) == FALSE)
+				problem = TRUE;
+		// }
 		nb_line++;
 		free(line);
 		line = NULL;
@@ -83,6 +92,7 @@ int		parser(t_master *mstr)
 {
 	int			nb_line;
 
+	nb_line = FALSE;
 	if ((nb_line = read_parameters(mstr)) == FALSE)
 		return (FALSE);
 	if (read_nodes_pipes_moves(mstr, nb_line) == FALSE)

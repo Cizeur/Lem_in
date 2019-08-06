@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:07:46 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 22:33:39 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:26:44 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void    ft_print_pipes(t_master *mstr)
     while (i < mstr->nb_pipes)
     {
         printf("PIPE INDEX       = %d\n", mstr->pipes_array[i]->pipe_index);
-		printf("PIPE ACTIVE      = %d\n", mstr->pipes_array[i]->active);
 		printf("NODE INDEX 1     = %d\n", mstr->pipes_array[i]->node1_index);
 		printf("NODE NAME  1     = %s\n", mstr->pipes_array[i]->node1_name);
 		printf("NODE INDEX 2     = %d\n", mstr->pipes_array[i]->node2_index);
-		printf("NODE NAME  2     = %s\n\n", mstr->pipes_array[i]->node2_name);
+		printf("NODE NAME  2     = %s\n", mstr->pipes_array[i]->node2_name);
+		printf("PIPE ACTIVE      = %d\n\n", mstr->pipes_array[i]->active);
         i++;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 18:34:56 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 15:58:19 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define NODE_START		1
 # define NODE_END		2
 
+# define PIPE_UNDEFINED	0
 # define PIPE_ACTIVE	1
 # define PIPE_INACTIVE	-1
 
