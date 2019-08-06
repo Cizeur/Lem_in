@@ -6,11 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:28:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 14:06:55 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:23:27 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include "utils.h"
 
 int			ft_dico_get(t_storage *storage_start, t_hash_dico *dico,
 					char *needle, int len)

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 17:24:00 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:24:08 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		ft_init_stacks(t_master *mstr, int start_node, int *queue)
 	queue[0] = 0;
 }
 
-static int			ft_solver_one_path_finder(t_master *mstr, int **mtx,
+static int		ft_solver_one_path_finder(t_master *mstr, int **mtx,
 			int cur_node, int path_number)
 {
 	int next_node;
@@ -129,7 +129,6 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 		if (ft_solver_one_path_finder(mstr, mtx,
 				mstr->start->node_number, i) == DEAD_END)
 			ft_exit(DEAD_END_ON_SOLUTION);
-		ft_print_matrix(mstr, DEBUG_PRINT_MATRIX);
 	}
 	return (SUCCESS);
 }
