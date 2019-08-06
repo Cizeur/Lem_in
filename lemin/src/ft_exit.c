@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:31:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 13:48:39 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 17:21:56 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 #include "lem_in.h"
+#include "libft/libft.h"
 #include <stdlib.h>
 
 char g_error_message[23][40] = {
@@ -44,6 +45,6 @@ void		ft_exit(t_errors error, t_master *mstr)
 {
 	if (error != STANDARD)
 		ft_putstr("ERROR\n");
-	mstr = 0;
+	ft_free_everything(mstr);
 	exit(error != STANDARD ? 1 : 0);
 }
