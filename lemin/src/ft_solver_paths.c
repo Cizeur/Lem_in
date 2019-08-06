@@ -95,7 +95,7 @@ void		ft_solver_paths_sort(t_master *mstr, int flow, int *extracted)
 
 void		ft_solver_paths(t_master *mstr, int flow)
 {
-	ft_solver_paths_get_starts(mstr, mstr->nodes_nb, mstr->node_path);
+	ft_solver_paths_get_starts(mstr, mstr->nodes, mstr->node_path);
 	ft_solver_paths_get_len(mstr, flow, mstr->node_path);
 	ft_solver_paths_sort(mstr, flow, mstr->node_path);
 }

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 18:42:38 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 10:13:16 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** STORAGE BATCH SIZES
 */
 # define BATCH_MALLOC_SIZE 10000
-# define BATCH_PRINT_SIZE 10000
+# define BATCH_PRINT_SIZE 1000000
 /*
 ** DICTIONARY
 */
@@ -145,9 +145,9 @@ typedef struct	s_solution
 
 typedef struct	s_master
 {
-	int				ants_nb;
-	int				nodes_nb;
-	int				pipes_nb;
+	int				ants;
+	int				nodes;
+	int				pipes;
 	int				inactives_pipes_nb;
 	int				graph_explored;
 	int				killed;

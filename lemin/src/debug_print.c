@@ -21,19 +21,19 @@ void    ft_print_matrix(t_master *mstr, int activation)
 		return;
 	i = -1;
 	printf("\n");
-	while ((j = -1) && ++i < mstr->nodes_nb)
+	while ((j = -1) && ++i < mstr->nodes)
 	{
 		if (DEBUG_TRUNC_MATRIX && mstr->adjacency_mtx[i][A_PATH_NUMBER] == DISCONNECTED)
 				continue;
 		printf("\033[0;34m%10.*s : \33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->name_len,
 				ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[i][A_LINE_INDEX])->line);
 		printf ("node : %4d |", i);
-		while (++j < 2 * mstr->nodes_nb + A_OPTIONS)
+		while (++j < 2 * mstr->nodes + A_OPTIONS)
 		{
 
 			if (DEBUG_TRUNC_MATRIX && j >= A_OPTIONS)
 				break;
-			if ((j - A_OPTIONS) % mstr->nodes_nb == 0)
+			if ((j - A_OPTIONS) % mstr->nodes == 0)
 				printf("%3s", "|");
 			if (mstr->adjacency_mtx[i][j] == DISCONNECTED)
 				printf("%3s", " . ");
@@ -52,7 +52,7 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	if (DEBUG_TRUNC_MATRIX)
 		return;
 	printf("\n");
-	while (++i < mstr->nodes_nb)
+	while (++i < mstr->nodes)
 	{
 		if (mstr->node_path[i] == -1)
 			break;
@@ -60,7 +60,7 @@ void    ft_print_matrix(t_master *mstr, int activation)
 		printf("\033[0;34m%5.*s\33[0m",ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->name_len,
 				ft_storage_get_line(mstr->storage, mstr->adjacency_mtx[mstr->node_path[i]][A_LINE_INDEX])->line);
 	}
-	while (++i < mstr->nodes_nb)
+	while (++i < mstr->nodes)
 	{
 		if (mstr->node_path[i] == -1)
 			break;
@@ -71,7 +71,7 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	i = -1;
 	printf("\nNode Path\n");
 	printf("\n");
-	while (++i < mstr->nodes_nb)
+	while (++i < mstr->nodes)
 	{
 	//	if (mstr->node_path[i] == -1)
 	//		break;
@@ -80,7 +80,7 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	i = -1;
 	printf("\nNode Queue\n");
 	printf("\n");
-	while (++i < 2 * mstr->nodes_nb)
+	while (++i < 2 * mstr->nodes)
 	{
 		if (mstr->node_path[i] == -1)
 			break;
@@ -89,7 +89,7 @@ void    ft_print_matrix(t_master *mstr, int activation)
 	i = -1;
 	printf("\nNode Parents\n");
 	printf("\n");
-	while (++i < 2 * mstr->nodes_nb)
+	while (++i < 2 * mstr->nodes)
 	{
 		if (mstr->node_path[i] == -1)
 			break;
@@ -110,25 +110,25 @@ void    		ft_print_test(t_master *mstr, int activation)
 	i = -1;
 	end[0] = 0;
 	start[0] = 0;
-    while ((j = -1) && ++i < mstr->nodes_nb)
+    while ((j = -1) && ++i < mstr->nodes)
     {
 		end[1] = 0;
 		start[1] = 0;
 		check = 0;
-		while (++j < mstr->nodes_nb)
+		while (++j < mstr->nodes)
    		{
-			if (mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb] != -1)
+			if (mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes] != -1)
 			{
 				if (!check)
 					printf ("node : %4d |", i);
 				check++;
-				printf ("\033[0;33m%6d\033[0m", mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb]);
-				if (mstr->adjacency_mtx[i][j+ A_OPTIONS + 2 * mstr->nodes_nb] == mstr->start->node_number)
+				printf ("\033[0;33m%6d\033[0m", mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes]);
+				if (mstr->adjacency_mtx[i][j+ A_OPTIONS + 2 * mstr->nodes] == mstr->start->node_number)
 				{
 					start[0]++;
 					start[1] = 1;
 				}
-				if (mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes_nb] == mstr->end->node_number)
+				if (mstr->adjacency_mtx[i][j + A_OPTIONS + 2 * mstr->nodes] == mstr->end->node_number)
 				{
 					end[0]++;
 					end[1] = 1;

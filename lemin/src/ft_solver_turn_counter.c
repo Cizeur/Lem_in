@@ -19,7 +19,7 @@ static int	ft_turn_counter_init(t_master *mstr, int *node_path, int flow)
 	int current_flow;
 	int current_path_len;
 
-	ants = mstr->ants_nb;
+	ants = mstr->ants;
 	current_flow = 0;
 	current_path_len = mstr->adjacency_mtx[node_path[0]][A_CURRENT_PATH_LEN];
 	i = -1;
@@ -42,7 +42,7 @@ void		ft_solver_turn_counter(t_master *mstr, int flow)
 	int ants;
 	int turns;
 
-	ants = mstr->ants_nb;
+	ants = mstr->ants;
 	mstr->skip = NOPE;
 	ants = ft_turn_counter_init(mstr, mstr->node_path, flow);
 	if (ants != -1 && !mstr->end_of_search)

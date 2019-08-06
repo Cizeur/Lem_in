@@ -35,7 +35,7 @@ void	ft_parser_fill_entry_pipe(t_master *mstr, char *line,
 				ft_storage_get_line(start, entry->pipe[0])->node_number;
 			entry->pipe[1] =
 				ft_storage_get_line(start, entry->pipe[1])->node_number;
-			mstr->pipes_nb++;
+			mstr->pipes++;
 			return ;
 		}
 	}

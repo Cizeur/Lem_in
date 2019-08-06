@@ -50,7 +50,7 @@ static int		ft_check_node(t_master *mstr, int cur_node,
 		? F_FLOW : F_BACKFLOW;
 	if ((mtx[cur_node][A_LOADED] && flow == F_FLOW && !mtx[next_node][A_LOADED])
 		|| (mtx[cur_node][A_LOADED] && mtx[next_node][A_LOADED]
-		&& mtx[next_node][mstr->nodes_nb + A_OPTIONS + cur_node] != ACTIVATED)
+		&& mtx[next_node][mstr->nodes + A_OPTIONS + cur_node] != ACTIVATED)
 		|| mtx[next_node][A_VISIT_BACKFLOW] != DISCONNECTED)
 		return (NOPE);
 	visited_lvl = flow == F_FLOW ? A_VISIT_FLOW : A_VISIT_BACKFLOW;
@@ -71,14 +71,14 @@ static void		ft_init_stacks(t_master *mstr, int start_node, int *queue)
 	int i;
 
 	i = -1;
-	while (++i < mstr->nodes_nb)
+	while (++i < mstr->nodes)
 	{
 		mstr->adjacency_mtx[i][A_VISIT_FLOW] = DISCONNECTED;
 		mstr->adjacency_mtx[i][A_VISIT_BACKFLOW] = DISCONNECTED;
 	}
-	ft_intset(mstr->node_path, mstr->nodes_nb, DISCONNECTED);
-	ft_intset(mstr->node_queue, 2 * mstr->nodes_nb, DISCONNECTED);
-	ft_intset(mstr->node_parents, 2 * mstr->nodes_nb, DISCONNECTED);
+	ft_intset(mstr->node_path, mstr->nodes, DISCONNECTED);
+	ft_intset(mstr->node_queue, 2 * mstr->nodes, DISCONNECTED);
+	ft_intset(mstr->node_parents, 2 * mstr->nodes, DISCONNECTED);
 	mstr->node_queue[0] = start_node;
 	mstr->node_parents[0] = start_node;
 	mstr->node_path[0] = start_node;
@@ -93,7 +93,7 @@ static int		ft_check_is_allowed_next(t_master *mstr, int cur_node,
 	int **mtx;
 
 	mtx = mstr->adjacency_mtx;
-	if (mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] == ACTIVATED
+	if (mtx[cur_node][mstr->nodes + A_OPTIONS + next_node] == ACTIVATED
 		|| next_node == DISCONNECTED
 		|| next_node == mstr->start->node_number
 		|| next_node == parent_node)

@@ -25,5 +25,5 @@ void				ft_output_count_inactive_pipes(t_master *mstr)
 	active_pipes = 0;
 	while (++i < mstr->final_flow)
 		active_pipes += mtx[solution_start[i]][A_STORED_PATH_LEN] + 1;
-	mstr->inactives_pipes_nb = mstr->pipes_nb - active_pipes;
+	mstr->inactives_pipes_nb = mstr->pipes - active_pipes;
 }

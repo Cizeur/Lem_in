@@ -21,7 +21,7 @@ static void		ft_alloc_adjancency_matrix(t_master *mstr, int nodes)
 	int malloc_size;
 
 	i = -1;
-	malloc_size = mstr->nodes_nb * sizeof(int);
+	malloc_size = mstr->nodes * sizeof(int);
 	if (!(mtx = (int **)ft_memalloc(sizeof(int *) * nodes)))
 		ft_exit(ADJACENCY_MTX);
 	while (++i < nodes)
@@ -62,13 +62,13 @@ static void		ft_put_pipe_in_adjancency_matrix(
 	int **mtx;
 
 	mtx = mstr->adjacency_mtx;
-	if (mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] != DISCONNECTED)
+	if (mtx[node1][mstr->nodes + node2 + A_OPTIONS] != DISCONNECTED)
 		return ;
-	mtx[node1][mstr->nodes_nb + node2 + A_OPTIONS] = INACTIVE;
+	mtx[node1][mstr->nodes + node2 + A_OPTIONS] = INACTIVE;
 	nodes = mtx[node1][A_LINKS_NB];
 	mtx[node1][A_LINKS_NB] += 1;
 	mtx[node1][A_OPTIONS + nodes] = node2;
-	mtx[node2][mstr->nodes_nb + node1 + A_OPTIONS] = INACTIVE;
+	mtx[node2][mstr->nodes + node1 + A_OPTIONS] = INACTIVE;
 	nodes = mtx[node2][A_LINKS_NB];
 	mtx[node2][A_LINKS_NB] += 1;
 	mtx[node2][A_OPTIONS + nodes] = node1;
@@ -81,7 +81,7 @@ void			ft_matrix_generate(t_master *mstr, t_storage *storage)
 	t_line_info	*entry;
 
 	ind = -1;
-	ft_alloc_adjancency_matrix(mstr, mstr->nodes_nb);
+	ft_alloc_adjancency_matrix(mstr, mstr->nodes);
 	while (++ind < mstr->lines_nb)
 	{
 		reduc_ind = ind % BATCH_MALLOC_SIZE;

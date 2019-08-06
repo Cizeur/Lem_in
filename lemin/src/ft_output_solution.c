@@ -75,7 +75,7 @@ static int		ft_load_new_ants(t_master *mstr, int ants, int turns)
 
 	i = -1;
 	mtx = mstr->adjacency_mtx;
-	while (ants <= mstr->ants_nb && ++i < mstr->final_flow)
+	while (ants <= mstr->ants && ++i < mstr->final_flow)
 	{
 		cur_cell = mstr->stored_solution[i];
 		if (i && mtx[cur_cell][A_STORED_PATH_LEN] > turns)
@@ -103,7 +103,7 @@ void			ft_output_solution(t_master *mstr)
 	int i;
 
 	ants = 1;
-	max_node = mstr->nodes_nb;
+	max_node = mstr->nodes;
 	ft_output_putstr("\n", mstr);
 	turns = mstr->turn_counter;
 	i = -1;

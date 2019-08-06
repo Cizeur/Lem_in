@@ -30,7 +30,7 @@ void		ft_parser_fill_entry_node(t_master *mstr, char *line,
 			ft_exit(DASH_IN_NAME);
 	}
 	entry->hash_key = ft_dico_hasher_djb2(line, name_end, HASH_SIZE);
-	entry->node_number = mstr->nodes_nb;
-	mstr->nodes_nb++;
+	entry->node_number = mstr->nodes;
+	mstr->nodes++;
 	ft_dico_add(mstr->storage_start, mstr->dico, entry);
 }

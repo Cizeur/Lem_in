@@ -21,7 +21,7 @@ void			ft_matrix_reset_state(t_master *mstr)
 
 	mtx = mstr->adjacency_mtx;
 	i = -1;
-	while ((j = -1) && ++i < mstr->nodes_nb)
+	while ((j = -1) && ++i < mstr->nodes)
 	{
 		if (!(mtx[i][A_LOADED])
 			|| i == mstr->end->node_number
@@ -31,12 +31,12 @@ void			ft_matrix_reset_state(t_master *mstr)
 		{
 			linked_node = mtx[i][A_OPTIONS + j];
 			mtx[i][A_LOADED] = !mtx[i][A_LOADED_FINDER] ? NOPE : CERTAINLY;
-			if (mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node]
+			if (mtx[i][A_OPTIONS + mstr->nodes + linked_node]
 					!= DISCONNECTED)
-				mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = INACTIVE;
+				mtx[i][A_OPTIONS + mstr->nodes + linked_node] = INACTIVE;
 			if (mtx[i][A_LOADED_FINDER] && linked_node
 					== mtx[i][A_CURRENT_SOLUTION])
-				mtx[i][A_OPTIONS + mstr->nodes_nb + linked_node] = ACTIVATED;
+				mtx[i][A_OPTIONS + mstr->nodes + linked_node] = ACTIVATED;
 		}
 	}
 }

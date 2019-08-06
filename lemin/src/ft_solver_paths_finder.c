@@ -24,7 +24,7 @@ static void		ft_path_cleaning(t_master *mstr, int path_number,
 	node_path = mstr->node_path;
 	mtx[end_node][A_PARENT_FLOW] = cur_node;
 	node_path[mtx[cur_node][A_VISIT_FLOW] + 1] = end_node;
-	i = mstr->nodes_nb;
+	i = mstr->nodes;
 	while (--i)
 	{
 		if (node_path[i] == DISCONNECTED)
@@ -46,7 +46,7 @@ static int		ft_is_possible_next(t_master *mstr, int cur_node,
 	int **mtx;
 
 	mtx = mstr->adjacency_mtx;
-	if (mtx[cur_node][mstr->nodes_nb + A_OPTIONS + next_node] != ACTIVATED)
+	if (mtx[cur_node][mstr->nodes + A_OPTIONS + next_node] != ACTIVATED)
 		return (NOPE);
 	if (next_node == mstr->start->node_number
 		|| next_node == mtx[cur_node][A_PARENT_FLOW]
@@ -67,13 +67,13 @@ static void		ft_init_stacks(t_master *mstr, int start_node, int *queue)
 	int i;
 
 	i = -1;
-	while (++i < mstr->nodes_nb)
+	while (++i < mstr->nodes)
 	{
 		mstr->adjacency_mtx[i][A_VISIT_FLOW] = DISCONNECTED;
 		mstr->adjacency_mtx[i][A_PARENT_FLOW] = DISCONNECTED;
 	}
-	ft_intset(mstr->node_path, mstr->nodes_nb, DISCONNECTED);
-	ft_intset(mstr->node_queue, 2 * mstr->nodes_nb, DISCONNECTED);
+	ft_intset(mstr->node_path, mstr->nodes, DISCONNECTED);
+	ft_intset(mstr->node_queue, 2 * mstr->nodes, DISCONNECTED);
 	mstr->node_queue[0] = start_node;
 	mstr->node_path[0] = start_node;
 	mstr->adjacency_mtx[start_node][A_VISIT_FLOW] = NOPE;
@@ -114,7 +114,7 @@ int				ft_solver_paths_finder(t_master *mstr, int flow)
 
 	i = -1;
 	mtx = mstr->adjacency_mtx;
-	while (++i < mstr->nodes_nb)
+	while (++i < mstr->nodes)
 	{
 		mtx[i][A_LOADED_FINDER] = NOPE;
 		mtx[i][A_PATH_NUMBER] = DISCONNECTED;

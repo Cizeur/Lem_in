@@ -22,10 +22,10 @@ static void		ft_output_first_lines(t_master *mstr, int activation)
 	if (!activation)
 		return;
 	ft_putstr(SO_NODE_NB);
-	ft_putnbr(mstr->nodes_nb);
+	ft_putnbr(mstr->nodes);
 	ft_putchar('\n');
 	ft_putstr(SO_PIPE_NB);
-	ft_putnbr(mstr->pipes_nb);
+	ft_putnbr(mstr->pipes);
 	ft_putchar('\n');
 	ft_putstr(SO_MVMT_NB);
 	ft_putnbr(mstr->turn_counter);

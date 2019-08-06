@@ -29,7 +29,7 @@ char		*ft_parser_ants_get(t_master *mstr)
 		i++;
 	if (line[i])
 		ft_exit(ANT_NOT_NB_ONLY);
-	if ((mstr->ants_nb = ft_atoi(line)) <= 0)
+	if ((mstr->ants = ft_atoi(line)) <= 0)
 		ft_exit(NO_ANTS);
 	return (line);
 }
