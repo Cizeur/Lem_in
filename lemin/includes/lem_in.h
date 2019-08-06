@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 15:01:19 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 17:21:27 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 #  include <stdio.h>
 # include "error.h"
-# include "libft/libft.h"
 
 /*
 ** STORAGE BATCH SIZES
 */
 
-# define BATCH_MALLOC_SIZE 10000
-# define BATCH_PRINT_SIZE 1000000
+# define BATCH_MALLOC_SIZE 100000
+# define BATCH_PRINT_SIZE 100000
 
 /*
 ** DICTIONARY
@@ -175,6 +174,7 @@ typedef struct	s_master
 
 void			ft_init_mstr(t_master *mstr);
 void			ft_exit(t_errors error, t_master *mstr);
+void			ft_free_everything(t_master *mstr);
 
 //
 #include "debug.h"
