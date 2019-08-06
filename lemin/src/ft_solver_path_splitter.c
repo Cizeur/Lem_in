@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 09:36:06 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/05 12:03:35 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:28:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
+#include "libft/libft.h"
 
 static void		ft_path_cleaning(t_master *mstr, int queue_end, int end_node)
 {

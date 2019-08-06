@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 11:38:41 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 16:03:15 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
+#include "libft/libft.h"
 
 static int		ft_get_max_flow_limit(t_master *mstr)
 {
@@ -27,6 +28,7 @@ static int		ft_get_max_flow_limit(t_master *mstr)
 void			solver(t_master *mstr)
 {
 	int flow;
+	int i;
 
 	mstr->max_flow = ft_get_max_flow_limit(mstr);
 	flow = 0;
@@ -38,7 +40,9 @@ void			solver(t_master *mstr)
 		ft_matrix_popping(mstr->nodes, mstr->adjacency_mtx, mstr->node_path);
 		ft_solver_paths_finder(mstr, ++flow);
 		ft_matrix_reset_state(mstr);
-		ft_solver_paths_shortener(mstr, flow);
+		i = -1;
+		while (++i < flow)
+			ft_solver_paths_shortener(mstr, flow);
 		ft_solver_paths(mstr, flow);
 		ft_solver_turn_counter(mstr, flow);
 		if (!mstr->end_of_search && !mstr->skip)

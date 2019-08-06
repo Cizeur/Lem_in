@@ -6,12 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 15:43:23 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 12:40:39 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 16:10:34 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
-#include "libft/get_next_line.h"
+#include "libft/libft.h"
 #include "utils.h"
 #include "lem_in.h"
 
@@ -21,8 +21,6 @@ void		ft_parser_ants_get(t_master *mstr, char *line)
 
 	i = 0;
 	while (line[i] && ft_isdigit(line[i]))
-		i++;
-	while (line[i] && ft_is_whitespace(line[i]))
 		i++;
 	if (line[i])
 		ft_exit(ANT_NOT_NB_ONLY, mstr);

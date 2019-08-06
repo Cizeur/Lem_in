@@ -6,11 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 14:46:24 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/03 14:42:57 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:28:43 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include "libft/libft.h"
 
 void		ft_output_putstr(char *str, t_master *mstr)
 {

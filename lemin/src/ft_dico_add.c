@@ -6,11 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:28:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:47:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:27:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include "libft/libft.h"
 
 static t_bucket	ft_dico_check_double_inc(t_master *mstr,
 					t_hash_dico *dico, t_line_info *entry)

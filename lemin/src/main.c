@@ -6,12 +6,11 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 13:49:10 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 16:12:36 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include "stdlib.h"
 #include "libft/libft.h"
 
 int			main(int argc, char **argv)
@@ -32,5 +31,6 @@ int			main(int argc, char **argv)
 		output_start_end(mstr);
 	solver(mstr);
 	output(mstr);
+	ft_exit(STANDARD, mstr);
 	return (0);
 }

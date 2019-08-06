@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:28:35 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:40:59 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:28:15 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
+#include "libft/libft.h"
 
 int			ft_dico_get(t_master *mstr, t_hash_dico *dico,
 					char *needle, int len)

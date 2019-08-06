@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:19:22 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/06 11:25:18 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:28:28 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
+#include "libft/libft.h"
 
 void		ft_solver_paths_get_starts(
 	t_master *mstr, int max_nodes, int *extracted)

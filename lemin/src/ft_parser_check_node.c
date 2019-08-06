@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 09:18:05 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 13:00:00 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 17:31:02 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static char		*ft_check_numbers(char *line, int *i_adr)
 	pos = 0;
 	if (i < 0 || !ft_isdigit(line[i]))
 		return (0);
-	while (i >= 0 && ft_isdigit(line[i]))
+	while (i > 0 && ft_isdigit(line[i]))
 		--i;
 	if (line[i] == '-')
 		--i;
-	if (i < 0 || !ft_is_whitespace(line[i]))
+	if (i <= 0 || !ft_is_whitespace(line[i]))
 		return (0);
 		--i;
 	pos = &(line[i + 1]);

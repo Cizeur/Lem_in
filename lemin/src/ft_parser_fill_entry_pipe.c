@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 12:08:15 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 13:49:47 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:40:14 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
+#include "libft/libft.h"
 
 void	ft_parser_fill_entry_pipe(t_master *mstr, char *line,
 			t_line_info *entry)

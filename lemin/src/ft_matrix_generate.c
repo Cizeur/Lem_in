@@ -6,13 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 10:45:52 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/06 15:27:37 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "error.h"
 #include "utils.h"
+#include "libft/libft.h"
 
 static void		ft_alloc_adjancency_matrix(t_master *mstr, int nodes)
 {
