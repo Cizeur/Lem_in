@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/19 17:57:30 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/07 18:13:58 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/07 18:35:59 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 function usage() {
 	printf "\nusage: sh ./test_script_lem_in.sh [-n number of maps] [-m map_folder] [-e with_generator]\n\
-	[-g generator][-o generator_opitons][-v with_verif][-t showtime]\n\n"
+	[-g generator][-o generator_opitons][-v with_verif][-t showtime][-p program]\n\n"
 	printf "Lemin map folder generator-tester\n\
 	- till n maps\n\
 	- in a folder of map (-m)\n\
@@ -62,6 +62,10 @@ while [ "$1" != "" ]; do
 	-n)
 		shift
 		n_maps=$1
+		;;
+	-p)
+		shift
+		program=$1
 		;;
 	-m)
 		shift
