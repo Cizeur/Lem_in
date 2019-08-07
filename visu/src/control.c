@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 15:30:49 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/07 20:18:56 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/07 20:34:20 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void    control_move_backwards(t_master *mstr)
 void    control_pause_and_delay(t_master *mstr)
 {
     if (mstr->event.type == SDL_KEYDOWN
-    && mstr->event.key.keysym.sym == SDLK_UP)
+    && mstr->event.key.keysym.sym == SDLK_UP
+    && mstr->delay > 2)
         mstr->delay -= 2;
     if (mstr->event.type == SDL_KEYDOWN
     && mstr->event.key.keysym.sym == SDLK_DOWN && mstr->delay > 0)
@@ -71,14 +72,20 @@ void    control_pause_and_delay(t_master *mstr)
     }
 }
 
+void    control_exit(t_master *mstr)
+{
+    if (mstr->event.type == SDL_QUIT
+    || (mstr->event.type == SDL_KEYDOWN
+    && mstr->event.key.keysym.sym == SDLK_ESCAPE))
+        close_program(mstr, VISU_FINISHED);
+}
+
+
 int		control(t_master *mstr)
 {
 	while (SDL_PollEvent(&mstr->event) != 0)
 	{
-		if (mstr->event.type == SDL_QUIT
-        || (mstr->event.type == SDL_KEYDOWN
-        && mstr->event.key.keysym.sym == SDLK_ESCAPE))
-			close_program(mstr, VISU_FINISHED);
+		control_exit(mstr);
         control_move_forward(mstr);
         control_move_backwards(mstr);
         control_pause_and_delay(mstr);

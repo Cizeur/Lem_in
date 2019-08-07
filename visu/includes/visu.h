@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/07 18:34:25 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/07 20:27:48 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct		s_master
 	int				frame;
 	int				delay;
 	int				flag_move;
+	int				flag_exit;
 }					t_master;
 
 /*
