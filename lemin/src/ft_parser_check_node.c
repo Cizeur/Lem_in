@@ -22,7 +22,9 @@ static int		ft_check_is_integer(char *line)
 
 	len = 0;
 	i = *line == '-' ? 1 : 0;
-	while(line[i] == '0' || ft_is_whitespace(line[i]))
+	while (ft_is_whitespace(line[i]))
+		++i;
+	while(line[i] == '0')
 		++i;
 	while(ft_isdigit(line[i + len]))
 		len++;
