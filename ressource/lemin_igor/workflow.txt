@@ -1,0 +1,5 @@
+1. Update t_path : modify from uni- to bi-directional chained list;
+2. Update initialize.c: add functions to initialize created structures (e.g. t_path with ant = 0); Example : debug_init_path(t_solution *sol) inside find_shortest.c;
+3. Check leaks in different cases of exits (every exit must have no leaks)4. remove debug_initialize from find_shortest
+5. modify printf to print to buffer (e.g. sprintf() prototype)
+6. Add visu 
