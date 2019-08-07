@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:24:01 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 09:58:06 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 17:35:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef enum	e_errors
 {
 	STANDARD,
 	EMPTY_FILE,
+	DOUBLE_START,
+	DOUBLE_END,
 	INVALID_LINE,
 	FAIL_MALLOC_DIC,
 	NAME_EMPTY_OR_SPACE,
