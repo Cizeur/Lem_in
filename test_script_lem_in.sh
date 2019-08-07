@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/19 17:57:30 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/07 17:20:55 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/07 18:13:58 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ function usage() {
 	- in a folder of map (-m)\n\
 	- with generator (-g)\n\
 	- with generator options (-o)\n\
-	- !!!-e for no generator otherwise -m [map_folder] erased\n"
+	- !!!-e for generator careful -m [map_folder] erased\n"
 }
 
 ########################## Variables initialization ############################
@@ -100,19 +100,26 @@ if [ $no_gen -eq 1 ]; then
 		map_str=$filename
 		turns=$(cat $map_str | grep "required" | head -1 | cut -d' ' -f8)
 		resu=$($program <$map_str | grep "^L" | wc -l | awk '{$1=$1;print}')
-		average=$(($average + $resu - $turns))
-		average_str=$(echo "scale=3; $average / $i" | bc)
-		if [ $resu -eq $turns ]; then
-			echo "TESTING" $map_str "  Required :" $turns "-" $resu "Achieved" \
-				" and Average" "$average_str"
-		else
-			if [ $resu -gt $turns ]; then
-				echo "TESTING" $map_str "  Required :\033[0;32m" $turns "\033[0m-\033[0;31m" $resu "\033[0mAchieved" \
-					" and Average" $average_str
+		if [ ! -z "$turns" ]; then
+			average=$(($average + $resu - $turns))
+			average_str=$(echo "scale=3; $average / $i" | bc)
+			if [ $resu -eq $turns ]; then
+				echo "TESTING" $map_str "  Required :" $turns "-" $resu "Achieved" \
+					" and Average" "$average_str"
 			else
-				echo "TESTING" $map_str "  Required :\033[0;31m" $turns "\033[0m-\033[0;32m" $resu "\033[0mAchieved" \
-					" and Average" $average_str
+				if [ $resu -gt $turns ]; then
+					echo "TESTING" $map_str "  Required :\033[0;32m" $turns "\033[0m-\033[0;31m" $resu "\033[0mAchieved" \
+						" and Average" $average_str
+				else
+					echo "TESTING" $map_str "  Required :\033[0;31m" $turns "\033[0m-\033[0;32m" $resu "\033[0mAchieved" \
+						" and Average" $average_str
+				fi
 			fi
+		else
+			echo "TESTING" $map_str " : " $resu "Achieved"
+		fi
+		if [ "$resu" -eq 0 ]; then
+			echo "\033[0;31mERROR\033[0m"
 		fi
 		if [ $timer -eq 1 ]; then
 			if test -f "$program"; then
@@ -131,9 +138,11 @@ if [ $no_gen -eq 1 ]; then
 			fi
 			echo VERIFIED
 		fi
-		if [ $resu -gt $(($turns + $max_step)) ]; then
-			echo "NOOOOOOO"
-			exit 1
+		if [ ! -z "$turns" ]; then
+			if [ $resu -gt $(($turns + $max_step)) ]; then
+				echo "NOOOOOOO"
+				exit 1
+			fi
 		fi
 		i=$(($i + 1))
 	done
