@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:26:31 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 19:57:12 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/07 19:09:38 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	inizialization(t_master *mstr)
 	mstr->min_x = 2147483647;
 	mstr->max_y = -2147483648;
 	mstr->min_y = 2147483647;
+	mstr->delay = 20;
+	mstr->flag_move = TRUE;
 	ft_alloc_ants(mstr);
 	ft_alloc_nodes(mstr);
 	ft_alloc_pipes(mstr);

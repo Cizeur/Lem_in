@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:19:24 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:09:31 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:10:48 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,4 @@ void	vs_init(t_master *mstr)
 	mstr->img_init_png = IMG_INIT_PNG;
 	if (!mstr->img_init_png || !IMG_Init(mstr->img_init_png))
 		ft_exit(mstr, INIT_VISU);
-	mstr->flag_exit = FALSE;
 }

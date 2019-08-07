@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:27:30 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:34:25 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # define TRUE				1
 # define FALSE				-1
 
+# define LINE_NODES			"# number of nodes            = "
+# define LINE_PIPES			"# number of pipes            = "
+# define LINE_MOVES			"# number of movements        = "
+# define LINE_ACTIVE		"# number of inactive pipes   = "
+
 # define NODE_UNUSED		-1
 # define NODE_USED			0
 # define NODE_START			1
@@ -39,6 +44,8 @@
 
 # define VISU_FAILED		-1
 # define VISU_FINISHED		1
+
+# define FRAMES				64
 
 typedef struct		s_ants
 {
@@ -113,14 +120,16 @@ typedef struct		s_master
 	int				min_y;
 	SDL_Window		*window;
 	SDL_Renderer	*render;
-	SDL_Event		event_quit;
+	SDL_Event		event;
 	t_texture		**textures;
 	t_texture		*background;
 	t_texture		*start;
 	t_texture		*finish;
 	t_texture		*node;
-	int				flag_exit;
 	int				img_init_png;
+	int				frame;
+	int				delay;
+	int				flag_move;
 }					t_master;
 
 /*

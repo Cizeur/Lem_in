@@ -6,21 +6,21 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:34:01 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 19:48:27 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:43:21 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
 
-void	ft_check_parameters(t_master *mstr, int nb_line)
+void	ft_check_parameters(t_master *mstr, char *line, int nb_line)
 {
 	if (nb_line == 0 && mstr->nb_ants == 0)
 		ft_exit(mstr, INVALID_INPUT);
-	else if (nb_line == 1 && mstr->nb_nodes == 0)
+	else if (ft_strstr(line, LINE_NODES) && mstr->nb_nodes == 0)
 		ft_exit(mstr, INVALID_INPUT);
-	else if (nb_line == 2 && mstr->nb_pipes == 0)
+	else if (ft_strstr(line, LINE_PIPES) && mstr->nb_pipes == 0)
 		ft_exit(mstr, INVALID_INPUT);
-	else if (nb_line == 3 && mstr->nb_movements == 0)
+	else if (ft_strstr(line, LINE_MOVES) && mstr->nb_movements == 0)
 		ft_exit(mstr, INVALID_INPUT);
 	else if (nb_line > 4)
 		ft_exit(mstr, INVALID_INPUT);
@@ -34,15 +34,15 @@ void	ft_get_parameters(t_master *mstr, char *line, int nb_line)
 			ft_exit(mstr, INVALID_INPUT);
 		mstr->nb_ants = ft_atoi(line);
 	}
-	else if (nb_line == 1)
+	else if (ft_strstr(line, LINE_NODES))
 		mstr->nb_nodes = ft_atoi(line + 31);
-	else if (nb_line == 2)
+	else if (ft_strstr(line, LINE_PIPES))
 		mstr->nb_pipes = ft_atoi(line + 31);
-	else if (nb_line == 3)
+	else if (ft_strstr(line, LINE_MOVES))
 		mstr->nb_movements = ft_atoi(line + 31);
-	else if (nb_line == 4)
+	else if (ft_strstr(line, LINE_ACTIVE))
 		mstr->nb_inactive = ft_atoi(line + 31);
-	ft_check_parameters(mstr, nb_line);
+	ft_check_parameters(mstr, line, nb_line);
 }
 
 void	ft_get_input(t_master *mstr, char *line)
