@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:11:02 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/07 09:45:10 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		read_parameters(t_master *mstr)
 		free(line);
 		line = NULL;
 	}
-	if (ret == FALSE)
+	if (ret <= 0)
 		ft_exit(mstr, FAIL_ON_READ);
 }
 
