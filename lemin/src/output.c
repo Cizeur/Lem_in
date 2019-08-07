@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/07 12:26:29 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 17:00:14 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 static void		ft_output_first_lines(t_master *mstr, int activation)
 {
+	ft_output_putnbr(mstr->ants, mstr);
+	ft_output_putstr("\n", mstr);
 	if (activation != OUTPUT_VISU && activation != OUTPUT_VISU_FULL)
 		return ;
 	ft_output_putstr(SO_NODE_NB, mstr);
@@ -85,16 +87,13 @@ static void		ft_output_batch_print(t_storage *storage, t_master *mstr)
 	i = -1;
 	mstr->buffer_pos = 0;
 	initiated = NOPE;
-	while (storage)
+	while ((i = -1) && storage)
 	{
 		while (++i < BATCH_MALLOC_SIZE && (entry = storage->entry[i]).line)
 		{
-			if (!initiated && entry.type != COMMENT)
+			if (!initiated && entry.type != COMMENT && (initiated = CERTAINLY))
 			{
-				ft_output_putnbr(mstr->ants, mstr);
-				ft_output_putstr("\n", mstr);
 				ft_output_first_lines(mstr, mstr->output_type);
-				initiated = CERTAINLY;
 				continue;
 			}
 			if (entry.type == PIPE)

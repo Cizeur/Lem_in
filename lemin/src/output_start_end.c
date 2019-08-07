@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/07 08:55:05 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 17:03:55 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@
 
 static void		ft_output_first_lines(t_master *mstr, int activation)
 {
-	ft_putstr(mstr->storage_start->entry[0].line);
-	ft_putchar('\n');
-	if (activation != OUTPUT_VISU)
+	ft_output_putnbr(mstr->ants, mstr);
+	ft_output_putstr("\n", mstr);
+	if (activation != OUTPUT_VISU && activation != OUTPUT_VISU_FULL)
 		return ;
-	ft_putstr(SO_NODE_NB);
-	ft_putnbr(mstr->nodes);
-	ft_putchar('\n');
-	ft_putstr(SO_PIPE_NB);
-	ft_putnbr(mstr->pipes);
-	ft_putchar('\n');
-	ft_putstr(SO_MVMT_NB);
-	ft_putnbr(1);
-	ft_putchar('\n');
-	ft_putstr(SO_INACT_PIPE_NB);
-	ft_putnbr(mstr->pipes - 1);
-	ft_putchar('\n');
+	ft_output_putstr(SO_NODE_NB, mstr);
+	ft_output_putnbr(mstr->nodes, mstr);
+	ft_output_putstr("\n", mstr);
+	ft_output_putstr(SO_PIPE_NB, mstr);
+	ft_output_putnbr(mstr->pipes, mstr);
+	ft_output_putstr("\n", mstr);
+	ft_output_putstr(SO_MVMT_NB, mstr);
+	ft_output_putnbr(1, mstr);
+	ft_output_putstr("\n", mstr);
+	ft_output_putstr(SO_INACT_PIPE_NB, mstr);
+	ft_output_putnbr(mstr->pipes - 1, mstr);
+	ft_output_putstr("\n", mstr);
 }
 
 static void		ft_output_pipe(t_master *mstr, t_line_info entry)
@@ -40,35 +40,47 @@ static void		ft_output_pipe(t_master *mstr, t_line_info entry)
 	int **mtx;
 
 	mtx = mstr->adjacency_mtx;
-	if ((entry.pipe[0] == mstr->start->node_number
-			&& entry.pipe[1] == mstr->end->node_number)
-			|| (entry.pipe[1] == mstr->start->node_number
-			&& entry.pipe[0] == mstr->end->node_number))
+	if (mstr->output_type == OUTPUT_VISU)
+	{
+		if ((entry.pipe[0] == mstr->start->node_number
+				&& entry.pipe[1] == mstr->end->node_number)
+				|| (entry.pipe[1] == mstr->start->node_number
+				&& entry.pipe[0] == mstr->end->node_number))
+			ft_output_putstr(SO_ACT_PIPE_MK, mstr);
+		else
+			ft_output_putstr(SO_INACT_PIPE_MK, mstr);
+	}
+	if (mstr->output_type == OUTPUT_VISU_FULL)
 		ft_output_putstr(SO_ACT_PIPE_MK, mstr);
-	else
-		ft_output_putstr(SO_INACT_PIPE_MK, mstr);
 }
 
-static void		ft_output_batch_print(t_storage *storage, t_master *mstr,
-							int activ_visu)
+static void		ft_output_batch_print(t_storage *storage, t_master *mstr)
 {
 	int			i;
 	t_line_info entry;
+	int			initiated;
 
-	i = 0;
+	i = -1;
 	mstr->buffer_pos = 0;
-	while (storage)
+	initiated = NOPE;
+	while ((i = -1) && storage)
 	{
 		while (++i < BATCH_MALLOC_SIZE && (entry = storage->entry[i]).line)
 		{
-			if (entry.type == PIPE && activ_visu == OUTPUT_VISU)
+			if (!initiated && entry.type != COMMENT && (initiated = CERTAINLY))
+			{
+				ft_output_first_lines(mstr, mstr->output_type);
+				continue;
+			}
+			if (entry.type == PIPE)
 				ft_output_pipe(mstr, entry);
-			ft_output_putstr(storage->entry[i].line, mstr);
+			ft_output_putstr(entry.line, mstr);
 			ft_output_putstr("\n", mstr);
 		}
 		storage = storage->next;
 		i = -1;
 	}
+	ft_output_putstr("\n", mstr);
 }
 
 static void		ft_output_solution_start_end(t_master *mstr)
@@ -79,7 +91,6 @@ static void		ft_output_solution_start_end(t_master *mstr)
 
 	ants = 0;
 	mtx = mstr->adjacency_mtx;
-	ft_output_putstr("\n", mstr);
 	while (++ants <= mstr->ants)
 	{
 		if (mstr->line_started)
@@ -99,14 +110,18 @@ void			output_start_end(t_master *mstr)
 {
 	mstr->buffer_pos = 0;
 	ft_bzero(mstr->output, BATCH_PRINT_SIZE + 1);
-	if (mstr->output_type != OUTPUT_DEACTIVATED)
+	if (mstr->output_type == OUTPUT_DEACTIVATED)
+		return ;
+	ft_output_count_inactive_pipes(mstr);
+	if (mstr->output_type != OUTPUT_JUST_SOLUTION)
+		ft_output_batch_print(mstr->storage_start, mstr);
+	ft_output_solution_start_end(mstr);
+	if (mstr->output_type == OUTPUT_JUST_SOLUTION)
 	{
-		ft_output_count_inactive_pipes(mstr);
-		ft_output_first_lines(mstr, mstr->output_type);
-		ft_output_batch_print(mstr->storage_start, mstr, mstr->output_type);
-		ft_output_buffer_flush(mstr);
-		ft_output_solution_start_end(mstr);
-		ft_output_buffer_flush(mstr);
+		ft_output_putstr(SO_MVMT_NB, mstr);
+		ft_output_putnbr(mstr->turn_counter, mstr);
+		ft_output_putstr("\n", mstr);
 	}
+	ft_output_buffer_flush(mstr);
 	ft_exit(STANDARD, mstr);
 }
