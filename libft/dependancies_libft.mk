@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/19 10:08:33 by cgiron            #+#    #+#              #
-#    Updated: 2019/06/19 13:02:35 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/07 09:40:05 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,9 @@ SRC_LIBFT = ft_abs.c\
 
 INC_LIBFT					:= libft.h get_next_line.h
 
-DEPENDANCIES_LIBFT			:= Makefile ./dependancies_$(L_LIBFT_DIR).mk ./dependancies_$(L_LIBFT_DIR)_object.mk
+DEPENDANCIES_LIBFT			:= Makefile ./dependancies_$(L_LIBFT_DIR).mk\
+								./dependancies_$(L_LIBFT_DIR)_object.mk\
+								../shared_val.mk
 INC_LIBFT_EXPORT			:= $(addprefix $(SHARE_INC_DIR)/,$(INC_LIBFT))
 SRC_LIBFT_EXPORT			:= $(addprefix $(SHARE_SRC_DIR)/,$(SRC_LIBFT))
 DEPENDANCIES_LIBFT_E 		:= $(DEPENDANCIES_LIBFT) $(SRC_LIBFT_EXPORT) $(INC_LIBFT_EXPORT)
