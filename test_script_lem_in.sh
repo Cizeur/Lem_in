@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/19 17:57:30 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/07 16:56:16 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/07 17:20:55 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 ################################ Functions #####################################
 
 function usage() {
-	printf "\nusage: sh ./test_script_lem_in.sh [-n number of maps] [-m map_folder] [-e no_generator]\n\
+	printf "\nusage: sh ./test_script_lem_in.sh [-n number of maps] [-m map_folder] [-e with_generator]\n\
 	[-g generator][-o generator_opitons][-v with_verif][-t showtime]\n\n"
 	printf "Lemin map folder generator-tester\n\
 	- till n maps\n\
@@ -34,7 +34,7 @@ program=./lem-in
 n_maps=100
 i=1
 max_step=8
-no_gen=0
+no_gen=1
 verifier=./verifier
 verif=0
 timer=0
@@ -57,7 +57,7 @@ while [ "$1" != "" ]; do
 		timer=1
 		;;
 	-e)
-		no_gen=1
+		no_gen=0
 		;;
 	-n)
 		shift
@@ -96,14 +96,12 @@ if [ $no_gen -eq 1 ]; then
 		echo "\033[0;31m$program absent\033[0m"
 		exit 1
 	fi
-	i=0
 	for filename in $map_folder/*; do
-		i=$(($i + 1))
 		map_str=$filename
 		turns=$(cat $map_str | grep "required" | head -1 | cut -d' ' -f8)
 		resu=$($program <$map_str | grep "^L" | wc -l | awk '{$1=$1;print}')
 		average=$(($average + $resu - $turns))
-		average_str=$(echo "scale=3; $average / $i * 100 /100" | bc)
+		average_str=$(echo "scale=3; $average / $i" | bc)
 		if [ $resu -eq $turns ]; then
 			echo "TESTING" $map_str "  Required :" $turns "-" $resu "Achieved" \
 				" and Average" "$average_str"
@@ -123,7 +121,7 @@ if [ $no_gen -eq 1 ]; then
 					time ($program <$map_str) 2>&1 1>/dev/null
 				)"
 				utime_tot=$(echo "scale=3; $utime + $utime_tot" | bc)
-				utime_av=$(echo "scale=3; $utime_tot / $i " | bc)
+				utime_av=$(echo "scale=3; $utime_tot / $i" | bc)
 				echo "TIME OF EXECUTION" $utime "and average" $utime_av
 			fi
 		fi
@@ -137,7 +135,7 @@ if [ $no_gen -eq 1 ]; then
 			echo "NOOOOOOO"
 			exit 1
 		fi
-		average=$(($average + $resu - $turns))
+		i=$(($i + 1))
 	done
 	if [ $timer -eq 1 ]; then
 		echo "TOTAL LEMIN RUNTIME for $(($i - 1)) FILES" $utime_tot "seconds"
