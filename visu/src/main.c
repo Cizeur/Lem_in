@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:46:26 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:28:00 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/07 09:41:16 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int		main(int ac, char **av)
 	vs_run(mstr);
 	// print(mstr, ac, av);
 	close_program(mstr, VISU_FINISHED);
+	return (0);
 }
 
