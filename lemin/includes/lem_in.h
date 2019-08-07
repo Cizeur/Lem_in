@@ -6,22 +6,24 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 17:21:27 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 09:00:28 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-#  include <stdio.h>
+//
+# include <stdio.h>
+//
 # include "error.h"
 
 /*
 ** STORAGE BATCH SIZES
 */
 
-# define BATCH_MALLOC_SIZE 100000
-# define BATCH_PRINT_SIZE 100000
+# define BATCH_MALLOC_SIZE 50000
+# define BATCH_PRINT_SIZE 1000000
 
 /*
 ** DICTIONARY
@@ -108,7 +110,6 @@ typedef enum	e_ln_type
 	END_OF_READ, ANTS, ERROR, START, END, NODE, PIPE, COMMENT, ANTS_NB
 }				t_ln_type;
 
-
 typedef struct	s_bucket
 {
 	int						line_index;
@@ -121,9 +122,9 @@ typedef struct	s_hash_dico
 	int				collisions;
 }				t_hash_dico;
 
-typedef struct 	s_line_info
+typedef struct	s_line_info
 {
-	char 				*line;
+	char				*line;
 	t_ln_type			type;
 	int					hash_key;
 	int					line_index;
@@ -171,13 +172,16 @@ typedef struct	s_master
 	int				fringe_start_end;
 }				t_master;
 
+/*
+** INIT AND EXIT
+*/
 
 void			ft_init_mstr(t_master *mstr);
 void			ft_exit(t_errors error, t_master *mstr);
 void			ft_free_everything(t_master *mstr);
 
 //
-#include "debug.h"
+# include "debug.h"
 //
 
 /*
@@ -203,7 +207,7 @@ void			ft_storage_grow(t_master *mstr);
 t_ln_type		ft_storage_add_line(char *line, t_master *mstr);
 t_line_info		*ft_storage_get_line(t_master *mstr, int line_nb);
 void			ft_dico_add(t_master *mstr,
-								t_hash_dico *dico,t_line_info *entry);
+								t_hash_dico *dico, t_line_info *entry);
 int				ft_dico_get(t_master *mstr,
 								t_hash_dico *dico, char *needle, int len);
 

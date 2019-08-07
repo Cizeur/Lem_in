@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/06 13:48:51 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 08:55:05 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		ft_output_pipe(t_master *mstr, t_line_info entry)
 			&& entry.pipe[1] == mstr->end->node_number)
 			|| (entry.pipe[1] == mstr->start->node_number
 			&& entry.pipe[0] == mstr->end->node_number))
-			ft_output_putstr(SO_ACT_PIPE_MK, mstr);
+		ft_output_putstr(SO_ACT_PIPE_MK, mstr);
 	else
 		ft_output_putstr(SO_INACT_PIPE_MK, mstr);
 }

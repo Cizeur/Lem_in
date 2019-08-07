@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:56:28 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 17:34:05 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 08:54:44 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		ft_free_storage(t_storage **storage)
 	while ((i = -1) && *storage)
 	{
 		stock = (*storage)->next;
-		while(++i < BATCH_MALLOC_SIZE && *storage)
+		while (++i < BATCH_MALLOC_SIZE && *storage)
 		{
 			if ((*storage)->entry[i].line)
 				free((*storage)->entry[i].line);
@@ -51,7 +51,7 @@ void		ft_free_dico(t_hash_dico **dico)
 			{
 				bucket = temp->next;
 				temp->line_index = 0;
-					free(temp);
+				free(temp);
 				temp = 0;
 				temp = bucket;
 			}
@@ -80,6 +80,10 @@ static void	ft_free_matrix(t_master *mstr)
 		free(mstr->adjacency_mtx);
 		mstr->adjacency_mtx = 0;
 	}
+}
+
+static void	ft_free_paths(t_master *mstr)
+{
 	if (mstr->node_parents)
 		free(mstr->node_parents);
 	if (mstr->node_path)
@@ -96,7 +100,7 @@ static void	ft_free_matrix(t_master *mstr)
 
 void		ft_free_everything(t_master *mstr)
 {
-	if(mstr)
+	if (mstr)
 	{
 		if (mstr->adjacency_mtx)
 			ft_free_matrix(mstr);
@@ -104,6 +108,7 @@ void		ft_free_everything(t_master *mstr)
 			ft_free_storage(&mstr->storage_start);
 		if (mstr->dico)
 			ft_free_dico(&mstr->dico);
+		ft_free_paths(mstr);
 		free(mstr);
 	}
 	mstr = 0;
