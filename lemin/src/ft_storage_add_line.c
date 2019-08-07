@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:46:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 08:52:31 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 10:39:06 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ t_ln_type		ft_storage_add_line(char *line, t_master *mstr)
 		ft_storage_grow(mstr);
 	entry = &(mstr->storage->entry[reduc_ind]);
 	entry->type = ft_parser_line_type(line, mstr->piping);
-	if (!mstr->ants && entry->type != COMMENT)
+	if (mstr->ants_nb_modified != CONFIRMED && entry->type != COMMENT)
 	{
-		ft_parser_ants_get(mstr, line);
+		ft_parser_ants_get(mstr, line, !mstr->ants_nb_modified);
 		entry->type = ANTS;
+		mstr->ants_nb_modified = CONFIRMED;
 	}
 	if (entry->type == END_OF_READ)
 		ft_exit(INVALID_LINE, mstr);

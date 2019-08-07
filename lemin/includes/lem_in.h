@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 09:00:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 10:38:54 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@
 
 typedef enum	e_ln_type
 {
-	END_OF_READ, ANTS, ERROR, START, END, NODE, PIPE, COMMENT, ANTS_NB
+	END_OF_READ, ANTS, ERROR, START, END, NODE, PIPE, COMMENT
 }				t_ln_type;
 
 typedef struct	s_bucket
@@ -170,6 +170,7 @@ typedef struct	s_master
 	char			output[BATCH_PRINT_SIZE + 1];
 	int				output_type;
 	int				fringe_start_end;
+	int				ants_nb_modified;
 }				t_master;
 
 /*
@@ -177,11 +178,12 @@ typedef struct	s_master
 */
 
 void			ft_init_mstr(t_master *mstr);
+void			ft_option_get(t_master *mstr, int argc, char **argv);
 void			ft_exit(t_errors error, t_master *mstr);
 void			ft_free_everything(t_master *mstr);
 
 //
-# include "debug.h"
+//# include "debug.h"
 //
 
 /*
@@ -189,7 +191,7 @@ void			ft_free_everything(t_master *mstr);
 */
 
 void			parser(t_master *mstr);
-void			ft_parser_ants_get(t_master *mstr, char *line);
+void			ft_parser_ants_get(t_master *mstr, char *line, int activation);
 t_ln_type		ft_parser_check_node(char *line, t_ln_type type);
 t_ln_type		ft_parser_check_pipe(char *line, t_ln_type type);
 t_ln_type		ft_parser_line_type(char *line, int piping);

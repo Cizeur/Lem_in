@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:31:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 17:21:56 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 10:05:01 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char g_error_message[23][40] = {
 
 void		ft_exit(t_errors error, t_master *mstr)
 {
-	if (error != STANDARD)
+	if (error != STANDARD && error != INVALID_ARGUMENT)
 		ft_putstr("ERROR\n");
 	ft_free_everything(mstr);
 	exit(error != STANDARD ? 1 : 0);

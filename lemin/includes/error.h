@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:24:01 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 15:07:25 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/07 09:58:06 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef enum	e_errors
 	START_OR_END_MISSING,
 	WRONG_POSITION_FOR_START_END,
 	DEAD_END_ON_SOLUTION,
-	FAIL_MALLOC_MSTR
+	FAIL_MALLOC_MSTR,
+	INVALID_ARGUMENT
 }				t_errors;
 
 #endif
