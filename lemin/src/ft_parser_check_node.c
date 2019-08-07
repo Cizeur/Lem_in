@@ -14,6 +14,23 @@
 #include "libft/libft.h"
 #include "utils.h"
 
+
+static int		ft_check_is_integer(char *line)
+{
+	int len;
+	int i;
+
+	len = 0;
+	i = *line == '-' ? 1 : 0;
+	while(line[i] == '0' || ft_is_whitespace(line[i]))
+		++i;
+	while(ft_isdigit(line[i + len]))
+		len++;
+	if (len && !ft_atoi(line))
+		return(NOPE);
+	return(CERTAINLY);
+}
+
 static char		*ft_check_numbers(char *line, int *i_adr)
 {
 	char	*pos;
@@ -25,6 +42,8 @@ static char		*ft_check_numbers(char *line, int *i_adr)
 		return (0);
 	while (i > 0 && ft_isdigit(line[i]))
 		--i;
+	if (!ft_check_is_integer(&line[i]))
+		return(0);
 	if (line[i] == '-')
 		--i;
 	if (i <= 0 || !ft_is_whitespace(line[i]))
