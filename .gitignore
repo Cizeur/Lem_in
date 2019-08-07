@@ -2,7 +2,7 @@
 ./.vscode/*
 */*.a
 */obj
-*/*dSYM
+*/*dSYM/*
 */visu_lemin
 ./visu_lemin
 */lem-in
