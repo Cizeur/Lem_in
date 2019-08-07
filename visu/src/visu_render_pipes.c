@@ -6,13 +6,13 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:14:23 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 18:29:00 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:20:08 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
 
-int		render_pipes(t_master *mstr)
+void	render_pipes(t_master *mstr)
 {
 	int		i;
 
@@ -28,9 +28,8 @@ int		render_pipes(t_master *mstr)
 			mstr->nodes_array[mstr->pipes_array[i]->node2_index]->x_px,
 			mstr->nodes_array[mstr->pipes_array[i]->node2_index]->y_px)
 			== FALSE)
-				return (ft_exit(mstr, RENDER_VISU));
+				ft_exit(mstr, RENDER_VISU);
 		}
 		i++;
 	}
-	return (TRUE);
 }

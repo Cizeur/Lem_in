@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:07:46 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 16:26:44 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:27:28 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void    ft_print_moves(t_master *mstr)
     // printf("mstr->moves_array[]->node2_index = %d\n", mstr->moves_array[mstr->current_move]->node2_index);
 }
 
-int    print(t_master *mstr, int ac, char **av)
+void    print(t_master *mstr, int ac, char **av)
 {
     int     i;
 
@@ -111,8 +111,6 @@ int    print(t_master *mstr, int ac, char **av)
             ft_print_moves(mstr);
         }
         else
-            return (ft_exit(mstr, WRONG_ARGUENT));
-        return (TRUE);
+            ft_exit(mstr, WRONG_ARGUENT);
     }
-    return (FALSE);
 }

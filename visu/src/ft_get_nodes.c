@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:14:30 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 15:57:43 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:01:07 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	free_get_nodes(char **tmp)
 	}
 }
 
-int		ft_check_overlap(t_master *mstr, t_nodes *node)
+void	ft_check_overlap(t_master *mstr, t_nodes *node)
 {
 	int		i;
 
@@ -54,30 +54,28 @@ int		ft_check_overlap(t_master *mstr, t_nodes *node)
 	{
 		if (node->x == mstr->nodes_array[i]->x
 		&& node->y == mstr->nodes_array[i]->y)
-			return (ft_exit(mstr, OVERLAPING_ROOMS));
+			ft_exit(mstr, OVERLAPING_ROOMS);
 		i++;
 	}
-	return (TRUE);
 }
 
-int		ft_check_nodes(t_master *mstr, char **tmp)
+void		ft_check_nodes(t_master *mstr, char **tmp)
 {
-	if (mstr->nodes_array[mstr->current_node]->name == NULL
-	|| mstr->nodes_array[mstr->current_node]->len_name == 0
-	|| (mstr->nodes_array[mstr->current_node]->x == 0 && tmp[1][0] != '0')
-	|| (mstr->nodes_array[mstr->current_node]->y == 0 && tmp[2][0] != '0'))
-		return (ft_exit(mstr, INVALID_INPUT));
-	if (ft_check_overlap(mstr, mstr->nodes_array[mstr->current_node]) == FALSE)
-		return (FALSE);
-	return (TRUE);
+	if (mstr->nodes_array[mstr->current_node]->name == NULL)
+		ft_exit(mstr, INVALID_INPUT);
+	if (mstr->nodes_array[mstr->current_node]->len_name == 0)
+		ft_exit(mstr, INVALID_INPUT);
+	if (mstr->nodes_array[mstr->current_node]->x == 0 && tmp[1][0] != '0')
+		ft_exit(mstr, INVALID_INPUT);
+	if (mstr->nodes_array[mstr->current_node]->y == 0 && tmp[2][0] != '0')
+		ft_exit(mstr, INVALID_INPUT);
+	ft_check_overlap(mstr, mstr->nodes_array[mstr->current_node]);
 }
 
-int		ft_get_nodes(t_master *mstr, char *line)
+void		ft_get_nodes(t_master *mstr, char *line)
 {
 	char		**tmp;
-	int			out;
 
-	out = TRUE;
 	if (ft_is_not_comment(mstr, line) == TRUE)
 	{
 		mstr->nodes_array[mstr->current_node]->node_index = mstr->current_node;
@@ -90,9 +88,8 @@ int		ft_get_nodes(t_master *mstr, char *line)
 			mstr->start_name = ft_strdup(tmp[0]);
 		if (mstr->nodes_array[mstr->current_node]->flag == NODE_END)
 			mstr->end_name = ft_strdup(tmp[0]);
-		out = ft_check_nodes(mstr, tmp);
+		ft_check_nodes(mstr, tmp);
 		free_get_nodes(tmp);
 		mstr->current_node++;
 	}
-	return (out);
 }

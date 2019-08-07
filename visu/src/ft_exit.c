@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:20:26 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/31 14:46:32 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:26:49 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char g_error_message[13][40] = {
 	{"nope13"}
 };
 
-int    ft_exit(t_master *mstr, t_errors error)
+void   ft_exit(t_master *mstr, t_errors error)
 {
 	printf("\e[36m");
 	printf("\n\n####################################################\n");
@@ -40,6 +40,5 @@ int    ft_exit(t_master *mstr, t_errors error)
 	printf("####################################################\n");
 	printf("####################################################\n\n");
 	printf("\e[0m");
-    close_program(mstr);
-    return(FALSE);
+    close_program(mstr, VISU_FAILED);
 }
