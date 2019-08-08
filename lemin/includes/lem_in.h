@@ -6,18 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 16:59:01 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:55:24 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
-
-# include "error.h"
-
-#include <stdio.h>
-
-
 
 /*
 ** STORAGE BATCH SIZES
@@ -180,7 +174,6 @@ typedef struct	s_master
 
 void			ft_init_mstr(t_master *mstr);
 void			ft_option_get(t_master *mstr, int argc, char **argv);
-void			ft_exit(t_errors error, t_master *mstr);
 void			ft_free_everything(t_master *mstr);
 
 /*

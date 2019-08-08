@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:24:01 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 17:35:03 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:56:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
+# include "lem_in.h"
 
 # define S_ERROR_OUTPUT "ERROR\n"
 
@@ -46,5 +47,7 @@ typedef enum	e_errors
 	FAIL_MALLOC_MSTR,
 	INVALID_ARGUMENT
 }				t_errors;
+
+void			ft_exit(t_errors error, t_master *mstr);
 
 #endif
