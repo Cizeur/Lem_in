@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 09:13:55 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 17:25:30 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 19:30:02 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		ft_passed_threshold(int o_case, t_master *mstr)
 			"BASIC STRUCT AND STORAGE Mallocated \e[32m \xE2\x9C\x94", mstr);
 	else if (o_case == OC_VALID_OPTIONS)
 		ft_output_putstr("OPTIONS \e[32m \xE2\x9C\x94", mstr);
-	else if (o_case == OC_NODES_OK)
+	else if (o_case == OC_NODES_OK && mstr->start && mstr->end)
 	{
 		ft_output_putstr("NODES \e[32m \xE2\x9C\x94", mstr);
 		entry = mstr->start;
