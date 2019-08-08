@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/07 10:00:18 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/08 09:30:09 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC_LEMIN =  \
 	output_start_end.c\
 	ft_output_count_inactive_pipes.c\
 	ft_output_buffer.c\
+	ft_output_explained.c\
 	ft_solver_path_splitter.c\
 	ft_solver_paths_finder.c\
 	ft_solver_paths_shortener.c\
@@ -70,7 +71,8 @@ INC_LEMIN					:= lem_in.h\
 							error.h\
 							libft/get_next_line.h\
 							libft/libft.h\
-							output.h
+							output.h\
+							output_explained.h
 
 DEPENDANCIES_LEMIN_O		:= Makefile ./dependancies_$(L_LEMIN_DIR).mk\
 								 ./dependancies_$(L_LEMIN_DIR)_object.mk\
