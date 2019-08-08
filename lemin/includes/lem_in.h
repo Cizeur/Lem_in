@@ -6,16 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 09:25:40 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 16:39:12 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-//
-# include <stdio.h>
-//
 # include "error.h"
 
 /*
@@ -182,10 +179,6 @@ void			ft_option_get(t_master *mstr, int argc, char **argv);
 void			ft_exit(t_errors error, t_master *mstr);
 void			ft_free_everything(t_master *mstr);
 
-//
-//# include "debug.h"
-//
-
 /*
 ** PARSER PROTOTYPES
 */
@@ -217,7 +210,8 @@ int				ft_dico_get(t_master *mstr,
 ** MATRIX PROTOTYPES
 */
 
-void			ft_matrix_popping(int max_nodes, int **mtx, int *node_path);
+void			ft_matrix_popping(t_master *mstr, int max_nodes,
+									int *node_path);
 void			ft_matrix_reset_state(t_master *mstr);
 void			ft_matrix_reset_one_path(t_master *mstr, int path);
 void			ft_matrix_generate(t_master *mstr, t_storage *storage);
@@ -250,5 +244,9 @@ void			ft_output_putnstr(char *str, int n, t_master *mstr);
 void			ft_output_putnbr(int n, t_master *mstr);
 void			ft_output_buffer_flush(t_master *mstr);
 void			ft_output_explained(t_master *master, int o_case);
+void			ft_output_explained_cut_pipes(t_master *mstr,
+						int node1, int node2);
+void			ft_output_explained_turns(t_master *mstr, int ants, int turns);
+void			ft_output_explained_string(t_master *mstr, char *str);
 
 #endif

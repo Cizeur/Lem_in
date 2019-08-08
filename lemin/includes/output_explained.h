@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 09:16:18 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 12:51:26 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 14:41:15 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 # define OC_NODES_OK 3
 # define OC_PIPES_OK 4
 # define OC_MALLOC_MATRIX 5
-# define OC_PATH_FOUNDS 6
-# define OC_OUTPUT_AUGMENTING_PATH 7
+# define OC_PATH_VALIDATED 6
+# define OC_PATH_NOT_VALIDATED 7
+# define OC_OUTPUT_AUGMENTING_PATH 8
+# define OC_OUTPUT_FOUND_PATH 9
+# define OC_OUTPUT_SHORTEN_PATH 10
 
 #endif
