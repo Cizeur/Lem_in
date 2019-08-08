@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/19 17:57:30 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/07 18:40:23 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/08 09:01:28 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ map_folder=./maps_tester
 program=./lem-in
 n_maps=100
 i=1
-max_step=8
+max_step=20
 no_gen=1
 verifier=./verifier
 verif=0
