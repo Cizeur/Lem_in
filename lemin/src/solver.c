@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 16:26:46 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:17:33 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void			solver(t_master *mstr)
 		ft_output_explained_string(mstr,
 			"\n	\e[31mSPLITING PATHS\n\e[0m");
 		ft_solver_paths_finder(mstr, ++flow);
-		ft_optimize_paths(mstr, flow);
 		ft_matrix_reset_state(mstr);
+		ft_optimize_paths(mstr, flow);
 		ft_solver_paths(mstr, flow);
 		ft_solver_turn_counter(mstr, flow);
 		if (!mstr->end_of_search && !mstr->skip)
