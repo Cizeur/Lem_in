@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 10:02:19 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 12:56:27 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "libft/libft.h"
+#include "output_explained.h"
 
 int			main(int argc, char **argv)
 {
@@ -19,12 +20,14 @@ int			main(int argc, char **argv)
 	int			start;
 	int			end;
 
-	argc--;
-	argv++;
+
 	if (!(mstr = (t_master *)ft_memalloc(sizeof(t_master))))
 		ft_exit(FAIL_MALLOC_MSTR, mstr);
 	ft_init_mstr(mstr);
-	ft_option_get(mstr, argc, argv);
+	ft_option_get(mstr, --argc, ++argv);
+	ft_output_explained(mstr, OCS_INIT);
+	ft_output_explained(mstr, OC_MALLOC_STORAGE);
+	ft_output_explained(mstr, OC_VALID_OPTIONS);
 	parser(mstr);
 	start = mstr->start->node_number;
 	end = mstr->end->node_number;

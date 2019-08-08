@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 10:38:54 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 09:25:40 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,5 +249,6 @@ void			ft_output_putstr(char *str, t_master *mstr);
 void			ft_output_putnstr(char *str, int n, t_master *mstr);
 void			ft_output_putnbr(int n, t_master *mstr);
 void			ft_output_buffer_flush(t_master *mstr);
+void			ft_output_explained(t_master *master, int o_case);
 
 #endif

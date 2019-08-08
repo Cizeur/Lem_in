@@ -6,14 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 09:18:05 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 08:41:23 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 09:08:49 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "libft/libft.h"
 #include "utils.h"
-
 
 static int		ft_check_is_integer(char *line)
 {
@@ -22,15 +21,15 @@ static int		ft_check_is_integer(char *line)
 
 	len = 0;
 	i = *line == '-' ? 1 : 0;
-	while (ft_is_whitespace(line[i]))
+	if (ft_is_whitespace(line[i]))
 		++i;
-	while(line[i] == '0')
+	while (line[i] == '0')
 		++i;
-	while(ft_isdigit(line[i + len]))
+	while (ft_isdigit(line[i + len]))
 		len++;
 	if (len && !ft_atoi(line))
-		return(NOPE);
-	return(CERTAINLY);
+		return (NOPE);
+	return (CERTAINLY);
 }
 
 static char		*ft_check_numbers(char *line, int *i_adr)

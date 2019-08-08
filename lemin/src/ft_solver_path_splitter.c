@@ -6,13 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 09:36:06 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 15:28:59 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 12:37:44 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
 #include "libft/libft.h"
+#include "output_explained.h"
 
 static void		ft_path_cleaning(t_master *mstr, int queue_end, int end_node)
 {
@@ -35,6 +36,7 @@ static void		ft_path_cleaning(t_master *mstr, int queue_end, int end_node)
 	j = -1;
 	while (++j <= queue_end / 2)
 		ft_swap(&mstr->node_path[j], &mstr->node_path[queue_end - j]);
+	ft_output_explained(mstr, OC_OUTPUT_AUGMENTING_PATH);
 }
 
 static int		ft_check_node(t_master *mstr, int cur_node,

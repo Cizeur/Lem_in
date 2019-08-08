@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/07 17:03:55 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 12:07:09 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void		ft_output_batch_print(t_storage *storage, t_master *mstr)
 	int			initiated;
 
 	i = -1;
-	mstr->buffer_pos = 0;
 	initiated = NOPE;
 	while ((i = -1) && storage)
 	{
@@ -108,12 +107,11 @@ static void		ft_output_solution_start_end(t_master *mstr)
 
 void			output_start_end(t_master *mstr)
 {
-	mstr->buffer_pos = 0;
-	ft_bzero(mstr->output, BATCH_PRINT_SIZE + 1);
 	if (mstr->output_type == OUTPUT_DEACTIVATED)
 		return ;
 	ft_output_count_inactive_pipes(mstr);
-	if (mstr->output_type != OUTPUT_JUST_SOLUTION)
+	if (mstr->output_type != OUTPUT_JUST_SOLUTION
+			&& mstr->output_type != OUTPUT_EXPLAINED)
 		ft_output_batch_print(mstr->storage_start, mstr);
 	ft_output_solution_start_end(mstr);
 	if (mstr->output_type == OUTPUT_JUST_SOLUTION)

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin_options.h                                    :+:      :+:    :+:   */
+/*   output_explained.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/07 09:55:00 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 11:39:56 by cgiron           ###   ########.fr       */
+/*   Created: 2019/08/08 09:16:18 by cgiron            #+#    #+#             */
+/*   Updated: 2019/08/08 12:51:26 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIN_OPTIONS_H
-# define LEMIN_OPTIONS_H
+#ifndef OUTPUT_EXPLAINED_H
+# define OUTPUT_EXPLAINED_H
 
-# define O_USAGE "USAGE : ./lemin < [map_file]\n"
+# define OCS_INIT 0
 
-/*
-** OPTIONS
-*/
-
-#define O_VISU "-v"
-#define O_VISU_FULL "-vu"
-#define O_OUTPUT_DEACT "-d"
-#define O_OUTPUT_JUST_SOL "-s"
-#define O_ANT_MOD "-a"
-#define O_OUTPUT_EXPLAINED "-e"
+# define OC_MALLOC_STORAGE 1
+# define OC_VALID_OPTIONS 2
+# define OC_NODES_OK 3
+# define OC_PIPES_OK 4
+# define OC_MALLOC_MATRIX 5
+# define OC_PATH_FOUNDS 6
+# define OC_OUTPUT_AUGMENTING_PATH 7
 
 #endif

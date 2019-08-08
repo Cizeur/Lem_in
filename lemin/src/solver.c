@@ -6,13 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 14:47:23 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 10:26:28 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
 #include "libft/libft.h"
+#include "output_explained.h"
 
 static int		ft_get_max_flow_limit(t_master *mstr)
 {
@@ -32,6 +33,7 @@ void			solver(t_master *mstr)
 
 	mstr->max_flow = ft_get_max_flow_limit(mstr);
 	flow = 0;
+	ft_output_explained(mstr, OC_PATH_FOUNDS);
 	while (flow < mstr->max_flow && !mstr->end_of_search)
 	{
 		if (!(ft_solver_paths_splitter(mstr, mstr->adjacency_mtx,
@@ -41,12 +43,13 @@ void			solver(t_master *mstr)
 		ft_solver_paths_finder(mstr, ++flow);
 		ft_matrix_reset_state(mstr);
 		i = -1;
-		while (++i < flow)
-			ft_solver_paths_shortener(mstr, flow);
+		ft_solver_paths_shortener(mstr, flow);
+		ft_solver_paths_shortener(mstr, flow);
 		ft_solver_paths(mstr, flow);
 		ft_solver_turn_counter(mstr, flow);
 		if (!mstr->end_of_search && !mstr->skip)
 			ft_solver_solution_store(mstr, mstr->nodes, flow);
+		ft_output_explained(mstr, OC_PATH_FOUNDS);
 	}
 	if (!mstr->final_flow)
 		ft_exit(NOT_CONNECTED, mstr);
