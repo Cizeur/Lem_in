@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/08 11:54:14 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:25:02 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,11 @@ void			output(t_master *mstr)
 		return ;
 	ft_output_count_inactive_pipes(mstr);
 	if (mstr->output_type != OUTPUT_JUST_SOLUTION
-			&& mstr->output_type != OUTPUT_EXPLAINED)
+			&& mstr->output_type != OUTPUT_EXPLAINED
+			&& mstr->output_type != OUTPUT_EXPLAINED_SHORT)
 		ft_output_batch_print(mstr->storage_start, mstr);
-	ft_output_solution(mstr);
+	if (mstr->output_type != OUTPUT_EXPLAINED_SHORT)
+		ft_output_solution(mstr);
 	if (mstr->output_type == OUTPUT_JUST_SOLUTION)
 	{
 		ft_output_putstr(SO_MVMT_NB, mstr);

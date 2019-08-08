@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 16:39:12 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 16:59:01 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define LEM_IN_H
 
 # include "error.h"
+
+#include <stdio.h>
+
+
 
 /*
 ** STORAGE BATCH SIZES

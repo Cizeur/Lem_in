@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 10:58:52 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/08 09:45:41 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:21:17 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define OUTPUT_DEACTIVATED 3
 # define OUTPUT_JUST_SOLUTION 4
 # define OUTPUT_EXPLAINED 5
+# define OUTPUT_EXPLAINED_SHORT 6
 
 /*
 ** VISU_STRING

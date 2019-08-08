@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 14:49:41 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 16:12:18 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:25:45 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 void			ft_output_explained_turns(t_master *mstr, int ants, int turns)
 {
-	if (mstr->output_type != OUTPUT_EXPLAINED)
+	if (mstr->output_type != OUTPUT_EXPLAINED_SHORT
+		&& mstr->output_type != OUTPUT_EXPLAINED)
 		return ;
 	if (!ants)
 		ft_output_putstr(

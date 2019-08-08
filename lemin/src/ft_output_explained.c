@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 09:13:55 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 16:35:07 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:25:30 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ static void		ft_paths_cases(t_master *mstr, int o_case)
 
 void			ft_output_explained(t_master *mstr, int o_case)
 {
-	if (mstr->output_type != OUTPUT_EXPLAINED)
+	if (mstr->output_type != OUTPUT_EXPLAINED_SHORT
+		&& mstr->output_type != OUTPUT_EXPLAINED)
 		return ;
 	ft_passed_threshold(o_case, mstr);
 	if (o_case == OC_PATH_VALIDATED)

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 13:40:54 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 13:56:47 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:25:57 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void			ft_output_explained_cut_pipes(t_master *mstr, int node1, int node2)
 	t_line_info *entry2;
 	int **mtx;
 
-	if (mstr->output_type != OUTPUT_EXPLAINED)
+	if (mstr->output_type != OUTPUT_EXPLAINED
+		&& mstr->output_type != OUTPUT_EXPLAINED_SHORT)
 		return ;
 	mtx = mstr->adjacency_mtx;
 	entry1 = ft_storage_get_line(mstr, mtx[node1][A_LINE_INDEX]);
