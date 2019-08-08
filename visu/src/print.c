@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:07:46 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:27:28 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/08 15:58:27 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void    ft_print_parameters(t_master *mstr)
     printf("POS MIN X         = %d\n", mstr->min_x);
     printf("POS MAX Y         = %d\n", mstr->max_y);
     printf("POS MIN Y         = %d\n", mstr->min_y);
-    printf("PATH BACKGROUND   = %s\n\n\n", mstr->background->path);    
+    // printf("PATH BACKGROUND   = %s\n\n\n", mstr->background->path);    
 }
 
 void    ft_print_nodes(t_master *mstr)
