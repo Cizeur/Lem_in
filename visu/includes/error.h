@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:07:41 by crfernan          #+#    #+#             */
-/*   Updated: 2019/07/30 22:16:36 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/08 18:59:10 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@ typedef enum	e_errors
 	INVALID_INPUT,
 	INVALID_NAME,
 	OVERLAPING_ROOMS,
-
 	INIT_VISU,
 	LOAD_VISU,
 	RENDER_VISU,
-
 	CREATE_TEXTURE,
-
 	WRONG_ARGUENT
 }				t_errors;
 

@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:55:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:31:14 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/08 18:14:10 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,19 @@ void	free_moves(t_master *mstr)
 	i = 0;
 	if (mstr->moves_array)
 	{
-		while (i < mstr->nb_movements)
+		while (i < mstr->nb_movements + 1)
 		{
 			current = mstr->moves_array[i];
-			next = mstr->moves_array[i]->next;
 			while (current != NULL)
 			{
+				next = current->next;
 				free(current);
 				current = next;
-				if (current != NULL)
-					next = current->next;
 			}
 			i++;
 		}
-		if (mstr->moves_array[i])
-			free(mstr->moves_array[i]);
 		free(mstr->moves_array);
+		mstr->moves_array = 0;
 	}
 }
 
@@ -135,8 +132,11 @@ void	close_program(t_master *mstr, int program_state)
 	}
 	IMG_Quit();
 	SDL_Quit();
-	free(mstr);
-	mstr = NULL;
+	if (mstr)
+	{
+		free(&mstr);
+		mstr = NULL;
+	}
 	if (program_state == VISU_FAILED)
 		exit(1);
 	if (program_state == VISU_FINISHED)

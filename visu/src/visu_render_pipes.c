@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/28 12:14:23 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:20:08 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/08 18:16:22 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	render_pipes(t_master *mstr)
 	i = 0;
 	while (i < mstr->nb_pipes)
 	{
+		if (mstr->pipes_array[i]->active == PIPE_UNDEFINED)
+			ft_exit(mstr, INVALID_INPUT);
 		if (mstr->pipes_array[i]->active == PIPE_ACTIVE)
 		{
 			if (SDL_SetRenderDrawColor(mstr->render, 0xFF, 0xFF, 0xFF, 0xFF)

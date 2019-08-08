@@ -6,17 +6,32 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/07 09:45:10 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:16:02 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visu.h"
 #include "libft/get_next_line.h"
 
-int		ft_comment_or_empty(char *line)
+int		ft_comment_or_empty_1(char *line)
 {
-	if (line[0] != '#' && line[0] != '\n')
+	if (ft_str_isdigit(line) == TRUE)
 		return (TRUE);
+	if (ft_strstr(line, LINE_NODES))
+		return (TRUE);
+	if (ft_strstr(line, LINE_PIPES))
+		return (TRUE);
+	if (ft_strstr(line, LINE_MOVES))
+		return (TRUE);
+	if (ft_strstr(line, LINE_ACTIVE))
+		return (TRUE);
+	return (FALSE);
+}
+
+int		ft_comment_or_empty_2(char *line)
+{
+	if (!line || !line[0])
+		return (FALSE);
 	if (ft_str_cmp(line, "##start") == TRUE)
 		return (TRUE);
 	if (ft_str_cmp(line, "##end") == TRUE)
@@ -25,25 +40,27 @@ int		ft_comment_or_empty(char *line)
 		return (TRUE);
 	if (ft_str_cmp(line, "#inactive") == TRUE)
 		return (TRUE);
-	return (FALSE);
+	if (line[0] == '#' || line[0] == '\n')
+		return (FALSE);
+	return (TRUE);
 }
-
-/*
-***	comments before or in between number of ants
-*/
 
 void		read_parameters(t_master *mstr)
 {
 	int			ret;
-	char		*line;
+	char		*line;    
 	int			nb_line;
 
 	nb_line = 0;
 	while (nb_line < 5 && (ret = get_next_line(0, &line)) > 0)
 	{
-		ft_get_parameters(mstr, line, nb_line);
-		nb_line++;
-		free(line);
+		if (line && ft_comment_or_empty_1(line) == TRUE)
+		{
+			ft_get_parameters(mstr, line, nb_line);
+			nb_line++;
+		}
+		if (line)
+			free(line);
 		line = NULL;
 	}
 	if (ret <= 0)
@@ -54,16 +71,16 @@ void		read_nodes_pipes_moves(t_master *mstr)
 {
 	int			ret;
 	char		*line;
-	int			nb_line;
 
-	nb_line = 5;
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
-		if (ft_comment_or_empty(line) == TRUE)
+		if (line && ft_comment_or_empty_2(line) == TRUE)
+		{
 			ft_get_input(mstr, line);
-		free(line);
+		}
+		if (line)
+			free(line);
 		line = NULL;
-		nb_line++;
 	}
 	if (ret == FALSE)
 		ft_exit(mstr, FAIL_ON_READ);
