@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/08 16:42:24 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:58:24 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "output.h"
 #include "utils.h"
 #include "libft/libft.h"
+#include "error.h"
 
 static void		ft_output_first_lines(t_master *mstr, int activation)
 {

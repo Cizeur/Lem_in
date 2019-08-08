@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 15:43:23 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 10:33:56 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:46:10 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_parser_ants_get(t_master *mstr, char *line, int activation)
 	if (line[i])
 		ft_exit(ANT_NOT_NB_ONLY, mstr);
 	if (!activation)
-		return;
+		return ;
 	if ((mstr->ants = ft_atoi(line)) <= 0)
 		ft_exit(NO_ANTS, mstr);
 }

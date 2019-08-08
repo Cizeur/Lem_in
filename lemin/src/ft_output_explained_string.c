@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 15:55:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 17:26:27 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:45:01 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void		ft_output_explained_string(t_master *mstr, char *str)
 {
 	if ((mstr->output_type != OUTPUT_EXPLAINED_SHORT
 		&& mstr->output_type != OUTPUT_EXPLAINED) || !str)
-		return;
+		return ;
 	ft_output_putstr(str, mstr);
 }

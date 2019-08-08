@@ -6,20 +6,20 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 17:30:41 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:56:44 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "libft/libft.h"
 #include "output_explained.h"
+#include "error.h"
 
 int			main(int argc, char **argv)
 {
 	t_master	*mstr;
 	int			start;
 	int			end;
-
 
 	if (!(mstr = (t_master *)ft_memalloc(sizeof(t_master))))
 		ft_exit(FAIL_MALLOC_MSTR, mstr);

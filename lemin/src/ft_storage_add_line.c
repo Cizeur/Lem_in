@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:46:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 12:04:01 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 19:28:53 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "output_explained.h"
+#include "error.h"
 
 static void		ft_check_ants(t_master *mstr, t_line_info *entry, char *line)
 {
@@ -38,8 +39,6 @@ t_ln_type		ft_storage_add_line(char *line, t_master *mstr)
 	ft_check_ants(mstr, entry, line);
 	if (entry->type == END_OF_READ)
 		ft_exit(INVALID_LINE, mstr);
-	if (entry->type == PIPE && !mstr->piping)
-		ft_output_explained(mstr, OC_NODES_OK);
 	entry->line = line;
 	entry->line_index = mstr->lines_nb;
 	ft_parser_fill_entry_node(mstr, line, entry);

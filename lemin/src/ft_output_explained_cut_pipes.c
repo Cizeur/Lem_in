@@ -6,18 +6,18 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 13:40:54 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 17:25:57 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:45:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "output.h"
 
-void			ft_output_explained_cut_pipes(t_master *mstr, int node1, int node2)
+void		ft_output_explained_cut_pipes(t_master *mstr, int node1, int node2)
 {
 	t_line_info *entry1;
 	t_line_info *entry2;
-	int **mtx;
+	int			**mtx;
 
 	if (mstr->output_type != OUTPUT_EXPLAINED
 		&& mstr->output_type != OUTPUT_EXPLAINED_SHORT)

@@ -6,13 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 16:39:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 19:29:25 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/get_next_line.h"
 #include "lem_in.h"
 #include "output_explained.h"
+#include "error.h"
 
 void		parser(t_master *mstr)
 {

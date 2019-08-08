@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:24:48 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/08 18:27:52 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:47:37 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_turn_counter_init(t_master *mstr, int *node_path, int flow)
 		return (-1);
 }
 
-static int		ft_end_of_search(t_master *mstr, int ants)
+static int	ft_end_of_search(t_master *mstr, int ants)
 {
 	if (ants != -1)
 		return (0);
@@ -46,7 +46,7 @@ static int		ft_end_of_search(t_master *mstr, int ants)
 	return (1);
 }
 
-void			ft_solver_turn_counter(t_master *mstr, int flow)
+void		ft_solver_turn_counter(t_master *mstr, int flow)
 {
 	int ants;
 	int turns;

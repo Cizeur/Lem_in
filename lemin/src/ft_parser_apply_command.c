@@ -6,11 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 08:34:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 17:27:24 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:57:26 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include "error.h"
 
 void		ft_parser_apply_command(t_master *mstr, t_line_info *entry)
 {

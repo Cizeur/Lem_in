@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 17:17:33 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:57:59 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "utils.h"
 #include "libft/libft.h"
 #include "output_explained.h"
+#include "error.h"
 
 static int		ft_get_max_flow_limit(t_master *mstr)
 {

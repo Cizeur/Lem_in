@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 09:50:05 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 17:20:01 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:57:08 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/libft.h"
 #include "lemin_options.h"
 #include "output.h"
+#include "error.h"
 
 static int	ft_visu_option_get(t_master *mstr, char **argv)
 {

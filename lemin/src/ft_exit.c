@@ -6,12 +6,13 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:31:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 17:17:58 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 19:42:51 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 #include "lem_in.h"
+#include "output.h"
 #include "libft/libft.h"
 #include <stdlib.h>
 

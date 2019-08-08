@@ -6,11 +6,12 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 14:49:53 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 13:41:37 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 18:57:50 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include "error.h"
 
 t_line_info			*ft_storage_get_line(t_master *mstr, int line_nb)
 {
