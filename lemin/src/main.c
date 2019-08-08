@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 16:36:49 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:30:41 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int			main(int argc, char **argv)
 			!= DISCONNECTED)
 		output_start_end(mstr);
 	solver(mstr);
-	ft_output_explained_string(mstr,
-		"\n-----          SOLUTION             -----\n\n");
 	output(mstr);
 	ft_exit(STANDARD, mstr);
 	return (0);

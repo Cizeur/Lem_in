@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 10:34:54 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 16:53:40 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 17:30:55 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void			ft_output_solution(t_master *mstr)
 	int ants;
 	int i;
 
+	ft_output_explained_string(mstr,
+		"\n-----          SOLUTION             -----\n\n");
 	ants = 1;
 	max_node = mstr->nodes;
 	turns = mstr->turn_counter;
