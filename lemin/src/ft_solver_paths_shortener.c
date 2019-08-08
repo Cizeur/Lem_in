@@ -6,43 +6,42 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 14:42:54 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 19:43:28 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
 #include "output_explained.h"
+#include "error.h"
 
 static void	ft_path_cleaning(t_master *mstr, int path_number,
 							int cur_node, int end_node)
 {
 	int i;
-	int *node_path;
 	int **mtx;
 
 	mtx = mstr->adjacency_mtx;
-	node_path = mstr->node_path;
 	mtx[end_node][A_PARENT_FLOW] = cur_node;
-	node_path[mtx[cur_node][A_VISIT_FLOW] + 1] = end_node;
+	mstr->node_path[mtx[cur_node][A_VISIT_FLOW] + 1] = end_node;
 	i = mstr->nodes;
 	while (--i)
 	{
-		if (node_path[i] == DISCONNECTED)
+		if (mstr->node_path[i] == DISCONNECTED)
 			continue;
-		node_path[i - 1] = mtx[node_path[i]][A_PARENT_FLOW];
+		mstr->node_path[i - 1] = mtx[mstr->node_path[i]][A_PARENT_FLOW];
 	}
-	mtx[node_path[1]][A_SOLUTION_START] = CERTAINLY;
-	while (node_path[++i + 1] != DISCONNECTED)
+	mtx[mstr->node_path[++i]][A_SOLUTION_START] = CERTAINLY;
+	while (i + 1 < mstr->nodes && mstr->node_path[i + 1] != DISCONNECTED)
 	{
-		mtx[node_path[i]][A_CURRENT_SOLUTION] = node_path[i + 1];
-		mtx[node_path[i]][A_LOADED] = CERTAINLY;
-		mtx[node_path[i]][A_PATH_NUMBER] = path_number;
-		mtx[node_path[i]]
-			[A_OPTIONS + mstr->nodes + node_path[i + 1]] = ACTIVATED;
+		mtx[mstr->node_path[i]][A_CURRENT_SOLUTION] = mstr->node_path[i + 1];
+		mtx[mstr->node_path[i]][A_LOADED] = CERTAINLY;
+		mtx[mstr->node_path[i]][A_PATH_NUMBER] = path_number;
+		mtx[mstr->node_path[i]]
+			[A_OPTIONS + mstr->nodes + mstr->node_path[i + 1]] = ACTIVATED;
+		i++;
 	}
 	ft_output_explained(mstr, OC_OUTPUT_SHORTEN_PATH);
-	mtx[node_path[0]][A_OPTIONS + mstr->nodes + node_path[1]] = ACTIVATED;
 }
 
 static int	ft_is_possible_next(t_master *mstr, int cur_node, int next_node)
@@ -102,6 +101,8 @@ static int	ft_solver_one_path_shorten(t_master *mstr, int **mtx,
 			if (next_node == mstr->end->node_number)
 			{
 				ft_path_cleaning(mstr, path_number, cur_node, next_node);
+				mtx[mstr->node_path[0]]
+					[A_OPTIONS + mstr->nodes + mstr->node_path[1]] = ACTIVATED;
 				return (SUCCESS);
 			}
 			if (ft_is_possible_next(mstr, cur_node, next_node))

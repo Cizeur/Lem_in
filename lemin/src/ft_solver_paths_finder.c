@@ -6,13 +6,14 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 13:35:20 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 19:11:04 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "utils.h"
 #include "output_explained.h"
+#include "error.h"
 
 static void		ft_path_cleaning(t_master *mstr, int path_number,
 					int cur_node, int end_node)
@@ -32,12 +33,12 @@ static void		ft_path_cleaning(t_master *mstr, int path_number,
 			continue;
 		node_path[i - 1] = mtx[node_path[i]][A_PARENT_FLOW];
 	}
-	mtx[node_path[1]][A_SOLUTION_START] = 1;
-	while (node_path[++i + 1] != DISCONNECTED)
+	mtx[node_path[++i]][A_SOLUTION_START] = 1;
+	while (i + 1 < mstr->nodes && node_path[i + 1] != DISCONNECTED)
 	{
 		mtx[node_path[i]][A_CURRENT_SOLUTION] = node_path[i + 1];
 		mtx[node_path[i]][A_LOADED_FINDER] = CERTAINLY;
-		mtx[node_path[i]][A_PATH_NUMBER] = path_number;
+		mtx[node_path[i++]][A_PATH_NUMBER] = path_number;
 	}
 	ft_output_explained(mstr, OC_OUTPUT_FOUND_PATH);
 }
