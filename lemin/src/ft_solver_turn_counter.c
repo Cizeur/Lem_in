@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:24:48 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/07 08:39:29 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 16:26:26 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,36 @@ static int	ft_turn_counter_init(t_master *mstr, int *node_path, int flow)
 			mstr->adjacency_mtx[node_path[i]][A_CURRENT_PATH_LEN];
 		current_flow++;
 	}
-	if (ants >= 0)
+	if (ants > 0)
 		return (ants);
 	else
 		return (-1);
 }
 
-void		ft_solver_turn_counter(t_master *mstr, int flow)
+static int		ft_end_of_search(t_master *mstr, int ants)
+{
+	if (ants != -1)
+		return (0);
+	ft_output_explained_turns(mstr, 0, 0);
+	mstr->end_of_search = CERTAINLY;
+	return (1);
+}
+
+void			ft_solver_turn_counter(t_master *mstr, int flow)
 {
 	int ants;
 	int turns;
 
 	ants = mstr->ants;
 	mstr->skip = NOPE;
+	turns = 0;
 	ants = ft_turn_counter_init(mstr, mstr->node_path, flow);
+	if (ft_end_of_search(mstr, ants))
+		return;
 	if (ants != -1 && !mstr->end_of_search)
 		turns = mstr->adjacency_mtx
 			[mstr->node_path[flow - 1]][A_CURRENT_PATH_LEN] - 1;
-	else
-	{
-		mstr->end_of_search = CERTAINLY;
-		return ;
-	}
+	ft_output_explained_turns(mstr, ants, turns);
 	while (ants > 0)
 	{
 		turns++;
@@ -62,4 +70,5 @@ void		ft_solver_turn_counter(t_master *mstr, int flow)
 		mstr->turn_counter = turns + 1;
 	else
 		mstr->skip = CERTAINLY;
+	ft_output_explained_turns(mstr, -1, turns);
 }

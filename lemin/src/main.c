@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 12:56:27 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 16:36:49 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ int			main(int argc, char **argv)
 	ft_output_explained(mstr, OC_MALLOC_STORAGE);
 	ft_output_explained(mstr, OC_VALID_OPTIONS);
 	parser(mstr);
+	ft_output_explained_string(mstr,
+		"\n-----          Parsing done            -----\n\n");
 	start = mstr->start->node_number;
 	end = mstr->end->node_number;
 	if (mstr->adjacency_mtx[start][A_OPTIONS + mstr->nodes + end]
 			!= DISCONNECTED)
 		output_start_end(mstr);
 	solver(mstr);
+	ft_output_explained_string(mstr,
+		"\n-----          SOLUTION             -----\n\n");
 	output(mstr);
 	ft_exit(STANDARD, mstr);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/08 12:07:09 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 16:42:24 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ static void		ft_output_solution_start_end(t_master *mstr)
 
 void			output_start_end(t_master *mstr)
 {
+	ft_output_explained_string(mstr,
+		"\n\e[31mSTART AND END CONNECTED DUMPING\n\e[0m");
+	ft_output_explained_string(mstr,
+		"\n-----          SOLUTION             -----\n\n");
 	if (mstr->output_type == OUTPUT_DEACTIVATED)
 		return ;
 	ft_output_count_inactive_pipes(mstr);

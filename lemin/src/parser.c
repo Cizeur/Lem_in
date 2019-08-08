@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 12:04:54 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/08 16:39:28 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		parser(t_master *mstr)
 	while ((r = get_next_line(0, &line)) > 0)
 	{
 		line_type = ft_storage_add_line(line, mstr);
-		line = NULL;
+		line = 0;
 		mstr->piping = line_type == PIPE ? CERTAINLY : mstr->piping;
 		if (line_type == END_OF_READ)
 			ft_exit(INVALID_LINE, mstr);
