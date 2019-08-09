@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 11:04:51 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 19:43:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 10:50:30 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static void	ft_path_cleaning(t_master *mstr, int path_number,
 			[A_OPTIONS + mstr->nodes + mstr->node_path[i + 1]] = ACTIVATED;
 		i++;
 	}
-	ft_output_explained(mstr, OC_OUTPUT_SHORTEN_PATH);
+	mtx[mstr->node_path[0]]
+			[A_OPTIONS + mstr->nodes + mstr->node_path[1]] = ACTIVATED;
 }
 
 static int	ft_is_possible_next(t_master *mstr, int cur_node, int next_node)
@@ -101,8 +102,6 @@ static int	ft_solver_one_path_shorten(t_master *mstr, int **mtx,
 			if (next_node == mstr->end->node_number)
 			{
 				ft_path_cleaning(mstr, path_number, cur_node, next_node);
-				mtx[mstr->node_path[0]]
-					[A_OPTIONS + mstr->nodes + mstr->node_path[1]] = ACTIVATED;
 				return (SUCCESS);
 			}
 			if (ft_is_possible_next(mstr, cur_node, next_node))
@@ -127,5 +126,6 @@ void		ft_solver_paths_shortener(t_master *mstr, int flow)
 		if (ft_solver_one_path_shorten(mstr, mtx,
 			mstr->start->node_number, i) == DEAD_END)
 			ft_exit(DEAD_END_ON_SOLUTION, mstr);
+		ft_output_explained(mstr, OC_OUTPUT_SHORTEN_PATH);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:56:28 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/07 08:54:44 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 12:08:11 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 
-void		ft_free_storage(t_storage **storage)
+static void	ft_free_storage(t_storage **storage)
 {
 	t_storage	*stock;
 	int			i;
@@ -34,7 +34,7 @@ void		ft_free_storage(t_storage **storage)
 	}
 }
 
-void		ft_free_dico(t_hash_dico **dico)
+static void	ft_free_dico(t_hash_dico **dico)
 {
 	t_bucket	*bucket;
 	t_bucket	*temp;

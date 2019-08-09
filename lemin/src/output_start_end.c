@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 14:00:32 by cesar             #+#    #+#             */
-/*   Updated: 2019/08/08 18:58:24 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 12:06:05 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,20 @@ static void		ft_output_solution_start_end(t_master *mstr)
 void			output_start_end(t_master *mstr)
 {
 	ft_output_explained_string(mstr,
-		"\n\e[31mSTART AND END CONNECTED DUMPING\n\e[0m");
-	ft_output_explained_string(mstr,
-		"\n-----          SOLUTION             -----\n\n");
+		"\n\e[31mSTART AND END CONNECTED IMMEDIATE DUMPING\n\e[0m");
 	if (mstr->output_type == OUTPUT_DEACTIVATED)
 		return ;
 	ft_output_count_inactive_pipes(mstr);
-	if (mstr->output_type != OUTPUT_JUST_SOLUTION
-			&& mstr->output_type != OUTPUT_EXPLAINED)
+	if (mstr->output_type < OUTPUT_JUST_SOLUTION
+			&& mstr->output_type != OUTPUT_EXPLAINED
+			&& mstr->output_type != OUTPUT_EXPLAINED_SHORT)
 		ft_output_batch_print(mstr->storage_start, mstr);
-	ft_output_solution_start_end(mstr);
+	if (mstr->output_type != OUTPUT_EXPLAINED_SHORT)
+	{
+		ft_output_explained_string(mstr,
+		"\n-----          SOLUTION             -----\n\n");
+		ft_output_solution_start_end(mstr);
+	}
 	if (mstr->output_type == OUTPUT_JUST_SOLUTION)
 	{
 		ft_output_putstr(SO_MVMT_NB, mstr);

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:46:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 19:28:53 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 12:10:06 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ t_ln_type		ft_storage_add_line(char *line, t_master *mstr)
 	if (!reduc_ind && index)
 		ft_storage_grow(mstr);
 	entry = &(mstr->storage->entry[reduc_ind]);
+	entry->line = line;
+	entry->line_index = mstr->lines_nb;
 	entry->type = ft_parser_line_type(line, mstr->piping);
 	ft_check_ants(mstr, entry, line);
 	if (entry->type == END_OF_READ)
 		ft_exit(INVALID_LINE, mstr);
-	entry->line = line;
-	entry->line_index = mstr->lines_nb;
 	ft_parser_fill_entry_node(mstr, line, entry);
 	ft_parser_fill_entry_pipe(mstr, line, entry);
 	ft_parser_apply_command(mstr, entry);
