@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/27 18:30:00 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/08 17:29:14 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/09 15:24:20 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,28 @@ int		ft_get_index_node(t_master *mstr, char *name)
 	{
 		if (ft_str_cmp(mstr->nodes_array[i]->name, name) == TRUE)
 			return (i);
+		i++;
+	}
+	return (FALSE);
+}
+
+int		ft_istrstr(const char *haystack, const char *needle)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (needle[0] == '\0')
+		return (FALSE);
+	while (haystack[i] != '\0')
+	{
+		j = 0;
+		while (needle[j] != '\0' && haystack[i + j] != '\0'
+				&& needle[j] == haystack[i + j])
+			j++;
+		if (needle[j] == '\0')
+			return (TRUE);
 		i++;
 	}
 	return (FALSE);

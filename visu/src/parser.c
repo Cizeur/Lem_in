@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/08 17:16:02 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:52:06 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ void		read_nodes_pipes_moves(t_master *mstr)
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
 		if (line && ft_comment_or_empty_2(line) == TRUE)
-		{
 			ft_get_input(mstr, line);
-		}
 		if (line)
 			free(line);
 		line = NULL;
@@ -86,10 +84,17 @@ void		read_nodes_pipes_moves(t_master *mstr)
 		ft_exit(mstr, FAIL_ON_READ);
 }
 
+
 void		parser(t_master *mstr)
 {
+	mstr->nb_ants = FALSE;
+	mstr->nb_nodes = FALSE;
+	mstr->nb_pipes = FALSE;
+	mstr->nb_movements = FALSE;
+	mstr->nb_inactive = FALSE;
 	read_parameters(mstr);
+	check_parameters(mstr);
 	inizialization(mstr);
 	read_nodes_pipes_moves(mstr);
-	check_inactive_nodes(mstr);
+	check_nodes_pipes_moves(mstr);
 }

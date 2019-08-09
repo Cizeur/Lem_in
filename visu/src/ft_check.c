@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_inactive_nodes.c                          :+:      :+:    :+:   */
+/*   ft_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 17:42:24 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 16:47:19 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:40:26 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,23 @@ void	check_inactive_nodes(t_master *mstr)
 			min_and_max_(mstr, i);
 		i++;
 	}
+}
+
+void	check_parameters(t_master *mstr)
+{
+	if ((mstr->nb_ants < TRUE)
+	|| (mstr->nb_nodes < TRUE)
+	|| (mstr->nb_pipes < TRUE)
+	|| (mstr->nb_movements < TRUE)
+	|| (mstr->nb_inactive < TRUE))
+		ft_exit(mstr, INVALID_INPUT);
+}
+
+void	check_nodes_pipes_moves(t_master *mstr)
+{
+	if ((mstr->current_node > mstr->nb_nodes)
+	|| (mstr->current_pipe > mstr->nb_pipes)
+	|| (mstr->current_move > mstr->nb_movements))
+		ft_exit(mstr, INVALID_INPUT);
+	check_inactive_nodes(mstr);
 }

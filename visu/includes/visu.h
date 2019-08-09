@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/07 20:27:48 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:22:54 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,19 @@
 # define TRUE				1
 # define FALSE				-1
 
+# define NODE				1
+# define PIPE				2
+# define MOVE				3
+
 # define LINE_NODES			"# number of nodes            = "
 # define LINE_PIPES			"# number of pipes            = "
 # define LINE_MOVES			"# number of movements        = "
 # define LINE_ACTIVE		"# number of inactive pipes   = "
+
+# define COMMENT_START		"##start"
+# define COMMENT_END		"##end"
+# define COMMENT_ACTIVE		"#active"
+# define COMMENT_INACTIVE	"#inactive"
 
 # define NODE_UNUSED		-1
 # define NODE_USED			0
@@ -144,8 +153,15 @@ void				ft_get_nodes(t_master *mstr, char *line);
 void				ft_get_pipes(t_master *mstr, char *line);
 void				ft_get_moves(t_master *mstr, char *line);
 
-void				check_inactive_nodes(t_master *mstr);
 void				inizialization(t_master *mstr);
+
+/*
+***		CHECK
+*/
+
+void				check_parameters(t_master *mstr);
+void				check_nodes_pipes_moves(t_master *mstr);
+
 
 /*
 ***		VISUAL
@@ -194,6 +210,7 @@ void				ft_print_moves(t_master *mstr);
 int					ft_get_index_node(t_master *mstr, char *name);
 int					ft_str_cmp(char *s1, char *s2);
 int					ft_str_isdigit(char *line);
+int					ft_istrstr(const char *haystack, const char *needle);
 
 /*
 ***		ERROR EXIT AND CLOSE PROGRAM

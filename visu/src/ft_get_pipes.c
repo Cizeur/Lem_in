@@ -6,7 +6,7 @@
 /*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:12:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/08 17:58:39 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:41:12 by crfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	ft_get_pipes(t_master *mstr, char *line)
 			= mstr->current_pipe;
 			mstr->nodes_array[i2]->nb_pipes++;
 		}
+		if (mstr->pipes_array[mstr->current_pipe]->active == PIPE_UNDEFINED)
+			ft_exit(mstr, INVALID_INPUT);
 		free_get_pipes(tmp);
 		mstr->current_pipe++;
 	}
