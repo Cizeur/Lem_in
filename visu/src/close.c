@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:55:52 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/09 08:36:40 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 08:43:31 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	free_moves(t_master *mstr)
 			i++;
 		}
 		free(mstr->moves_array);
-		mstr->moves_array = 0;
 	}
 }
 
@@ -123,22 +122,14 @@ void	close_program(t_master *mstr, int program_state)
 		free_moves(mstr);
 		free_textures(mstr);
 		if (mstr->render)
-		{
 			SDL_DestroyRenderer(mstr->render);
-			mstr->render = NULL;
-		}
 		if (mstr->window)
-		{
 			SDL_DestroyWindow(mstr->window);
-			mstr->window = NULL;
-		}
+		ft_bzero(mstr, sizeof(t_master));
 		free(mstr);
 		mstr = NULL;
 	}
 	IMG_Quit();
 	SDL_Quit();
-	if (program_state == VISU_FAILED)
-		exit(1);
-	if (program_state == VISU_FINISHED)
-		exit(0);
+	exit(program_state == VISU_FAILED ? 1 : 0);
 }
