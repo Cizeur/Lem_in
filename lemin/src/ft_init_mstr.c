@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:24:57 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 11:22:20 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 13:50:19 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "error.h"
 #include "libft/libft.h"
 
-void		ft_init_mstr(t_master *mstr)
+void		ft_init_mstr(t_master *mstr, int explained)
 {
-	mstr->output_type = DEFAULT_OUTPUT;
+	mstr->output_type = !explained ? DEFAULT_OUTPUT : OUTPUT_EXPLAINED;
 	mstr->piping = NOPE;
 	mstr->command_line = COM_DEFAULT;
 	if (!(mstr->dico = (t_hash_dico *)ft_memalloc(sizeof(t_hash_dico))))

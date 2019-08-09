@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 10:34:54 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 18:46:55 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 13:19:44 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void			ft_output_solution(t_master *mstr)
 		ft_output_explained_string(mstr,
 			"]\e[31m\n	THEN LOADING NEW ANTS:\n	\e[36m[");
 		ants = ft_load_new_ants(mstr, ants, turns);
-		ft_output_explained_string(mstr, "]\e[33m\nEND OF TURN\n");
+		ft_output_explained_string(mstr, "]\e[33m\nEND OF TURN\e[0m\n");
 		ft_update_history(mstr, max_node);
 		ft_output_putstr("\n", mstr);
 	}

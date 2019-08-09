@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 19:29:25 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 14:03:47 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void		parser(t_master *mstr)
 	}
 	if (r == -1)
 		ft_exit(FAIL_ON_READ, mstr);
+	if (!mstr->lines_nb)
+		ft_exit(EMPTY_FILE, mstr);
+	if (!mstr->piping)
+		ft_exit(INCOMPLETE_FILE, mstr);
 	ft_output_explained(mstr, OC_PIPES_OK);
 	ft_matrix_generate(mstr, mstr->storage_start);
 	ft_output_explained(mstr, OC_MALLOC_MATRIX);

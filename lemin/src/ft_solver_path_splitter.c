@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 09:36:06 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 12:37:44 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 15:46:10 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int		ft_check_node(t_master *mstr, int cur_node,
 		|| !(mtx[mstr->node_queue[mstr->node_parents[queue[0] - 1]]][A_LOADED]
 		&& mtx[cur_node][A_LOADED])
 		? F_FLOW : F_BACKFLOW;
+	flow = mtx[next_node][mstr->nodes + A_OPTIONS + cur_node] == ACTIVATED ? F_BACKFLOW :flow;
 	if ((mtx[cur_node][A_LOADED] && flow == F_FLOW && !mtx[next_node][A_LOADED])
 		|| (mtx[cur_node][A_LOADED] && mtx[next_node][A_LOADED]
 		&& mtx[next_node][mstr->nodes + A_OPTIONS + cur_node] != ACTIVATED)
@@ -96,11 +97,13 @@ static int		ft_check_is_allowed_next(t_master *mstr, int cur_node,
 	int **mtx;
 
 	mtx = mstr->adjacency_mtx;
+
 	if (mtx[cur_node][mstr->nodes + A_OPTIONS + next_node] == ACTIVATED
 		|| next_node == DISCONNECTED
 		|| next_node == mstr->start->node_number
 		|| next_node == parent_node)
 		return (NOPE);
+
 	return (SUCCESS);
 }
 
@@ -127,7 +130,7 @@ int				ft_solver_paths_splitter(t_master *mstr, int **mtx,
 				return (SUCCESS);
 			}
 			if (ft_check_node(mstr, cur_node, next_node, queue))
-				queue[1]++;
+				 queue[1]++;
 		}
 	}
 	return (DEAD_END);

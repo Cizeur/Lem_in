@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/09 10:13:30 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/09 13:14:12 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC_LEMIN =  \
 	parser.c\
 	output.c\
 	ft_option_get.c\
+	ft_explained_get.c\
 	ft_parser_ants_get.c\
 	ft_parser_line_type.c\
 	ft_parser_check_node.c\

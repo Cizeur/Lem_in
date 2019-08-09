@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:31:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 12:13:30 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 15:52:39 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 
 char g_error_message[26][50] = {
 	{"\n-----            DONE               -----\n\n"},
+	{"\n	EMPTY FILE\n\n"},
+	{"\n	INCOMPLETE FILE\n\n"},
 	{"\n	INVALID LINE FORMAT\n\n"},
 	{"\n	DOUBLE START\n\n"},
 	{"\n	DOUBLE END\n\n"},
-	{"\n	WRONG COMMAND POSITION \n\n"},
-	{"\n	INVALID LINE\n\n"},
+	{"\n	WRONG COMMAND POSITION : NODE EXPECTED \n\n"},
 	{"\n	ROOM ALREADY DEFINED\n\n"},
 	{"\n	DASH IN NAME\n\n"},
 	{"\n	ANTS STRICTLY POSITIVE INT\n\n"},
@@ -43,21 +44,25 @@ char g_error_message[26][50] = {
 	{"nope18"},
 	{"nope19"},
 	{"nope20"},
-	{"nope22"},
-	{"\n	MALLOC DICO FAILED\n\n"},
 };
 
 void		ft_exit(t_errors error, t_master *mstr)
 {
+	t_line_info *entry;
+
 	if (error != STANDARD && error != INVALID_ARGUMENT)
 		ft_putstr("ERROR\n");
 	if (mstr && mstr->output_type >= OUTPUT_EXPLAINED && error < 14)
 		ft_putstr(g_error_message[error]);
 	if (mstr && mstr->output_type >= OUTPUT_EXPLAINED && error && error <= 11)
 	{
-		ft_putstr("		");
-		ft_putstr(ft_storage_get_line(mstr, mstr->lines_nb)->line);
-		ft_putstr("\n");
+		entry = ft_storage_get_line(mstr, mstr->lines_nb) ;
+		if (entry && entry->line)
+		{
+			ft_putstr("		");
+			ft_putstr(entry->line);
+			ft_putstr("\n");
+		}
 	}
 	ft_free_everything(mstr);
 	exit(error != STANDARD ? 1 : 0);

@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 09:13:55 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/08 19:30:02 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 13:44:13 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,7 @@ static void		ft_passed_threshold(int o_case, t_master *mstr)
 {
 	t_line_info *entry;
 
-	if (o_case == OCS_INIT)
-		ft_output_putstr("\n----- Welcome on the algo clarifier -----\n", mstr);
-	else if (o_case == OC_MALLOC_STORAGE)
-		ft_output_putstr(
-			"BASIC STRUCT AND STORAGE Mallocated \e[32m \xE2\x9C\x94", mstr);
-	else if (o_case == OC_VALID_OPTIONS)
+	if (o_case == OC_VALID_OPTIONS)
 		ft_output_putstr("OPTIONS \e[32m \xE2\x9C\x94", mstr);
 	else if (o_case == OC_NODES_OK && mstr->start && mstr->end)
 	{
@@ -56,8 +51,12 @@ static void		ft_passed_threshold(int o_case, t_master *mstr)
 	else if (o_case == OC_PIPES_OK)
 		ft_output_putstr("PIPES \e[32m \xE2\x9C\x94", mstr);
 	else if (o_case == OC_MALLOC_MATRIX)
+	{
 		ft_output_putstr(
 			"LINK MATRIX-PATH-QUEUE Mallocated\e[32m \xE2\x9C\x94\n", mstr);
+		ft_output_putstr(
+			"\e[0m\n-----          Parsing done            -----\n\n", mstr);
+	}
 }
 
 static void		ft_print_path(t_master *mstr)

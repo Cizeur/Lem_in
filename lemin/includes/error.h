@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 10:24:01 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 10:49:08 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/09 14:01:44 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ typedef enum	e_errors
 {
 	STANDARD,
 	EMPTY_FILE,
+	INCOMPLETE_FILE,
+	INVALID_LINE,
 	DOUBLE_START,
 	DOUBLE_END,
 	WRONG_POSITION_FOR_START_END,
-	INVALID_LINE,
 	FAIL_REPEAT_ENTRY,
 	DASH_IN_NAME,
 	NO_ANTS,
