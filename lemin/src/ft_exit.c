@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cizeur <cizeur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:31:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 15:52:39 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/10 21:24:14 by cizeur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ void		ft_exit(t_errors error, t_master *mstr)
 		entry = ft_storage_get_line(mstr, mstr->lines_nb) ;
 		if (entry && entry->line)
 		{
-			ft_putstr("		-|-");
+			ft_putstr("		[[");
 			ft_putstr(entry->line);
-			ft_putstr("-|-\n");
+			ft_putstr("]] line :");
+			ft_putnbr(mstr->lines_nb);
+			ft_putstr("\e[0m\n");
+
 		}
 	}
 	ft_free_everything(mstr);
