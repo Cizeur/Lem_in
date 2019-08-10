@@ -36,7 +36,8 @@ SDL_EXFLAGS	+=	-F../frameworks \
 				-rpath ../frameworks \
 				-rpath ./frameworks \
 				-framework OpenGL -framework AppKit -framework OpenCl \
-				-framework SDL2 -framework SDL2_ttf -framework SDL2_image \
+				-framework SDL2_image \
+				-framework SDL2 # *-framework SDL2_ttf 
 
 EXFLAGS := -L $(L_FT) -lft
 
@@ -73,7 +74,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJ) $(DEPENDANCIES_VISU)
 	$(MAKE) -C $(L_FT) "CFLAGS=$(CFLAGS)" --no-print-directory
-	$(CC)  $(EXFLAGS)  $(addprefix $(OBJ_DIR)/,$(OBJ)) -o $(NAME)
+	$(CC) $(CFLAGS)  $(EXFLAGS)  $(addprefix $(OBJ_DIR)/,$(OBJ)) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C $(L_FT) --no-print-directory
