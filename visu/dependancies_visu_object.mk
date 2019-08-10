@@ -10,18 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
-ft_exit.o: visu.h error.h
-ft_get_moves.o: visu.h 
-ft_get_nodes.o: visu.h
-ft_get_pipes.o: visu.h 
-ft_get_input.o: visu.h 
-ft_print.o: visu.h
-initialization.o: visu.h 
-main.o: visu.h 
-parser.o: visu.h libft/get_next_line.h
-T_init.o: visu.h
-T_load_media.o: visu.h
-T_load_texture.o: visu.h
-T_run.o: visu.h
-T_close.o: visu.h
-T_texture.o: visu.h
+close.o: visu.h libft/libft.h
+control.o: visu.h key_press.h
+free.o: visu.h libft/libft.h
+ft_check.o: visu.h libft/get_next_line.h
+ft_exit.o: visu.h libft/libft.h error.h
+ft_get_input.o: visu.h libft/libft.h
+ft_get_moves.o: visu.h libft/libft.h
+ft_get_nodes.o: visu.h libft/libft.h
+ft_get_pipes.o: visu.h libft/libft.h
+initialization.o: visu.h libft/libft.h
+main.o: visu.h libft/libft.h
+parser.o: visu.h libft/libft.h libft/get_next_line.h
+print.o: visu.h
+utils.o: visu.h libft/libft.h
+visu_init.o: visu.h
+visu_load.o: visu.h libft/libft.h
+visu_render_moves.o: visu.h
+visu_render_nodes.o: visu.h
+visu_render_pipes.o: visu.h
+visu_render_total_background.o: visu.h
+visu_run.o: visu.h
+visu_texture.o: visu.h libft/libft.h
