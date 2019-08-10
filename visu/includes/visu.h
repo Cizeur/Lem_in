@@ -13,14 +13,10 @@
 #ifndef VISU_H
 # define VISU_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include "error.h"
-# include "key_press.h"
-# include "libft/libft.h"
 # include "SDL.h"
 # include "SDL_image.h"
-# include "SDL_ttf.h"
 
 # define TRUE				1
 # define FALSE				-1
