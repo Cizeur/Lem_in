@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "visu.h"
+#include "key_press.h"
+
 
 void    control_move_forward(t_master *mstr)
 {
