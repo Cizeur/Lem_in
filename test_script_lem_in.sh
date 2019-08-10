@@ -16,7 +16,7 @@
 
 function usage() {
 	printf "\nusage: sh ./test_script_lem_in.sh [-n number of maps] [-m map_folder] [-e with_generator]\n\
-	[-g generator][-o generator_opitons][-v with_verif][-t showtime][-p program]\n\n"
+	[-g generator][-o generator_opitons][-v with_verif][-t showtime][-p program][-po program options]\n\n"
 	printf "Lemin map folder generator-tester\n\
 	- till n maps\n\
 	- in a folder of map (-m)\n\
@@ -31,6 +31,7 @@ generator_ex=./generator
 options=--big-superposition
 map_folder=./maps_tester
 program=./lem-in
+prog_options=
 n_maps=100
 i=1
 max_step=20
@@ -79,6 +80,10 @@ while [ "$1" != "" ]; do
 		shift
 		options=$1
 		;;
+	-po)
+		shift
+		prog_options=$1
+		;;
 	*)
 		usage
 		exit
@@ -107,7 +112,7 @@ if [ $no_gen -eq 1 ]; then
 	for filename in $map_folder/*; do
 		map_str=$filename
 		turns=$(cat $map_str | grep "required" | head -1 | cut -d' ' -f8)
-		resu=$($program <$map_str | grep "^L" | wc -l | awk '{$1=$1;print}')
+		resu=$($program $prog_options <$map_str | grep "^L" | wc -l | awk '{$1=$1;print}')
 		if [ ! -z "$turns" ]; then
 			average=$(($average + $resu - $turns))
 			average_str=$(echo "scale=3; $average / $i" | bc)
@@ -133,7 +138,7 @@ if [ $no_gen -eq 1 ]; then
 			if test -f "$program"; then
 				utime="$(
 					TIMEFORMAT='%R'
-					time ($program <$map_str) 2>&1 1>/dev/null
+					time ($program $prog_options <$map_str) 2>&1 1>/dev/null
 				)"
 				utime_tot=$(echo "scale=3; $utime + $utime_tot" | bc)
 				utime_av=$(echo "scale=3; $utime_tot / $i" | bc)
@@ -142,7 +147,7 @@ if [ $no_gen -eq 1 ]; then
 		fi
 		if [ $verif -eq 1 ]; then
 			if test -f "$verifier"; then
-				$program <$map_str | $verifier 1>/dev/null
+				$program $prog_options <$map_str | $verifier 1>/dev/null
 			fi
 			echo VERIFIED
 		fi
@@ -172,7 +177,7 @@ while [ $(($i)) -lt $(($n_maps + 1)) ]; do
 	map_str="$generator_ex""$options"_round_"$istr"
 	$generator_ex $options >$map_folder/$map_str
 	turns=$(cat $map_folder/$map_str | grep "required" | head -1 | cut -d' ' -f8)
-	resu=$($program <$map_folder/$map_str | grep "^L" | wc -l | awk '{$1=$1;print}')
+	resu=$($program $prog_options <$map_folder/$map_str | grep "^L" | wc -l | awk '{$1=$1;print}')
 	average=$(($average + $resu - $turns))
 	average_str=$(echo "scale=3; $average / $i * 100 /100" | bc)
 	if [ $resu -eq $turns ]; then
@@ -189,7 +194,7 @@ while [ $(($i)) -lt $(($n_maps + 1)) ]; do
 	fi
 	if [ $verif -eq 1 ]; then
 		if test -f "$verifier"; then
-			$program <$map_folder/$map_str | $verifier 1>/dev/null
+			$program $prog_options <$map_folder/$map_str | $verifier 1>/dev/null
 		fi
 		echo VERIFIED
 	fi
@@ -197,7 +202,7 @@ while [ $(($i)) -lt $(($n_maps + 1)) ]; do
 		if test -f "$program"; then
 			utime="$(
 				TIMEFORMAT='%R'
-				time ($program <$map_folder/$map_str) 2>&1 1>/dev/null
+				time ($program $prog_options <$map_folder/$map_str) 2>&1 1>/dev/null
 			)"
 			utime_tot=$(echo "scale=3; $utime + $utime_tot" | bc)
 			utime_av=$(echo "scale=3; $utime_tot / $i " | bc)
