@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "visu.h"
+#include "libft/libft.h"
 
 int		ft_str_isdigit(char *line)
 {

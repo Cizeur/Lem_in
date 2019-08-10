@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "visu.h"
+#include "libft/libft.h"
 
 int		ft_is_not_comment(t_master *mstr, char *line)
 {

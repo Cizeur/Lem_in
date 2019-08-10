@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "visu.h"
+#include "libft/libft.h"
 
 void	ft_check_parameters(t_master *mstr, char *line, int nb_line)
 {

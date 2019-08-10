@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "visu.h"
+#include "libft/libft.h"
 
 void	init_texture(t_texture *texture)
 {

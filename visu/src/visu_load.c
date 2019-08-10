@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "visu.h"
+#include "libft/libft.h"
 
 char	g_path_from_visu_textures[12][150] = {
 	{"resources_visual/background.jpg"},

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "visu.h"
+#include "libft/libft.h"
 #include "error.h"
 
 char g_error_message[10][200] = {

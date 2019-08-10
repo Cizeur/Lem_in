@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "visu.h"
+#include "libft/libft.h"
 
 int		ft_start_end(t_master *mstr, char *line)
 {

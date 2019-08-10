@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "visu.h"
+#include "libft/libft.h"
 #include "libft/get_next_line.h"
 
 int		ft_comment_or_empty_1(char *line)
