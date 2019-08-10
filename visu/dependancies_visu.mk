@@ -59,9 +59,6 @@ DEPENDANCIES_VISU_O		:= Makefile ./dependancies_$(L_VISU_DIR).mk\
 								 ../shared_val.mk\
 								./includes/error.h
 
-DEPENDANCIES_VISU_O		+= ./includes/*.h
-
-
 DEPENDANCIES_VISU			:= $(DEPENDANCIES_VISU_O) \
  								$(addprefix ../,$(DEPENDANCIES_LIBFT_EXPORT))
 
