@@ -7,12 +7,13 @@ room4 7 5
 ##end
 room5 3 3
 room6 5 3
-room7 3 7
+room7 4 7
 room1-room2
+room2-room5
 room2-room3
 room3-room4
 room4-room5
 room1-room6
 room6-room3
 room3-room7
-room7-room5
+room7-room2
