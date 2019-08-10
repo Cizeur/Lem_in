@@ -45,6 +45,7 @@ SRC_VISU =  \
 	control.c \
 	print.c \
 	utils.c \
+	free.c\
 	close.c
 
 INC_VISU	:= visu.h\
@@ -55,7 +56,8 @@ INC_VISU	:= visu.h\
 
 DEPENDANCIES_VISU_O		:= Makefile ./dependancies_$(L_VISU_DIR).mk\
 								 ./dependancies_$(L_VISU_DIR)_object.mk\
-								 ../shared_val.mk
+								 ../shared_val.mk\
+								./includes/error.h
 
 DEPENDANCIES_VISU_O		+= ./includes/*.h
 

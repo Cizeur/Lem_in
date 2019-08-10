@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visu.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cizeur <cizeur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/09 16:22:54 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/10 21:12:42 by cizeur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,5 +214,10 @@ int					ft_istrstr(const char *haystack, const char *needle);
 
 void				ft_exit(t_master *mstr, t_errors error);
 void				close_program(t_master *mstr, int program_state);
+void				free_moves(t_master *mstr);
+void				free_nodes(t_master *mstr);
+void				free_pipes(t_master *mstr);
+void				free_ants(t_master *mstr);
+void				free_textures(t_master *mstr);
 
 #endif
