@@ -43,10 +43,10 @@ SRC_VISU =  \
 	visu_render_total_background.c \
 	visu_texture.c \
 	control.c \
-	print.c \
 	utils.c \
 	free.c\
-	close.c
+	close.c\
+	#   print.c \
 
 INC_VISU	:= visu.h\
 			error.h\
