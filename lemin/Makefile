@@ -58,7 +58,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJ) $(DEPENDANCIES_LEMIN)
 	$(MAKE) -C $(L_FT) "CFLAGS=$(CFLAGS)" --no-print-directory
-	$(CC)  $(EXFLAGS)  $(addprefix $(OBJ_DIR)/,$(OBJ)) -o $(NAME)
+	$(CC)  $(CFLAGS) $(EXFLAGS)  $(addprefix $(OBJ_DIR)/,$(OBJ)) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C $(L_FT) --no-print-directory

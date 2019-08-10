@@ -52,7 +52,8 @@ void		ft_option_get(t_master *mstr, int argc, char **argv)
 		}
 		else
 		{
-			ft_putstr(O_USAGE);
+			ft_putstr(O_USAGE1);
+			ft_putstr(O_USAGE2);
 			ft_exit(INVALID_ARGUMENT, mstr);
 		}
 		argv++;

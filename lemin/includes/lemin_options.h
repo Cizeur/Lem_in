@@ -13,8 +13,8 @@
 #ifndef LEMIN_OPTIONS_H
 # define LEMIN_OPTIONS_H
 
-# define O_USAGE "USAGE : ./lemin < [map_file]\n"
-
+# define O_USAGE1 "USAGE : ./lem-in [-v/-vu visu -e/es explained -d no output "
+# define O_USAGE2 "-s solution only]  < [map_file]\n"
 /*
 ** OPTIONS
 */

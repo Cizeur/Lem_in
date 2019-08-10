@@ -13,7 +13,7 @@
 ft_dico_add.o: lem_in.h libft/libft.h error.h
 ft_dico_get.o: lem_in.h utils.h libft/libft.h
 ft_exit.o: error.h lem_in.h output.h libft/libft.h
-ft_explained_get.o: lem_in.h libft/libft.h lemin_options.h output_explained.h
+ft_explained_get.o: lem_in.h libft/libft.h lemin_options.h output_explained.h error.h
 ft_find_end.o: utils.h
 ft_free_everything.o: lem_in.h libft/libft.h
 ft_init_mstr.o: lem_in.h output.h error.h libft/libft.h

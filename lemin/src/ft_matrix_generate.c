@@ -63,7 +63,8 @@ static void		ft_put_pipe_in_adjancency_matrix(
 	int **mtx;
 
 	mtx = mstr->adjacency_mtx;
-	if (mtx[node1][mstr->nodes + node2 + A_OPTIONS] != DISCONNECTED)
+	if (mtx[node1][mstr->nodes + node2 + A_OPTIONS] != DISCONNECTED
+		|| node1 == node2)
 		return ;
 	mtx[node1][mstr->nodes + node2 + A_OPTIONS] = INACTIVE;
 	nodes = mtx[node1][A_LINKS_NB];

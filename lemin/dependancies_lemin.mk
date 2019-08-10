@@ -75,7 +75,9 @@ INC_LEMIN					:= lem_in.h\
 							libft/get_next_line.h\
 							libft/libft.h\
 							output.h\
-							output_explained.h
+							output_explained.h\
+							lemin_options.h\
+							utils.h
 
 DEPENDANCIES_LEMIN_O		:= Makefile ./dependancies_$(L_LEMIN_DIR).mk\
 								 ./dependancies_$(L_LEMIN_DIR)_object.mk\

@@ -16,9 +16,7 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-#    include <stdio.h>
-
-char g_error_message[26][50] = {
+char g_error_message[16][50] = {
 	{"\n-----            DONE               -----\n\n"},
 	{"\n	EMPTY FILE\n\n"},
 	{"\n	INCOMPLETE FILE\n\n"},
@@ -34,16 +32,7 @@ char g_error_message[26][50] = {
 	{"\n	START OR END MISSING\n\n"},
 	{"\n	NO PATH FOUNDS\n\n"},
 	{"\n	SOLUTION EXTRACTION FAILED\n\n"},
-	{"nope11"},
-	{"nope12"},
-	{"nope13"},
-	{"nope14"},
-	{"NO FLOW"},
-	{"nope16"},
-	{"nope17"},
-	{"nope18"},
-	{"nope19"},
-	{"nope20"},
+	{"\n	FAILED MALLOC\n\n"},
 };
 
 void		ft_exit(t_errors error, t_master *mstr)
@@ -52,16 +41,16 @@ void		ft_exit(t_errors error, t_master *mstr)
 
 	if (error != STANDARD && error != INVALID_ARGUMENT)
 		ft_putstr("ERROR\n");
-	if (mstr && mstr->output_type >= OUTPUT_EXPLAINED && error < 14)
-		ft_putstr(g_error_message[error]);
+	if (mstr && mstr->output_type >= OUTPUT_EXPLAINED && error)
+		ft_putstr(g_error_message[ft_min(error, 15)]);
 	if (mstr && mstr->output_type >= OUTPUT_EXPLAINED && error && error <= 11)
 	{
 		entry = ft_storage_get_line(mstr, mstr->lines_nb) ;
 		if (entry && entry->line)
 		{
-			ft_putstr("		");
+			ft_putstr("		-|-");
 			ft_putstr(entry->line);
-			ft_putstr("\n");
+			ft_putstr("-|-\n");
 		}
 	}
 	ft_free_everything(mstr);

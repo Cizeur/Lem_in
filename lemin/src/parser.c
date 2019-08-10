@@ -27,18 +27,19 @@ void		parser(t_master *mstr)
 	{
 		line_type = ft_storage_add_line(line, mstr);
 		line = 0;
-		mstr->piping = line_type == PIPE ? CERTAINLY : mstr->piping;
+		if (line_type == PIPE && !mstr->piping)
+			mstr-> piping = CERTAINLY;
 		if (line_type == END_OF_READ)
 			ft_exit(INVALID_LINE, mstr);
 		if ((!mstr->start || !mstr->end) && mstr->piping)
 			ft_exit(START_OR_END_MISSING, mstr);
+		else if (mstr->piping == CERTAINLY)
+			ft_output_explained(mstr, OC_NODES_OK);
 	}
 	if (r == -1)
 		ft_exit(FAIL_ON_READ, mstr);
-	if (!mstr->lines_nb)
-		ft_exit(EMPTY_FILE, mstr);
-	if (!mstr->piping)
-		ft_exit(INCOMPLETE_FILE, mstr);
+	if (!mstr->lines_nb || !mstr->piping)
+		ft_exit(!mstr->lines_nb ? EMPTY_FILE : INCOMPLETE_FILE, mstr);
 	ft_output_explained(mstr, OC_PIPES_OK);
 	ft_matrix_generate(mstr, mstr->storage_start);
 	ft_output_explained(mstr, OC_MALLOC_MATRIX);
