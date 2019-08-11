@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:20:26 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/09 16:23:12 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/11 18:04:55 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char g_error_message[10][200] = {
 	{"# ERROR 10                          WRONG_ARGUMENT #"}
 };
 
-void   ft_exit(t_master *mstr, t_errors error)
+void	ft_exit(t_master *mstr, t_errors error)
 {
 	ft_putendl("\e[36m");
 	ft_putendl("\n\n####################################################");
@@ -36,5 +36,5 @@ void   ft_exit(t_master *mstr, t_errors error)
 	ft_putendl("####################################################");
 	ft_putendl("####################################################\n");
 	ft_putendl("\e[0m");
-    close_program(mstr, VISU_FAILED);
+	close_program(mstr, VISU_FAILED);
 }

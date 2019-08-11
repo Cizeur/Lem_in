@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:40:59 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/09 16:52:06 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/11 18:15:32 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
 
-int		ft_comment_or_empty_1(char *line)
+int			ft_comment_or_empty_1(char *line)
 {
 	if (ft_str_isdigit(line) == TRUE)
 		return (TRUE);
@@ -29,7 +29,7 @@ int		ft_comment_or_empty_1(char *line)
 	return (FALSE);
 }
 
-int		ft_comment_or_empty_2(char *line)
+int			ft_comment_or_empty_2(char *line)
 {
 	if (!line || !line[0])
 		return (FALSE);
@@ -49,12 +49,16 @@ int		ft_comment_or_empty_2(char *line)
 void		read_parameters(t_master *mstr)
 {
 	int			ret;
-	char		*line;    
+	char		*line;
 	int			nb_line;
+	int			started;
 
 	nb_line = 0;
+	started = FALSE;
 	while (nb_line < 5 && (ret = get_next_line(0, &line)) > 0)
 	{
+		if (!started && line && *line == '#')
+			started = TRUE;
 		if (line && ft_comment_or_empty_1(line) == TRUE)
 		{
 			ft_get_parameters(mstr, line, nb_line);
@@ -84,7 +88,6 @@ void		read_nodes_pipes_moves(t_master *mstr)
 	if (ret == FALSE)
 		ft_exit(mstr, FAIL_ON_READ);
 }
-
 
 void		parser(t_master *mstr)
 {

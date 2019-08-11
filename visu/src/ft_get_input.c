@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:34:01 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/09 16:22:58 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:57:36 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_get_parameters(t_master *mstr, char *line, int nb_line)
 	{
 		if (ft_str_isdigit(line) == FALSE)
 		{
-			free (line);
+			free(line);
 			ft_exit(mstr, INVALID_INPUT);
 		}
 		mstr->nb_ants = ft_atoi(line);

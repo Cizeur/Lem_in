@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_nodes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:14:30 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/09 15:14:06 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:55:37 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_check_overlap(t_master *mstr, t_nodes *node, char **tmp)
 	}
 }
 
-void		ft_check_nodes(t_master *mstr, char **tmp)
+void	ft_check_nodes(t_master *mstr, char **tmp)
 {
 	if ((mstr->nodes_array[mstr->current_node]->name == NULL)
 	|| (mstr->nodes_array[mstr->current_node]->len_name == 0)
@@ -75,7 +75,7 @@ void		ft_check_nodes(t_master *mstr, char **tmp)
 	}
 }
 
-void		ft_get_nodes(t_master *mstr, char *line)
+void	ft_get_nodes(t_master *mstr, char *line)
 {
 	char		**tmp;
 

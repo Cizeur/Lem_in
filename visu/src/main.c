@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:46:26 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/09 15:04:22 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:58:18 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,3 @@ int		main(void)
 	close_program(mstr, VISU_FINISHED);
 	return (0);
 }
-

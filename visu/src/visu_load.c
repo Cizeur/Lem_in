@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visu_load.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:38:14 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:22:21 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/11 18:16:48 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	load_background_node_textures(t_master *mstr)
 		g_path_from_git_textures[0]) == FALSE)
 			ft_exit(mstr, LOAD_VISU);
 	mstr->background->width = S_WIDTH;
-	mstr->background->height =  S_HEIGHT;
+	mstr->background->height = S_HEIGHT;
 	if (!(mstr->node = (t_texture*)ft_memalloc(sizeof(t_texture))))
 		ft_exit(mstr, ERROR_MALLOC);
 	init_texture(mstr->node);

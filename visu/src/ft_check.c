@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 17:42:24 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/09 16:40:26 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:16:41 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	check_parameters(t_master *mstr)
 	|| (mstr->nb_nodes < TRUE)
 	|| (mstr->nb_pipes < TRUE)
 	|| (mstr->nb_movements < TRUE)
-	|| (mstr->nb_inactive < TRUE))
+	|| (mstr->nb_inactive < 0))
 		ft_exit(mstr, INVALID_INPUT);
 }
 
