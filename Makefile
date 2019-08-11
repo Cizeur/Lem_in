@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 12:16:41 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/05 08:49:48 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/11 16:54:49 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,6 @@ simulink:
 	$(MAKE) simulink -C $(L_VISU_DIR) --no-print-directory
 
 debug:
-	$(MAKE) debug -C $(L_LIBFT_DIR) --no-print-directory
 	$(MAKE) debug -C $(L_LEMIN_DIR) $(L_NAME) --no-print-directory
 	$(MAKE) debug -C $(L_VISU_DIR) $(V_NAME) --no-print-directory
 

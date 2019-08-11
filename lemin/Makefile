@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 11:56:45 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/09 11:54:05 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/11 16:52:32 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,13 +52,13 @@ $(OBJ_DIR):
 
 %.o:%.c $(DEPENDANCIES_LEMIN_O)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)/$@
+	$(CC) $(OPTI_FLAGS) $(CFLAGS) -c $< -o $(OBJ_DIR)/$@
 
 -include $(DEPENDANCY_OBJ_INC_FILE)
 
 $(NAME): $(OBJ) $(DEPENDANCIES_LEMIN)
-	$(MAKE) -C $(L_FT) "CFLAGS=$(CFLAGS)" --no-print-directory
-	$(CC)  $(CFLAGS) $(EXFLAGS)  $(addprefix $(OBJ_DIR)/,$(OBJ)) -o $(NAME)
+	$(MAKE) -C $(L_FT) "OPTI_FLAGS=$(OPTI_FLAGS)" --no-print-directory
+	$(CC) $(OPTI_FLAGS) $(CFLAGS) $(EXFLAGS)  $(addprefix $(OBJ_DIR)/,$(OBJ)) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C $(L_FT) --no-print-directory
@@ -68,7 +68,7 @@ fclean: clean
 	$(MAKE) fclean -C $(L_FT) --no-print-directory
 	rm -f $(NAME)
 
-debug: CFLAGS += $(SHARE_DEBUG)
+debug: OPTI_FLAGS := $(SHARE_DEBUG)
 debug: re clean
 
 re: fclean all

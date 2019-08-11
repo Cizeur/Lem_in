@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
+#    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/17 11:56:45 by crfernan          #+#    #+#              #
-#    Updated: 2019/07/31 12:46:44 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/11 18:07:02 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SDL_EXFLAGS	+=	-F../frameworks \
 				-rpath ./frameworks \
 				-framework OpenGL -framework AppKit -framework OpenCl \
 				-framework SDL2_image \
-				-framework SDL2 # *-framework SDL2_ttf 
+				-framework SDL2 # *-framework SDL2_ttf
 
 EXFLAGS := -L $(L_FT) -lft
 
@@ -51,7 +51,7 @@ SRC 	:= $(SRC_VISU)
 OBJ		:= $(patsubst %.c,%.o,$(SRC))
 
 CC      := gcc
-CFLAGS  := $(SHARE_FLAGS) 
+CFLAGS  := $(SHARE_FLAGS)
 CFLAGS	+= $(SDL_IFLAGS)
 EXFLAGS	+= $(SDL_EXFLAGS)
 
@@ -68,13 +68,13 @@ $(OBJ_DIR):
 
 %.o:%.c $(DEPENDANCIES_VISU_O)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -g -c $< -o $(OBJ_DIR)/$@
+	$(CC) $(OPTI_FLAGS) $(CFLAGS) -c $< -o $(OBJ_DIR)/$@
 
 -include $(DEPENDANCY_OBJ_INC_FILE)
 
 $(NAME): $(OBJ) $(DEPENDANCIES_VISU)
-	$(MAKE) -C $(L_FT) "CFLAGS=$(CFLAGS)" --no-print-directory
-	$(CC) $(CFLAGS)  $(EXFLAGS)  $(addprefix $(OBJ_DIR)/,$(OBJ)) -o $(NAME)
+	$(MAKE) -C $(L_FT) "OPTI_FLAGS=$(OPTI_FLAGS)" --no-print-directory
+	$(CC) $(CFLAGS) $(OPTI_FLAGS)  $(EXFLAGS)  $(addprefix $(OBJ_DIR)/,$(OBJ)) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C $(L_FT) --no-print-directory
@@ -84,7 +84,7 @@ fclean: clean
 	$(MAKE) fclean -C $(L_FT) --no-print-directory
 	rm -f $(NAME)
 
-debug: CFLAGS += $(SHARE_DEBUG)
+debug: OPTI_FLAGS := $(SHARE_DEBUG)
 debug: re clean
 
 re: fclean all

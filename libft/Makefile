@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgiron <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 09:01:34 by cgiron            #+#    #+#              #
-#    Updated: 2019/06/17 12:18:44 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/11 16:53:34 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ $(OBJ_DIR):
 
 %.o:%.c $(DEPENDANCIES_LIBFT)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS)  -o $(OBJ_DIR)/$@ -c $<
+	$(CC) $(OPTI_FLAGS) $(CFLAGS)  -o $(OBJ_DIR)/$@ -c $<
 
 -include ./dependancies_$(L_LIBFT_DIR)_object.mk
 
@@ -49,7 +49,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(addprefix $(OBJ_DIR)/,$(OBJ))
 	ranlib $(NAME)
 
-debug: CFLAGS += $(SHARE_DEBUG)
+debug: OPTI_FLAGS := $(SHARE_DEBUG)
 debug: re clean
 
 clean:
