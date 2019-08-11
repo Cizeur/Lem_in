@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    dependancies_visu_object.mk                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+         #
+#    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 12:48:07 by crfernan          #+#    #+#              #
-#    Updated: 2019/08/06 20:10:59 by crfernan         ###   ########.fr        #
+#    Updated: 2019/08/11 18:37:46 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ ft_get_pipes.o: visu.h libft/libft.h
 initialization.o: visu.h libft/libft.h
 main.o: visu.h libft/libft.h
 parser.o: visu.h libft/libft.h libft/get_next_line.h
-print.o: visu.h
 utils.o: visu.h libft/libft.h
 visu_init.o: visu.h
 visu_load.o: visu.h libft/libft.h
