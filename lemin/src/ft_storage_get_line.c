@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 14:49:53 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 13:36:35 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/11 16:07:09 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_line_info			*ft_storage_get_line(t_master *mstr, int line_nb)
 
 	storage_start = mstr->storage_start;
 	if (!storage_start)
-		return(0);
+		return (0);
 	reduc_ind = line_nb % BATCH_MALLOC_SIZE;
 	while (storage_start->next && line_nb >= BATCH_MALLOC_SIZE)
 	{

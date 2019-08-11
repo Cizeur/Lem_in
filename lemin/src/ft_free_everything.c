@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:56:28 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 12:08:11 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/11 15:46:02 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,39 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 
-static void	ft_free_storage(t_storage **storage)
+static void	ft_free_storage(t_master *mstr)
 {
+	t_storage	*storage;
 	t_storage	*stock;
 	int			i;
 
-	while ((i = -1) && *storage)
+	storage = mstr->storage_start;
+	while ((i = -1) && storage)
 	{
-		stock = (*storage)->next;
-		while (++i < BATCH_MALLOC_SIZE && *storage)
+		stock = storage->next;
+		while (++i < BATCH_MALLOC_SIZE && storage)
 		{
-			if ((*storage)->entry[i].line)
-				free((*storage)->entry[i].line);
-			ft_bzero(&(*storage)->entry[i], sizeof((*storage)->entry[i]));
-			(*storage)->entry[i].line = 0;
+			if (storage->entry[i].line)
+				free(storage->entry[i].line);
+			ft_bzero(&(storage->entry[i]), sizeof(t_line_info));
 		}
-		free(*storage);
-		*storage = stock;
+		free(storage);
+		storage = stock;
 	}
 }
 
-static void	ft_free_dico(t_hash_dico **dico)
+static void	ft_free_dico(t_master *mstr)
 {
+	t_hash_dico *dico;
 	t_bucket	*bucket;
 	t_bucket	*temp;
 	int			i;
 
 	i = -1;
-	while (++i < HASH_SIZE && *dico)
+	dico = mstr->dico;
+	while (++i < HASH_SIZE && dico)
 	{
-		temp = &(*dico)->dico_list[i];
+		temp = &dico->dico_list[i];
 		if (temp->next)
 		{
 			temp = temp->next;
@@ -52,14 +55,13 @@ static void	ft_free_dico(t_hash_dico **dico)
 				bucket = temp->next;
 				temp->line_index = 0;
 				free(temp);
-				temp = 0;
 				temp = bucket;
 			}
 		}
 	}
-	if (*dico)
-		free(*dico);
-	*dico = 0;
+	if (dico)
+		free(dico);
+	dico = 0;
 }
 
 static void	ft_free_matrix(t_master *mstr)
@@ -105,10 +107,11 @@ void		ft_free_everything(t_master *mstr)
 		if (mstr->adjacency_mtx)
 			ft_free_matrix(mstr);
 		if (mstr->storage_start)
-			ft_free_storage(&mstr->storage_start);
+			ft_free_storage(mstr);
 		if (mstr->dico)
-			ft_free_dico(&mstr->dico);
+			ft_free_dico(mstr);
 		ft_free_paths(mstr);
+		ft_bzero(mstr, sizeof(t_master));
 		free(mstr);
 	}
 	mstr = 0;

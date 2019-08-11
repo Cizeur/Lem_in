@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 12:24:56 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/09 13:13:47 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/11 16:32:23 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ ft_parser_fill_entry_node.o: lem_in.h utils.h error.h
 ft_parser_fill_entry_pipe.o: lem_in.h utils.h libft/libft.h error.h
 ft_parser_line_type.o: libft/libft.h lem_in.h utils.h
 ft_solver_path_splitter.o: lem_in.h utils.h libft/libft.h output_explained.h
+ft_solver_path_splitter_init_stacks.o: lem_in.h utils.h
 ft_solver_paths.o: lem_in.h utils.h libft/libft.h
 ft_solver_paths_finder.o: lem_in.h utils.h output_explained.h error.h
 ft_solver_paths_shortener.o: lem_in.h utils.h output_explained.h error.h

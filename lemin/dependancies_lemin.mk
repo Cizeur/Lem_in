@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/02 11:46:32 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/09 13:14:12 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/11 16:29:32 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ SRC_LEMIN =  \
 	ft_output_explained.c\
 	ft_output_explained_cut_pipes.c\
 	ft_solver_path_splitter.c\
+	ft_solver_path_splitter_init_stacks.c\
 	ft_solver_paths_finder.c\
 	ft_solver_paths_shortener.c\
 	ft_free_everything.c\

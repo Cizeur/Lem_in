@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 09:13:55 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 13:44:13 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/11 13:41:03 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,17 @@ static void		ft_output_current_flow(int final_flow, t_master *mstr)
 
 static void		ft_passed_threshold(int o_case, t_master *mstr)
 {
-	t_line_info *entry;
-
 	if (o_case == OC_VALID_OPTIONS)
 		ft_output_putstr("OPTIONS \e[32m \xE2\x9C\x94", mstr);
 	else if (o_case == OC_NODES_OK && mstr->start && mstr->end)
 	{
 		ft_output_putstr(
 			"NODES \e[32m \xE2\x9C\x94\e[0m\n	      ANTS : \e[32m", mstr);
-		entry = mstr->start;
 		ft_output_putnbr(mstr->ants, mstr);
 		ft_output_putstr("\e[0m\n	START NODE : \e[32m", mstr);
-		ft_output_putnstr(entry->line, entry->name_len, mstr);
+		ft_output_putnstr(mstr->start->line, mstr->start->name_len, mstr);
 		ft_output_putstr("\e[0m\n	  END NODE : \e[32m", mstr);
-		entry = mstr->end;
-		ft_output_putnstr(entry->line, entry->name_len, mstr);
+		ft_output_putnstr(mstr->end->line, mstr->end->name_len, mstr);
 		mstr->piping = CONFIRMED;
 	}
 	else if (o_case == OC_PIPES_OK)

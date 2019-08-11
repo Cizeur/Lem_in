@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:35:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 14:03:47 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/11 16:17:29 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,16 @@ void		parser(t_master *mstr)
 	t_ln_type	line_type;
 
 	line_type = COMMENT;
-	mstr->storage_start = mstr->storage;
 	while ((r = get_next_line(0, &line)) > 0)
 	{
 		line_type = ft_storage_add_line(line, mstr);
-		line = 0;
-		if (line_type == PIPE && !mstr->piping)
-			mstr-> piping = CERTAINLY;
+		if (!(line = 0) && line_type == PIPE && !mstr->piping)
+			mstr->piping = CERTAINLY;
 		if (line_type == END_OF_READ)
 			ft_exit(INVALID_LINE, mstr);
 		if ((!mstr->start || !mstr->end) && mstr->piping)
 			ft_exit(START_OR_END_MISSING, mstr);
-		else if (mstr->piping == CERTAINLY)
+		if (mstr->piping == CERTAINLY)
 			ft_output_explained(mstr, OC_NODES_OK);
 	}
 	if (r == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cizeur <cizeur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:31:40 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/10 21:24:14 by cizeur           ###   ########.fr       */
+/*   Updated: 2019/08/11 15:14:20 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ void		ft_exit(t_errors error, t_master *mstr)
 {
 	t_line_info *entry;
 
+	entry = 0;
 	if (error != STANDARD && error != INVALID_ARGUMENT)
 		ft_putstr("ERROR\n");
 	if (mstr && mstr->output_type >= OUTPUT_EXPLAINED && error)
 		ft_putstr(g_error_message[ft_min(error, 15)]);
 	if (mstr && mstr->output_type >= OUTPUT_EXPLAINED && error && error <= 11)
 	{
-		entry = ft_storage_get_line(mstr, mstr->lines_nb) ;
+		entry = ft_storage_get_line(mstr, mstr->lines_nb);
 		if (entry && entry->line)
 		{
 			ft_putstr("		[[");
@@ -53,7 +54,6 @@ void		ft_exit(t_errors error, t_master *mstr)
 			ft_putstr("]] line :");
 			ft_putnbr(mstr->lines_nb);
 			ft_putstr("\e[0m\n");
-
 		}
 	}
 	ft_free_everything(mstr);

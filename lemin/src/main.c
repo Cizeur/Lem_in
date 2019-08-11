@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 13:41:50 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/11 15:28:12 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ int			main(int argc, char **argv)
 	int			end;
 	int			explained;
 
-	explained = ft_explained_get(--argc, ++argv);
+	mstr = 0;
+	explained = ft_explained_get(mstr, --argc, ++argv);
 	if (!(mstr = (t_master *)ft_memalloc(sizeof(t_master))))
 		ft_exit(FAIL_MALLOC_MSTR, mstr);
+	ft_init_mstr(mstr, explained);
 	if (explained)
 		ft_putstr("STRUCT AND STORAGE Malloc'ed \e[32m \xE2\x9C\x94\e[0m\n");
-	ft_init_mstr(mstr, explained);
 	ft_option_get(mstr, argc, argv);
 	ft_output_explained(mstr, OC_MALLOC_STORAGE);
 	ft_output_explained(mstr, OC_VALID_OPTIONS);
