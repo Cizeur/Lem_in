@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:42:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/11 18:14:24 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/11 18:40:46 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ void				inizialization(t_master *mstr);
 
 void				check_parameters(t_master *mstr);
 void				check_nodes_pipes_moves(t_master *mstr);
-
 
 /*
 ***		VISUAL
