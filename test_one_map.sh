@@ -6,7 +6,7 @@
 #    By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/19 17:57:30 by cgiron            #+#    #+#              #
-#    Updated: 2019/08/12 10:33:22 by cgiron           ###   ########.fr        #
+#    Updated: 2019/08/12 12:16:27 by cgiron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,12 @@ if test -f "$program"; then
 	echo "\033[0;32m$program exist\033[0m"
 else
 	echo "\033[0;31m$program absent\033[0m"
+	exit 1
+fi
+if test -f "$map"; then
+	echo "\033[0;32m$map exist\033[0m"
+else
+	echo "\033[0;31m map absente\033[0m"
 	exit 1
 fi
 if [ ! -z "$ants" ]; then
