@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:34:01 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/12 12:59:31 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/12 14:32:02 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_get_parameters(t_master *mstr, char *line, int nb_line)
 
 int		format_input(char *line)
 {
-	if (ft_strstr(line, "-") && ft_strstr(line, "L"))
+	if (ft_strchr(line, '-') && *line == 'L')
 		return (MOVE);
 	else if (ft_strchr(line, ' ') != NULL
 	|| (ft_str_cmp(line, COMMENT_START) == TRUE)

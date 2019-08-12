@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:13:50 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/12 08:27:41 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/12 14:07:00 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	ft_fill_movements(t_master *mstr, char *move, int index)
 	tmp = trim(move);
 	strsplit = ft_strsplit(tmp, '-');
 	ant_index = ft_atoi(strsplit[0]) - 1;
-	if ((node_index = ft_get_index_node(mstr, strsplit[1])) == FALSE)
+	if ((node_index = ft_get_index_node(mstr, strsplit[1])) == FALSE
+		|| ant_index >= mstr->nb_ants)
 	{
 		free_get_moves(tmp, strsplit);
 		ft_exit(mstr, INVALID_NAME);
