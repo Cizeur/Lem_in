@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_moves.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crfernan <crfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:13:50 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 20:36:05 by crfernan         ###   ########.fr       */
+/*   Updated: 2019/08/12 08:27:41 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*trim(char *move)
 	char	**strsplit;
 	char	*trim;
 
+	strsplit = 0;
+	trim = 0;
 	strsplit = ft_strsplit(move, ' ');
 	trim = ft_strdup(strsplit[0]);
 	free(strsplit[0]);
@@ -88,22 +90,6 @@ void	ft_new_movement(t_master *mstr)
 	mstr->moves_array[move_index] = current;
 }
 
-void	free_moves_ants(char **moves_ants)
-{
-	int		i;
-
-	i = 0;
-	if (moves_ants)
-	{
-		while (moves_ants[i])
-		{
-			free(moves_ants[i]);
-			i++;
-		}
-		free(moves_ants);
-	}
-}
-
 void	ft_get_moves(t_master *mstr, char *line)
 {
 	int		i;
@@ -121,5 +107,5 @@ void	ft_get_moves(t_master *mstr, char *line)
 		}
 		mstr->current_move++;
 	}
-	free_moves_ants(moves_ants);
+	free_get_moves(0, moves_ants);
 }
