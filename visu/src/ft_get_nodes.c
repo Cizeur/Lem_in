@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 18:14:30 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/11 17:55:37 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/12 12:44:54 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_get_nodes(t_master *mstr, char *line)
 	if (ft_start_end(mstr, line) == FALSE)
 	{
 		mstr->nodes_array[mstr->current_node]->node_index = mstr->current_node;
-		tmp = ft_strsplit(line, ' ');
+		tmp = ft_split_whitespace(line);
 		mstr->nodes_array[mstr->current_node]->name = ft_strdup(tmp[0]);
 		mstr->nodes_array[mstr->current_node]->len_name = ft_strlen(tmp[0]);
 		mstr->nodes_array[mstr->current_node]->x = ft_atoi(tmp[1]);

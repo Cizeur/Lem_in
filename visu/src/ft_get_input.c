@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:34:01 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/11 17:57:36 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/08/12 12:59:31 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ int		format_input(char *line)
 {
 	if (ft_strstr(line, "-") && ft_strstr(line, "L"))
 		return (MOVE);
-	else if (ft_strchr(line, '-') != NULL
-	|| (ft_str_cmp(line, COMMENT_ACTIVE) == TRUE)
-	|| (ft_str_cmp(line, COMMENT_INACTIVE) == TRUE))
-		return (PIPE);
 	else if (ft_strchr(line, ' ') != NULL
 	|| (ft_str_cmp(line, COMMENT_START) == TRUE)
 	|| (ft_str_cmp(line, COMMENT_END) == TRUE))
 		return (NODE);
+	else if (ft_strchr(line, '-') != NULL
+	|| (ft_str_cmp(line, COMMENT_ACTIVE) == TRUE)
+	|| (ft_str_cmp(line, COMMENT_INACTIVE) == TRUE))
+		return (PIPE);
 	else
 		return (FALSE);
 }
