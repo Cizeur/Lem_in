@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/08/06 15:27:37 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/11 13:58:57 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,16 @@ static void		ft_alloc_adjancency_matrix(t_master *mstr, int nodes)
 {
 	int i;
 	int **mtx;
-	int malloc_size;
+	int *mtx_val;
 
 	i = -1;
-	malloc_size = mstr->nodes * sizeof(int);
-	if (!(mtx = (int **)ft_memalloc(sizeof(int *) * nodes)))
+	mtx = (int **)ft_memalloc(sizeof(int *) * nodes);
+	mtx_val = (int *)ft_memalloc(sizeof(int) * (2 * nodes + A_OPTIONS) * nodes);
+	if (!mtx || !mtx_val)
 		ft_exit(ADJACENCY_MTX, mstr);
 	while (++i < nodes)
 	{
-		if (!(mtx[i] = (int *)ft_memalloc(sizeof(int)
-				* (2 * nodes + A_OPTIONS))))
-			ft_exit(ADJACENCY_MTX, mstr);
+		mtx[i] = &mtx_val[i * (2 * nodes + A_OPTIONS)];
 		ft_intset(mtx[i], 2 * nodes + A_OPTIONS, DISCONNECTED);
 		mtx[i][A_LINKS_NB] = 0;
 		mtx[i][A_LOADED] = 0;
@@ -42,6 +41,7 @@ static void		ft_alloc_adjancency_matrix(t_master *mstr, int nodes)
 			|| !mstr->node_path || !mstr->stored_solution)
 		ft_exit(NODE_STACK_MTX, mstr);
 	mstr->adjacency_mtx = mtx;
+	mstr->adjacency_mtx_val = mtx_val;
 }
 
 static void		ft_put_line_index_to_adjancency_matrix(

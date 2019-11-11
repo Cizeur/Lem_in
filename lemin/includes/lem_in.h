@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/11 16:31:40 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/11 13:46:22 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct	s_master
 	int				max_flow;
 	int				command_line;
 	int				**adjacency_mtx;
+	int				*adjacency_mtx_val;
 	int				*node_queue;
 	int				*node_path;
 	int				*node_parents;

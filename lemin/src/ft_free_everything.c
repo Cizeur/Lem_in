@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:56:28 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/11 15:46:02 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/11 13:55:58 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,6 @@ static void	ft_free_dico(t_master *mstr)
 	dico = 0;
 }
 
-static void	ft_free_matrix(t_master *mstr)
-{
-	int **mtx;
-	int i;
-
-	i = -1;
-	mtx = mstr->adjacency_mtx;
-	if (mstr->adjacency_mtx)
-	{
-		while (++i < mstr->nodes)
-		{
-			if (mtx[i])
-				free(mtx[i]);
-			mtx[i] = 0;
-		}
-		free(mstr->adjacency_mtx);
-		mstr->adjacency_mtx = 0;
-	}
-}
-
 static void	ft_free_paths(t_master *mstr)
 {
 	if (mstr->node_parents)
@@ -105,7 +85,9 @@ void		ft_free_everything(t_master *mstr)
 	if (mstr)
 	{
 		if (mstr->adjacency_mtx)
-			ft_free_matrix(mstr);
+			ft_memdel((void **)&mstr->adjacency_mtx);
+		if (mstr->adjacency_mtx_val)
+			ft_memdel((void **)&mstr->adjacency_mtx_val);
 		if (mstr->storage_start)
 			ft_free_storage(mstr);
 		if (mstr->dico)
