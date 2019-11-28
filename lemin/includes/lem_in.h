@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:20:16 by cgiron            #+#    #+#             */
-/*   Updated: 2019/11/11 13:46:22 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/28 16:50:32 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,33 +65,79 @@
 # define END_MK "##end"
 
 /*
-** ADJACENCY
+** MATRIX CELL
 */
-# define DISCONNECTED -1
-# define INACTIVE 1
-# define ACTIVATED 2
+
+typedef struct	s_matrix_cell
+{
+	int			adjacency;
+	char	 	activation;
+}				t_matrix_cell;
+
+# define A_EMIT 'E'
+# define A_RECEIVE 'R'
+# define A_INACTIVE 'I'
+
+/*
+** STACK CELL
+*/
+
+typedef struct	s_stack_cell
+{
+	int				cell;
+	char	 		visite_type;
+	t_stack_cell	*parent_in_stack;
+}				t_stack_cell;
+
+# define V_FLOW 'F'
+# define V_BACKFLOW 'B'
+# define V_START 'S'
+
+/*
+** CELL INFO
+*/
+
+typedef struct	s_cell
+{
+	int				link_nb;
+	char	 		loaded;
+	int				line_index;
+	int				ant;
+	int				ant_hist;
+	int				stored_solution;
+	int				current_solution;
+	int				path_len;
+	int				last_visit;
+	char			loaded_finder;
+	char			path_number;
+	t_matrix_cell	*m;
+	
+}				t_cell;
+
+# define INIT_VAL "-1"
+
 
 /*
 ** AJACENCY OPTIONS
 */
 
-# define A_OPTIONS 15
+// # define A_OPTIONS 15
 
-# define A_LINKS_NB 0
-# define A_LOADED 1
-# define A_LINE_INDEX 2
-# define A_ANT 3
-# define A_ANT_HIST 4
-# define A_STORED_SOLUTION 5
-# define A_CURRENT_SOLUTION 6
-# define A_STORED_PATH_LEN 7
-# define A_CURRENT_PATH_LEN 8
-# define A_VISIT_FLOW 9
-# define A_VISIT_BACKFLOW 10
-# define A_PARENT_FLOW 11
-# define A_LOADED_FINDER 12
-# define A_PATH_NUMBER 13
-# define A_SOLUTION_START 14
+// # define A_LINKS_NB 0
+// # define A_LOADED 1
+// # define A_LINE_INDEX 2
+// # define A_ANT 3
+// # define A_ANT_HIST 4
+// # define A_STORED_SOLUTION 5
+// # define A_CURRENT_SOLUTION 6
+// # define A_STORED_PATH_LEN 7
+// # define A_CURRENT_PATH_LEN 8
+// # define A_VISIT_FLOW 9
+// # define A_VISIT_BACKFLOW 10
+// # define A_PARENT_FLOW 11
+// # define A_LOADED_FINDER 12
+// # define A_PATH_NUMBER 13
+// # define A_SOLUTION_START 14
 
 /*
 ** FLOW TYPE
@@ -136,6 +182,8 @@ typedef struct	s_storage
 	struct s_storage	*next;
 }				t_storage;
 
+
+
 typedef struct	s_master
 {
 	int				ants;
@@ -144,12 +192,11 @@ typedef struct	s_master
 	int				inactives_pipes_nb;
 	int				max_flow;
 	int				command_line;
-	int				**adjacency_mtx;
-	int				*adjacency_mtx_val;
-	int				*node_queue;
-	int				*node_path;
-	int				*node_parents;
+	t_cell			*cells;
+	t_matrix_cell	*adjacency_mtx;
+	t_stack_cell	*stack;
 	int				*stored_solution;
+	int				*solution_start;
 	t_storage		*storage;
 	t_storage		*storage_start;
 	t_hash_dico		*dico;
@@ -221,10 +268,9 @@ void			ft_solution_print(t_master *mstr);
 */
 
 void			solver(t_master *mstr);
-void			ft_solver_path_splitter_init_stacks(t_master *mstr,
-						int start_node, int *queue);
+void			ft_init_stack(t_master *mstr, int start_node);
 int				ft_solver_paths_splitter(t_master *mstr,
-					int **mtx, int cur_node, int end_node);
+					t_cell *mtx, int cur_node, int end_node);
 void			ft_solver_paths_finder(t_master *mstr, int flow);
 void			ft_solver_paths_shortener(t_master *mstr, int flow);
 void			ft_solver_paths(t_master *mstr, int flow);

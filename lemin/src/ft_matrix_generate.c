@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:29:07 by crfernan          #+#    #+#             */
-/*   Updated: 2019/11/11 13:58:57 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/28 15:09:18 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,40 @@
 
 static void		ft_alloc_adjancency_matrix(t_master *mstr, int nodes)
 {
-	int i;
-	int **mtx;
-	int *mtx_val;
+	int				i;
+	t_cell			*mtx;
+	t_matrix_cell	*mtx_val;
 
-	i = -1;
-	mtx = (int **)ft_memalloc(sizeof(int *) * nodes);
-	mtx_val = (int *)ft_memalloc(sizeof(int) * (2 * nodes + A_OPTIONS) * nodes);
+	mtx = (t_cell *)ft_memalloc(sizeof(t_cell) * nodes);
+	mtx_val = (t_matrix_cell *)\
+		ft_memalloc(sizeof(t_matrix_cell) * nodes * nodes);
 	if (!mtx || !mtx_val)
 		ft_exit(ADJACENCY_MTX, mstr);
+	i = -1;
 	while (++i < nodes)
 	{
-		mtx[i] = &mtx_val[i * (2 * nodes + A_OPTIONS)];
-		ft_intset(mtx[i], 2 * nodes + A_OPTIONS, DISCONNECTED);
-		mtx[i][A_LINKS_NB] = 0;
-		mtx[i][A_LOADED] = 0;
+		mtx[i].line_index = INIT_VAL;
+		mtx[i].m = &mtx_val[i * nodes];
 	}
-	mstr->node_queue = (int *)ft_memalloc(sizeof(int) * (2 * nodes + 1));
-	mstr->node_parents = (int *)ft_memalloc(sizeof(int) * (2 * nodes + 1));
-	mstr->node_path = (int *)ft_memalloc(sizeof(int) * (nodes + 1));
-	mstr->stored_solution = (int *)ft_memalloc(sizeof(int) * (nodes + 1));
-	if (!mstr->node_queue || !mstr->node_parents
-			|| !mstr->node_path || !mstr->stored_solution)
+	mstr->stack = \
+		(t_stack_cell *)ft_memalloc(sizeof(t_stack_cell) * (nodes + 1));
+	mstr->stored_solution = (int *)ft_memalloc(sizeof(int) * nodes);
+	mstr->solution_start = (int *)ft_memalloc(sizeof(int) * nodes);
+	if (!mstr->stack || !mstr->stored_solution || !mstr->solution_start)
 		ft_exit(NODE_STACK_MTX, mstr);
-	mstr->adjacency_mtx = mtx;
-	mstr->adjacency_mtx_val = mtx_val;
+	mstr->cells = mtx;
+	mstr->adjacency_mtx = mtx_val;
 }
 
 static void		ft_put_line_index_to_adjancency_matrix(
 					t_master *mstr, int line_index, int node_number)
 {
-	int **mtx;
+	t_cell **mtx;
 
-	mtx = mstr->adjacency_mtx;
-	if (mtx[node_number][A_LINE_INDEX] == DISCONNECTED)
-		mtx[node_number][A_LINE_INDEX] = line_index;
-	else if (mtx[node_number][A_LINE_INDEX] != line_index)
+	mtx = &mstr->cells;
+	if (mtx[node_number]->line_index == INIT_VAL)
+		mtx[node_number]->line_index = line_index;
+	else if (mtx[node_number]->line_index != line_index)
 		ft_exit(ADJACENCY_MTX, mstr);
 }
 
@@ -60,20 +58,20 @@ static void		ft_put_pipe_in_adjancency_matrix(
 					t_master *mstr, int node1, int node2)
 {
 	int nodes;
-	int **mtx;
+	t_cell **mtx;
 
-	mtx = mstr->adjacency_mtx;
-	if (mtx[node1][mstr->nodes + node2 + A_OPTIONS] != DISCONNECTED
+	mtx = &mstr->cells;
+	if (mtx[node1]->m[node2].activation
 		|| node1 == node2)
 		return ;
-	mtx[node1][mstr->nodes + node2 + A_OPTIONS] = INACTIVE;
-	nodes = mtx[node1][A_LINKS_NB];
-	mtx[node1][A_LINKS_NB] += 1;
-	mtx[node1][A_OPTIONS + nodes] = node2;
-	mtx[node2][mstr->nodes + node1 + A_OPTIONS] = INACTIVE;
-	nodes = mtx[node2][A_LINKS_NB];
-	mtx[node2][A_LINKS_NB] += 1;
-	mtx[node2][A_OPTIONS + nodes] = node1;
+	mtx[node1]->m[node2].activation = A_INACTIVE;
+	nodes = mtx[node1]->link_nb;
+	mtx[node1]->link_nb += 1;
+	mtx[node1]->m[nodes].adjacency = node2;
+	mtx[node2]->m[node1].activation = A_INACTIVE;
+	nodes = mtx[node2]->link_nb;
+	mtx[node2]->link_nb += 1;
+	mtx[node2]->m[nodes].adjacency = node1;
 }
 
 void			ft_matrix_generate(t_master *mstr, t_storage *storage)
@@ -83,7 +81,7 @@ void			ft_matrix_generate(t_master *mstr, t_storage *storage)
 	t_line_info	*entry;
 
 	ind = -1;
-	ft_alloc_adjancency_matrix(mstr, mstr->nodes);
+	ft_alloc_adjancency_matrix(mstr, mstr->cells);
 	while (++ind < mstr->lines_nb)
 	{
 		reduc_ind = ind % BATCH_MALLOC_SIZE;

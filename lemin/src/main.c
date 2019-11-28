@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/11 15:28:12 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/28 15:09:43 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int			main(int argc, char **argv)
 	parser(mstr);
 	start = mstr->start->node_number;
 	end = mstr->end->node_number;
-	if (mstr->adjacency_mtx[start][A_OPTIONS + mstr->nodes + end]
-			!= DISCONNECTED)
+	if (mstr->cells[start].m[end].activation)
 		output_start_end(mstr);
 	solver(mstr);
 	output(mstr);

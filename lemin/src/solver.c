@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:33:37 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/09 15:17:54 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/28 14:24:40 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int		ft_get_max_flow_limit(t_master *mstr)
 	int limit[3];
 
 	limit[0] = mstr->ants;
-	limit[1] = mstr->adjacency_mtx[mstr->start->node_number][A_LINKS_NB];
-	limit[2] = mstr->adjacency_mtx[mstr->end->node_number][A_LINKS_NB];
+	limit[1] = mstr->cells[mstr->start->node_number].link_nb;
+	limit[2] = mstr->cells[mstr->end->node_number].link_nb;
 	mstr->final_flow = 0;
 	return (ft_min(ft_min(limit[0], limit[1]), limit[2]));
 }

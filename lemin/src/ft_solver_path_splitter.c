@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 09:36:06 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/11 16:31:08 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/28 16:58:42 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,88 +39,55 @@ static void		ft_path_cleaning(t_master *mstr, int queue_end, int end_node)
 	ft_output_explained(mstr, OC_OUTPUT_AUGMENTING_PATH);
 }
 
-static int		ft_node_is_to_loaded(t_master *mstr, int flow,
-				int cur_node, int next_node)
+
+static int		ft_check_node(t_master *mstr, t_stack_cell *qcur,
+								int next_node, t_stack_cell *qend)
 {
-	int **mtx;
+	t_cell *mtx;
 
-	mtx = mstr->adjacency_mtx;
-	if ((mtx[cur_node][A_LOADED] && flow == F_FLOW && !mtx[next_node][A_LOADED])
-		|| (mtx[cur_node][A_LOADED] && mtx[next_node][A_LOADED]
-		&& mtx[next_node][mstr->nodes + A_OPTIONS + cur_node] != ACTIVATED)
-		|| mtx[next_node][A_VISIT_BACKFLOW] != DISCONNECTED)
-		return (CERTAINLY);
-	return (NOPE);
-}
-
-static int		ft_check_node(t_master *mstr, int cur_node,
-								int next_node, int *queue)
-{
-	int **mtx;
-	int flow;
-	int visited_lvl;
-
-	mtx = mstr->adjacency_mtx;
-	flow = cur_node == mstr->start->node_number
-		|| !(mtx[mstr->node_queue[mstr->node_parents[queue[0] - 1]]][A_LOADED]
-		&& mtx[cur_node][A_LOADED])
-		? F_FLOW : F_BACKFLOW;
-	flow = mtx[next_node][mstr->nodes + A_OPTIONS + cur_node] == ACTIVATED
-			? F_BACKFLOW : flow;
-	if (ft_node_is_to_loaded(mstr, flow, cur_node, next_node))
+	mtx = mstr->cells;
+	if (mstr->cells[next_node].last_visit 
+		&& mstr->cells[next_node].last_visit != V_FLOW)
 		return (NOPE);
-	visited_lvl = flow == F_FLOW ? A_VISIT_FLOW : A_VISIT_BACKFLOW;
-	if (mtx[next_node][visited_lvl] == DISCONNECTED)
-	{
-		mstr->node_queue[queue[0] + queue[1]] = next_node;
-		mstr->node_parents[queue[0] + queue[1]] = queue[0] - 1;
-		mtx[next_node][A_VISIT_FLOW] = CERTAINLY;
-		if (flow == F_BACKFLOW)
-			mtx[next_node][A_VISIT_BACKFLOW] = CERTAINLY;
-		return (SUCCESS);
-	}
-	return (NOPE);
-}
-
-static int		ft_check_is_allowed_next(t_master *mstr, int cur_node,
-								int next_node, int parent_node)
-{
-	int **mtx;
-
-	mtx = mstr->adjacency_mtx;
-	if (mtx[cur_node][mstr->nodes + A_OPTIONS + next_node] == ACTIVATED
-		|| next_node == DISCONNECTED
-		|| next_node == mstr->start->node_number
-		|| next_node == parent_node)
+	if (mtx[qcur->cell].loaded
+		&& mtx[qcur->cell].m[next_node].activation != A_RECEIVE)
 		return (NOPE);
+	qend->cell = next_node;
+	qend->parent_in_stack = qcur;
+	if (mtx[qcur->cell].m[next_node].activation == A_RECEIVE)
+		qend->visite_type = V_BACKFLOW;
+	else
+		qend->visite_type = V_FLOW;
 	return (SUCCESS);
 }
 
-int				ft_solver_paths_splitter(t_master *mstr, int **mtx,
+int				ft_solver_paths_splitter(t_master *mstr, t_cell *mtx,
 								int cur_node, int end_node)
 {
+	int cur_node;
 	int next_node;
-	int i;
-	int queue[2];
+	t_stack_cell *qcur;
+	t_stack_cell *qend;
+	int node_adj;
 
-	ft_solver_path_splitter_init_stacks(mstr, cur_node, queue);
-	while ((i = -1) && queue[1]--)
+	ft_init_stack(mstr, cur_node, queue);
+	qcur = mstr->stack;
+	qend = qcur++;
+	while (!(node_adj = 0) && qcur->visite_type)
 	{
-		cur_node = mstr->node_queue[queue[0]++];
-		while (++i < mtx[cur_node][A_LINKS_NB])
+		while (node_adj++ < mtx[qcur->cell].link_nb)
 		{
-			next_node = mtx[cur_node][A_OPTIONS + i];
-			if (!ft_check_is_allowed_next(mstr, cur_node, next_node,
-					mstr->node_queue[mstr->node_parents[queue[0] - 1]]))
-				continue;
+			next_node = mtx[cur_node].m[node_adj].adjacency;
 			if (next_node == end_node)
 			{
-				ft_path_cleaning(mstr, queue[0], end_node);
+				qend->cell = end_node;
+				ft_path_cleaning(mstr, qend, end_node);
 				return (SUCCESS);
 			}
-			if (ft_check_node(mstr, cur_node, next_node, queue))
-				queue[1]++;
+			if (ft_check_node(mstr, qcur, next_node ,qend))
+				qend++;
 		}
+		qcur++;
 	}
 	return (DEAD_END);
 }

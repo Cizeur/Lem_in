@@ -6,7 +6,7 @@
 /*   By: cgiron <cgiron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 10:17:06 by cgiron            #+#    #+#             */
-/*   Updated: 2019/08/06 10:17:28 by cgiron           ###   ########.fr       */
+/*   Updated: 2019/11/28 12:38:31 by cgiron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void		ft_matrix_reset_one_path(t_master *mstr, int path)
 		if (mtx[i][A_SOLUTION_START] == CERTAINLY)
 			mtx[mstr->start->node_number]
 			[A_OPTIONS + mstr->nodes + i] = INACTIVE;
-		mtx[i][A_SOLUTION_START] = DISCONNECTED;
+		mtx[i][A_] = DISCONNECTED;
 	}
 }
